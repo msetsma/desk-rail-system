@@ -37,7 +37,7 @@ are rigid-jointed to it.
 | `MON-00` Monitors | 32in main, 27in portrait |
 | `SPK-00` Speakers | Klipsch R-40M pair + their swivel mounts |
 | `PC-00` PC | Fractal North hung on one 6in x 1/2in strap (`pc_leg_gap`, `strap_w`), walnut slat front |
-| `INP-00` Input devices | 16.5in mouse pad, Razer DeathAdder V3, ErgoDox EZ halves (`kb_gap`, `pad_kb_gap`, `kb_front_gap`, `pad_front_gap`). ErgoDox footprint = real case outline (202.3 x 176.3 mm per half) traced from ZSA's 1:1 printout (`refs/ergodox_ez/`), 15 mm case + 15 mm tapered keycap layer = ZSA's 30 mm. Mouse = DeathAdder V3 Pro, Razer spec 128 x 68 x 44 mm; rough shape = plan, side and front profiles intersected (rear hump, thumb-side waist, crown), eyeballed, not vendor CAD |
+| `INP-00` Input devices | 16.5in mouse pad, Razer DeathAdder V3, ErgoDox EZ halves (`kb_gap`, `pad_kb_gap`, `kb_front_gap`, `pad_front_gap`). ErgoDox footprint = real case outline (202.3 x 176.3 mm per half) traced from ZSA's 1:1 printout (`refs/ergodox_ez/`), 15 mm case + 15 mm tapered keycap layer = ZSA's 30 mm. Mouse = DeathAdder V3 Pro, real STEP (`refs/razer_dav3pro/DAV3Pro.step`, 10 bodies `Mouse_DAV3Pro_*`) in `INP-02a`, rigid-jointed to the mouse pad's top-face centre so it follows `pad_x`/`pad_y` |
 | `REF-00` Reference | `Eye` marker |
 
 The 80/20 and V-slot configuration rows still exist, but switching to one puts its rails loose

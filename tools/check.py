@@ -30,9 +30,9 @@ REPORT = BUILD / "report.json"
 VIEWS = ("iso", "front", "back", "right", "top")
 NEAR_MM, TOUCH_MM = 10.0, 0.01
 # Designed gaps, not warnings: speaker bracket parts, panel on standoffs past the plates,
-# mouse resting on the pad.
+# mouse resting on the pad, gaps between the vendor mouse model's own parts.
 EXPECTED_NEAR = (("Speaker_", "SpkMount_"), ("SpkMount_", "Upright_"), ("ModestyPanel", "Plate_Bar"),
-                 ("Plate_SideRail", "Standoff_Post"), ("Mouse_", "Desktop"))
+                 ("Plate_SideRail", "Standoff_Post"), ("MousePad", "Mouse_"), ("Mouse_", "Mouse_"))
 
 
 class CheckError(Exception):
