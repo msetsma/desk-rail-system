@@ -5,8 +5,8 @@ Reads body bounding boxes from a solidcraft-cli build report (``--json-out``), a
 mass vs the feet (tip margins), push force to tip at sit/stand height, leg load split, crossbar
 sag and the load on the side-rail joints. Rule IDs refer to docs/EXTRUSION_GUIDE.md.
 
-    solidcraft-cli run desk_rails.json --save build.solidcraft --quiet --json-out build.json
-    python tools/audit.py build.json
+    python tools/check.py            # writes build/report.json, then runs this audit
+    python tools/audit.py build/report.json
 """
 
 from __future__ import annotations

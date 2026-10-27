@@ -2,11 +2,10 @@
 
 Parametric model: Apex Pro 4-leg frame (Jiecang OEM) + desktop + 20-series extrusion rail system.
 
-- `tools/gen_desk.py` — **source of truth**: parameters, parts, colors, configurations. Edit, then rebuild.
-- `desk_rails.json` — generated SolidCraft build script (don't hand-edit).
-- `desk_rails.solidcraft` — built design, open in SolidCraft.
+- `desk_rails.solidcraft` — **source of truth**: the design. Edit it in SolidCraft (Parameters
+  table, timeline) and save. The old generator (`tools/gen_desk.py`, `tools/joints.py`,
+  `desk_rails.json`) was retired on 2026-10-27; it's in git history before commit `bd5ba5a`.
 - `profiles/` — extrusion cross-section DXFs used by the model. `refs/` — PDFs and raw downloads.
-- `tools/joints.py` — joint hardware (plates, brackets), imported by `gen_desk.py`.
 - `tools/audit.py` — structural + balance audit (mass budget, tip margins, leg split, crossbar sag, joint loads) from a build `--json-out` report. Edit `MASS_INPUTS` when weighed.
 - `tools/check.py` — one-command build + checks (see below). `tools/bom.py` — writes `BOM.md` (cut list, hardware, fastener estimate).
 - `BOM.md` — generated bill of materials; don't hand-edit.
@@ -14,19 +13,35 @@ Parametric model: Apex Pro 4-leg frame (Jiecang OEM) + desktop + 20-series extru
 - `renders/` — snapshots.
 - `docs/EXTRUSION_GUIDE.md` — extrusion rules (loads, joints, wobble, fasteners) + decision log. Check it before any extrusion decision.
 
-Rebuild + check (one command):
+Check (one command, reads the saved design, never overwrites it):
 
 ```sh
-python tools/check.py            # generate, build, overlap check, audit, BOM.md
-python tools/check.py --renders  # also refresh renders/iso|front|back|right.png
+python tools/check.py            # report, overlap check, audit, BOM.md
+python tools/check.py --renders  # also refresh renders/iso|front|back|right|top.png
 ```
 
-It exits non-zero if the build fails or any bodies overlap. Build outputs (report JSON,
-interference results) go to `build/` (git-ignored). Commit after a good check: the folder is a
-git repo, so any model change can be undone (`git diff`, `git checkout -- <file>`).
+It exits non-zero if the report fails or any bodies overlap. Outputs (report JSON,
+interference results) go to `build/` (git-ignored). Save in SolidCraft, run the check, then
+commit: the `.solidcraft` file is binary, so git history is the undo (`git checkout <rev> -- desk_rails.solidcraft`).
 
-Changing values in the app's Parameters table also works (everything follows), but copy final
-values back into `PARAMS` in `tools/gen_desk.py` so a rebuild keeps them.
+## Assemblies
+
+Root holds only assemblies; every part has a part-number name; `DSK-00` is grounded, the rest
+are rigid-jointed to it.
+
+| Assembly | Contents |
+|---|---|
+| `DSK-00` Desk | desktop, frame (top supports, channel bars, legs, feet) |
+| `FRM-00` Monitor rail frame | side rails, uprights, crossbars, stiles, modesty panel |
+| `HW-00` Frame hardware | joining plates, gusset brackets, panel standoffs |
+| `MON-00` Monitors | 32in main, 27in portrait |
+| `SPK-00` Speakers | Klipsch R-40M pair + their swivel mounts |
+| `PC-00` PC | Fractal North hung on one 6in x 1/2in strap (`pc_leg_gap`, `strap_w`), walnut slat front |
+| `INP-00` Input devices | 16.5in mouse pad, Razer DeathAdder V3, ErgoDox EZ halves (`kb_gap`, `pad_kb_gap`, `kb_front_gap`, `pad_front_gap`) |
+| `REF-00` Reference | `Eye` marker |
+
+The 80/20 and V-slot configuration rows still exist, but switching to one puts its rails loose
+at the root, outside `FRM-00`.
 
 Axes: origin = floor under frame center. X = width (+ right), Y = depth (+ toward wall), Z = up.
 
@@ -44,7 +59,7 @@ Axes: origin = floor under frame center. X = width (+ right), Y = depth (+ towar
 | `Stile_Main/Side_<std>` | vertical 2040 between the crossbars (resting on the lower one, faces flush); monitors VESA-mount to these | silver |
 | `Monitor_Main/Side` (+ `_Back`) | 32in 16:9, 27in portrait left: thin screen slab + rear bulge (no stands) | near-black |
 | `Standoff_*` | panel standoffs (M5), hold the panel `pnl_back_gap` off the back faces | orange |
-| `Plate_*`, `Bracket_*` | joint hardware: flat joining plates + gusset brackets (`tools/joints.py`; decisions D2, D6, D7 in the guide) | orange |
+| `Plate_*`, `Bracket_*` | joint hardware: flat joining plates + gusset brackets (decisions D2, D6, D7 in the guide) | orange |
 | `Speaker_R/L` (+ `SpkFace_*_Horn/Woofer`) | Klipsch R-40M (spec size, 3.2 kg) with horn + spun-copper woofer faces; hung from their back swivel; toe-in + tilt aimed at `Eye` | dark brown |
 | `SpkMount_*` | speaker bracket: flange in the upright front slot, block, ball swivel | orange |
 | `Eye` | your eye position marker (ergonomics check in `tools/audit.py`) | red |
@@ -54,7 +69,7 @@ Axes: origin = floor under frame center. X = width (+ right), Y = depth (+ towar
 
 ## Measure checklist
 
-Inches are fine (`"1.45 in"`). Set in `PARAMS` (or the app's Parameters table).
+Inches are fine (`"1.45 in"`). Set in the app's Parameters table.
 
 **TopSupport_R / TopSupport_L** (end brackets under the desktop)
 - `frame_w` is now **derived** (`desk_w - 2*(rail_s + up_side_inset)`): channel bars get cut to suit. Check result stays in frame's usable range (leg spacing, cable/PC clearance).

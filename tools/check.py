@@ -1,9 +1,10 @@
-"""One command: generate, build, overlap check, audit, BOM (and optional renders).
+"""One command: report, overlap check, audit, BOM (and optional renders) on desk_rails.solidcraft.
 
-    python tools/check.py            # build + checks + BOM
+    python tools/check.py            # checks + BOM
     python tools/check.py --renders  # also refresh renders/*.png
 
-Exits non-zero if the build fails or any bodies overlap.
+The saved design file is the source of truth; nothing is regenerated or overwritten.
+Exits non-zero if the report fails or any bodies overlap.
 """
 
 from __future__ import annotations
@@ -17,7 +18,6 @@ from pathlib import Path
 
 import audit
 import bom
-import gen_desk
 
 __all__ = ["CheckError", "main"]
 
@@ -29,9 +29,10 @@ DESIGN = ROOT / "desk_rails.solidcraft"
 REPORT = BUILD / "report.json"
 VIEWS = ("iso", "front", "back", "right", "top")
 NEAR_MM, TOUCH_MM = 10.0, 0.01
-# Designed gaps, not warnings: speaker bracket parts, panel on standoffs past the plates.
+# Designed gaps, not warnings: speaker bracket parts, panel on standoffs past the plates,
+# mouse resting on the pad.
 EXPECTED_NEAR = (("Speaker_", "SpkMount_"), ("SpkMount_", "Upright_"), ("ModestyPanel", "Plate_Bar"),
-                 ("Plate_SideRail", "Standoff_Post"))
+                 ("Plate_SideRail", "Standoff_Post"), ("Mouse_", "Desktop"))
 
 
 class CheckError(Exception):
@@ -47,9 +48,11 @@ def _cli(*args: str) -> None:
         raise CheckError(f"solidcraft-cli failed: {' '.join(args[:2])}") from exc
 
 
-def build() -> None:
-    gen_desk.main()
-    _cli("run", "desk_rails.json", "--save", str(DESIGN), "--quiet", "--json-out", str(REPORT))
+def report() -> None:
+    """Body report (bboxes, masses) from the saved design via an empty command run."""
+    script = BUILD / "report_cmd.json"
+    script.write_text(json.dumps({"commands": []}), encoding="utf-8")
+    _cli("run", str(script), "--in", str(DESIGN), "--quiet", "--json-out", str(REPORT))
 
 
 def interference() -> list[tuple[str, str]]:
@@ -88,14 +91,14 @@ def main(argv: Sequence[str]) -> int:
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     BUILD.mkdir(exist_ok=True)
     try:
-        build()
+        report()
         overlaps = interference()
         close = near_misses()
     except CheckError as exc:
         log.error("%s", exc)
         return 1
     bodies = json.loads(REPORT.read_text())["body_count"]
-    log.info("built %d bodies; overlaps: %d", bodies, len(overlaps))
+    log.info("checked %d bodies; overlaps: %d", bodies, len(overlaps))
     for a, b in overlaps:
         log.error("  OVERLAP %s <-> %s", a, b)
     for a, b, d in close:
