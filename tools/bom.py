@@ -33,12 +33,12 @@ MACHINING: Mapping[str, str] = {
     "SideRail": "rear end tapped M5 (M1, D8)",
     "Stile": "both ends tapped M5 for end anchors into the crossbar slots (M1, D7)",
 }
-# (bolts into T-nuts, other bolts) per hardware piece. Estimates; confirm against vendor kits.
+# (bolts into T-nuts, other bolts) per hardware piece. Misumi counts from the catalog
+# (refs/misumi_brackets/p2259.pdf); the -SET suffix ships them with each part.
 FASTENERS: Mapping[str, tuple[int, int]] = {
-    "Bracket_2slot": (4, 0),   # HBLFSD5 class: 2 bolts per leg
-    "Bracket_1slot": (2, 0),   # HBLFSN5 class
-    "Plate_T": (6, 0),         # 2 into the arm, 4 into the upright
-    "Plate_L": (4, 0),         # 2 into the bar, 2 into the upright
+    "Bracket": (2, 0),         # HBLFSN5: 1 bolt per leg
+    "Plate_T": (8, 0),         # HPTTD5: 8 x M5
+    "Plate_L": (8, 0),         # HPTLD5: 8 x M5
     "Standoff": (1, 0),        # M5 standoff into a T-nut, + 1 screw through the panel
     "VESA": (2, 4),            # 2 per stile into T-nuts, 4 M4 into the monitor
     "SpkMount": (2, 1),        # flange: 2 into the upright front slot; swivel: speaker's own screw
@@ -75,10 +75,8 @@ def cut_list(bodies: Mapping[str, Box]) -> list[CutPiece]:
 def _hardware(bodies: Mapping[str, Box]) -> Counter[str]:
     hw: Counter[str] = Counter()
     for name in bodies:
-        if name.startswith("Bracket_Stile"):
-            hw["Bracket_1slot"] += 1
-        elif name.startswith("Bracket_"):
-            hw["Bracket_2slot"] += 1
+        if name.startswith("Bracket_"):
+            hw["Bracket"] += 1
         elif name.startswith("Plate_SideRail"):
             hw["Plate_T"] += 1
         elif name.startswith("Plate_"):
@@ -93,10 +91,9 @@ def _hardware(bodies: Mapping[str, Box]) -> Counter[str]:
 
 
 HW_LABEL: Mapping[str, str] = {
-    "Bracket_2slot": "Gusset bracket, 2-slot, 40 mm legs (Misumi HBLFSD5 class)",
-    "Bracket_1slot": "Gusset bracket, 1-slot, 20 mm legs (Misumi HBLFSN5 class)",
-    "Plate_T": "T joining plate, 4 mm (side rail to upright, outer face)",
-    "Plate_L": "L joining plate, 4 mm (crossbar to upright, back face)",
+    "Bracket": "Misumi HBLFSN5-SET gusset bracket, 1-slot, 30 mm legs (rail/bar ends + stiles)",
+    "Plate_T": "Misumi HPTTD5-SET T plate, 110 x 80 x 2.3 mm (side rail to upright, outer face)",
+    "Plate_L": "Misumi HPTLD5-SET L plate, 80 x 80 x 2.3 mm (crossbar to upright, back face)",
     "Standoff": "M5 standoff, 10 mm dia x 12 mm (panel)",
     "VESA": "VESA adapter, 3D printed (wedge for tilt / toe-in)",
     "SpkMount": "Speaker bracket: flange in the upright front slot + block out to the speaker's swivel mount",
