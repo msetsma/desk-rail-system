@@ -24,6 +24,8 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   4. A skeleton change also needs `parameters.import` of the skeleton into the assembly, for the placements.
 - Parameter sweep (parallel, on private copies): `python tools/sweep.py`.
 - Rebuild the whole assembly from scratch (~20 s): `python tools/build_assembly.py --out desk_rails.solidcraft`.
+  Build straight to that path (the design name comes from the build path, so a copied file keeps the
+  wrong name). Run `new_design` in the live app first, then `open`.
   `tools/assembly_finish.py` adds materials, properties, views and display rows.
 - The desk (DSK group) stays in the main assembly rather than a nested file, as tested on 2026-10-28:
   - a linked sub-assembly is flattened to one BOM row
