@@ -4,3 +4,15 @@ __pycache__/
 *.bak
 .~*.lock
 .playwright-mcp/
+
+# Vendor downloads: local only (licenses don't allow redistribution)
+refs/apex_pro/
+refs/ergodox_ez/
+refs/ext_8020/
+refs/ext_alexcrr/
+refs/ext_misumi/
+refs/ext_vslot/
+refs/misumi_brackets/
+refs/razer_dav3pro/
+refs/*.pdf
+skeleton/

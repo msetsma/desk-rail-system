@@ -1,11 +1,35 @@
-# Desk rail system (SolidCraft)
+# Desk rail system
 
-Parametric model: Apex Pro 4-leg frame (Jiecang OEM) + desktop + 20-series extrusion rail system.
+Parametric CAD model of my desk: a DeskHaus Apex Pro 4-leg frame (Jiecang OEM), the desktop, and a
+Misumi HFS5 aluminium extrusion rail system that carries two monitors, Klipsch R-40M speakers, a
+hanging PC and a modesty panel.
+
+![Isometric view of the desk rail system](docs/images/desk_iso.png)
+
+## Built agentically
+
+This design is being developed agentically: an AI coding agent (Claude Code) drives
+SolidCraft over its MCP control interface and builds, edits, measures and
+checks the model while I review and steer. The project doubles as a testbed for:
+
+- **SolidCraft's agent integration**: what works well, what doesn't, and the quirks found along the
+  way (logged in `PROJECT.md`).
+- **Skills and agents for CAD work**: reusable instructions such as
+  `.claude/skills/cad-best-practices/`, plus the living rule set in `AGENTS.md`, which gets updated
+  (with an improvement log) every time a session learns something.
+
+Expect the repo to change often while that workflow is worked out.
+
+> [!NOTE]
+> Raw vendor downloads (Misumi, Razer, DeskHaus, ZSA) are kept local only and aren't in this repo,
+> since their licenses don't allow redistribution. The paths to them in the docs are references.
+
+## Files
 
 - `desk_rails.solidcraft` — **source of truth**: the design. Edit it in SolidCraft (Parameters
   table, timeline) and save. The old generator (`tools/gen_desk.py`, `tools/joints.py`,
   `desk_rails.json`) was retired on 2026-10-27; it's in git history before commit `bd5ba5a`.
-- `profiles/` — extrusion cross-section DXFs used by the model. `refs/` — PDFs and raw downloads.
+- `profiles/` — extrusion cross-section DXFs used by the model. `refs/` — reference photos and data (vendor downloads are local only).
 - `tools/audit.py` — structural + balance audit (mass budget, tip margins, leg split, crossbar sag, joint loads) from a build `--json-out` report. Edit `MASS_INPUTS` when weighed.
 - `tools/check.py` — one-command build + checks (see below). `tools/bom.py` — writes `BOM.md` (cut list, hardware, fastener estimate).
 - `BOM.md` — generated bill of materials; don't hand-edit.
