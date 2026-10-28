@@ -77,10 +77,123 @@
    }
   },
   {
+   "command": "parameters.add",
+   "params": {
+    "name": "pcn_foot_h",
+    "expression": "19 mm",
+    "comment": "Fractal North feet height (spec: 469 overall - 450 w/o feet)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "pcn_frame_d",
+    "expression": "slat_inset + slat_t + 3 mm",
+    "comment": "Front panel frame depth (Y): slat recess + slats + 3 mm rails"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "pcn_edge_r",
+    "expression": "6 mm",
+    "comment": "Fractal North long-edge radius (MEASURE from renders)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "pcn_lip",
+    "expression": "5 mm",
+    "comment": "Front frame visible lip width (MEASURE, front render)"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PC02_Frame",
+    "body_name": "PC_FrontFrame",
+    "operation": "new",
+    "length": "pc_w",
+    "width": "pcn_frame_d",
+    "height": "(pc_h - pcn_foot_h)",
+    "corner": [
+     "-pc_w/2",
+     "-slat_inset",
+     "-pc_h/2 + pcn_foot_h"
+    ]
+   }
+  },
+  {
+   "command": "solid.fillet",
+   "params": {
+    "name": "PC02_FrameEdgeRound",
+    "radius": "pcn_edge_r",
+    "edges": [
+     [
+      -107.5,
+      4.5,
+      223.5
+     ],
+     [
+      107.5,
+      4.5,
+      223.5
+     ],
+     [
+      -107.5,
+      4.5,
+      -204.5
+     ],
+     [
+      107.5,
+      4.5,
+      -204.5
+     ]
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PC02_FrameOpening",
+    "operation": "cut",
+    "targets": [
+     "PC_FrontFrame"
+    ],
+    "length": "pc_w - 2*pcn_lip",
+    "width": "slat_inset + slat_t + 0.1 mm",
+    "height": "(pc_h - pcn_foot_h) - 2*pcn_lip",
+    "corner": [
+     "-pc_w/2 + pcn_lip",
+     "-slat_inset - 0.1 mm",
+     "-pc_h/2 + pcn_foot_h + pcn_lip"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PC02_FrameBackOpening",
+    "operation": "cut",
+    "targets": [
+     "PC_FrontFrame"
+    ],
+    "length": "pc_w - 2*pcn_lip",
+    "width": "3.2 mm",
+    "height": "(pc_h - pcn_foot_h) - 2*pc_bezel_v - 16 mm",
+    "corner": [
+     "-pc_w/2 + pcn_lip",
+     "slat_t - 0.1 mm",
+     "-pc_h/2 + pcn_foot_h + pc_bezel_v + 8 mm"
+    ]
+   }
+  },
+  {
    "command": "sketch.create",
    "params": {
     "plane": "XZ",
-    "name": "PC_Slats_Profile"
+    "name": "PC02_Slats_Sketch"
    }
   },
   {
@@ -98,11 +211,11 @@
      ],
      [
       "-pc_w/2 + pc_bezel + slat_gap + slat_w",
-      "pc_h/2 - pc_bezel_v"
+      "pc_h/2 - pcn_foot_h - pc_bezel_v"
      ],
      [
       "-pc_w/2 + pc_bezel + slat_gap",
-      "pc_h/2 - pc_bezel_v"
+      "pc_h/2 - pcn_foot_h - pc_bezel_v"
      ]
     ]
    }
@@ -131,10 +244,10 @@
   {
    "command": "solid.extrude",
    "params": {
-    "sketch": "PC_Slats_Profile",
+    "name": "PC02_Slats",
+    "sketch": "PC02_Slats_Sketch",
     "distance": "slat_t",
     "operation": "new",
-    "name": "PC_Slat",
     "body_name": "PC_FrontSlats"
    }
   },
@@ -160,7 +273,7 @@
    "command": "timeline.rename",
    "params": {
     "feature": "Combine1",
-    "name": "PC_FrontSlats_Join"
+    "name": "PC02_Slats_Join"
    }
   },
   {
@@ -178,7 +291,25 @@
     "bodies": [
      "PC_FrontSlats"
     ],
-    "color": "#6b4a2f"
+    "color": "#634433"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "PC_FrontFrame"
+    ],
+    "material": "Steel powder-coated"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "PC_FrontFrame"
+    ],
+    "color": "#333437"
    }
   },
   {
@@ -186,13 +317,13 @@
    "params": {
     "values": {
      "part_number": "PC-02",
-     "description": "Walnut slat front for the Fractal North (10 slats, one body). Origin: centre of the slat array on its front face; slats extend +Y (toward wall), X right, Z up",
+     "description": "Fractal North front panel, dark walnut: 10 vertical walnut slats in the charcoal front frame (5 mm lip, top/bottom rails). Origin: placement datum on the slat front face, X centred, Z = case height centre incl. feet (slat array centre is pcn_foot_h/2 above it); slats extend +Y (toward wall), X right, Z up.",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
       "Material": "Walnut",
       "ReleaseState": "WIP",
-      "Source": "Fractal North walnut front, sizes from skeleton slat_* / pc_*"
+      "Source": "Fractal North official renders (refs/fractal_north/), sizes from skeleton slat_* / pc_*"
      }
     }
    }

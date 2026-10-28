@@ -25,12 +25,20 @@ STEP = {
 }
 
 
+# Vendor STEP each library script starts from (repo-relative; regen_parts opens it with --in).
+INPUT = {
+    "HW-L01_HPTTD5": "refs/misumi_brackets/HPTTD5/HPTTD5_plate.stp",
+    "HW-L02_HPTLD5": "refs/misumi_brackets/HPTLD5/HPTLD5_plate.stp",
+    "HW-L03_HBLFSN5": "refs/misumi_brackets/HBLFSN5/HBLFSN5_bracket.stp",
+}
+
+
 def step_script(label: str) -> dict:
     old, new, pn, desc, mat, col = STEP[label]
     cmds = list(TEMPLATE)
     if old:
         cmds.append({"command": "body.rename", "params": {"body": old, "name": new}})
-    return {"commands": cmds + finish(new, pn, desc, mat, col, label)}
+    return {"input": INPUT[label], "commands": cmds + finish(new, pn, desc, mat, col, label)}
 
 
 def screw() -> dict:

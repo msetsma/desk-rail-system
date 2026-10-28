@@ -45,6 +45,12 @@ triggers a full rebuild.
 - Vendor CAD: strip kits (screws, nuts, internal joints) down to the part body in a scratch
   design. Save the result next to the raw download and insert that.
 - Move existing in-assembly parts out to part files whenever you touch them.
+- When parts are built from scripts, link **frozen** outputs (geometry import + finishes), not files
+  with history. Inserting a part re-runs its history, so freezing makes inserts and refreshes cheap.
+  Keep the history version as a build artifact for inspection.
+- Refresh only the links that changed. Refreshing everything re-evaluates every link.
+- Keep an existing object (e.g. a desk you already own) in the main assembly unless nesting has been
+  measured to help. Nested links can flatten the BOM and need chained refreshes.
 
 ## 3. Modeling rules (performance)
 
@@ -121,4 +127,5 @@ subagents run, the main agent keeps working on non-conflicting tasks.
 | 2026-10-28 | Compliance rebuild: 4 part-builder subagents ran headless in parallel (~10 min) while the main agent built the assembly | §5 pattern confirmed; spike the CAD API first (scratch, parallel) before restructuring |
 | 2026-10-28 | Generated assemblies (script + regression vs a baseline bbox dump) caught a placement bug at once | §1: take a baseline before restructuring; verify by regression, not screenshots |
 | 2026-10-28 | Audit of the 1 h 42 min compliance run: one 46 s hole feature cost ~25-30 min across inserts, builds and the sweep | §3: profile builds over 30 s and fix the hot feature first |
+| 2026-10-28 | Speed spike: freezing linked parts and targeted link refresh. Inserts 42 s -> 9 s; a one-part refresh 40 s -> 0.3 s; a nested desk file flattened the BOM and saved < 1 s | §2: link frozen outputs, refresh only changed links, don't nest without measuring |
 | 2026-10-28 | Same audit: a 10 min headless baseline re-eval, late-spawned placement and colour jobs (~6 min), a serial sweep (17 min vs ~5 parallel), 2 rebuilds from an untested 180° convention | §5: first wave, conventions in specs, reuse the loaded design, parallel check cases; §3: background long runs, no big dumps in context |

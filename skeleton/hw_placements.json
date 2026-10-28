@@ -706,30 +706,6 @@
       -1
     ],
     "x": "-(frame_w/2 + sr_seat_t)",
-    "y": "ch_y_off + (-leg_yc) - (ch_bar_gap + ch_bar_w)/2",
-    "z": "frame_top - ts_bolt_z",
-    "yaw": "0 deg",
-    "legacy_body": "SideBolts_L_M6x20 (7)",
-    "verified_bbox_err_mm": 0.0,
-    "host": "FRM-03L side rail L / DSK top support",
-    "note": "Head on the drilled seat, shank inward; channel bar end.",
-    "joint_angle": "0 deg"
-  },
-  {
-    "name": "HW-30 Side bolt L2",
-    "lib": "HW-L10_M6x20_SHCS",
-    "parent_group": "HW-00 Frame hardware",
-    "zl": [
-      0,
-      1,
-      0
-    ],
-    "xl": [
-      0,
-      0,
-      -1
-    ],
-    "x": "-(frame_w/2 + sr_seat_t)",
     "y": "ch_y_off + (-leg_yc) - ts_bolt_pitch/2",
     "z": "frame_top - ts_bolt_z",
     "yaw": "0 deg",
@@ -740,7 +716,7 @@
     "joint_angle": "0 deg"
   },
   {
-    "name": "HW-31 Side bolt L3",
+    "name": "HW-30 Side bolt L2",
     "lib": "HW-L10_M6x20_SHCS",
     "parent_group": "HW-00 Frame hardware",
     "zl": [
@@ -764,55 +740,7 @@
     "joint_angle": "0 deg"
   },
   {
-    "name": "HW-32 Side bolt L4",
-    "lib": "HW-L10_M6x20_SHCS",
-    "parent_group": "HW-00 Frame hardware",
-    "zl": [
-      0,
-      1,
-      0
-    ],
-    "xl": [
-      0,
-      0,
-      -1
-    ],
-    "x": "-(frame_w/2 + sr_seat_t)",
-    "y": "ch_y_off + (-leg_yc) + (ch_bar_gap + ch_bar_w)/2",
-    "z": "frame_top - ts_bolt_z",
-    "yaw": "0 deg",
-    "legacy_body": "SideBolts_L_M6x20 (8)",
-    "verified_bbox_err_mm": 0.0,
-    "host": "FRM-03L side rail L / DSK top support",
-    "note": "Head on the drilled seat, shank inward; channel bar end.",
-    "joint_angle": "0 deg"
-  },
-  {
-    "name": "HW-33 Side bolt L5",
-    "lib": "HW-L10_M6x20_SHCS",
-    "parent_group": "HW-00 Frame hardware",
-    "zl": [
-      0,
-      1,
-      0
-    ],
-    "xl": [
-      0,
-      0,
-      -1
-    ],
-    "x": "-(frame_w/2 + sr_seat_t)",
-    "y": "ch_y_off + (leg_yc) - (ch_bar_gap + ch_bar_w)/2",
-    "z": "frame_top - ts_bolt_z",
-    "yaw": "0 deg",
-    "legacy_body": "SideBolts_L_M6x20 (5)",
-    "verified_bbox_err_mm": 0.0,
-    "host": "FRM-03L side rail L / DSK top support",
-    "note": "Head on the drilled seat, shank inward; channel bar end.",
-    "joint_angle": "0 deg"
-  },
-  {
-    "name": "HW-34 Side bolt L6",
+    "name": "HW-31 Side bolt L3",
     "lib": "HW-L10_M6x20_SHCS",
     "parent_group": "HW-00 Frame hardware",
     "zl": [
@@ -836,7 +764,7 @@
     "joint_angle": "0 deg"
   },
   {
-    "name": "HW-35 Side bolt L7",
+    "name": "HW-32 Side bolt L4",
     "lib": "HW-L10_M6x20_SHCS",
     "parent_group": "HW-00 Frame hardware",
     "zl": [
@@ -860,55 +788,7 @@
     "joint_angle": "0 deg"
   },
   {
-    "name": "HW-36 Side bolt L8",
-    "lib": "HW-L10_M6x20_SHCS",
-    "parent_group": "HW-00 Frame hardware",
-    "zl": [
-      0,
-      1,
-      0
-    ],
-    "xl": [
-      0,
-      0,
-      -1
-    ],
-    "x": "-(frame_w/2 + sr_seat_t)",
-    "y": "ch_y_off + (leg_yc) + (ch_bar_gap + ch_bar_w)/2",
-    "z": "frame_top - ts_bolt_z",
-    "yaw": "0 deg",
-    "legacy_body": "SideBolts_L_M6x20 (4)",
-    "verified_bbox_err_mm": 0.0,
-    "host": "FRM-03L side rail L / DSK top support",
-    "note": "Head on the drilled seat, shank inward; channel bar end.",
-    "joint_angle": "0 deg"
-  },
-  {
-    "name": "HW-37 Side bolt R1",
-    "lib": "HW-L10_M6x20_SHCS",
-    "parent_group": "HW-00 Frame hardware",
-    "zl": [
-      0,
-      1,
-      0
-    ],
-    "xl": [
-      0,
-      0,
-      1
-    ],
-    "x": "(frame_w/2 + sr_seat_t)",
-    "y": "ch_y_off + (-leg_yc) - (ch_bar_gap + ch_bar_w)/2",
-    "z": "frame_top - ts_bolt_z",
-    "yaw": "0 deg",
-    "legacy_body": "SideBolts_R_M6x20 (5)",
-    "verified_bbox_err_mm": 0.0,
-    "host": "FRM-03R side rail R / DSK top support",
-    "note": "Head on the drilled seat, shank inward; channel bar end.",
-    "joint_angle": "0 deg"
-  },
-  {
-    "name": "HW-38 Side bolt R2",
+    "name": "HW-33 Side bolt R1",
     "lib": "HW-L10_M6x20_SHCS",
     "parent_group": "HW-00 Frame hardware",
     "zl": [
@@ -932,7 +812,7 @@
     "joint_angle": "0 deg"
   },
   {
-    "name": "HW-39 Side bolt R3",
+    "name": "HW-34 Side bolt R2",
     "lib": "HW-L10_M6x20_SHCS",
     "parent_group": "HW-00 Frame hardware",
     "zl": [
@@ -956,55 +836,7 @@
     "joint_angle": "0 deg"
   },
   {
-    "name": "HW-40 Side bolt R4",
-    "lib": "HW-L10_M6x20_SHCS",
-    "parent_group": "HW-00 Frame hardware",
-    "zl": [
-      0,
-      1,
-      0
-    ],
-    "xl": [
-      0,
-      0,
-      1
-    ],
-    "x": "(frame_w/2 + sr_seat_t)",
-    "y": "ch_y_off + (-leg_yc) + (ch_bar_gap + ch_bar_w)/2",
-    "z": "frame_top - ts_bolt_z",
-    "yaw": "0 deg",
-    "legacy_body": "SideBolts_R_M6x20 (7)",
-    "verified_bbox_err_mm": 0.0,
-    "host": "FRM-03R side rail R / DSK top support",
-    "note": "Head on the drilled seat, shank inward; channel bar end.",
-    "joint_angle": "0 deg"
-  },
-  {
-    "name": "HW-41 Side bolt R5",
-    "lib": "HW-L10_M6x20_SHCS",
-    "parent_group": "HW-00 Frame hardware",
-    "zl": [
-      0,
-      1,
-      0
-    ],
-    "xl": [
-      0,
-      0,
-      1
-    ],
-    "x": "(frame_w/2 + sr_seat_t)",
-    "y": "ch_y_off + (leg_yc) - (ch_bar_gap + ch_bar_w)/2",
-    "z": "frame_top - ts_bolt_z",
-    "yaw": "0 deg",
-    "legacy_body": "SideBolts_R_M6x20 (6)",
-    "verified_bbox_err_mm": 0.0,
-    "host": "FRM-03R side rail R / DSK top support",
-    "note": "Head on the drilled seat, shank inward; channel bar end.",
-    "joint_angle": "0 deg"
-  },
-  {
-    "name": "HW-42 Side bolt R6",
+    "name": "HW-35 Side bolt R3",
     "lib": "HW-L10_M6x20_SHCS",
     "parent_group": "HW-00 Frame hardware",
     "zl": [
@@ -1028,7 +860,7 @@
     "joint_angle": "0 deg"
   },
   {
-    "name": "HW-43 Side bolt R7",
+    "name": "HW-36 Side bolt R4",
     "lib": "HW-L10_M6x20_SHCS",
     "parent_group": "HW-00 Frame hardware",
     "zl": [
@@ -1049,30 +881,6 @@
     "verified_bbox_err_mm": 0.0,
     "host": "FRM-03R side rail R / DSK top support",
     "note": "Head on the drilled seat, shank inward; leg screw.",
-    "joint_angle": "0 deg"
-  },
-  {
-    "name": "HW-44 Side bolt R8",
-    "lib": "HW-L10_M6x20_SHCS",
-    "parent_group": "HW-00 Frame hardware",
-    "zl": [
-      0,
-      1,
-      0
-    ],
-    "xl": [
-      0,
-      0,
-      1
-    ],
-    "x": "(frame_w/2 + sr_seat_t)",
-    "y": "ch_y_off + (leg_yc) + (ch_bar_gap + ch_bar_w)/2",
-    "z": "frame_top - ts_bolt_z",
-    "yaw": "0 deg",
-    "legacy_body": "SideBolts_R_M6x20 (4)",
-    "verified_bbox_err_mm": 0.0,
-    "host": "FRM-03R side rail R / DSK top support",
-    "note": "Head on the drilled seat, shank inward; channel bar end.",
     "joint_angle": "0 deg"
   }
 ]

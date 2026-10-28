@@ -149,24 +149,6 @@
    }
   },
   {
-   "command": "solid.cylinder",
-   "params": {
-    "name": "TS_Hole_ChannelBolt",
-    "axis": "X",
-    "operation": "cut",
-    "targets": [
-     "TopSupport_JC"
-    ],
-    "radius": "sr_clear_d/2",
-    "height": "ts_t + 0.2 mm",
-    "base": [
-     "-ts_t - 0.1 mm",
-     "ch_y_off - leg_yc - (ch_bar_gap/2 + ch_bar_w/2)",
-     "-ts_bolt_z"
-    ]
-   }
-  },
-  {
    "command": "solid.pattern.rectangular",
    "params": {
     "name": "TS_Hole_LegScrew_Pattern",
@@ -183,30 +165,12 @@
    }
   },
   {
-   "command": "solid.pattern.rectangular",
-   "params": {
-    "name": "TS_Hole_ChannelBolt_Pattern",
-    "features": [
-     "TS_Hole_ChannelBolt"
-    ],
-    "dir1": [
-     0,
-     1,
-     0
-    ],
-    "count1": 2,
-    "spacing1": "2*(ch_bar_gap/2 + ch_bar_w/2)"
-   }
-  },
-  {
    "command": "solid.mirror",
    "params": {
     "name": "TS_Holes_Mirror",
     "features": [
      "TS_Hole_LegScrew",
-     "TS_Hole_ChannelBolt",
-     "TS_Hole_LegScrew_Pattern",
-     "TS_Hole_ChannelBolt_Pattern"
+     "TS_Hole_LegScrew_Pattern"
     ],
     "plane": {
      "origin": [
@@ -245,7 +209,7 @@
    "params": {
     "values": {
      "part_number": "DSK-02",
-     "description": "Apex Pro (Jiecang OEM) top support: bent steel angle, outer web + inward top flange, web ends tapered to a ts_lip lip, 8 x sr_clear_d M6 holes in the web (D9: 4 leg screws + 4 channel-bar bolts). Origin: outer web face / flange top edge, mid-length; +X outward (away from desk centre), flange toward -X, +Y toward wall, body below Z=0. Serves L and R (L = yaw 180); hole pattern centred on ch_y_off, so this needs ch_y_off = 0.",
+     "description": "Apex Pro (Jiecang OEM) top support: bent steel angle, outer web + inward top flange, web ends tapered to a ts_lip lip, 4 x sr_clear_d M6 holes in the web (D9: leg screws, 2 per leg column). Origin: outer web face / flange top edge, mid-length; +X outward (away from desk centre), flange toward -X, +Y toward wall, body below Z=0. Serves L and R (L = yaw 180); hole pattern centred on ch_y_off, so this needs ch_y_off = 0.",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

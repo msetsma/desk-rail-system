@@ -77,36 +77,623 @@
    }
   },
   {
-   "command": "solid.box",
+   "command": "parameters.add",
    "params": {
-    "name": "PC_Case",
-    "body_name": "PC_FractalNorth",
-    "length": "pc_w",
-    "width": "pc_d",
-    "height": "pc_h",
-    "corner": [
-     "-pc_w/2",
-     "-pc_d/2",
-     "-pc_h"
-    ],
-    "operation": "new"
+    "name": "pcn_foot_h",
+    "expression": "19 mm",
+    "comment": "Fractal North feet height (spec: 469 overall - 450 w/o feet)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "pcn_frame_d",
+    "expression": "slat_inset + slat_t + 3 mm",
+    "comment": "Front panel frame depth (Y): slat recess + slats + 3 mm rails"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "pcn_edge_r",
+    "expression": "6 mm",
+    "comment": "Fractal North long-edge radius (MEASURE from renders)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "pcn_rear",
+    "expression": "9 mm",
+    "comment": "Rear thumbscrew protrusion (MEASURE, side render)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "pcn_front_d",
+    "expression": "102 mm",
+    "comment": "Front section depth: front to top-mesh / side-panel seam (MEASURE)"
    }
   },
   {
    "command": "solid.box",
    "params": {
-    "name": "PC_FrontRecess",
-    "length": "pc_w - 2*pc_bezel",
-    "width": "slat_inset + slat_t + 0.5 mm",
-    "height": "pc_h - 2*pc_bezel_v",
+    "name": "PC01_Body",
+    "body_name": "PC_FractalNorth",
+    "operation": "new",
+    "length": "pc_w",
+    "width": "pc_d - pcn_frame_d - pcn_rear",
+    "height": "(pc_h - pcn_foot_h)",
     "corner": [
-     "-pc_w/2 + pc_bezel",
-     "-pc_d/2 - 0.5 mm",
-     "-pc_h + pc_bezel_v"
-    ],
+     "-pc_w/2",
+     "-pc_d/2 + pcn_frame_d",
+     "-(pc_h - pcn_foot_h)"
+    ]
+   }
+  },
+  {
+   "command": "solid.fillet",
+   "params": {
+    "name": "PC01_EdgeRound",
+    "radius": "pcn_edge_r",
+    "edges": [
+     [
+      -107.5,
+      2.0,
+      0.0
+     ],
+     [
+      107.5,
+      2.0,
+      0.0
+     ],
+     [
+      -107.5,
+      2.0,
+      -428.0
+     ],
+     [
+      107.5,
+      2.0,
+      -428.0
+     ]
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PC01_TopMeshRecess",
     "operation": "cut",
     "targets": [
      "PC_FractalNorth"
+    ],
+    "length": "pc_w - 28 mm",
+    "width": "pc_d - pcn_front_d - pcn_rear - 12 mm",
+    "height": "1.1 mm",
+    "corner": [
+     "-pc_w/2 + 14 mm",
+     "-pc_d/2 + pcn_front_d",
+     "-1 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "-0.9 mm",
+    "name": "PC01_TopVent_Sketch"
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "closed": true,
+    "points": [
+     [
+      "-pc_w/2 + 20 mm",
+      "-pc_d/2 + pcn_front_d + 10 mm"
+     ],
+     [
+      "-pc_w/2 + 24 mm",
+      "-pc_d/2 + pcn_front_d + 10 mm"
+     ],
+     [
+      "-pc_w/2 + 24 mm",
+      "-pc_d/2 + pcn_front_d + 34 mm"
+     ],
+     [
+      "-pc_w/2 + 20 mm",
+      "-pc_d/2 + pcn_front_d + 34 mm"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.pattern.rectangular",
+   "params": {
+    "entities": [
+     "l1",
+     "l2",
+     "l3",
+     "l4"
+    ],
+    "count": 18,
+    "spacing": "(pc_w - 44 mm) / 17",
+    "dir": [
+     1,
+     0
+    ],
+    "count2": 10,
+    "spacing2": "(pc_d - pcn_front_d - pcn_rear - 66 mm) / 9",
+    "dir2": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "PC01_TopVent",
+    "sketch": "PC01_TopVent_Sketch",
+    "distance": "2.1 mm",
+    "direction": "negative",
+    "operation": "cut",
+    "targets": [
+     "PC_FractalNorth"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PC01_SideMeshRecess",
+    "operation": "cut",
+    "targets": [
+     "PC_FractalNorth"
+    ],
+    "length": "0.9 mm",
+    "width": "pc_d - pcn_front_d - pcn_rear - 3 mm",
+    "height": "(pc_h - pcn_foot_h) - 32 mm",
+    "corner": [
+     "-pc_w/2 - 0.1 mm",
+     "-pc_d/2 + pcn_front_d",
+     "-(pc_h - pcn_foot_h) + 25 mm"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PC01_SideSeam_R",
+    "operation": "cut",
+    "targets": [
+     "PC_FractalNorth"
+    ],
+    "length": "0.7 mm",
+    "width": "1 mm",
+    "height": "(pc_h - pcn_foot_h) + 0.2 mm",
+    "corner": [
+     "pc_w/2 - 0.6 mm",
+     "-pc_d/2 + pcn_front_d - 0.5 mm",
+     "-(pc_h - pcn_foot_h) - 0.1 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "0.1 mm",
+    "name": "PC01_TopIO_Sketch"
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "-72.7 mm",
+     "-pc_d/2 + 45 mm"
+    ],
+    "diameter": 16
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "-48.8 mm",
+     "-pc_d/2 + 45 mm"
+    ],
+    "diameter": 6
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "-32.2 mm",
+     "-pc_d/2 + 45 mm"
+    ],
+    "diameter": 6
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "closed": true,
+    "points": [
+     [
+      "-19.3 mm",
+      "-pc_d/2 + 45 mm - 2.75 mm"
+     ],
+     [
+      "-6.300000000000001 mm",
+      "-pc_d/2 + 45 mm - 2.75 mm"
+     ],
+     [
+      "-6.300000000000001 mm",
+      "-pc_d/2 + 45 mm + 2.75 mm"
+     ],
+     [
+      "-19.3 mm",
+      "-pc_d/2 + 45 mm + 2.75 mm"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "closed": true,
+    "points": [
+     [
+      "4.699999999999999 mm",
+      "-pc_d/2 + 45 mm - 2.75 mm"
+     ],
+     [
+      "17.7 mm",
+      "-pc_d/2 + 45 mm - 2.75 mm"
+     ],
+     [
+      "17.7 mm",
+      "-pc_d/2 + 45 mm + 2.75 mm"
+     ],
+     [
+      "4.699999999999999 mm",
+      "-pc_d/2 + 45 mm + 2.75 mm"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "closed": true,
+    "points": [
+     [
+      "29.0 mm",
+      "-pc_d/2 + 45 mm - 1.75 mm"
+     ],
+     [
+      "38.0 mm",
+      "-pc_d/2 + 45 mm - 1.75 mm"
+     ],
+     [
+      "38.0 mm",
+      "-pc_d/2 + 45 mm + 1.75 mm"
+     ],
+     [
+      "29.0 mm",
+      "-pc_d/2 + 45 mm + 1.75 mm"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "closed": true,
+    "points": [
+     [
+      "40.0 mm",
+      "-pc_d/2 + 45 mm - 0.6 mm"
+     ],
+     [
+      "80.0 mm",
+      "-pc_d/2 + 45 mm - 0.6 mm"
+     ],
+     [
+      "80.0 mm",
+      "-pc_d/2 + 45 mm + 0.6 mm"
+     ],
+     [
+      "40.0 mm",
+      "-pc_d/2 + 45 mm + 0.6 mm"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "PC01_TopIO",
+    "sketch": "PC01_TopIO_Sketch",
+    "distance": "4.1 mm",
+    "direction": "negative",
+    "operation": "cut",
+    "targets": [
+     "PC_FractalNorth"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XZ",
+    "offset": "(pc_d/2 - pcn_rear) - 0.1 mm",
+    "name": "PC01_Thumbscrew_Sketch"
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "-(pc_w/2 - 8 mm)",
+     "22 mm"
+    ],
+    "diameter": 10
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "-(pc_w/2 - 8 mm)",
+     "(pc_h - pcn_foot_h) - 40 mm"
+    ],
+    "diameter": 10
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "pc_w/2 - 8 mm",
+     "22 mm"
+    ],
+    "diameter": 10
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "pc_w/2 - 8 mm",
+     "(pc_h - pcn_foot_h) - 40 mm"
+    ],
+    "diameter": 10
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "PC01_Thumbscrews",
+    "sketch": "PC01_Thumbscrew_Sketch",
+    "distance": "pcn_rear + 0.1 mm",
+    "operation": "join",
+    "targets": [
+     "PC_FractalNorth"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "-(pc_h - pcn_foot_h) + 0.1 mm",
+    "name": "PC01_Feet_Sketch"
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "-(pc_w/2 - 25 mm)",
+     "-pc_d/2 + 34 mm"
+    ],
+    "diameter": 22
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "pc_w/2 - 25 mm",
+     "-pc_d/2 + 34 mm"
+    ],
+    "diameter": 22
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "-(pc_w/2 - 25 mm)",
+     "pc_d/2 - pcn_rear - 32 mm"
+    ],
+    "diameter": 22
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "pc_w/2 - 25 mm",
+     "pc_d/2 - pcn_rear - 32 mm"
+    ],
+    "diameter": 22
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "PC01_Feet",
+    "sketch": "PC01_Feet_Sketch",
+    "distance": "pcn_foot_h - 6 mm + 0.1 mm",
+    "direction": "negative",
+    "operation": "join",
+    "targets": [
+     "PC_FractalNorth"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "-pc_h",
+    "name": "PC01_FeetBrass_Sketch"
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "-(pc_w/2 - 25 mm)",
+     "-pc_d/2 + 34 mm"
+    ],
+    "diameter": 22
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "pc_w/2 - 25 mm",
+     "-pc_d/2 + 34 mm"
+    ],
+    "diameter": 22
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "-(pc_w/2 - 25 mm)",
+     "pc_d/2 - pcn_rear - 32 mm"
+    ],
+    "diameter": 22
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "pc_w/2 - 25 mm",
+     "pc_d/2 - pcn_rear - 32 mm"
+    ],
+    "diameter": 22
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "PC01_FeetBrass",
+    "sketch": "PC01_FeetBrass_Sketch",
+    "distance": "6 mm",
+    "operation": "new",
+    "body_name": "PC_North_Brass"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "PC01_PowerButton",
+    "diameter": 16,
+    "height": "4.8 mm",
+    "base": [
+     "-72.7 mm",
+     "-pc_d/2 + 45 mm",
+     "-4 mm"
+    ],
+    "operation": "new",
+    "body_name": "PC_North_Button"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PC01_AccentLine",
+    "operation": "new",
+    "body_name": "PC_North_AccentLine",
+    "length": "40.0 mm",
+    "width": "1.2 mm",
+    "height": "1 mm",
+    "corner": [
+     "40.0 mm",
+     "-pc_d/2 + 45 mm - 0.6 mm",
+     "-1 mm"
+    ]
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "target": "PC_North_Brass",
+    "operation": "join",
+    "tools": [
+     "PC_North_Brass (2)",
+     "PC_North_Brass (3)",
+     "PC_North_Brass (4)",
+     "PC_North_Button",
+     "PC_North_AccentLine"
+    ]
+   }
+  },
+  {
+   "command": "timeline.rename",
+   "params": {
+    "feature": "Combine1",
+    "name": "PC01_Brass_Join"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PC01_PullTab",
+    "operation": "new",
+    "body_name": "PC_North_PullTab",
+    "length": "16 mm",
+    "width": "pcn_rear + 3 mm",
+    "height": "1.5 mm",
+    "corner": [
+     "-8 mm",
+     "(pc_d/2 - pcn_rear) - 4 mm",
+     "0 mm"
     ]
    }
   },
@@ -125,7 +712,43 @@
     "bodies": [
      "PC_FractalNorth"
     ],
-    "color": "#5a5d60"
+    "color": "#333437"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "PC_North_Brass"
+    ],
+    "material": "Steel zinc-plated"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "PC_North_Brass"
+    ],
+    "color": "#b08d57"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "PC_North_PullTab"
+    ],
+    "material": "PC"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "PC_North_PullTab"
+    ],
+    "color": "#7a4a2c"
    }
   },
   {
@@ -133,13 +756,13 @@
    "params": {
     "values": {
      "part_number": "PC-01",
-     "description": "Fractal North PC case (envelope, front recess for slats). Origin: top face centre; front at -Y, X right, Z up",
+     "description": "Fractal Design North, Charcoal Black, Mesh side (visual model: body with rounded long edges, top mesh + I/O strip, left mesh panel, feet, rear thumbscrews; front panel is PC-02). Origin: top face centre of the case body; front at -Y, X right, Z up. Bodies: PC_FractalNorth (charcoal), PC_North_Brass (feet rings, power button, accent line), PC_North_PullTab (leather tab).",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
       "Material": "Steel powder-coated",
       "ReleaseState": "WIP",
-      "Source": "Fractal North spec dimensions (skeleton pc_*)"
+      "Source": "Fractal North product sheet (447 x 215 x 469 mm) + official renders, refs/fractal_north/"
      }
     }
    }

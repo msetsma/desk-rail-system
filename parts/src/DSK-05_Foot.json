@@ -77,17 +77,242 @@
    }
   },
   {
-   "command": "solid.box",
+   "command": "parameters.add",
    "params": {
-    "name": "Foot_Bar",
+    "name": "jc_foot_body_h",
+    "expression": "1.25 in",
+    "comment": "MEASURE Apex Pro foot steel body height (dimension sheet end view ~32 mm)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "jc_glide_h",
+    "expression": "max(foot_h - jc_foot_body_h, 0.25 in)",
+    "comment": "Leveling glide height under the foot body (end view ~20 mm)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "jc_taper",
+    "expression": "28 mm",
+    "comment": "MEASURE foot end slope run along Y (end view)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "jc_lip",
+    "expression": "8 mm",
+    "comment": "MEASURE foot end lip height left under the slope"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "jc_glide_in",
+    "expression": "31 mm",
+    "comment": "MEASURE glide centre from the foot end"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "jc_step",
+    "expression": "3 mm",
+    "comment": "MEASURE column stage inset per side (matches DSK-04)"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "YZ",
+    "name": "Foot_Profile_Sketch"
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "closed": true,
+    "points": [
+     [
+      "-foot_len/2",
+      "jc_glide_h"
+     ],
+     [
+      "foot_len/2",
+      "jc_glide_h"
+     ],
+     [
+      "foot_len/2",
+      "jc_glide_h + jc_lip"
+     ],
+     [
+      "foot_len/2 - jc_taper",
+      "foot_h"
+     ],
+     [
+      "-(foot_len/2 - jc_taper)",
+      "foot_h"
+     ],
+     [
+      "-foot_len/2",
+      "jc_glide_h + jc_lip"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "Foot_Body",
     "body_name": "Foot",
-    "length": "foot_w",
-    "width": "foot_len",
-    "height": "foot_h",
-    "corner": [
-     "-foot_w/2",
-     "-foot_len/2",
+    "distance": "foot_w",
+    "direction": "symmetric"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "foot_h + 0.1 mm",
+    "name": "Foot_Pocket_Sketch"
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "closed": true,
+    "points": [
+     [
+      "-(leg_x/2 - 2*jc_step + 3 mm)",
+      "leg_yc - (leg_y/2 - 2*jc_step + 3 mm)"
+     ],
+     [
+      "leg_x/2 - 2*jc_step + 3 mm",
+      "leg_yc - (leg_y/2 - 2*jc_step + 3 mm)"
+     ],
+     [
+      "leg_x/2 - 2*jc_step + 3 mm",
+      "leg_yc + (leg_y/2 - 2*jc_step + 3 mm)"
+     ],
+     [
+      "-(leg_x/2 - 2*jc_step + 3 mm)",
+      "leg_yc + (leg_y/2 - 2*jc_step + 3 mm)"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "closed": true,
+    "points": [
+     [
+      "-(leg_x/2 - 2*jc_step + 3 mm)",
+      "-leg_yc - (leg_y/2 - 2*jc_step + 3 mm)"
+     ],
+     [
+      "leg_x/2 - 2*jc_step + 3 mm",
+      "-leg_yc - (leg_y/2 - 2*jc_step + 3 mm)"
+     ],
+     [
+      "leg_x/2 - 2*jc_step + 3 mm",
+      "-leg_yc + (leg_y/2 - 2*jc_step + 3 mm)"
+     ],
+     [
+      "-(leg_x/2 - 2*jc_step + 3 mm)",
+      "-leg_yc + (leg_y/2 - 2*jc_step + 3 mm)"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "Foot_Pockets",
+    "operation": "cut",
+    "targets": [
+     "Foot"
+    ],
+    "distance": "3.1 mm",
+    "direction": "negative"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Glide_F_Base",
+    "axis": "Z",
+    "operation": "new",
+    "body_name": "Foot_Glide_F",
+    "radius": "22 mm",
+    "height": "0.4*jc_glide_h",
+    "base": [
+     "0 mm",
+     "-(foot_len/2 - jc_glide_in)",
      "0 mm"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Glide_F_Stem",
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "Foot_Glide_F"
+    ],
+    "radius": "12 mm",
+    "height": "0.6*jc_glide_h + 0.1 mm",
+    "base": [
+     "0 mm",
+     "-(foot_len/2 - jc_glide_in)",
+     "0.4*jc_glide_h - 0.1 mm"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Glide_B_Base",
+    "axis": "Z",
+    "operation": "new",
+    "body_name": "Foot_Glide_B",
+    "radius": "22 mm",
+    "height": "0.4*jc_glide_h",
+    "base": [
+     "0 mm",
+     "(foot_len/2 - jc_glide_in)",
+     "0 mm"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Glide_B_Stem",
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "Foot_Glide_B"
+    ],
+    "radius": "12 mm",
+    "height": "0.6*jc_glide_h + 0.1 mm",
+    "base": [
+     "0 mm",
+     "(foot_len/2 - jc_glide_in)",
+     "0.4*jc_glide_h - 0.1 mm"
     ]
    }
   },
@@ -110,17 +335,37 @@
    }
   },
   {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Foot_Glide_F",
+     "Foot_Glide_B"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Foot_Glide_F",
+     "Foot_Glide_B"
+    ],
+    "color": "#1e1f21"
+   }
+  },
+  {
    "command": "document.metadata.set",
    "params": {
     "values": {
      "part_number": "DSK-05",
-     "description": "Apex Pro foot (incl. glides), envelope foot_w x foot_len x foot_h. Origin: bottom face centre (floor); +Y toward wall, +Z up.",
+     "description": "Apex Pro foot: bent-steel bar foot_w x foot_len, body jc_foot_body_h tall on 2 black M8 leveling glides (jc_glide_h), ends sloped down to a jc_lip lip, 2 column pockets at +-leg_yc. Bodies: Foot (steel), Foot_Glide_F / Foot_Glide_B (black). Top at foot_h. Origin: bottom face centre (floor); +Y toward wall, +Z up.",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
       "Material": "Steel powder-coated",
       "ReleaseState": "WIP",
-      "Source": "MEASURE: DeskHaus dimension sheet (legacy Foot_*)"
+      "Source": "DeskHaus dimension sheet end view (27.5 in, 2.75 in), foot-kit photos, callout card (threaded leveling feet), assembly guide step 4; MEASURE: body height, slope, glides"
      }
     }
    }

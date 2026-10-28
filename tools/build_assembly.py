@@ -104,7 +104,7 @@ OCCURRENCES: tuple[Occurrence, ...] = (
     _occ("ModestyPanel", "FRM-05_Modesty_panel", _FRM, "0 mm", "stile_y + rail_s/2 + pnl_back_gap",
          "frame_top - pnl_drop"),
     _occ("Monitor_Main", "MON-01_Monitor_Main_32in", _MON, "m1_x", "stile_front - m1_off",
-         "desk_h + mon_clearance + m1_h/2"),
+         "desk_h + mon_clearance + m1_h/2 + m1_vesa_dz"),
     _occ("Monitor_Side", "MON-02_Monitor_Side_27in", _MON, "m3_x", "stile_front - m3_off",
          "desk_h + m3_bot + m3_h/2", "m3_yaw"),
     _occ("Speaker_L", "SPK-01_R40M_Speaker", _SPK, "-spk_px", "spk_py", "desk_h + spk_pz", "spk_yaw"),

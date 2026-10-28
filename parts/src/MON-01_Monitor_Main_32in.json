@@ -73,41 +73,279 @@
   {
    "command": "parameters.import",
    "params": {
-    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+    "text": "[{\"name\": \"m32u_w\", \"expression\": \"715.8 mm\", \"comment\": \"Width without stand (Gigabyte spec page)\"}, {\"name\": \"m32u_h\", \"expression\": \"423.8 mm\", \"comment\": \"Height without stand (Gigabyte spec page)\"}, {\"name\": \"m32u_d\", \"expression\": \"68.2 mm\", \"comment\": \"Depth without stand, screen front to VESA boss face (Gigabyte spec page)\"}, {\"name\": \"m32u_aa_w\", \"expression\": \"697.3056 mm\", \"comment\": \"Active area width (manual p.39)\"}, {\"name\": \"m32u_aa_h\", \"expression\": \"392.2344 mm\", \"comment\": \"Active area height (manual p.39)\"}, {\"name\": \"m32u_bez_side\", \"expression\": \"(m32u_w - m32u_aa_w)/2\", \"comment\": \"Side bezel to active area (9.25)\"}, {\"name\": \"m32u_bez_top\", \"expression\": \"m32u_bez_side\", \"comment\": \"Top bezel = side (dual-stage, reviews 8-9 mm)\"}, {\"name\": \"m32u_vesa_dz\", \"expression\": \"6.7 mm\", \"comment\": \"VESA centre above outline centre (scaled manual p.16 drawing, +-0.5)\"}, {\"name\": \"m32u_slab_t\", \"expression\": \"18 mm\", \"comment\": \"MEASURE panel thickness at the edge (photo; review says ~17 thinnest)\"}, {\"name\": \"m32u_back_d\", \"expression\": \"54 mm\", \"comment\": \"MEASURE screen front to rear housing back (side photo)\"}, {\"name\": \"m32u_hsg_drop\", \"expression\": \"106.4 mm\", \"comment\": \"Top edge down to rear housing top (manual p.16 drawing)\"}, {\"name\": \"m32u_hsg_r\", \"expression\": \"30 mm\", \"comment\": \"MEASURE rounded top of rear housing (side photo)\"}, {\"name\": \"m32u_boss\", \"expression\": \"131 mm\", \"comment\": \"VESA boss square (manual p.16 drawing)\"}, {\"name\": \"m32u_port_z\", \"expression\": \"77.3 mm\", \"comment\": \"Port line (downward-facing I/O) above bottom edge (manual p.16)\"}, {\"name\": \"m32u_pkt_wt\", \"expression\": \"387 mm\", \"comment\": \"I/O pocket width at the port line (manual p.16)\"}, {\"name\": \"m32u_pkt_wb\", \"expression\": \"452 mm\", \"comment\": \"I/O pocket width at the bottom edge (manual p.16)\"}, {\"name\": \"m32u_pkt_floor\", \"expression\": \"30 mm\", \"comment\": \"MEASURE screen front to I/O pocket floor\"}, {\"name\": \"m32u_vesa\", \"expression\": \"100 mm\", \"comment\": \"VESA hole pattern (manual p.16)\"}]"
    }
   },
   {
    "command": "solid.box",
    "params": {
-    "name": "Monitor_Main_Slab",
+    "name": "M32U_Panel",
     "body_name": "Monitor_Main",
-    "length": "m1_w",
-    "width": "mon_panel_t",
-    "height": "m1_h",
+    "operation": "new",
     "corner": [
-     "-m1_w/2",
-     "-m1_t",
-     "-m1_h/2"
+     "-m32u_w/2",
+     "-m32u_d",
+     "-m32u_h/2 - m32u_vesa_dz"
     ],
-    "operation": "new"
+    "length": "m32u_w",
+    "width": "m32u_slab_t",
+    "height": "m32u_h"
    }
   },
   {
    "command": "solid.box",
    "params": {
-    "name": "Monitor_Main_Back",
-    "length": "m1_w*mon_back_frac",
-    "width": "m1_t - mon_panel_t + 0.1 mm",
-    "height": "m1_h*mon_back_frac",
-    "corner": [
-     "-m1_w*mon_back_frac/2",
-     "-(m1_t - mon_panel_t) - 0.1 mm",
-     "-m1_h*mon_back_frac/2"
-    ],
+    "name": "M32U_RearHousing",
     "operation": "join",
     "targets": [
      "Monitor_Main"
+    ],
+    "corner": [
+     "-m32u_w/2 + 1 mm",
+     "-m32u_d + m32u_slab_t - 0.1 mm",
+     "-m32u_h/2 - m32u_vesa_dz + 1 mm"
+    ],
+    "length": "m32u_w - 2 mm",
+    "width": "m32u_back_d - m32u_slab_t + 0.1 mm",
+    "height": "m32u_h - m32u_hsg_drop - 1 mm"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "M32U_VesaBoss",
+    "operation": "join",
+    "targets": [
+     "Monitor_Main"
+    ],
+    "corner": [
+     "-m32u_boss/2",
+     "-m32u_d + m32u_back_d - 0.1 mm",
+     "-m32u_boss/2"
+    ],
+    "length": "m32u_boss",
+    "width": "m32u_d - m32u_back_d + 0.1 mm",
+    "height": "m32u_boss"
+   }
+  },
+  {
+   "command": "solid.fillet",
+   "params": {
+    "edges": [
+     [
+      200.0,
+      -14.200000000000003,
+      98.80000000000001
+     ]
+    ],
+    "radius": "m32u_hsg_r",
+    "name": "M32U_HousingRound"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": {
+     "origin": [
+      0,
+      -14.100000000000003,
+      0
+     ],
+     "x_dir": [
+      1,
+      0,
+      0
+     ],
+     "y_dir": [
+      0,
+      0,
+      1
+     ]
+    },
+    "name": "Sk_M32U_IOPocket"
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "points": [
+     [
+      "-m32u_pkt_wt/2",
+      "-m32u_h/2 - m32u_vesa_dz + m32u_port_z"
+     ],
+     [
+      "m32u_pkt_wt/2",
+      "-m32u_h/2 - m32u_vesa_dz + m32u_port_z"
+     ],
+     [
+      "m32u_pkt_wb/2 + 0.05 mm",
+      "-m32u_h/2 - m32u_vesa_dz - 0.1 mm"
+     ],
+     [
+      "-m32u_pkt_wb/2 - 0.05 mm",
+      "-m32u_h/2 - m32u_vesa_dz - 0.1 mm"
+     ]
+    ],
+    "closed": true
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Sk_M32U_IOPocket",
+    "distance": "m32u_back_d - m32u_pkt_floor + 0.1 mm",
+    "operation": "cut",
+    "targets": [
+     "Monitor_Main"
+    ],
+    "name": "M32U_IOPocket"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": {
+     "origin": [
+      0,
+      0.1,
+      0
+     ],
+     "x_dir": [
+      1,
+      0,
+      0
+     ],
+     "y_dir": [
+      0,
+      0,
+      1
+     ]
+    },
+    "name": "Sk_M32U_VesaHoles"
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "-m32u_vesa/2",
+     "-m32u_vesa/2"
+    ],
+    "radius": 2.0
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "-m32u_vesa/2",
+     "m32u_vesa/2"
+    ],
+    "radius": 2.0
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "m32u_vesa/2",
+     "-m32u_vesa/2"
+    ],
+    "radius": 2.0
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     "m32u_vesa/2",
+     "m32u_vesa/2"
+    ],
+    "radius": 2.0
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Sk_M32U_VesaHoles",
+    "distance": "10.1 mm",
+    "operation": "cut",
+    "targets": [
+     "Monitor_Main"
+    ],
+    "name": "M32U_VesaHoles_M4"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": {
+     "origin": [
+      0,
+      -68.3,
+      0
+     ],
+     "x_dir": [
+      1,
+      0,
+      0
+     ],
+     "y_dir": [
+      0,
+      0,
+      1
+     ]
+    },
+    "name": "Sk_M32U_Screen"
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "closed": true,
+    "points": [
+     [
+      "-m32u_aa_w/2",
+      "-m32u_h/2 - m32u_vesa_dz + m32u_h - m32u_bez_top - m32u_aa_h"
+     ],
+     [
+      "m32u_aa_w/2",
+      "-m32u_h/2 - m32u_vesa_dz + m32u_h - m32u_bez_top - m32u_aa_h"
+     ],
+     [
+      "m32u_aa_w/2",
+      "m32u_h/2 - m32u_vesa_dz - m32u_bez_top"
+     ],
+     [
+      "-m32u_aa_w/2",
+      "m32u_h/2 - m32u_vesa_dz - m32u_bez_top"
+     ]
     ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Sk_M32U_Screen",
+    "distance": "0.4 mm",
+    "direction": "negative",
+    "operation": "cut",
+    "targets": [
+     "Monitor_Main"
+    ],
+    "name": "M32U_ScreenFace"
    }
   },
   {
@@ -129,17 +367,36 @@
    }
   },
   {
+   "command": "appearance.assign",
+   "params": {
+    "faces": [
+     [
+      0.0,
+      -67.9,
+      -0.1643999999999437
+     ]
+    ],
+    "body": "Monitor_Main",
+    "color": "#050608",
+    "pbr": {
+     "metallic": 0.0,
+     "roughness": 0.08,
+     "dielectric_ior": 1.5
+    }
+   }
+  },
+  {
    "command": "document.metadata.set",
    "params": {
     "values": {
      "part_number": "MON-01",
-     "description": "Main monitor 32in 16:9 (envelope). Origin: VESA mount face centre (rear of bulge); screen faces -Y, X right, Z up",
+     "description": "Gigabyte M32U 31.5in 4K monitor, stand removed, VESA 100x100 mounted (purchased, reference model). Origin: VESA mounting face centre (rear of VESA boss); screen faces -Y, X right, Z up. VESA centre is m32u_vesa_dz = 6.7 mm above the outline centre (= active-area centre).",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
       "Material": "ABS",
       "ReleaseState": "WIP",
-      "Source": "Envelope from skeleton m1_* MEASURE params"
+      "Source": "Gigabyte M32U spec page + user manual (refs/gigabyte_m32u/README.md); slab/housing depth MEASURE from photos"
      }
     }
    }

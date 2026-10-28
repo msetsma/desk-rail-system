@@ -3,7 +3,7 @@
     python tools/sweep.py                    # default cases into build/sweep/
     python tools/sweep.py --cases cases.json # {"name": {"param": "expression", ...}, ...}
 
-Each case gets its own copy of parts/ and its own skeleton, so cases run side by side and the
+Each case builds its own frozen parts from the scripts with its own skeleton, so cases run side by side and the
 repo's parts and skeleton are never touched. A case passes when every part rebuilds and the
 assembly has no timeline errors or warnings. Exits non-zero if any case fails.
 """
@@ -13,7 +13,6 @@ from __future__ import annotations
 import argparse
 import json
 import logging
-import shutil
 import subprocess
 import sys
 from collections.abc import Mapping, Sequence
@@ -57,14 +56,8 @@ def _write_skeleton(changes: Mapping[str, str], path: Path) -> None:
 
 
 def _regen_copy(case_dir: Path, skeleton: Path) -> list[str]:
-    parts_dir = case_dir / "parts"
-    shutil.copytree(ROOT / "parts", parts_dir, dirs_exist_ok=True)
-    errors = []
-    for part in regen_parts.load_part_list():
-        try:
-            regen_parts.regen_part(parts_dir / part.relative_to(ROOT / "parts"), skeleton)
-        except regen_parts.RegenError as exc:
-            errors.append(str(exc))
+    _, errors = regen_parts.regen_all(regen_parts.part_sources(), skeleton, parts_dir=case_dir / "parts",
+                                      hist=case_dir / "hist", force=True)
     return errors
 
 

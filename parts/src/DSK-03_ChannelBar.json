@@ -77,72 +77,296 @@
    }
   },
   {
-   "command": "solid.box",
+   "command": "parameters.add",
    "params": {
-    "name": "CB_Bar",
-    "body_name": "ChannelBar",
-    "length": "frame_w - 2*ts_w",
-    "width": "ch_bar_w",
-    "height": "ch_h",
-    "corner": [
-     "-(frame_w/2 - ts_w)",
-     "-ch_bar_w/2",
-     "-ch_h"
+    "name": "jc_hsg_in",
+    "expression": "40 mm",
+    "comment": "MEASURE Apex Pro column-top housing: reach inward of the top-stage inner face (X), assembly guide step 1"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "jc_hsg_below",
+    "expression": "6 mm",
+    "comment": "MEASURE column-top housing: depth below the channel bars"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "jc_scr_pitch",
+    "expression": "50 mm",
+    "comment": "MEASURE channel-to-column M6x10 screws: X pitch of the 2 per side (assembly guide step 1)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "jc_hsg_xc",
+    "expression": "((leg_inset - ts_t) - (leg_x/2 + jc_hsg_in))/2",
+    "comment": "Column-top housing X centre from leg centre (channel screws are centred on it)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "jc_half",
+    "expression": "19.8 in",
+    "comment": "Apex Pro collapsing channel: outer half length from the frame outer face (dimension sheet front view)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "jc_ch_t",
+    "expression": "1.5 mm",
+    "comment": "MEASURE channel sheet thickness (bent steel, open to the floor)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "jc_rail_ovl",
+    "expression": "60 mm",
+    "comment": "MEASURE inner telescoping rail overlap inside each half"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "YZ",
+    "offset": "frame_w/2 - ts_t",
+    "name": "CB_Half_R_Sketch"
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "closed": true,
+    "points": [
+     [
+      "-ch_bar_w/2",
+      "-ch_h"
+     ],
+     [
+      "-ch_bar_w/2",
+      "0 mm"
+     ],
+     [
+      "ch_bar_w/2",
+      "0 mm"
+     ],
+     [
+      "ch_bar_w/2",
+      "-ch_h"
+     ],
+     [
+      "ch_bar_w/2 - jc_ch_t",
+      "-ch_h"
+     ],
+     [
+      "ch_bar_w/2 - jc_ch_t",
+      "-jc_ch_t"
+     ],
+     [
+      "-(ch_bar_w/2 - jc_ch_t)",
+      "-jc_ch_t"
+     ],
+     [
+      "-(ch_bar_w/2 - jc_ch_t)",
+      "-ch_h"
+     ]
     ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "CB_Half_R",
+    "body_name": "ChannelBar",
+    "distance": "jc_half - ts_t",
+    "direction": "negative"
    }
   },
   {
    "command": "solid.box",
    "params": {
-    "name": "CB_EndTabs",
+    "name": "CB_InnerRail",
     "operation": "join",
     "targets": [
      "ChannelBar"
     ],
-    "length": "frame_w - 2*ts_t",
-    "width": "ch_bar_w",
-    "height": "ch_h - ts_t",
+    "length": "max(frame_w - 2*jc_half, 1 mm) + 2*jc_rail_ovl",
+    "width": "ch_bar_w - 2*jc_ch_t - 1 mm",
+    "height": "ch_h - jc_ch_t - 2 mm + 0.1 mm",
     "corner": [
-     "-(frame_w/2 - ts_t)",
-     "-ch_bar_w/2",
-     "-ch_h"
+     "-max(frame_w/2 - jc_half, 0.5 mm) - jc_rail_ovl",
+     "-(ch_bar_w/2 - jc_ch_t - 0.5 mm)",
+     "-(ch_h - 2 mm)"
     ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "YZ",
+    "offset": "-(frame_w/2 - ts_t)",
+    "name": "CB_Half_L_Sketch"
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "closed": true,
+    "points": [
+     [
+      "-ch_bar_w/2",
+      "-ch_h"
+     ],
+     [
+      "-ch_bar_w/2",
+      "0 mm"
+     ],
+     [
+      "ch_bar_w/2",
+      "0 mm"
+     ],
+     [
+      "ch_bar_w/2",
+      "-ch_h"
+     ],
+     [
+      "ch_bar_w/2 - jc_ch_t",
+      "-ch_h"
+     ],
+     [
+      "ch_bar_w/2 - jc_ch_t",
+      "-jc_ch_t"
+     ],
+     [
+      "-(ch_bar_w/2 - jc_ch_t)",
+      "-jc_ch_t"
+     ],
+     [
+      "-(ch_bar_w/2 - jc_ch_t)",
+      "-ch_h"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "CB_Half_L",
+    "operation": "join",
+    "targets": [
+     "ChannelBar"
+    ],
+    "distance": "jc_half - ts_t"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "CB_FlangeNotch",
+    "operation": "cut",
+    "targets": [
+     "ChannelBar"
+    ],
+    "length": "ts_w - ts_t + 0.1 mm",
+    "width": "ch_bar_w + 0.2 mm",
+    "height": "ts_t + 0.1 mm",
+    "corner": [
+     "frame_w/2 - ts_w",
+     "-ch_bar_w/2 - 0.1 mm",
+     "-ts_t"
+    ]
+   }
+  },
+  {
+   "command": "solid.mirror",
+   "params": {
+    "name": "CB_FlangeNotch_Mirror",
+    "features": [
+     "CB_FlangeNotch"
+    ],
+    "plane": {
+     "origin": [
+      "0 mm",
+      "0 mm",
+      "0 mm"
+     ],
+     "normal": [
+      1,
+      0,
+      0
+     ]
+    }
    }
   },
   {
    "command": "solid.cylinder",
    "params": {
-    "name": "CB_Tap_R",
-    "axis": "X",
+    "name": "CB_ScrewHole",
+    "axis": "Y",
     "operation": "cut",
     "targets": [
      "ChannelBar"
     ],
-    "radius": "3 mm",
-    "height": "sb_len - sr_seat_t - ts_t + 0.1 mm",
+    "radius": "sr_clear_d/2",
+    "height": "ch_bar_w + 0.2 mm",
     "base": [
-     "frame_w/2 - ts_t - (sb_len - sr_seat_t - ts_t)",
-     "0 mm",
-     "-ts_bolt_z"
+     "frame_w/2 - leg_inset + jc_hsg_xc - jc_scr_pitch/2",
+     "-ch_bar_w/2 - 0.1 mm",
+     "-ch_h/2"
     ]
    }
   },
   {
-   "command": "solid.cylinder",
+   "command": "solid.pattern.rectangular",
    "params": {
-    "name": "CB_Tap_L",
-    "axis": "X",
-    "operation": "cut",
-    "targets": [
-     "ChannelBar"
+    "name": "CB_ScrewHole_Pattern",
+    "features": [
+     "CB_ScrewHole"
     ],
-    "radius": "3 mm",
-    "height": "sb_len - sr_seat_t - ts_t + 0.1 mm",
-    "base": [
-     "-(frame_w/2 - ts_t) - 0.1 mm",
-     "0 mm",
-     "-ts_bolt_z"
-    ]
+    "dir1": [
+     1,
+     0,
+     0
+    ],
+    "count1": 2,
+    "spacing1": "jc_scr_pitch"
+   }
+  },
+  {
+   "command": "solid.mirror",
+   "params": {
+    "name": "CB_ScrewHole_Mirror",
+    "features": [
+     "CB_ScrewHole",
+     "CB_ScrewHole_Pattern"
+    ],
+    "plane": {
+     "origin": [
+      "0 mm",
+      "0 mm",
+      "0 mm"
+     ],
+     "normal": [
+      1,
+      0,
+      0
+     ]
+    }
    }
   },
   {
@@ -168,13 +392,13 @@
    "params": {
     "values": {
      "part_number": "DSK-03",
-     "description": "Apex Pro channel bar (one of 4), length frame_w - 2*ts_w with end tabs under the top-support flanges reaching the web; M6 tap at each end for the D9 through-bolt. Origin: top face centre; +X along the bar, +Z up, body below Z=0.",
+     "description": "Apex Pro collapsing channel bar (one of 4; 2 per channel either side of the column housings): bent-steel channel ch_bar_w x ch_h open to the floor, two outer halves jc_half long from the frame outer face with a smaller inner telescoping rail between them; ends run under the top-support flange (notched ts_t) to the web. No side bolts into the top support; 2 M6 clearance holes per end (Y) for the column-housing screws. Origin: top face centre; +X along the bar, +Z up, body below Z=0.",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
       "Material": "Steel powder-coated",
       "ReleaseState": "WIP",
-      "Source": "MEASURE: DeskHaus dimension sheet (legacy ChannelBar_*)"
+      "Source": "DeskHaus dimension sheet (16.6/5.8 in spans, 19.8 in half), assembly guide steps 1 and 5, product renders; MEASURE: sheet thickness, rail section, screw pitch"
      }
     }
    }

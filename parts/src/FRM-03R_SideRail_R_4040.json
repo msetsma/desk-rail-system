@@ -168,38 +168,6 @@
     "command": "sketch.circle.center",
     "params": {
      "center": [
-      "ch_y_off + (-leg_yc) - (ch_bar_gap + ch_bar_w)/2",
-      "-ts_bolt_z"
-     ],
-     "diameter": 11.0
-    },
-    "dimensions": {
-     "diameter": "sr_access_d"
-    }
-   }
-  },
-  {
-   "command": "sketch.draw.dimensioned",
-   "params": {
-    "command": "sketch.circle.center",
-    "params": {
-     "center": [
-      "ch_y_off + (-leg_yc) + (ch_bar_gap + ch_bar_w)/2",
-      "-ts_bolt_z"
-     ],
-     "diameter": 11.0
-    },
-    "dimensions": {
-     "diameter": "sr_access_d"
-    }
-   }
-  },
-  {
-   "command": "sketch.draw.dimensioned",
-   "params": {
-    "command": "sketch.circle.center",
-    "params": {
-     "center": [
       "ch_y_off + (leg_yc) - ts_bolt_pitch/2",
       "-ts_bolt_z"
      ],
@@ -217,38 +185,6 @@
     "params": {
      "center": [
       "ch_y_off + (leg_yc) + ts_bolt_pitch/2",
-      "-ts_bolt_z"
-     ],
-     "diameter": 11.0
-    },
-    "dimensions": {
-     "diameter": "sr_access_d"
-    }
-   }
-  },
-  {
-   "command": "sketch.draw.dimensioned",
-   "params": {
-    "command": "sketch.circle.center",
-    "params": {
-     "center": [
-      "ch_y_off + (leg_yc) - (ch_bar_gap + ch_bar_w)/2",
-      "-ts_bolt_z"
-     ],
-     "diameter": 11.0
-    },
-    "dimensions": {
-     "diameter": "sr_access_d"
-    }
-   }
-  },
-  {
-   "command": "sketch.draw.dimensioned",
-   "params": {
-    "command": "sketch.circle.center",
-    "params": {
-     "center": [
-      "ch_y_off + (leg_yc) + (ch_bar_gap + ch_bar_w)/2",
       "-ts_bolt_z"
      ],
      "diameter": 11.0
@@ -320,38 +256,6 @@
     "command": "sketch.circle.center",
     "params": {
      "center": [
-      "ch_y_off + (-leg_yc) - (ch_bar_gap + ch_bar_w)/2",
-      "-ts_bolt_z"
-     ],
-     "diameter": 6.6
-    },
-    "dimensions": {
-     "diameter": "sr_clear_d"
-    }
-   }
-  },
-  {
-   "command": "sketch.draw.dimensioned",
-   "params": {
-    "command": "sketch.circle.center",
-    "params": {
-     "center": [
-      "ch_y_off + (-leg_yc) + (ch_bar_gap + ch_bar_w)/2",
-      "-ts_bolt_z"
-     ],
-     "diameter": 6.6
-    },
-    "dimensions": {
-     "diameter": "sr_clear_d"
-    }
-   }
-  },
-  {
-   "command": "sketch.draw.dimensioned",
-   "params": {
-    "command": "sketch.circle.center",
-    "params": {
-     "center": [
       "ch_y_off + (leg_yc) - ts_bolt_pitch/2",
       "-ts_bolt_z"
      ],
@@ -369,38 +273,6 @@
     "params": {
      "center": [
       "ch_y_off + (leg_yc) + ts_bolt_pitch/2",
-      "-ts_bolt_z"
-     ],
-     "diameter": 6.6
-    },
-    "dimensions": {
-     "diameter": "sr_clear_d"
-    }
-   }
-  },
-  {
-   "command": "sketch.draw.dimensioned",
-   "params": {
-    "command": "sketch.circle.center",
-    "params": {
-     "center": [
-      "ch_y_off + (leg_yc) - (ch_bar_gap + ch_bar_w)/2",
-      "-ts_bolt_z"
-     ],
-     "diameter": 6.6
-    },
-    "dimensions": {
-     "diameter": "sr_clear_d"
-    }
-   }
-  },
-  {
-   "command": "sketch.draw.dimensioned",
-   "params": {
-    "command": "sketch.circle.center",
-    "params": {
-     "center": [
-      "ch_y_off + (leg_yc) + (ch_bar_gap + ch_bar_w)/2",
       "-ts_bolt_z"
      ],
      "diameter": 6.6
@@ -485,7 +357,7 @@
    "params": {
     "values": {
      "part_number": "FRM-03R",
-     "description": "Side rail R, Misumi HFS5-4040 drilled for 8 M6 through-bolts (D9): \u00d8 sr_access_d access from the outer (+X) face to a sr_seat_t seat, \u00d8 sr_clear_d through the inner wall; at ts_bolt_z below the top, Y = ch_y_off \u00b1 leg_yc \u00b1 ts_bolt_pitch/2 (leg screws) and \u00b1 (ch_bar_gap+ch_bar_w)/2 (channel bars). Ends: side_front .. up_y - rail_l/2. Origin: top edge of the inner (mating) face at the top-support centre station (Y=0), +Y toward wall, +Z up",
+     "description": "Side rail R, Misumi HFS5-4040 drilled for 4 M6 through-bolts (D9): \u00d8 sr_access_d access from the outer (+X) face to a sr_seat_t seat, \u00d8 sr_clear_d through the inner wall; at ts_bolt_z below the top, Y = ch_y_off \u00b1 leg_yc \u00b1 ts_bolt_pitch/2 (leg screws, into the leg columns' threads). Ends: side_front .. up_y - rail_l/2. Origin: top edge of the inner (mating) face at the top-support centre station (Y=0), +Y toward wall, +Z up",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

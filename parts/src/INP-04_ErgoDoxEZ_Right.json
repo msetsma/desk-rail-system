@@ -77,16 +77,72 @@
    }
   },
   {
+   "command": "parameters.add",
+   "params": {
+    "name": "kb_sw_h",
+    "expression": "6 mm",
+    "comment": "MEASURE: switch housing exposed between plate (case top) and SA cap skirt"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "kb_chamfer",
+    "expression": "1 mm",
+    "comment": "Case top edge chamfer"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "kb_cap_inset",
+    "expression": "2.75 mm",
+    "comment": "SA cap top inset per side (18.2 base -> 12.7 top)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "sa_r1",
+    "expression": "16.5 mm",
+    "comment": "MEASURE: SA row 1 (number row) cap height, SP nominal 0.65 in"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "sa_r2",
+    "expression": "13.7 mm",
+    "comment": "MEASURE: SA row 2 (QWERT) cap height, est."
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "sa_r3",
+    "expression": "11.9 mm",
+    "comment": "MEASURE: SA row 3 (home row + thumbs) cap height, SP nominal 0.47 in"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "sa_r4",
+    "expression": "13.2 mm",
+    "comment": "MEASURE: SA row 4 (ZXCV + bottom row) cap height, est."
+   }
+  },
+  {
    "command": "sketch.create",
    "params": {
     "plane": "XY",
-    "name": "Keyboard_R_Outline"
+    "name": "Sketch_R_Outline"
    }
   },
   {
    "command": "sketch.insert_dxf",
    "params": {
-    "path": "C:/Users/2015m/DEV/CAD/desk/refs/ergodox_ez/ergodox_ez_right.dxf"
+    "path": "C:/Users/2015m/DEV/CAD/desk/refs/ergodox_ez/ergodox_ez_right_mirror.dxf"
    }
   },
   {
@@ -96,32 +152,1379 @@
   {
    "command": "solid.extrude",
    "params": {
-    "sketch": "Keyboard_R_Outline",
-    "distance": "kb_case_h",
+    "sketch": "Sketch_R_Outline",
+    "distance": "kb_case_h - kb_chamfer",
     "operation": "new",
-    "name": "Keyboard_R_Case",
-    "body_name": "Keyboard_R"
+    "name": "Extrude_R_Case",
+    "body_name": "Keyboard_R_Case"
    }
   },
   {
    "command": "solid.extrude",
    "params": {
-    "sketch": "Keyboard_R_Outline",
-    "distance": "kb_key_h",
-    "start_offset": "kb_case_h",
-    "taper": "-12 deg",
+    "sketch": "Sketch_R_Outline",
+    "start_offset": "kb_case_h - kb_chamfer",
+    "distance": "kb_chamfer",
+    "taper": "-45 deg",
     "operation": "join",
     "targets": [
-     "Keyboard_R"
+     "Keyboard_R_Case"
     ],
-    "name": "Keyboard_R_Keys"
+    "name": "Extrude_R_CaseChamfer"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "name": "Sketch_R_Switches_Main"
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     171.1484,
+     69.54
+    ],
+    "p1": [
+     185.1484,
+     83.54
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     171.1484,
+     89.69
+    ],
+    "p1": [
+     185.1484,
+     103.69
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     171.1484,
+     109.85
+    ],
+    "p1": [
+     185.1484,
+     123.85
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     171.1484,
+     130.01
+    ],
+    "p1": [
+     185.1484,
+     144.01
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     166.7384,
+     49.38
+    ],
+    "p1": [
+     180.7384,
+     63.38
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     146.9784,
+     50.25
+    ],
+    "p1": [
+     160.9784,
+     64.25
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     146.9784,
+     70.19
+    ],
+    "p1": [
+     160.9784,
+     84.19
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     146.9784,
+     90.13
+    ],
+    "p1": [
+     160.9784,
+     104.13
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     146.9784,
+     110.07
+    ],
+    "p1": [
+     160.9784,
+     124.07
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     146.9784,
+     130.01
+    ],
+    "p1": [
+     160.9784,
+     144.01
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     127.8684,
+     53.61
+    ],
+    "p1": [
+     141.8684,
+     67.61
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     127.8684,
+     73.55
+    ],
+    "p1": [
+     141.8684,
+     87.55
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     127.8684,
+     93.49
+    ],
+    "p1": [
+     141.8684,
+     107.49
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     127.8684,
+     113.43
+    ],
+    "p1": [
+     141.8684,
+     127.43
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     127.8684,
+     133.05
+    ],
+    "p1": [
+     141.8684,
+     147.05
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     108.7284,
+     55.02
+    ],
+    "p1": [
+     122.7284,
+     69.02
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     108.7284,
+     74.96
+    ],
+    "p1": [
+     122.7284,
+     88.96
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     108.7284,
+     94.9
+    ],
+    "p1": [
+     122.7284,
+     108.9
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     108.7284,
+     114.84
+    ],
+    "p1": [
+     122.7284,
+     128.84
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     108.7284,
+     134.78
+    ],
+    "p1": [
+     122.7284,
+     148.78
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     89.6684,
+     53.29
+    ],
+    "p1": [
+     103.6684,
+     67.29
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     89.6684,
+     73.23
+    ],
+    "p1": [
+     103.6684,
+     87.23
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     89.6684,
+     93.17
+    ],
+    "p1": [
+     103.6684,
+     107.17
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     89.6684,
+     113.11
+    ],
+    "p1": [
+     103.6684,
+     127.11
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     89.6684,
+     133.05
+    ],
+    "p1": [
+     103.6684,
+     147.05
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     70.5584,
+     72.36
+    ],
+    "p1": [
+     84.5584,
+     86.36
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     70.5584,
+     92.3
+    ],
+    "p1": [
+     84.5584,
+     106.3
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     70.5584,
+     112.24
+    ],
+    "p1": [
+     84.5584,
+     126.24
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     70.5584,
+     132.18
+    ],
+    "p1": [
+     84.5584,
+     146.18
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     51.4584,
+     79.13
+    ],
+    "p1": [
+     65.4584,
+     93.13
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     51.4584,
+     107.78
+    ],
+    "p1": [
+     65.4584,
+     121.78
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     51.4584,
+     132.18
+    ],
+    "p1": [
+     65.4584,
+     146.18
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Sketch_R_Switches_Main",
+    "start_offset": "kb_case_h",
+    "distance": "kb_sw_h",
+    "operation": "new",
+    "name": "Extrude_R_Switches_Main",
+    "body_name": "Keyboard_R_Switches"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": {
+     "origin": [
+      0,
+      0,
+      0
+     ],
+     "x_dir": [
+      0.917060074385124,
+      0.3987490689252462,
+      0
+     ],
+     "y_dir": [
+      -0.3987490689252462,
+      0.917060074385124,
+      0
+     ]
+    },
+    "name": "Sketch_R_Switches_Thumb"
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     72.4352,
+     11.3034
+    ],
+    "p1": [
+     86.4352,
+     25.3034
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     53.3298,
+     11.3015
+    ],
+    "p1": [
+     67.3298,
+     25.3015
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     53.3402,
+     41.2187
+    ],
+    "p1": [
+     67.3402,
+     55.2187
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     34.2246,
+     1.3437
+    ],
+    "p1": [
+     48.2246,
+     15.3437
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     34.2363,
+     21.2828
+    ],
+    "p1": [
+     48.2363,
+     35.2828
+    ]
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     34.2348,
+     41.2168
+    ],
+    "p1": [
+     48.2348,
+     55.2168
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Sketch_R_Switches_Thumb",
+    "start_offset": "kb_case_h",
+    "distance": "kb_sw_h",
+    "operation": "new",
+    "name": "Extrude_R_Switches_Thumb",
+    "body_name": "Keyboard_R_Switches_Thumb"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "target": "Keyboard_R_Switches",
+    "tools": [
+     "Keyboard_R_Switches (2)",
+     "Keyboard_R_Switches (3)",
+     "Keyboard_R_Switches (4)",
+     "Keyboard_R_Switches (5)",
+     "Keyboard_R_Switches (6)",
+     "Keyboard_R_Switches (7)",
+     "Keyboard_R_Switches (8)",
+     "Keyboard_R_Switches (9)",
+     "Keyboard_R_Switches (10)",
+     "Keyboard_R_Switches (11)",
+     "Keyboard_R_Switches (12)",
+     "Keyboard_R_Switches (13)",
+     "Keyboard_R_Switches (14)",
+     "Keyboard_R_Switches (15)",
+     "Keyboard_R_Switches (16)",
+     "Keyboard_R_Switches (17)",
+     "Keyboard_R_Switches (18)",
+     "Keyboard_R_Switches (19)",
+     "Keyboard_R_Switches (20)",
+     "Keyboard_R_Switches (21)",
+     "Keyboard_R_Switches (22)",
+     "Keyboard_R_Switches (23)",
+     "Keyboard_R_Switches (24)",
+     "Keyboard_R_Switches (25)",
+     "Keyboard_R_Switches (26)",
+     "Keyboard_R_Switches (27)",
+     "Keyboard_R_Switches (28)",
+     "Keyboard_R_Switches (29)",
+     "Keyboard_R_Switches (30)",
+     "Keyboard_R_Switches (31)",
+     "Keyboard_R_Switches (32)",
+     "Keyboard_R_Switches_Thumb",
+     "Keyboard_R_Switches_Thumb (2)",
+     "Keyboard_R_Switches_Thumb (3)",
+     "Keyboard_R_Switches_Thumb (4)",
+     "Keyboard_R_Switches_Thumb (5)",
+     "Keyboard_R_Switches_Thumb (6)"
+    ],
+    "operation": "join"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "name": "Sketch_R_Caps_R1"
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     164.2859,
+     127.91
+    ],
+    "p1": [
+     192.0109,
+     146.11
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     144.8784,
+     127.91
+    ],
+    "p1": [
+     163.0784,
+     146.11
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     125.7684,
+     130.95
+    ],
+    "p1": [
+     143.9684,
+     149.15
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     106.6284,
+     132.68
+    ],
+    "p1": [
+     124.8284,
+     150.88
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     87.5684,
+     130.95
+    ],
+    "p1": [
+     105.7684,
+     149.15
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     68.4584,
+     130.08
+    ],
+    "p1": [
+     86.6584,
+     148.28
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     49.3584,
+     130.08
+    ],
+    "p1": [
+     67.5584,
+     148.28
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Sketch_R_Caps_R1",
+    "start_offset": "kb_case_h + kb_sw_h",
+    "distance": "sa_r1",
+    "taper": "-atan(kb_cap_inset / sa_r1)",
+    "operation": "new",
+    "name": "Extrude_R_Caps_R1",
+    "body_name": "Keyboard_R_Keycaps_R1"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "target": "Keyboard_R_Keycaps_R1",
+    "tools": [
+     "Keyboard_R_Keycaps_R1 (2)",
+     "Keyboard_R_Keycaps_R1 (3)",
+     "Keyboard_R_Keycaps_R1 (4)",
+     "Keyboard_R_Keycaps_R1 (5)",
+     "Keyboard_R_Keycaps_R1 (6)",
+     "Keyboard_R_Keycaps_R1 (7)"
+    ],
+    "operation": "join"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "name": "Sketch_R_Caps_R2"
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     164.2859,
+     107.75
+    ],
+    "p1": [
+     192.0109,
+     125.95
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     144.8784,
+     107.97
+    ],
+    "p1": [
+     163.0784,
+     126.17
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     125.7684,
+     111.33
+    ],
+    "p1": [
+     143.9684,
+     129.53
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     106.6284,
+     112.74
+    ],
+    "p1": [
+     124.8284,
+     130.94
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     87.5684,
+     111.01
+    ],
+    "p1": [
+     105.7684,
+     129.21
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     68.4584,
+     110.14
+    ],
+    "p1": [
+     86.6584,
+     128.34
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     49.3584,
+     100.9175
+    ],
+    "p1": [
+     67.5584,
+     128.6425
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Sketch_R_Caps_R2",
+    "start_offset": "kb_case_h + kb_sw_h",
+    "distance": "sa_r2",
+    "taper": "-atan(kb_cap_inset / sa_r2)",
+    "operation": "new",
+    "name": "Extrude_R_Caps_R2",
+    "body_name": "Keyboard_R_Keycaps_R2"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "target": "Keyboard_R_Keycaps_R2",
+    "tools": [
+     "Keyboard_R_Keycaps_R2 (2)",
+     "Keyboard_R_Keycaps_R2 (3)",
+     "Keyboard_R_Keycaps_R2 (4)",
+     "Keyboard_R_Keycaps_R2 (5)",
+     "Keyboard_R_Keycaps_R2 (6)",
+     "Keyboard_R_Keycaps_R2 (7)"
+    ],
+    "operation": "join"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "name": "Sketch_R_Caps_R3"
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     164.2859,
+     87.59
+    ],
+    "p1": [
+     192.0109,
+     105.79
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     144.8784,
+     88.03
+    ],
+    "p1": [
+     163.0784,
+     106.23
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     125.7684,
+     91.39
+    ],
+    "p1": [
+     143.9684,
+     109.59
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     106.6284,
+     92.8
+    ],
+    "p1": [
+     124.8284,
+     111.0
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     87.5684,
+     91.07
+    ],
+    "p1": [
+     105.7684,
+     109.27
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     68.4584,
+     90.2
+    ],
+    "p1": [
+     86.6584,
+     108.4
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Sketch_R_Caps_R3",
+    "start_offset": "kb_case_h + kb_sw_h",
+    "distance": "sa_r3",
+    "taper": "-atan(kb_cap_inset / sa_r3)",
+    "operation": "new",
+    "name": "Extrude_R_Caps_R3",
+    "body_name": "Keyboard_R_Keycaps_R3"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "target": "Keyboard_R_Keycaps_R3",
+    "tools": [
+     "Keyboard_R_Keycaps_R3 (2)",
+     "Keyboard_R_Keycaps_R3 (3)",
+     "Keyboard_R_Keycaps_R3 (4)",
+     "Keyboard_R_Keycaps_R3 (5)",
+     "Keyboard_R_Keycaps_R3 (6)"
+    ],
+    "operation": "join"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": {
+     "origin": [
+      0,
+      0,
+      0
+     ],
+     "x_dir": [
+      0.917060074385124,
+      0.3987490689252462,
+      0
+     ],
+     "y_dir": [
+      -0.3987490689252462,
+      0.917060074385124,
+      0
+     ]
+    },
+    "name": "Sketch_R_Caps_R3_Thumb"
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     70.3352,
+     -0.3216
+    ],
+    "p1": [
+     88.5352,
+     36.9284
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     51.2298,
+     -0.3235
+    ],
+    "p1": [
+     69.4298,
+     36.9265
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     51.2402,
+     39.1187
+    ],
+    "p1": [
+     69.4402,
+     57.3187
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     32.1246,
+     -0.7563
+    ],
+    "p1": [
+     50.3246,
+     17.4437
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     32.1363,
+     19.1828
+    ],
+    "p1": [
+     50.3363,
+     37.3828
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     32.1348,
+     39.1168
+    ],
+    "p1": [
+     50.3348,
+     57.3168
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Sketch_R_Caps_R3_Thumb",
+    "start_offset": "kb_case_h + kb_sw_h",
+    "distance": "sa_r3",
+    "taper": "-atan(kb_cap_inset / sa_r3)",
+    "operation": "new",
+    "name": "Extrude_R_Caps_R3_Thumb",
+    "body_name": "Keyboard_R_Keycaps_R3_Thumb"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "target": "Keyboard_R_Keycaps_R3_Thumb",
+    "tools": [
+     "Keyboard_R_Keycaps_R3_Thumb (2)",
+     "Keyboard_R_Keycaps_R3_Thumb (3)",
+     "Keyboard_R_Keycaps_R3_Thumb (4)",
+     "Keyboard_R_Keycaps_R3_Thumb (5)",
+     "Keyboard_R_Keycaps_R3_Thumb (6)"
+    ],
+    "operation": "join"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "name": "Sketch_R_Caps_R4"
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     164.2859,
+     67.44
+    ],
+    "p1": [
+     192.0109,
+     85.64
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     164.6384,
+     47.28
+    ],
+    "p1": [
+     182.8384,
+     65.48
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     144.8784,
+     48.15
+    ],
+    "p1": [
+     163.0784,
+     66.35
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     144.8784,
+     68.09
+    ],
+    "p1": [
+     163.0784,
+     86.29
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     125.7684,
+     51.51
+    ],
+    "p1": [
+     143.9684,
+     69.71
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     125.7684,
+     71.45
+    ],
+    "p1": [
+     143.9684,
+     89.65
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     106.6284,
+     52.92
+    ],
+    "p1": [
+     124.8284,
+     71.12
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     106.6284,
+     72.86
+    ],
+    "p1": [
+     124.8284,
+     91.06
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     87.5684,
+     51.19
+    ],
+    "p1": [
+     105.7684,
+     69.39
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     87.5684,
+     71.13
+    ],
+    "p1": [
+     105.7684,
+     89.33
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     68.4584,
+     70.26
+    ],
+    "p1": [
+     86.6584,
+     88.46
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     49.3584,
+     72.2675
+    ],
+    "p1": [
+     67.5584,
+     99.9925
+    ],
+    "radius": 3.0
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Sketch_R_Caps_R4",
+    "start_offset": "kb_case_h + kb_sw_h",
+    "distance": "sa_r4",
+    "taper": "-atan(kb_cap_inset / sa_r4)",
+    "operation": "new",
+    "name": "Extrude_R_Caps_R4",
+    "body_name": "Keyboard_R_Keycaps_R4"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "target": "Keyboard_R_Keycaps_R4",
+    "tools": [
+     "Keyboard_R_Keycaps_R4 (2)",
+     "Keyboard_R_Keycaps_R4 (3)",
+     "Keyboard_R_Keycaps_R4 (4)",
+     "Keyboard_R_Keycaps_R4 (5)",
+     "Keyboard_R_Keycaps_R4 (6)",
+     "Keyboard_R_Keycaps_R4 (7)",
+     "Keyboard_R_Keycaps_R4 (8)",
+     "Keyboard_R_Keycaps_R4 (9)",
+     "Keyboard_R_Keycaps_R4 (10)",
+     "Keyboard_R_Keycaps_R4 (11)",
+     "Keyboard_R_Keycaps_R4 (12)"
+    ],
+    "operation": "join"
    }
   },
   {
    "command": "material.assign",
    "params": {
     "bodies": [
-     "Keyboard_R"
+     "Keyboard_R_Case",
+     "Keyboard_R_Switches",
+     "Keyboard_R_Keycaps_R1",
+     "Keyboard_R_Keycaps_R2",
+     "Keyboard_R_Keycaps_R3",
+     "Keyboard_R_Keycaps_R3_Thumb",
+     "Keyboard_R_Keycaps_R4"
     ],
     "material": "ABS"
    }
@@ -130,9 +1533,31 @@
    "command": "appearance.assign",
    "params": {
     "bodies": [
-     "Keyboard_R"
+     "Keyboard_R_Case"
     ],
-    "color": "#0f0f0f"
+    "color": "#eeeeea"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Keyboard_R_Switches"
+    ],
+    "color": "#2b2b2b"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Keyboard_R_Keycaps_R1",
+     "Keyboard_R_Keycaps_R2",
+     "Keyboard_R_Keycaps_R3",
+     "Keyboard_R_Keycaps_R3_Thumb",
+     "Keyboard_R_Keycaps_R4"
+    ],
+    "color": "#cdcdc8"
    }
   },
   {
@@ -140,13 +1565,13 @@
    "params": {
     "values": {
      "part_number": "INP-04",
-     "description": "ErgoDox EZ right half (case + tapered keycap envelope). Origin: DXF origin = front-left corner of the outline bbox on the bottom face; +Y toward wall, Z up",
+     "description": "ZSA ErgoDox EZ right (mirror of left), white case, light grey SA keycaps (38 keys, flat/untented). Bodies: case (outline extrude, 1 mm top chamfer), switch housings, keycaps per SA row (tapered rounded blocks: R1, R2, R3, R3_Thumb, R4). Origin: DXF origin = front-left corner of the outline bbox on the bottom face; +Y toward wall, Z up",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
       "Material": "ABS",
       "ReleaseState": "WIP",
-      "Source": "ZSA 1:1 outline refs/ergodox_ez/ergodox_ez_right.dxf; heights kb_case_h + kb_key_h"
+      "Source": "ZSA 1:1 PDF refs/ergodox_ez/1-1-ergodox.pdf: outline ergodox_ez_right_mirror.dxf, key layout keys_left.json; SA heights SP nominal (MEASURE)"
      }
     }
    }

@@ -142,7 +142,7 @@ graph TD
 | `REF-00` Skeleton | (no part file) | | `SKL_Eye`: a sketch point at the seated eye position, not a body | red |
 
 That's 29 part numbers and 83 parts in total (see `BOM.md`). The hardware occurrences are named
-`HW-01` to `HW-44` by job (`HW-07 Gusset side rail L`). Side rails and keyboards have L and R files
+`HW-01` to `HW-36` by job (`HW-07 Gusset side rail L`). Side rails and keyboards have L and R files
 because they're mirror images; the other pairs reuse one file, turned 180°.
 
 Saved views: Overview, Front, Back, SideRailJoint_R/L, SpeakerMount_R, UnderDesk. Display rows

@@ -1,4 +1,5 @@
 {
+ "input": "refs/misumi_brackets/HBLFSN5/HBLFSN5_bracket.stp",
  "commands": [
   {
    "command": "material.create",

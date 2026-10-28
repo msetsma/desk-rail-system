@@ -80,3 +80,21 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 
 Hardware is in `parts/lib/` (HPTTD5, HPTLD5, HBLFSN5, M6x20 SHCS, standoff). Eye becomes a skeleton
 point in the assembly, not a part.
+
+## Edit speed (applies to every part)
+Inserting a part or refreshing its link re-runs its whole history, so every second a part takes is paid
+again on every assembly build, link refresh and sweep case.
+- Profile the part with `solidcraft-cli run <script> --save <tmp> --timings --profile --json-out t.json`.
+  Target **< 3 s** for layout-driven parts and **< 5 s** for detailed purchased models. Report the number.
+- Booleans on the detailed HFS5 DXF profile are slow. Cut features into a plain box blank, then
+  intersect it with the profile once (see FRM-03 `Intersect_SideBolts`).
+- Fewer, larger features: one sketch plus one cut for a group of holes or keys, patterns instead of copies,
+  no per-instance features. Avoid fillets on many tiny edges. Model the visible detail (outline, finish
+  splits, key rows, grilles as a few slots), not internals.
+- Purchased models with a fixed shape don't import the skeleton (they won't be rebuilt by `regen_parts`).
+  If they're still slow, report it: they may be frozen to an imported-STEP part file.
+- **Keep the existing local origin and axes** of a part you redo, so `tools/build_assembly.py` placements
+  stay valid. If the real product needs a different datum (e.g. the VESA centre isn't the screen centre),
+  keep the origin at the mounting datum, move the geometry, and report it.
+- Don't edit `skeleton/params.json`. Propose parameter changes (name, new expression, source) in your
+  report, and the main agent applies them.

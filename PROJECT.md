@@ -8,14 +8,27 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   `solidcraft --control 27878 --allow-path "C:\Users\<user>\DEV\CAD\desk"`.
 - Skeleton: `skeleton/params.json`, the shared layout and `MEASURE` parameters. Both the assembly and
   every layout-driven part import it. `skeleton/hw_placements.json` holds the hardware placements.
-- Parts: `parts/<PN>_<Name>.solidcraft`, built from `parts/src/<file>.json` (the scripts are the source
-  of truth for each part). Hardware library: `parts/lib/` (scripts in `parts/lib/src/`). New parts start
-  from `parts/_template.json` (materials) and follow `docs/PART_BUILD_SPEC.md`.
-- Workflow after changing a skeleton parameter: edit `skeleton/params.json` (or export it from the
-  assembly), run `python tools/regen_parts.py`, then `component.update_links {}` in the assembly.
+- Parts: the scripts `parts/src/<PN>_<Name>.json` and `parts/lib/src/HW-*.json` are the source of
+  truth. A script may name a vendor file to start from (`"input": "refs/..."`). New parts start from
+  `parts/_template.json` (materials) and follow `docs/PART_BUILD_SPEC.md`.
+  - `parts/<PN>_<Name>.solidcraft` are **frozen** outputs: a STEP import plus materials, colours and
+    metadata. They're what the assembly links, at about 1 s per insert. Don't edit them by hand.
+  - Each part's build history is in `build/parts_hist/<stem>.solidcraft`. Open that one to inspect a part,
+    then change the script.
+- **Edit loop (fast):**
+  1. Edit `skeleton/params.json` or a part script.
+  2. Run `python tools/regen_parts.py` (it rebuilds only the parts whose script or skeleton changed, in
+     parallel). It prints the components to refresh.
+  3. In the live assembly, run `component.update_links {"component": "<name>"}` for each one (~0.3 s each).
+     **Never use the bare `update_links {}`**: it re-evaluates every link (~40 s).
+  4. A skeleton change also needs `parameters.import` of the skeleton into the assembly, for the placements.
 - Parameter sweep (parallel, on private copies): `python tools/sweep.py`.
-- Rebuild the whole assembly from scratch: `python tools/build_assembly.py --out desk_rails.solidcraft`
-  (`tools/assembly_finish.py` adds materials, properties, views and display rows).
+- Rebuild the whole assembly from scratch (~20 s): `python tools/build_assembly.py --out desk_rails.solidcraft`.
+  `tools/assembly_finish.py` adds materials, properties, views and display rows.
+- The desk (DSK group) stays in the main assembly rather than a nested file, as tested on 2026-10-28:
+  - a linked sub-assembly is flattened to one BOM row
+  - links don't chain, so every change becomes a two-step refresh
+  - all of DSK costs < 1 s to insert
 - Legacy single-timeline model (pre-compliance, reference only): `legacy/desk_rails_legacy.solidcraft`.
 - Headless CLI: `solidcraft-cli run <script.json> [--in X] --save Y`.
 - Full check: `tools/check.py` (slow; run only on request). BOM: `tools/bom.py` -> `BOM.md`.
@@ -92,6 +105,9 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   - Booleans on the detailed HFS5 DXF profile are the expensive case: one `solid.hole` with 8 counterbores
     took 46 s.
   - The assembly build is ~120 s, of which the two side rails are ~105 s (2026-10-28).
+- `component.update_links {}` re-evaluates every link, even unchanged ones (~40 s). Pass `component`.
+- Full assembly builds log repeated non-fatal `knot vector consists single value` panics (source part
+  not yet identified; likely a vendor NURBS body). The run still succeeds.
 - MCP `parameters.export` returns the full text even when given a `path`. `component.list` on the full
   assembly is large; use `solidcraft-cli ... --results --json-out` and summarize it.
 - Eval names a body in a repeated placement with its occurrence path:

@@ -128,16 +128,16 @@
     "value": 142.23999999999998
   },
   {
-    "comment": "MEASURE Leg: top stage size along X",
-    "expression": "2.75 in",
+    "comment": "Leg column size along X (Jiecang JS36DR1-3-R 80x50; dimension sheet front view)",
+    "expression": "50 mm",
     "favorite": false,
     "name": "leg_x",
     "unit": "mm",
     "value": 69.85
   },
   {
-    "comment": "MEASURE Leg: top stage size along Y (dimension sheet end view ~3.1 in; fits 16.6/5.8 in channel spans)",
-    "expression": "3.1 in",
+    "comment": "Leg column size along Y (Jiecang 80x50; dimension sheet end view)",
+    "expression": "80 mm",
     "favorite": false,
     "name": "leg_y",
     "unit": "mm",
@@ -152,8 +152,8 @@
     "value": 78.74
   },
   {
-    "comment": "Leg: top support outer face to leg center (X). Leg outer face bears on the web's inner face (screwed through the web)",
-    "expression": "ts_t + leg_x/2",
+    "comment": "Top support outer face to leg center (X); dimension sheet front view 2.76 in to the column inner face",
+    "expression": "2.76 in - leg_x/2",
     "favorite": false,
     "name": "leg_inset",
     "unit": "mm",
@@ -176,8 +176,8 @@
     "value": 69.85
   },
   {
-    "comment": "MEASURE Foot: height incl. glides (Z)",
-    "expression": "1.25 in",
+    "comment": "Foot height incl. glides (dimension sheet end view: 32 mm body + 20 mm glide)",
+    "expression": "2 in",
     "favorite": false,
     "name": "foot_h",
     "unit": "mm",
@@ -192,28 +192,36 @@
     "value": 723.9
   },
   {
-    "comment": "MEASURE Monitor_Main: 32in 16:9 width (X)",
-    "expression": "714 mm",
+    "comment": "Gigabyte M32U width without stand (manual p.16)",
+    "expression": "715.8 mm",
     "favorite": false,
     "name": "m1_w",
     "unit": "mm",
     "value": 714.0
   },
   {
-    "comment": "MEASURE Monitor_Main: height (Z)",
-    "expression": "420 mm",
+    "comment": "Gigabyte M32U height without stand (manual p.16)",
+    "expression": "423.8 mm",
     "favorite": false,
     "name": "m1_h",
     "unit": "mm",
     "value": 420.0
   },
   {
-    "comment": "MEASURE Monitor_Main: max depth incl. rear bulge (Y)",
-    "expression": "48 mm",
+    "comment": "Gigabyte M32U depth without stand (manual p.16)",
+    "expression": "68.2 mm",
     "favorite": false,
     "name": "m1_t",
     "unit": "mm",
     "value": 48.0
+  },
+  {
+    "comment": "MEASURE Monitor_Main: VESA centre above the screen outline centre (M32U manual drawing, +/-0.5)",
+    "expression": "6.7 mm",
+    "favorite": false,
+    "name": "m1_vesa_dz",
+    "unit": "mm",
+    "value": 6.7
   },
   {
     "comment": "MEASURE Monitor_Side: 27in rotated portrait, width (X)",
@@ -361,7 +369,7 @@
   },
   {
     "comment": "Derived: Monitor_Main adapter top above desktop surface (ports sit at/below it; before tilt)",
-    "expression": "mon_clearance + m1_h/2 + vesa_adp/2",
+    "expression": "mon_clearance + m1_h/2 + m1_vesa_dz + vesa_adp/2",
     "favorite": false,
     "name": "m1_adp_top",
     "unit": "mm",
@@ -760,16 +768,16 @@
     "value": 215.0
   },
   {
-    "comment": "PC case depth Y (Fractal North spec)",
-    "expression": "469 mm",
+    "comment": "PC case depth Y (Fractal North product sheet)",
+    "expression": "447 mm",
     "favorite": false,
     "name": "pc_d",
     "unit": "mm",
     "value": 469.0
   },
   {
-    "comment": "PC case height Z (Fractal North spec)",
-    "expression": "447 mm",
+    "comment": "PC case height Z incl. 19 mm feet (Fractal North product sheet)",
+    "expression": "469 mm",
     "favorite": false,
     "name": "pc_h",
     "unit": "mm",
@@ -808,24 +816,24 @@
     "value": 152.39999999999998
   },
   {
-    "comment": "PC front frame border, sides (X)",
-    "expression": "10 mm",
+    "comment": "PC front frame border, sides (X), Fractal North renders",
+    "expression": "8.5 mm",
     "favorite": false,
     "name": "pc_bezel",
     "unit": "mm",
     "value": 10.0
   },
   {
-    "comment": "PC front frame border, top and bottom (Z)",
-    "expression": "15 mm",
+    "comment": "PC front frame border, top and bottom (Z), Fractal North renders",
+    "expression": "18 mm",
     "favorite": false,
     "name": "pc_bezel_v",
     "unit": "mm",
     "value": 15.0
   },
   {
-    "comment": "Walnut slat width (X)",
-    "expression": "1/3 in",
+    "comment": "Walnut slat width (X), Fractal North renders",
+    "expression": "9 mm",
     "favorite": false,
     "name": "slat_w",
     "unit": "mm",
@@ -840,8 +848,8 @@
     "value": 8.0
   },
   {
-    "comment": "Slat face set back from case front",
-    "expression": "2 mm",
+    "comment": "MEASURE Slat face set back from case front (renders)",
+    "expression": "8 mm",
     "favorite": false,
     "name": "slat_inset",
     "unit": "mm",
@@ -920,16 +928,16 @@
     "value": 176.25
   },
   {
-    "comment": "ErgoDox EZ case height (case + keys = 30 mm, ZSA spec)",
-    "expression": "15 mm",
+    "comment": "ErgoDox EZ case height (3 cm total with stock DCS caps)",
+    "expression": "12 mm",
     "favorite": false,
     "name": "kb_case_h",
     "unit": "mm",
     "value": 15.0
   },
   {
-    "comment": "Keycap stack above case (case + keys = 30 mm, ZSA spec)",
-    "expression": "15 mm",
+    "comment": "ErgoDox EZ switch + SA R1 keycap above case (MEASURE: SA row heights estimated)",
+    "expression": "22.5 mm",
     "favorite": false,
     "name": "kb_key_h",
     "unit": "mm",

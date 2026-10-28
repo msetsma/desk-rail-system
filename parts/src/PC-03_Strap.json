@@ -88,128 +88,263 @@
    "command": "parameters.add",
    "params": {
     "name": "strap_r_out",
-    "expression": "19 mm",
-    "comment": "Strap outer bend radius (legacy value)"
+    "expression": "strap_r_in + strap_t",
+    "comment": "Strap outer bend radius = inner + thickness (constant wall)"
    }
   },
   {
-   "command": "solid.box",
+   "command": "sketch.create",
    "params": {
-    "name": "PC_Strap_Top",
-    "body_name": "PC_Strap",
-    "length": "pc_w + strap_t",
-    "width": "strap_w",
-    "height": "strap_t",
-    "corner": [
-     "-pc_w/2",
-     "-strap_w/2",
-     "0 mm"
-    ],
-    "operation": "new"
-   }
-  },
-  {
-   "command": "solid.box",
-   "params": {
-    "name": "PC_Strap_Side",
-    "length": "strap_t",
-    "width": "strap_w",
-    "height": "pc_h + 2*strap_t",
-    "corner": [
-     "pc_w/2",
-     "-strap_w/2",
-     "-pc_h - strap_t"
-    ],
-    "operation": "join",
-    "targets": [
-     "PC_Strap"
-    ]
-   }
-  },
-  {
-   "command": "solid.box",
-   "params": {
-    "name": "PC_Strap_Bottom",
-    "length": "pc_w + 2*strap_t",
-    "width": "strap_w",
-    "height": "strap_t",
-    "corner": [
-     "-pc_w/2 - strap_t",
-     "-strap_w/2",
-     "-pc_h - strap_t"
-    ],
-    "operation": "join",
-    "targets": [
-     "PC_Strap"
-    ]
-   }
-  },
-  {
-   "command": "solid.box",
-   "params": {
-    "name": "PC_Strap_LeftLip",
-    "length": "strap_t",
-    "width": "strap_w",
-    "height": "strap_lip + strap_t",
-    "corner": [
-     "-pc_w/2 - strap_t",
-     "-strap_w/2",
-     "-pc_h - strap_t"
-    ],
-    "operation": "join",
-    "targets": [
-     "PC_Strap"
-    ]
-   }
-  },
-  {
-   "command": "solid.fillet",
-   "params": {
-    "name": "PC_Strap_OuterBends",
-    "body": "PC_Strap",
-    "radius": "strap_r_out",
-    "edges": [
-     [
-      120.2,
+    "plane": {
+     "origin": [
       0,
-      12.7
-     ],
-     [
-      120.2,
-      0,
-      -459.7
-     ],
-     [
-      -120.2,
-      0,
-      -459.7
-     ]
-    ]
-   }
-  },
-  {
-   "command": "solid.fillet",
-   "params": {
-    "name": "PC_Strap_InnerBends",
-    "body": "PC_Strap",
-    "radius": "strap_r_in",
-    "edges": [
-     [
-      107.5,
       0,
       0
      ],
-     [
-      107.5,
+     "x_dir": [
+      1,
       0,
-      -447
+      0
+     ],
+     "y_dir": [
+      0,
+      0,
+      1
+     ]
+    },
+    "name": "PC_Strap_Profile"
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "points": [
+     [
+      "-pc_w/2",
+      "strap_t"
      ],
      [
-      -107.5,
-      0,
-      -447
+      "pc_w/2 + strap_t - strap_r_out",
+      "strap_t"
      ]
     ]
+   }
+  },
+  {
+   "command": "sketch.arc.center_point",
+   "params": {
+    "center": [
+     "pc_w/2 + strap_t - strap_r_out",
+     "strap_t - strap_r_out"
+    ],
+    "start": [
+     "pc_w/2 + strap_t",
+     "strap_t - strap_r_out"
+    ],
+    "end": [
+     "pc_w/2 + strap_t - strap_r_out",
+     "strap_t"
+    ]
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "points": [
+     [
+      "pc_w/2 + strap_t",
+      "strap_t - strap_r_out"
+     ],
+     [
+      "pc_w/2 + strap_t",
+      "-pc_h - strap_t + strap_r_out"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.arc.center_point",
+   "params": {
+    "center": [
+     "pc_w/2 + strap_t - strap_r_out",
+     "-pc_h - strap_t + strap_r_out"
+    ],
+    "start": [
+     "pc_w/2 + strap_t - strap_r_out",
+     "-pc_h - strap_t"
+    ],
+    "end": [
+     "pc_w/2 + strap_t",
+     "-pc_h - strap_t + strap_r_out"
+    ]
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "points": [
+     [
+      "pc_w/2 + strap_t - strap_r_out",
+      "-pc_h - strap_t"
+     ],
+     [
+      "-pc_w/2 - strap_t + strap_r_out",
+      "-pc_h - strap_t"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.arc.center_point",
+   "params": {
+    "center": [
+     "-pc_w/2 - strap_t + strap_r_out",
+     "-pc_h - strap_t + strap_r_out"
+    ],
+    "start": [
+     "-pc_w/2 - strap_t",
+     "-pc_h - strap_t + strap_r_out"
+    ],
+    "end": [
+     "-pc_w/2 - strap_t + strap_r_out",
+     "-pc_h - strap_t"
+    ]
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "points": [
+     [
+      "-pc_w/2 - strap_t",
+      "-pc_h - strap_t + strap_r_out"
+     ],
+     [
+      "-pc_w/2 - strap_t",
+      "-pc_h + strap_lip"
+     ],
+     [
+      "-pc_w/2",
+      "-pc_h + strap_lip"
+     ],
+     [
+      "-pc_w/2",
+      "-pc_h + strap_r_in"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.arc.center_point",
+   "params": {
+    "center": [
+     "-pc_w/2 + strap_r_in",
+     "-pc_h + strap_r_in"
+    ],
+    "start": [
+     "-pc_w/2",
+     "-pc_h + strap_r_in"
+    ],
+    "end": [
+     "-pc_w/2 + strap_r_in",
+     "-pc_h"
+    ]
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "points": [
+     [
+      "-pc_w/2 + strap_r_in",
+      "-pc_h"
+     ],
+     [
+      "pc_w/2 - strap_r_in",
+      "-pc_h"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.arc.center_point",
+   "params": {
+    "center": [
+     "pc_w/2 - strap_r_in",
+     "-pc_h + strap_r_in"
+    ],
+    "start": [
+     "pc_w/2 - strap_r_in",
+     "-pc_h"
+    ],
+    "end": [
+     "pc_w/2",
+     "-pc_h + strap_r_in"
+    ]
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "points": [
+     [
+      "pc_w/2",
+      "-pc_h + strap_r_in"
+     ],
+     [
+      "pc_w/2",
+      "-strap_r_in"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.arc.center_point",
+   "params": {
+    "center": [
+     "pc_w/2 - strap_r_in",
+     "-strap_r_in"
+    ],
+    "start": [
+     "pc_w/2",
+     "-strap_r_in"
+    ],
+    "end": [
+     "pc_w/2 - strap_r_in",
+     "0 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "points": [
+     [
+      "pc_w/2 - strap_r_in",
+      "0 mm"
+     ],
+     [
+      "-pc_w/2",
+      "0 mm"
+     ],
+     [
+      "-pc_w/2",
+      "strap_t"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "distance": "strap_w",
+    "direction": "symmetric",
+    "name": "PC_Strap_Extrude",
+    "body_name": "PC_Strap"
    }
   },
   {

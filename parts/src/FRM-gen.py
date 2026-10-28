@@ -77,10 +77,9 @@ def bolt_circles(sketch: str, offset: str, diameter: str, nominal: float, ys: li
 
 
 def side_rail(side: str) -> list[dict]:
-    holes = []
-    for leg in ("-leg_yc", "leg_yc"):
-        for off in ("- ts_bolt_pitch/2", "+ ts_bolt_pitch/2", "- (ch_bar_gap + ch_bar_w)/2", "+ (ch_bar_gap + ch_bar_w)/2"):
-            holes.append(f"ch_y_off + ({leg}) {off}")
+    # D9: 4 M6 bolts per side, all into the leg columns' own threads (2 per column).
+    holes = [f"ch_y_off + ({leg}) {off}" for leg in ("-leg_yc", "leg_yc")
+             for off in ("- ts_bolt_pitch/2", "+ ts_bolt_pitch/2")]
     body = f"SideRail_{side}_4040"
     # R is built as the Y-mirrored L (drilled from -X, same boolean as L) then turned 180 deg about Z:
     # drilling R directly from +X hits a slow boolean retry on the DXF's ~1e-5 mm asymmetry.
@@ -107,7 +106,7 @@ def side_rail(side: str) -> list[dict]:
         cmds.append(c("solid.move", bodies=[body], axis=[0, 0, 1], angle="180 deg", name="Rotate_to_R"))
     outer = "-X" if side == "L" else "+X"
     return cmds + finish(body, AL, AL_COLOR, f"FRM-03{side}",
-                         f"Side rail {side}, Misumi HFS5-4040 drilled for 8 M6 through-bolts (D9): Ø sr_access_d access from the outer ({outer}) face to a sr_seat_t seat, Ø sr_clear_d through the inner wall; at ts_bolt_z below the top, Y = ch_y_off ± leg_yc ± ts_bolt_pitch/2 (leg screws) and ± (ch_bar_gap+ch_bar_w)/2 (channel bars). Ends: side_front .. up_y - rail_l/2. Origin: top edge of the inner (mating) face at the top-support centre station (Y=0), +Y toward wall, +Z up",
+                         f"Side rail {side}, Misumi HFS5-4040 drilled for 4 M6 through-bolts (D9): Ø sr_access_d access from the outer ({outer}) face to a sr_seat_t seat, Ø sr_clear_d through the inner wall; at ts_bolt_z below the top, Y = ch_y_off ± leg_yc ± ts_bolt_pitch/2 (leg screws, into the leg columns' threads). Ends: side_front .. up_y - rail_l/2. Origin: top edge of the inner (mating) face at the top-support centre station (Y=0), +Y toward wall, +Z up",
                          SRC_DXF + "; holes per D9")
 
 
