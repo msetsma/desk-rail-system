@@ -1,0 +1,120 @@
+{
+ "input": "refs/misumi_brackets/HBLFSD5/HBLFSD5_bracket.stp",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "body.rename",
+   "params": {
+    "body": "HBLFSD5-SETh5",
+    "name": "HBLFSD5"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "HBLFSD5"
+    ],
+    "material": "Al ADC12 cast"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "HBLFSD5"
+    ],
+    "color": "#a9adb2"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "HBLFSD5",
+     "description": "Misumi HBLFSD5 cast bracket, 5 series, 2 slots (40 wide)",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "lib_id": "HW-L04_HBLFSD5",
+      "Material": "Al ADC12 cast",
+      "ReleaseState": "Released"
+     }
+    }
+   }
+  },
+  {
+   "command": "document.metadata",
+   "params": {}
+  }
+ ]
+}

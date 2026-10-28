@@ -190,20 +190,20 @@
     "closed": true,
     "points": [
      [
-      "-(leg_x/2 - 2*jc_step + 3 mm)",
-      "leg_yc - (leg_y/2 - 2*jc_step + 3 mm)"
+      "-(leg_x/2 + 3 mm)",
+      "leg_yc - (leg_y/2 + 3 mm)"
      ],
      [
-      "leg_x/2 - 2*jc_step + 3 mm",
-      "leg_yc - (leg_y/2 - 2*jc_step + 3 mm)"
+      "leg_x/2 + 3 mm",
+      "leg_yc - (leg_y/2 + 3 mm)"
      ],
      [
-      "leg_x/2 - 2*jc_step + 3 mm",
-      "leg_yc + (leg_y/2 - 2*jc_step + 3 mm)"
+      "leg_x/2 + 3 mm",
+      "leg_yc + (leg_y/2 + 3 mm)"
      ],
      [
-      "-(leg_x/2 - 2*jc_step + 3 mm)",
-      "leg_yc + (leg_y/2 - 2*jc_step + 3 mm)"
+      "-(leg_x/2 + 3 mm)",
+      "leg_yc + (leg_y/2 + 3 mm)"
      ]
     ]
    }
@@ -214,20 +214,20 @@
     "closed": true,
     "points": [
      [
-      "-(leg_x/2 - 2*jc_step + 3 mm)",
-      "-leg_yc - (leg_y/2 - 2*jc_step + 3 mm)"
+      "-(leg_x/2 + 3 mm)",
+      "-leg_yc - (leg_y/2 + 3 mm)"
      ],
      [
-      "leg_x/2 - 2*jc_step + 3 mm",
-      "-leg_yc - (leg_y/2 - 2*jc_step + 3 mm)"
+      "leg_x/2 + 3 mm",
+      "-leg_yc - (leg_y/2 + 3 mm)"
      ],
      [
-      "leg_x/2 - 2*jc_step + 3 mm",
-      "-leg_yc + (leg_y/2 - 2*jc_step + 3 mm)"
+      "leg_x/2 + 3 mm",
+      "-leg_yc + (leg_y/2 + 3 mm)"
      ],
      [
-      "-(leg_x/2 - 2*jc_step + 3 mm)",
-      "-leg_yc + (leg_y/2 - 2*jc_step + 3 mm)"
+      "-(leg_x/2 + 3 mm)",
+      "-leg_yc + (leg_y/2 + 3 mm)"
      ]
     ]
    }

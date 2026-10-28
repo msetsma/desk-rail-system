@@ -157,7 +157,7 @@
      ],
      [
       "pc_w/2 + strap_t",
-      "-pc_h - strap_t + strap_r_out"
+      "-(pc_h - pc_foot_h) - strap_t + strap_r_out"
      ]
     ]
    }
@@ -167,15 +167,15 @@
    "params": {
     "center": [
      "pc_w/2 + strap_t - strap_r_out",
-     "-pc_h - strap_t + strap_r_out"
+     "-(pc_h - pc_foot_h) - strap_t + strap_r_out"
     ],
     "start": [
      "pc_w/2 + strap_t - strap_r_out",
-     "-pc_h - strap_t"
+     "-(pc_h - pc_foot_h) - strap_t"
     ],
     "end": [
      "pc_w/2 + strap_t",
-     "-pc_h - strap_t + strap_r_out"
+     "-(pc_h - pc_foot_h) - strap_t + strap_r_out"
     ]
    }
   },
@@ -185,11 +185,11 @@
     "points": [
      [
       "pc_w/2 + strap_t - strap_r_out",
-      "-pc_h - strap_t"
+      "-(pc_h - pc_foot_h) - strap_t"
      ],
      [
       "-pc_w/2 - strap_t + strap_r_out",
-      "-pc_h - strap_t"
+      "-(pc_h - pc_foot_h) - strap_t"
      ]
     ]
    }
@@ -199,15 +199,15 @@
    "params": {
     "center": [
      "-pc_w/2 - strap_t + strap_r_out",
-     "-pc_h - strap_t + strap_r_out"
+     "-(pc_h - pc_foot_h) - strap_t + strap_r_out"
     ],
     "start": [
      "-pc_w/2 - strap_t",
-     "-pc_h - strap_t + strap_r_out"
+     "-(pc_h - pc_foot_h) - strap_t + strap_r_out"
     ],
     "end": [
      "-pc_w/2 - strap_t + strap_r_out",
-     "-pc_h - strap_t"
+     "-(pc_h - pc_foot_h) - strap_t"
     ]
    }
   },
@@ -217,19 +217,19 @@
     "points": [
      [
       "-pc_w/2 - strap_t",
-      "-pc_h - strap_t + strap_r_out"
+      "-(pc_h - pc_foot_h) - strap_t + strap_r_out"
      ],
      [
       "-pc_w/2 - strap_t",
-      "-pc_h + strap_lip"
+      "-(pc_h - pc_foot_h) + strap_lip"
      ],
      [
       "-pc_w/2",
-      "-pc_h + strap_lip"
+      "-(pc_h - pc_foot_h) + strap_lip"
      ],
      [
       "-pc_w/2",
-      "-pc_h + strap_r_in"
+      "-(pc_h - pc_foot_h) + strap_r_in"
      ]
     ]
    }
@@ -239,15 +239,15 @@
    "params": {
     "center": [
      "-pc_w/2 + strap_r_in",
-     "-pc_h + strap_r_in"
+     "-(pc_h - pc_foot_h) + strap_r_in"
     ],
     "start": [
      "-pc_w/2",
-     "-pc_h + strap_r_in"
+     "-(pc_h - pc_foot_h) + strap_r_in"
     ],
     "end": [
      "-pc_w/2 + strap_r_in",
-     "-pc_h"
+     "-(pc_h - pc_foot_h)"
     ]
    }
   },
@@ -257,11 +257,11 @@
     "points": [
      [
       "-pc_w/2 + strap_r_in",
-      "-pc_h"
+      "-(pc_h - pc_foot_h)"
      ],
      [
       "pc_w/2 - strap_r_in",
-      "-pc_h"
+      "-(pc_h - pc_foot_h)"
      ]
     ]
    }
@@ -271,15 +271,15 @@
    "params": {
     "center": [
      "pc_w/2 - strap_r_in",
-     "-pc_h + strap_r_in"
+     "-(pc_h - pc_foot_h) + strap_r_in"
     ],
     "start": [
      "pc_w/2 - strap_r_in",
-     "-pc_h"
+     "-(pc_h - pc_foot_h)"
     ],
     "end": [
      "pc_w/2",
-     "-pc_h + strap_r_in"
+     "-(pc_h - pc_foot_h) + strap_r_in"
     ]
    }
   },
@@ -289,7 +289,7 @@
     "points": [
      [
       "pc_w/2",
-      "-pc_h + strap_r_in"
+      "-(pc_h - pc_foot_h) + strap_r_in"
      ],
      [
       "pc_w/2",
@@ -370,7 +370,7 @@
    "params": {
     "values": {
      "part_number": "PC-03",
-     "description": "Under-desk PC strap (top, right side, bottom, left lip). Origin: centre of the top plate's underside = PC case top face centre; X right, +Y toward wall, Z up",
+     "description": "Under-desk PC strap (top, right side, bottom, left lip); the bottom bears on the case body, between the feet. Origin: centre of the top plate's underside = PC case top face centre; X right, +Y toward wall, Z up",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

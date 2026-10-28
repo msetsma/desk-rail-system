@@ -73,7 +73,7 @@
   {
    "command": "parameters.import",
    "params": {
-    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+    "path": "skeleton/params.json"
    }
   },
   {
@@ -81,7 +81,7 @@
    "params": {
     "name": "jc_hsg_in",
     "expression": "40 mm",
-    "comment": "MEASURE Apex Pro column-top housing: reach inward of the top-stage inner face (X), assembly guide step 1"
+    "comment": "MEASURE Apex Pro column-top housing: reach inward of the column outer face (X), assembly guide step 1"
    }
   },
   {
@@ -121,7 +121,7 @@
    "params": {
     "name": "jc_s0",
     "expression": "10 mm",
-    "comment": "MEASURE visible length of each lower stage when fully retracted"
+    "comment": "MEASURE visible length of each upper stage when fully retracted"
    }
   },
   {
@@ -129,7 +129,7 @@
    "params": {
     "name": "jc_step",
     "expression": "3 mm",
-    "comment": "MEASURE stage-to-stage inset per side (Jiecang 80x50 / 74x44 / 68x38)"
+    "comment": "MEASURE stage-to-stage inset per side (Jiecang 80x50 bottom / 74x44 / 68x38 top)"
    }
   },
   {
@@ -137,7 +137,7 @@
    "params": {
     "name": "jc_r",
     "expression": "4 mm",
-    "comment": "MEASURE top-stage corner radius"
+    "comment": "MEASURE bottom-stage corner radius"
    }
   },
   {
@@ -153,15 +153,31 @@
    "params": {
     "name": "jc_vis",
     "expression": "jc_s0 + jc_ext/2",
-    "comment": "Visible length of the middle and bottom stages (extension split evenly)"
+    "comment": "Visible length of the top and middle stages (extension split evenly)"
    }
   },
   {
    "command": "parameters.add",
    "params": {
-    "name": "jc_t1",
-    "expression": "frame_top - foot_h - 2*jc_vis",
-    "comment": "Top (widest) stage length below frame top"
+    "name": "jc_hsg_d",
+    "expression": "ch_h + jc_hsg_below",
+    "comment": "Column-top housing depth below frame top"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "jc_z_mid",
+    "expression": "jc_hsg_d + jc_vis",
+    "comment": "Top (smallest) stage bottom end = middle stage top, below frame top"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "jc_z_bot",
+    "expression": "jc_z_mid + jc_vis",
+    "comment": "Middle stage bottom end = bottom (widest) stage top, below frame top"
    }
   },
   {
@@ -212,7 +228,7 @@
    "params": {
     "name": "Leg_Housing",
     "body_name": "Leg",
-    "distance": "ch_h + jc_hsg_below",
+    "distance": "jc_hsg_d",
     "direction": "negative"
    }
   },
@@ -221,127 +237,7 @@
    "params": {
     "plane": "XY",
     "offset": "-1 mm",
-    "name": "Leg_Stage1_Sketch"
-   }
-  },
-  {
-   "command": "sketch.line",
-   "params": {
-    "points": [
-     [
-      "-(leg_x/2)",
-      "-(leg_y/2)"
-     ],
-     [
-      "leg_x/2",
-      "-(leg_y/2)"
-     ],
-     [
-      "leg_x/2",
-      "leg_y/2"
-     ],
-     [
-      "-(leg_x/2)",
-      "leg_y/2"
-     ]
-    ],
-    "closed": true
-   }
-  },
-  {
-   "command": "sketch.fillet",
-   "params": {
-    "points": [
-     "l1.start",
-     "l1.end",
-     "l2.end",
-     "l3.end"
-    ],
-    "radius": "jc_r"
-   }
-  },
-  {
-   "command": "sketch.finish",
-   "params": {}
-  },
-  {
-   "command": "solid.extrude",
-   "params": {
-    "name": "Leg_Stage1",
-    "operation": "join",
-    "targets": [
-     "Leg"
-    ],
-    "distance": "jc_t1 - 1 mm",
-    "direction": "negative"
-   }
-  },
-  {
-   "command": "sketch.create",
-   "params": {
-    "plane": "XY",
-    "offset": "-jc_t1 + 0.1 mm",
-    "name": "Leg_Stage2_Sketch"
-   }
-  },
-  {
-   "command": "sketch.line",
-   "params": {
-    "points": [
-     [
-      "-(leg_x/2 - jc_step)",
-      "-(leg_y/2 - jc_step)"
-     ],
-     [
-      "leg_x/2 - jc_step",
-      "-(leg_y/2 - jc_step)"
-     ],
-     [
-      "leg_x/2 - jc_step",
-      "leg_y/2 - jc_step"
-     ],
-     [
-      "-(leg_x/2 - jc_step)",
-      "leg_y/2 - jc_step"
-     ]
-    ],
-    "closed": true
-   }
-  },
-  {
-   "command": "sketch.fillet",
-   "params": {
-    "points": [
-     "l1.start",
-     "l1.end",
-     "l2.end",
-     "l3.end"
-    ],
-    "radius": "jc_r - 0.5 mm"
-   }
-  },
-  {
-   "command": "sketch.finish",
-   "params": {}
-  },
-  {
-   "command": "solid.extrude",
-   "params": {
-    "name": "Leg_Stage2",
-    "operation": "join",
-    "targets": [
-     "Leg"
-    ],
-    "distance": "jc_vis + 0.1 mm",
-    "direction": "negative"
-   }
-  },
-  {
-   "command": "sketch.create",
-   "params": {
-    "plane": "XY",
-    "offset": "-(jc_t1 + jc_vis) + 0.1 mm",
-    "name": "Leg_Stage3_Sketch"
+    "name": "Leg_StageTop_Sketch"
    }
   },
   {
@@ -387,12 +283,132 @@
   {
    "command": "solid.extrude",
    "params": {
-    "name": "Leg_Stage3",
+    "name": "Leg_StageTop",
+    "operation": "join",
+    "targets": [
+     "Leg"
+    ],
+    "distance": "jc_z_mid - 1 mm + 0.1 mm",
+    "direction": "negative"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "-jc_z_mid",
+    "name": "Leg_StageMid_Sketch"
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "points": [
+     [
+      "-(leg_x/2 - jc_step)",
+      "-(leg_y/2 - jc_step)"
+     ],
+     [
+      "leg_x/2 - jc_step",
+      "-(leg_y/2 - jc_step)"
+     ],
+     [
+      "leg_x/2 - jc_step",
+      "leg_y/2 - jc_step"
+     ],
+     [
+      "-(leg_x/2 - jc_step)",
+      "leg_y/2 - jc_step"
+     ]
+    ],
+    "closed": true
+   }
+  },
+  {
+   "command": "sketch.fillet",
+   "params": {
+    "points": [
+     "l1.start",
+     "l1.end",
+     "l2.end",
+     "l3.end"
+    ],
+    "radius": "jc_r - 0.5 mm"
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "Leg_StageMid",
     "operation": "join",
     "targets": [
      "Leg"
     ],
     "distance": "jc_vis + 0.1 mm",
+    "direction": "negative"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "-jc_z_bot",
+    "name": "Leg_StageBot_Sketch"
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "points": [
+     [
+      "-(leg_x/2)",
+      "-(leg_y/2)"
+     ],
+     [
+      "leg_x/2",
+      "-(leg_y/2)"
+     ],
+     [
+      "leg_x/2",
+      "leg_y/2"
+     ],
+     [
+      "-(leg_x/2)",
+      "leg_y/2"
+     ]
+    ],
+    "closed": true
+   }
+  },
+  {
+   "command": "sketch.fillet",
+   "params": {
+    "points": [
+     "l1.start",
+     "l1.end",
+     "l2.end",
+     "l3.end"
+    ],
+    "radius": "jc_r"
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "Leg_StageBot",
+    "operation": "join",
+    "targets": [
+     "Leg"
+    ],
+    "distance": "frame_top - foot_h - jc_z_bot",
     "direction": "negative"
    }
   },
@@ -505,13 +521,13 @@
    "params": {
     "values": {
      "part_number": "DSK-04",
-     "description": "Apex Pro (Jiecang OEM) inverted 3-stage lifting column: column-top housing between the 2 channel bars (leg_y wide, outer face on the top-support web, chamfered inner end, notched ts_t under the flange), stages leg_x x leg_y / -jc_step / -2*jc_step per side, widest at top; extension above jc_top_min split evenly between the 2 lower stages; bottom stage ends on the foot top (frame_top - foot_h below origin). 2 M6 taps (ts_bolt_pitch) in the outer face for the D9 leg screws, 4 M6 taps in the +-Y faces for the channel-bar screws. Origin: top face centre (frame_top); +X toward the outer (top support) side, +Y toward wall, body below Z=0.",
+     "description": "Apex Pro (Jiecang OEM) 3-stage lifting column, narrowest at the top (DeskHaus renders): column-top housing between the 2 channel bars (leg_y wide, outer face on the top-support web, chamfered inner end, notched ts_t under the flange), then stages leg_x x leg_y less 2*jc_step / jc_step / 0 per side from top to bottom; the extension above jc_top_min is split evenly between the top and middle stages; the bottom (widest) stage ends on the foot top (frame_top - foot_h below origin). 2 M6 taps (ts_bolt_pitch) in the outer face for the D9 leg screws, 4 M6 taps in the +-Y faces for the channel-bar screws. Origin: top face centre (frame_top); +X toward the outer (top support) side, +Y toward wall, body below Z=0.",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
       "Material": "Steel powder-coated",
       "ReleaseState": "WIP",
-      "Source": "DeskHaus dimension sheet (end/front views, 2.76 in), callout card 21.5-47.5 in, assembly guide steps 1-2, Jiecang JS36DR1-3-R (3-stage reverse, 80x50 mm); MEASURE: stage insets, housing size, screw pitch"
+      "Source": "DeskHaus dimension sheet (end/front views, 2.76 in), callout card 21.5-47.5 in, product renders (stages taper toward the top), assembly guide steps 1-2, Jiecang 3-stage rectangular 80x50 mm; MEASURE: stage insets, housing size, screw pitch"
      }
     }
    }

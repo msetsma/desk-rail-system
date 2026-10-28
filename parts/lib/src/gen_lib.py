@@ -22,6 +22,7 @@ STEP = {
     "HW-L01_HPTTD5": ("HPTTD5-SET_b", "HPTTD5", "HPTTD5", "Misumi HPTTD5 T-joint plate, 5 series, 2.3 mm", "Steel zinc-plated", "#c4c9d0"),
     "HW-L02_HPTLD5": ("HPTLD5-SET_b", "HPTLD5", "HPTLD5", "Misumi HPTLD5 L-joint plate, 5 series, 2.3 mm", "Steel zinc-plated", "#c4c9d0"),
     "HW-L03_HBLFSN5": ("Diameter Hole3", "HBLFSN5", "HBLFSN5", "Misumi HBLFSN5 cast bracket, 5 series", "Al ADC12 cast", "#a9adb2"),
+    "HW-L04_HBLFSD5": ("HBLFSD5-SETh5", "HBLFSD5", "HBLFSD5", "Misumi HBLFSD5 cast bracket, 5 series, 2 slots (40 wide)", "Al ADC12 cast", "#a9adb2"),
 }
 
 
@@ -30,6 +31,7 @@ INPUT = {
     "HW-L01_HPTTD5": "refs/misumi_brackets/HPTTD5/HPTTD5_plate.stp",
     "HW-L02_HPTLD5": "refs/misumi_brackets/HPTLD5/HPTLD5_plate.stp",
     "HW-L03_HBLFSN5": "refs/misumi_brackets/HBLFSN5/HBLFSN5_bracket.stp",
+    "HW-L04_HBLFSD5": "refs/misumi_brackets/HBLFSD5/HBLFSD5_bracket.stp",
 }
 
 

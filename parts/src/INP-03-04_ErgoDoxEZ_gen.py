@@ -32,7 +32,7 @@ SW = 14.0  # MX switch housing top, square
 BOTTOM_ROW_Y = 66.0  # keys below this (non-thumb) are the bottom modifier row
 
 MATERIAL = "ABS"
-COLOR_CASE = "#eeeeea"  # ZSA white case
+COLOR_CASE = "#1e1f21"  # ZSA black case (user, 2026-10-28)
 COLOR_SWITCH = "#2b2b2b"  # switch housings (dark)
 COLOR_CAPS = "#cdcdc8"  # light grey SA keycaps
 
@@ -202,7 +202,7 @@ def finish_cmds(side: str, pn: str, dxf: Path, keys: Sequence[Key]) -> list[dict
         c("document.metadata.set", values={
             "part_number": pn,
             "description": (
-                f"ZSA ErgoDox EZ {half}, white case, light grey SA keycaps (38 keys, flat/untented). "
+                f"ZSA ErgoDox EZ {half}, black case, user's own light grey SA keycaps (38 keys, flat/untented). "
                 "Bodies: case (outline extrude, 1 mm top chamfer), switch housings, keycaps per SA row "
                 "(tapered rounded blocks: R1, R2, R3, R3_Thumb, R4). Origin: DXF origin = front-left corner "
                 "of the outline bbox on the bottom face; +Y toward wall, Z up"

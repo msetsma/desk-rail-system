@@ -1535,7 +1535,7 @@
     "bodies": [
      "Keyboard_L_Case"
     ],
-    "color": "#eeeeea"
+    "color": "#1e1f21"
    }
   },
   {
@@ -1565,7 +1565,7 @@
    "params": {
     "values": {
      "part_number": "INP-03",
-     "description": "ZSA ErgoDox EZ left, white case, light grey SA keycaps (38 keys, flat/untented). Bodies: case (outline extrude, 1 mm top chamfer), switch housings, keycaps per SA row (tapered rounded blocks: R1, R2, R3, R3_Thumb, R4). Origin: DXF origin = front-left corner of the outline bbox on the bottom face; +Y toward wall, Z up",
+     "description": "ZSA ErgoDox EZ left, black case, user's own light grey SA keycaps (38 keys, flat/untented). Bodies: case (outline extrude, 1 mm top chamfer), switch housings, keycaps per SA row (tapered rounded blocks: R1, R2, R3, R3_Thumb, R4). Origin: DXF origin = front-left corner of the outline bbox on the bottom face; +Y toward wall, Z up",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

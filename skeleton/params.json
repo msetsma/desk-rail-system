@@ -696,7 +696,7 @@
     "value": 5.0
   },
   {
-    "comment": "Misumi HBLFSN5 gusset leg (1-slot; 2040 members show their 20 face, so 2-slot HBLFSD5 can't fit); sketches hold fixed geometry",
+    "comment": "Misumi HBLFSN5 gusset leg (1-slot) for the 2040 crossbar/stile joints; the 4040 side-rail joints use the 2-slot HBLFSD5 (HW-L04). Sketches hold fixed geometry",
     "expression": "30 mm",
     "favorite": false,
     "name": "brk_a",
@@ -782,6 +782,14 @@
     "name": "pc_h",
     "unit": "mm",
     "value": 447.0
+  },
+  {
+    "comment": "PC case foot height (Fractal North: 469 with feet, 450 without). The strap bears on the case body; the feet hang outside the strap",
+    "expression": "19 mm",
+    "favorite": false,
+    "name": "pc_foot_h",
+    "unit": "mm",
+    "value": 19.0
   },
   {
     "comment": "Gap: left leg inner face to PC case left side",

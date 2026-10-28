@@ -150,53 +150,53 @@
     "joint_angle": "0 deg"
   },
   {
-    "name": "HW-07 Gusset side rail L",
-    "lib": "HW-L03_HBLFSN5",
+    "name": "HW-07 Gusset side rail L (HBLFSD5)",
+    "lib": "HW-L04_HBLFSD5",
     "parent_group": "HW-00 Frame hardware",
     "zl": [
       0,
-      -1,
-      0
+      0,
+      -1
     ],
     "xl": [
+      1,
       0,
-      0,
-      1
+      0
     ],
-    "x": "-(up_xc + rail_l/2 - rail_s/2)",
+    "x": "-up_xc",
     "y": "up_y - rail_l/2",
     "z": "frame_top - rail_l",
     "yaw": "0 deg",
-    "legacy_body": "Bracket_SideRail_L_HBLFSN5",
-    "verified_bbox_err_mm": 0.0,
-    "verified_com_err_mm": 0.0,
+    "legacy_body": null,
+    "verified_bbox_err_mm": null,
+    "verified_com_err_mm": null,
     "host": "FRM-03L side rail L / FRM-01 upright L",
-    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane. Same rotation as R (bracket is symmetric about local Z=0).",
+    "note": "Vendor frame: inside corner on local X, legs along local +Y/+Z, 40 wide symmetric in X. Sits under the rail, centred on the shared 40 mm width (both slots of the rail bottom and upright front faces, 20 mm pitch); origin = rail underside / upright front face corner line, tabs 1 mm into the slots. Local -Z (rail leg) up, local +Y forward along the rail; same rotation L and R (symmetric). Clear: HPTTD5 1 mm, panel standoff 39 mm, top support 53 mm.",
     "joint_angle": "0 deg"
   },
   {
-    "name": "HW-08 Gusset side rail R",
-    "lib": "HW-L03_HBLFSN5",
+    "name": "HW-08 Gusset side rail R (HBLFSD5)",
+    "lib": "HW-L04_HBLFSD5",
     "parent_group": "HW-00 Frame hardware",
     "zl": [
       0,
-      -1,
-      0
+      0,
+      -1
     ],
     "xl": [
+      1,
       0,
-      0,
-      1
+      0
     ],
-    "x": "up_xc + rail_l/2 - rail_s/2",
+    "x": "up_xc",
     "y": "up_y - rail_l/2",
     "z": "frame_top - rail_l",
     "yaw": "0 deg",
-    "legacy_body": "Bracket_SideRail_R_HBLFSN5",
-    "verified_bbox_err_mm": 0.0,
-    "verified_com_err_mm": 0.0,
+    "legacy_body": null,
+    "verified_bbox_err_mm": null,
+    "verified_com_err_mm": null,
     "host": "FRM-03R side rail R / FRM-01 upright R",
-    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "note": "Vendor frame: inside corner on local X, legs along local +Y/+Z, 40 wide symmetric in X. Sits under the rail, centred on the shared 40 mm width (both slots of the rail bottom and upright front faces, 20 mm pitch); origin = rail underside / upright front face corner line, tabs 1 mm into the slots. Local -Z (rail leg) up, local +Y forward along the rail; same rotation L and R (symmetric). Clear: HPTTD5 1 mm, panel standoff 39 mm, top support 53 mm.",
     "joint_angle": "0 deg"
   },
   {
