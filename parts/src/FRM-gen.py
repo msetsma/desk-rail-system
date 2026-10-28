@@ -67,9 +67,16 @@ write("FRM-05_Modesty_panel", [
            "Modelled from skeleton (legacy ModestyPanel); colour from legacy model"))
 
 
+def bolt_circles(sketch: str, offset: str, diameter: str, nominal: float, ys: list[str]) -> list[dict]:
+    """One YZ sketch with a circle per bolt station, diameter driven by a skeleton parameter."""
+    return [c("sketch.create", plane="YZ", offset=offset, name=sketch)] + [
+        c("sketch.draw.dimensioned", command="sketch.circle.center",
+          params={"center": [y, "-ts_bolt_z"], "diameter": nominal}, dimensions={"diameter": diameter})
+        for y in ys
+    ] + [c("sketch.finish")]
+
+
 def side_rail(side: str) -> list[dict]:
-    s = -1 if side == "L" else 1
-    sgn = "-" if side == "L" else ""
     holes = []
     for leg in ("-leg_yc", "leg_yc"):
         for off in ("- ts_bolt_pitch/2", "+ ts_bolt_pitch/2", "- (ch_bar_gap + ch_bar_w)/2", "+ (ch_bar_gap + ch_bar_w)/2"):
@@ -78,14 +85,23 @@ def side_rail(side: str) -> list[dict]:
     # R is built as the Y-mirrored L (drilled from -X, same boolean as L) then turned 180 deg about Z:
     # drilling R directly from +X hits a slow boolean retry on the DXF's ~1e-5 mm asymmetry.
     d1, d2 = ("up_y - rail_l/2", "-side_front") if side == "L" else ("-side_front", "up_y - rail_l/2")
+    y0, y1 = ("side_front", "up_y - rail_l/2") if side == "L" else ("-(up_y - rail_l/2)", "-side_front")
+    # Counterbores are drilled into a plain blank box (cheap), then the profile is intersected with
+    # the blank: one boolean on the complex DXF body (~7.5 s) instead of solid.hole's ~46 s of retries.
+    # Blank overruns the rail by 0.1 mm and the cutters overrun the blank by 0.1 mm (AGENTS.md §3).
     cmds = profile("Profile_HFS5_4040", "XZ", DXF4040, [-20.0, 20.0]) + [
         c("solid.extrude", distance=d1, distance2=d2, body_name=body, name="Extrude_SideRail"),
-        c("sketch.create", plane="YZ", offset="-rail_l", name="Sketch_BoltHoles"),
-    ] + [c("sketch.point", point=[y, "-ts_bolt_z"]) for y in holes] + [
-        c("sketch.finish"),
-        c("solid.hole", sketch="Sketch_BoltHoles", type="counterbore", diameter="sr_clear_d",
-          cb_diameter="sr_access_d", cb_depth="rail_l - sr_seat_t", targets=[body], name="Hole_SideBolts"),
-        c("browser.visibility", visible=False, items=["Sketch_BoltHoles"]),
+        c("solid.box", length="rail_l + 0.2 mm", width=f"({y1}) - ({y0}) + 0.2 mm", height="rail_l + 0.2 mm",
+          corner=["-rail_l - 0.1 mm", f"({y0}) - 0.1 mm", "-rail_l - 0.1 mm"], operation="new",
+          body_name="BoltBlank", name="Box_BoltBlank"),
+    ] + bolt_circles("Sketch_BoltAccess", "-rail_l - 0.2 mm", "sr_access_d", 11.0, holes) + [
+        c("solid.extrude", sketch="Sketch_BoltAccess", distance="rail_l - sr_seat_t + 0.2 mm", operation="cut",
+          targets=["BoltBlank"], name="Cut_BoltAccess"),
+    ] + bolt_circles("Sketch_BoltClear", "-rail_l - 0.2 mm", "sr_clear_d", 6.6, holes) + [
+        c("solid.extrude", sketch="Sketch_BoltClear", distance="rail_l + 0.4 mm", operation="cut",
+          targets=["BoltBlank"], name="Cut_BoltClear"),
+        c("solid.combine", target=body, tools=["BoltBlank"], operation="intersect", name="Intersect_SideBolts"),
+        c("browser.visibility", visible=False, items=["Sketch_BoltAccess", "Sketch_BoltClear"]),
     ]
     if side == "R":
         cmds.append(c("solid.move", bodies=[body], axis=[0, 0, 1], angle="180 deg", name="Rotate_to_R"))

@@ -107,83 +107,155 @@
    }
   },
   {
+   "command": "solid.box",
+   "params": {
+    "length": "rail_l + 0.2 mm",
+    "width": "(-side_front) - (-(up_y - rail_l/2)) + 0.2 mm",
+    "height": "rail_l + 0.2 mm",
+    "corner": [
+     "-rail_l - 0.1 mm",
+     "(-(up_y - rail_l/2)) - 0.1 mm",
+     "-rail_l - 0.1 mm"
+    ],
+    "operation": "new",
+    "body_name": "BoltBlank",
+    "name": "Box_BoltBlank"
+   }
+  },
+  {
    "command": "sketch.create",
    "params": {
     "plane": "YZ",
-    "offset": "-rail_l",
-    "name": "Sketch_BoltHoles"
+    "offset": "-rail_l - 0.2 mm",
+    "name": "Sketch_BoltAccess"
    }
   },
   {
-   "command": "sketch.point",
+   "command": "sketch.draw.dimensioned",
    "params": {
-    "point": [
-     "ch_y_off + (-leg_yc) - ts_bolt_pitch/2",
-     "-ts_bolt_z"
-    ]
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (-leg_yc) - ts_bolt_pitch/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 11.0
+    },
+    "dimensions": {
+     "diameter": "sr_access_d"
+    }
    }
   },
   {
-   "command": "sketch.point",
+   "command": "sketch.draw.dimensioned",
    "params": {
-    "point": [
-     "ch_y_off + (-leg_yc) + ts_bolt_pitch/2",
-     "-ts_bolt_z"
-    ]
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (-leg_yc) + ts_bolt_pitch/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 11.0
+    },
+    "dimensions": {
+     "diameter": "sr_access_d"
+    }
    }
   },
   {
-   "command": "sketch.point",
+   "command": "sketch.draw.dimensioned",
    "params": {
-    "point": [
-     "ch_y_off + (-leg_yc) - (ch_bar_gap + ch_bar_w)/2",
-     "-ts_bolt_z"
-    ]
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (-leg_yc) - (ch_bar_gap + ch_bar_w)/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 11.0
+    },
+    "dimensions": {
+     "diameter": "sr_access_d"
+    }
    }
   },
   {
-   "command": "sketch.point",
+   "command": "sketch.draw.dimensioned",
    "params": {
-    "point": [
-     "ch_y_off + (-leg_yc) + (ch_bar_gap + ch_bar_w)/2",
-     "-ts_bolt_z"
-    ]
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (-leg_yc) + (ch_bar_gap + ch_bar_w)/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 11.0
+    },
+    "dimensions": {
+     "diameter": "sr_access_d"
+    }
    }
   },
   {
-   "command": "sketch.point",
+   "command": "sketch.draw.dimensioned",
    "params": {
-    "point": [
-     "ch_y_off + (leg_yc) - ts_bolt_pitch/2",
-     "-ts_bolt_z"
-    ]
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (leg_yc) - ts_bolt_pitch/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 11.0
+    },
+    "dimensions": {
+     "diameter": "sr_access_d"
+    }
    }
   },
   {
-   "command": "sketch.point",
+   "command": "sketch.draw.dimensioned",
    "params": {
-    "point": [
-     "ch_y_off + (leg_yc) + ts_bolt_pitch/2",
-     "-ts_bolt_z"
-    ]
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (leg_yc) + ts_bolt_pitch/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 11.0
+    },
+    "dimensions": {
+     "diameter": "sr_access_d"
+    }
    }
   },
   {
-   "command": "sketch.point",
+   "command": "sketch.draw.dimensioned",
    "params": {
-    "point": [
-     "ch_y_off + (leg_yc) - (ch_bar_gap + ch_bar_w)/2",
-     "-ts_bolt_z"
-    ]
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (leg_yc) - (ch_bar_gap + ch_bar_w)/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 11.0
+    },
+    "dimensions": {
+     "diameter": "sr_access_d"
+    }
    }
   },
   {
-   "command": "sketch.point",
+   "command": "sketch.draw.dimensioned",
    "params": {
-    "point": [
-     "ch_y_off + (leg_yc) + (ch_bar_gap + ch_bar_w)/2",
-     "-ts_bolt_z"
-    ]
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (leg_yc) + (ch_bar_gap + ch_bar_w)/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 11.0
+    },
+    "dimensions": {
+     "diameter": "sr_access_d"
+    }
    }
   },
   {
@@ -191,17 +263,178 @@
    "params": {}
   },
   {
-   "command": "solid.hole",
+   "command": "solid.extrude",
    "params": {
-    "sketch": "Sketch_BoltHoles",
-    "type": "counterbore",
-    "diameter": "sr_clear_d",
-    "cb_diameter": "sr_access_d",
-    "cb_depth": "rail_l - sr_seat_t",
+    "sketch": "Sketch_BoltAccess",
+    "distance": "rail_l - sr_seat_t + 0.2 mm",
+    "operation": "cut",
     "targets": [
-     "SideRail_R_4040"
+     "BoltBlank"
     ],
-    "name": "Hole_SideBolts"
+    "name": "Cut_BoltAccess"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "YZ",
+    "offset": "-rail_l - 0.2 mm",
+    "name": "Sketch_BoltClear"
+   }
+  },
+  {
+   "command": "sketch.draw.dimensioned",
+   "params": {
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (-leg_yc) - ts_bolt_pitch/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 6.6
+    },
+    "dimensions": {
+     "diameter": "sr_clear_d"
+    }
+   }
+  },
+  {
+   "command": "sketch.draw.dimensioned",
+   "params": {
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (-leg_yc) + ts_bolt_pitch/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 6.6
+    },
+    "dimensions": {
+     "diameter": "sr_clear_d"
+    }
+   }
+  },
+  {
+   "command": "sketch.draw.dimensioned",
+   "params": {
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (-leg_yc) - (ch_bar_gap + ch_bar_w)/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 6.6
+    },
+    "dimensions": {
+     "diameter": "sr_clear_d"
+    }
+   }
+  },
+  {
+   "command": "sketch.draw.dimensioned",
+   "params": {
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (-leg_yc) + (ch_bar_gap + ch_bar_w)/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 6.6
+    },
+    "dimensions": {
+     "diameter": "sr_clear_d"
+    }
+   }
+  },
+  {
+   "command": "sketch.draw.dimensioned",
+   "params": {
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (leg_yc) - ts_bolt_pitch/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 6.6
+    },
+    "dimensions": {
+     "diameter": "sr_clear_d"
+    }
+   }
+  },
+  {
+   "command": "sketch.draw.dimensioned",
+   "params": {
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (leg_yc) + ts_bolt_pitch/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 6.6
+    },
+    "dimensions": {
+     "diameter": "sr_clear_d"
+    }
+   }
+  },
+  {
+   "command": "sketch.draw.dimensioned",
+   "params": {
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (leg_yc) - (ch_bar_gap + ch_bar_w)/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 6.6
+    },
+    "dimensions": {
+     "diameter": "sr_clear_d"
+    }
+   }
+  },
+  {
+   "command": "sketch.draw.dimensioned",
+   "params": {
+    "command": "sketch.circle.center",
+    "params": {
+     "center": [
+      "ch_y_off + (leg_yc) + (ch_bar_gap + ch_bar_w)/2",
+      "-ts_bolt_z"
+     ],
+     "diameter": 6.6
+    },
+    "dimensions": {
+     "diameter": "sr_clear_d"
+    }
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Sketch_BoltClear",
+    "distance": "rail_l + 0.4 mm",
+    "operation": "cut",
+    "targets": [
+     "BoltBlank"
+    ],
+    "name": "Cut_BoltClear"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "target": "SideRail_R_4040",
+    "tools": [
+     "BoltBlank"
+    ],
+    "operation": "intersect",
+    "name": "Intersect_SideBolts"
    }
   },
   {
@@ -209,7 +442,8 @@
    "params": {
     "visible": false,
     "items": [
-     "Sketch_BoltHoles"
+     "Sketch_BoltAccess",
+     "Sketch_BoltClear"
     ]
    }
   },

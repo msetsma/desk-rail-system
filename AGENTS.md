@@ -56,8 +56,13 @@ triggers a full rebuild.
   per instance.
 - Cut and join tools should overrun the faces they start or end on by ~0.1 mm. Coincident faces
   cause slow boolean retries.
+- **Profile any build slower than ~30 s once** (per-command timings / boolean profile). One slow
+  feature in a part is paid again every time the part is inserted, refreshed, swept or rebuilt.
+  Fix it before building on top of it.
 - Query the design narrowly (single feature, single command schema). Full design dumps are huge.
+  Write big listings to a file and summarize them with a script. Don't pull them into context.
 - Long calls may move to the background. Wait for the completion notification and don't resend.
+- Run anything over ~1 min (builds, sweeps, full checks) in the background, and keep working.
 
 ## 4. Getting vendor parts and references
 
@@ -90,6 +95,17 @@ Pattern: the main agent writes a short spec per part (dimensions, origin, parame
 Subagents build the parts in parallel. The main agent inserts and places them, then verifies. While
 subagents run, the main agent keeps working on non-conflicting tasks.
 
+- **First wave = everything whose inputs exist.** As soon as the reference data is exported, spawn
+  every independent job (part builds, placement solving, research). Don't hold a job for a later
+  phase when its inputs are already there.
+- **Specs carry the verified API conventions.** Put every tested convention (placement joint form,
+  sign rules, required flags) into the subagent spec. When a spike leaves a case untested (e.g. a
+  180° flip), test it before the specs go out.
+- **Reuse what's already loaded.** Take baselines, exports and measurements from the open live
+  design rather than re-evaluating a big file headless.
+- **Independent check cases run in parallel** (sweep cases, per-group checks), each in its own
+  scratch output.
+
 ## Improvement log
 
 | Date | What happened | Rule change |
@@ -104,3 +120,5 @@ subagents run, the main agent keeps working on non-conflicting tasks.
 | 2026-10-28 | User supplied a CAD best-practice list | New skill `cad-best-practices` + core rules at top |
 | 2026-10-28 | Compliance rebuild: 4 part-builder subagents ran headless in parallel (~10 min) while the main agent built the assembly | §5 pattern confirmed; spike the CAD API first (scratch, parallel) before restructuring |
 | 2026-10-28 | Generated assemblies (script + regression vs a baseline bbox dump) caught a placement bug at once | §1: take a baseline before restructuring; verify by regression, not screenshots |
+| 2026-10-28 | Audit of the 1 h 42 min compliance run: one 46 s hole feature cost ~25-30 min across inserts, builds and the sweep | §3: profile builds over 30 s and fix the hot feature first |
+| 2026-10-28 | Same audit: a 10 min headless baseline re-eval, late-spawned placement and colour jobs (~6 min), a serial sweep (17 min vs ~5 parallel), 2 rebuilds from an untested 180° convention | §5: first wave, conventions in specs, reuse the loaded design, parallel check cases; §3: background long runs, no big dumps in context |

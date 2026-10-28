@@ -184,9 +184,10 @@ def _placement_joint(occ: Occurrence, occurrence_name: str) -> dict[str, object]
     )
 
 
-def build_script(occurrences: Sequence[Occurrence]) -> dict[str, object]:
+def build_script(occurrences: Sequence[Occurrence], parts_dir: Path = PARTS,
+                 skeleton: Path = SKELETON) -> dict[str, object]:
     """The full command script: skeleton, groups, linked parts, placement joints."""
-    commands = [*_template_commands(), _cmd("parameters.import", path=SKELETON.as_posix())]
+    commands = [*_template_commands(), _cmd("parameters.import", path=skeleton.as_posix())]
     commands += [_cmd("document.metadata.set", values={
         "part_number": "DESK-000", "description": "Desk rail system top-level assembly", "revision": "A"})]
     for i, (name, description) in enumerate(GROUPS):
@@ -201,7 +202,7 @@ def build_script(occurrences: Sequence[Occurrence]) -> dict[str, object]:
         component = component_name(occ.part)
         reuse = component in counts
         counts[component] = counts.get(component, 0) + 1
-        commands.append(_cmd("component.insert_design", path=(PARTS / f"{occ.part}.solidcraft").as_posix(),
+        commands.append(_cmd("component.insert_design", path=(parts_dir / f"{occ.part}.solidcraft").as_posix(),
                              name=component, parent=occ.group, reuse=reuse))
         joints.append(_placement_joint(occ, f"{component}:{counts[component]}"))
     return {"commands": [*commands, *joints]}

@@ -13,6 +13,7 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   from `parts/_template.json` (materials) and follow `docs/PART_BUILD_SPEC.md`.
 - Workflow after changing a skeleton parameter: edit `skeleton/params.json` (or export it from the
   assembly), run `python tools/regen_parts.py`, then `component.update_links {}` in the assembly.
+- Parameter sweep (parallel, on private copies): `python tools/sweep.py`.
 - Rebuild the whole assembly from scratch: `python tools/build_assembly.py --out desk_rails.solidcraft`
   (`tools/assembly_finish.py` adds materials, properties, views and display rows).
 - Legacy single-timeline model (pre-compliance, reference only): `legacy/desk_rails_legacy.solidcraft`.
@@ -85,6 +86,14 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
 - MCP `open` of a path whose design is already loaded (even after the file changed on disk) keeps the
   in-memory design. Run `new_design` first, then `open`.
 - Linked inserts split multi-lump bodies into separate bodies (`PC_FrontSlats (2)` …).
+- `component.insert_design` and `update_links` **re-evaluate the part's history**: an insert costs about
+  what the part takes to build. Profile slow parts with
+  `solidcraft-cli run <script> --timings --profile --json-out t.json`.
+  - Booleans on the detailed HFS5 DXF profile are the expensive case: one `solid.hole` with 8 counterbores
+    took 46 s.
+  - The assembly build is ~120 s, of which the two side rails are ~105 s (2026-10-28).
+- MCP `parameters.export` returns the full text even when given a `path`. `component.list` on the full
+  assembly is large; use `solidcraft-cli ... --results --json-out` and summarize it.
 - Eval names a body in a repeated placement with its occurrence path:
   `Leg (DSK-00 Desk frame:1/DSK-04 Leg:3)`.
 - `solidcraft-cli eval <script> --in X` ignores the script; use `run --in X --save tmp`, then `eval`.
