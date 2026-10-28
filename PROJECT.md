@@ -33,6 +33,9 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   - all of DSK costs < 1 s to insert
 - Legacy single-timeline model (pre-compliance, reference only): `legacy/desk_rails_legacy.solidcraft`.
 - Headless CLI: `solidcraft-cli run <script.json> [--in X] --save Y`.
+- Narrow clearance after a change: `python tools/near_check.py <body prefixes>` (~4 s). It checks each
+  changed body against its bbox neighbours and skips hardware-on-extrusion contacts.
+  `--print-params` prints the commands for the live app. `--include-mating` keeps the contacts (slow).
 - Full check: `tools/check.py` (slow; run only on request). BOM: `tools/bom.py` -> `BOM.md`.
 - Decision log and extrusion rules: `docs/EXTRUSION_GUIDE.md`. Cite rule IDs (J*, M*, P*, W*) and
   log decisions (D*) there.

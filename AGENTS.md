@@ -25,6 +25,12 @@ Core rules that always apply:
 - The design file named in `PROJECT.md` is the source of truth. Edit it live, save, commit when asked.
 - Verify narrowly after each change: measure or interference-check only the changed bodies and their
   neighbours. Run full checks, audits or BOM builds only when asked.
+  - Narrow means each changed body against only the bodies whose bounding boxes come near it, as
+    separate pairs. One all-against-all call over the same lists checks every combination.
+  - Skip designed face-to-face contacts (catalog hardware on its host) unless asked: exact checks of
+    coincident faces are very slow, and placement already verifies them.
+  - A quick check can run in the live app if the user isn't using it. Anything over ~10 s runs headless
+    in the background with capped threads, because the live app has a single command queue.
 - Before restructuring, dump a baseline (every body's bbox, volume, centre of mass). Afterwards, verify
   by regression against it, not by screenshots.
 - Note estimated or unmeasured dimensions as such (e.g. a `MEASURE` comment) and say so when relying on them.
@@ -128,4 +134,5 @@ subagents run, the main agent keeps working on non-conflicting tasks.
 | 2026-10-28 | Generated assemblies (script + regression vs a baseline bbox dump) caught a placement bug at once | §1: take a baseline before restructuring; verify by regression, not screenshots |
 | 2026-10-28 | Audit of the 1 h 42 min compliance run: one 46 s hole feature cost ~25-30 min across inserts, builds and the sweep | §3: profile builds over 30 s and fix the hot feature first |
 | 2026-10-28 | Speed spike: freezing linked parts and targeted link refresh. Inserts 42 s -> 9 s; a one-part refresh 40 s -> 0.3 s; a nested desk file flattened the BOM and saved < 1 s | §2: link frozen outputs, refresh only changed links, don't nest without measuring |
+| 2026-10-28 | A thread-eval suggested live-app checks. Measured: loading the frozen assembly takes 0.65 s; a 14-pair check took 113 s because hardware-on-extrusion contacts took ~25 s per pair, and one all-against-all call re-added them | §1: per-body neighbour pairs, skip designed contacts, cap threads -> 4 s |
 | 2026-10-28 | Same audit: a 10 min headless baseline re-eval, late-spawned placement and colour jobs (~6 min), a serial sweep (17 min vs ~5 parallel), 2 rebuilds from an untested 180° convention | §5: first wave, conventions in specs, reuse the loaded design, parallel check cases; §3: background long runs, no big dumps in context |
