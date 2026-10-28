@@ -1,0 +1,201 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XZ",
+    "name": "PC_Slats_Profile"
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "closed": true,
+    "points": [
+     [
+      "-pc_w/2 + pc_bezel + slat_gap",
+      "-(pc_h/2 - pc_bezel_v)"
+     ],
+     [
+      "-pc_w/2 + pc_bezel + slat_gap + slat_w",
+      "-(pc_h/2 - pc_bezel_v)"
+     ],
+     [
+      "-pc_w/2 + pc_bezel + slat_gap + slat_w",
+      "pc_h/2 - pc_bezel_v"
+     ],
+     [
+      "-pc_w/2 + pc_bezel + slat_gap",
+      "pc_h/2 - pc_bezel_v"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.pattern.rectangular",
+   "params": {
+    "entities": [
+     "l1",
+     "l2",
+     "l3",
+     "l4"
+    ],
+    "count": 10,
+    "spacing": "slat_w + slat_gap",
+    "dir": [
+     1,
+     0
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "PC_Slats_Profile",
+    "distance": "slat_t",
+    "operation": "new",
+    "name": "PC_Slat",
+    "body_name": "PC_FrontSlats"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "target": "PC_FrontSlats",
+    "tools": [
+     "PC_FrontSlats (2)",
+     "PC_FrontSlats (3)",
+     "PC_FrontSlats (4)",
+     "PC_FrontSlats (5)",
+     "PC_FrontSlats (6)",
+     "PC_FrontSlats (7)",
+     "PC_FrontSlats (8)",
+     "PC_FrontSlats (9)",
+     "PC_FrontSlats (10)"
+    ],
+    "operation": "join"
+   }
+  },
+  {
+   "command": "timeline.rename",
+   "params": {
+    "feature": "Combine1",
+    "name": "PC_FrontSlats_Join"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "PC_FrontSlats"
+    ],
+    "material": "Walnut"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "PC_FrontSlats"
+    ],
+    "color": "#6b4a2f"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "PC-02",
+     "description": "Walnut slat front for the Fractal North (10 slats, one body). Origin: centre of the slat array on its front face; slats extend +Y (toward wall), X right, Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Walnut",
+      "ReleaseState": "WIP",
+      "Source": "Fractal North walnut front, sizes from skeleton slat_* / pc_*"
+     }
+    }
+   }
+  }
+ ]
+}

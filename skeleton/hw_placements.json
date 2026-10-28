@@ -1,0 +1,1078 @@
+[
+  {
+    "name": "HW-01 Joining plate side rail L",
+    "lib": "HW-L01_HPTTD5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      -1,
+      0,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "-(up_xc + rail_l/2)",
+    "y": "up_y + 19 mm - 80 mm",
+    "z": "frame_top - rail_l/2",
+    "yaw": "0 deg",
+    "legacy_body": "Plate_SideRail_L_HPTTD5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-03L side rail L / FRM-01 upright L",
+    "note": "Vendor-fixed: the 38 mm T-bar is centred on the 40 mm upright (19 mm = 38/2) and the plate is 80 mm long along local +Y, so the origin (stem end) sits at up_y + 19 - 80. Local -Z (thickness) points outward.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-02 Joining plate side rail R",
+    "lib": "HW-L01_HPTTD5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      1,
+      0,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      -1
+    ],
+    "x": "up_xc + rail_l/2",
+    "y": "up_y + 19 mm - 80 mm",
+    "z": "frame_top - rail_l/2",
+    "yaw": "0 deg",
+    "legacy_body": "Plate_SideRail_R_HPTTD5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-03R side rail R / FRM-01 upright R",
+    "note": "Vendor-fixed: the 38 mm T-bar is centred on the 40 mm upright (19 mm = 38/2) and the plate is 80 mm long along local +Y, so the origin (stem end) sits at up_y + 19 - 80. Local -Z (thickness) points outward.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-03 Joining plate low bar L",
+    "lib": "HW-L02_HPTLD5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "-(up_xc + 19 mm)",
+    "y": "up_y + rail_l/2",
+    "z": "desk_h + bar1_z - 19 mm",
+    "yaw": "0 deg",
+    "legacy_body": "Plate_BarLow_L_HPTLD5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-01 upright L / FRM-02 crossbar low",
+    "note": "Vendor-fixed: the 38 mm legs are centred on the 40 mm members, so the outer corner (local origin) sits 1 mm in from the upright outer face and the bar edge (19 mm = 38/2 from the centrelines). Plate is diagonal-symmetric. Local -Z (thickness) points to +Y.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-04 Joining plate low bar R",
+    "lib": "HW-L02_HPTLD5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      1,
+      0,
+      0
+    ],
+    "xl": [
+      0,
+      -1,
+      0
+    ],
+    "x": "(up_xc + 19 mm)",
+    "y": "up_y + rail_l/2",
+    "z": "desk_h + bar1_z - 19 mm",
+    "yaw": "0 deg",
+    "legacy_body": "Plate_BarLow_R_HPTLD5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-01 upright R / FRM-02 crossbar low",
+    "note": "Vendor-fixed: the 38 mm legs are centred on the 40 mm members, so the outer corner (local origin) sits 1 mm in from the upright outer face and the bar edge (19 mm = 38/2 from the centrelines). Plate is diagonal-symmetric. Local -Z (thickness) points to +Y.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-05 Joining plate high bar L",
+    "lib": "HW-L02_HPTLD5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      -1,
+      0,
+      0
+    ],
+    "xl": [
+      0,
+      1,
+      0
+    ],
+    "x": "-(up_xc + 19 mm)",
+    "y": "up_y + rail_l/2",
+    "z": "desk_h + bar2_z + 19 mm",
+    "yaw": "0 deg",
+    "legacy_body": "Plate_BarHigh_L_HPTLD5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-01 upright L / FRM-02 crossbar high",
+    "note": "Vendor-fixed: the 38 mm legs are centred on the 40 mm members, so the outer corner (local origin) sits 1 mm in from the upright outer face and the bar edge (19 mm = 38/2 from the centrelines). Plate is diagonal-symmetric. Local -Z (thickness) points to +Y.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-06 Joining plate high bar R",
+    "lib": "HW-L02_HPTLD5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      -1,
+      0,
+      0
+    ],
+    "x": "(up_xc + 19 mm)",
+    "y": "up_y + rail_l/2",
+    "z": "desk_h + bar2_z + 19 mm",
+    "yaw": "0 deg",
+    "legacy_body": "Plate_BarHigh_R_HPTLD5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-01 upright R / FRM-02 crossbar high",
+    "note": "Vendor-fixed: the 38 mm legs are centred on the 40 mm members, so the outer corner (local origin) sits 1 mm in from the upright outer face and the bar edge (19 mm = 38/2 from the centrelines). Plate is diagonal-symmetric. Local -Z (thickness) points to +Y.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-07 Gusset side rail L",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "-(up_xc + rail_l/2 - rail_s/2)",
+    "y": "up_y - rail_l/2",
+    "z": "frame_top - rail_l",
+    "yaw": "0 deg",
+    "legacy_body": "Bracket_SideRail_L_HBLFSN5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-03L side rail L / FRM-01 upright L",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane. Same rotation as R (bracket is symmetric about local Z=0).",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-08 Gusset side rail R",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "up_xc + rail_l/2 - rail_s/2",
+    "y": "up_y - rail_l/2",
+    "z": "frame_top - rail_l",
+    "yaw": "0 deg",
+    "legacy_body": "Bracket_SideRail_R_HBLFSN5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-03R side rail R / FRM-01 upright R",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-09 Gusset low bar L",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "-(up_xc - rail_l/2)",
+    "y": "stile_y",
+    "z": "desk_h + bar1_z - rail_l/2",
+    "yaw": "0 deg",
+    "legacy_body": "Bracket_BarLow_L_HBLFSN5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-01 upright L / FRM-02 crossbar low",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-10 Gusset low bar R",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      -1,
+      0,
+      0
+    ],
+    "x": "(up_xc - rail_l/2)",
+    "y": "stile_y",
+    "z": "desk_h + bar1_z - rail_l/2",
+    "yaw": "0 deg",
+    "legacy_body": "Bracket_BarLow_R_HBLFSN5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-01 upright R / FRM-02 crossbar low",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-11 Gusset high bar L",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "-(up_xc - rail_l/2)",
+    "y": "stile_y",
+    "z": "desk_h + bar2_z - rail_l/2",
+    "yaw": "0 deg",
+    "legacy_body": "Bracket_BarHigh_L_HBLFSN5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-01 upright L / FRM-02 crossbar high",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-12 Gusset high bar R",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      -1,
+      0,
+      0
+    ],
+    "x": "(up_xc - rail_l/2)",
+    "y": "stile_y",
+    "z": "desk_h + bar2_z - rail_l/2",
+    "yaw": "0 deg",
+    "legacy_body": "Bracket_BarHigh_R_HBLFSN5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-01 upright R / FRM-02 crossbar high",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-13 Gusset main stile low L",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      -1,
+      0,
+      0
+    ],
+    "x": "m1_x - rail_l/2",
+    "y": "stile_y",
+    "z": "desk_h + bar1_z + rail_l/2",
+    "yaw": "0 deg",
+    "legacy_body": "Bracket_StileMain_LowL_HBLFSN5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-04 stile main / FRM-02 crossbar low",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-14 Gusset main stile low R",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "m1_x + rail_l/2",
+    "y": "stile_y",
+    "z": "desk_h + bar1_z + rail_l/2",
+    "yaw": "0 deg",
+    "legacy_body": "Bracket_StileMain_LowR_HBLFSN5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-04 stile main / FRM-02 crossbar low",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-15 Gusset main stile high L",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      -1,
+      0,
+      0
+    ],
+    "x": "m1_x - rail_l/2",
+    "y": "stile_y",
+    "z": "desk_h + bar2_z - rail_l/2",
+    "yaw": "0 deg",
+    "legacy_body": "Bracket_StileMain_HighL_HBLFSN5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-04 stile main / FRM-02 crossbar high",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-16 Gusset main stile high R",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "m1_x + rail_l/2",
+    "y": "stile_y",
+    "z": "desk_h + bar2_z - rail_l/2",
+    "yaw": "0 deg",
+    "legacy_body": "Bracket_StileMain_HighR_HBLFSN5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-04 stile main / FRM-02 crossbar high",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-17 Gusset side stile low L",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      -1,
+      0,
+      0
+    ],
+    "x": "m3_x - rail_l/2",
+    "y": "stile_y",
+    "z": "desk_h + bar1_z + rail_l/2",
+    "yaw": "0 deg",
+    "legacy_body": "Bracket_StileSide_LowL_HBLFSN5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-04 stile side / FRM-02 crossbar low",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-18 Gusset side stile low R",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "m3_x + rail_l/2",
+    "y": "stile_y",
+    "z": "desk_h + bar1_z + rail_l/2",
+    "yaw": "0 deg",
+    "legacy_body": "Bracket_StileSide_LowR_HBLFSN5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-04 stile side / FRM-02 crossbar low",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-19 Gusset side stile high L",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      -1,
+      0,
+      0
+    ],
+    "x": "m3_x - rail_l/2",
+    "y": "stile_y",
+    "z": "desk_h + bar2_z - rail_l/2",
+    "yaw": "0 deg",
+    "legacy_body": "Bracket_StileSide_HighL_HBLFSN5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-04 stile side / FRM-02 crossbar high",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-20 Gusset side stile high R",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "m3_x + rail_l/2",
+    "y": "stile_y",
+    "z": "desk_h + bar2_z - rail_l/2",
+    "yaw": "0 deg",
+    "legacy_body": "Bracket_StileSide_HighR_HBLFSN5",
+    "verified_bbox_err_mm": 0.0,
+    "verified_com_err_mm": 0.0,
+    "host": "FRM-04 stile side / FRM-02 crossbar high",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-21 Panel standoff low bar L",
+    "lib": "HW-L11_Standoff_M5x12",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "-so_bar_x",
+    "y": "stile_y + rail_s/2",
+    "z": "desk_h + bar1_z + (rail_l/2 - rail_s/2)",
+    "yaw": "0 deg",
+    "legacy_body": "Standoff_BarLow_L",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-02 crossbar low / FRM-05 panel",
+    "note": "Length must equal pnl_back_gap (12 mm = library part). Upper slot of the crossbar.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-22 Panel standoff low bar C",
+    "lib": "HW-L11_Standoff_M5x12",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "0 mm",
+    "y": "stile_y + rail_s/2",
+    "z": "desk_h + bar1_z + (rail_l/2 - rail_s/2)",
+    "yaw": "0 deg",
+    "legacy_body": "Standoff_BarLow_C",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-02 crossbar low / FRM-05 panel",
+    "note": "Length must equal pnl_back_gap (12 mm = library part). Upper slot of the crossbar.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-23 Panel standoff low bar R",
+    "lib": "HW-L11_Standoff_M5x12",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "so_bar_x",
+    "y": "stile_y + rail_s/2",
+    "z": "desk_h + bar1_z + (rail_l/2 - rail_s/2)",
+    "yaw": "0 deg",
+    "legacy_body": "Standoff_BarLow_R",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-02 crossbar low / FRM-05 panel",
+    "note": "Length must equal pnl_back_gap (12 mm = library part). Upper slot of the crossbar.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-24 Panel standoff high bar L",
+    "lib": "HW-L11_Standoff_M5x12",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "-so_bar_x",
+    "y": "stile_y + rail_s/2",
+    "z": "desk_h + bar2_z + (rail_l/2 - rail_s/2)",
+    "yaw": "0 deg",
+    "legacy_body": "Standoff_BarHigh_L",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-02 crossbar high / FRM-05 panel",
+    "note": "Length must equal pnl_back_gap (12 mm = library part). Upper slot of the crossbar.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-25 Panel standoff high bar C",
+    "lib": "HW-L11_Standoff_M5x12",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "0 mm",
+    "y": "stile_y + rail_s/2",
+    "z": "desk_h + bar2_z + (rail_l/2 - rail_s/2)",
+    "yaw": "0 deg",
+    "legacy_body": "Standoff_BarHigh_C",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-02 crossbar high / FRM-05 panel",
+    "note": "Length must equal pnl_back_gap (12 mm = library part). Upper slot of the crossbar.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-26 Panel standoff high bar R",
+    "lib": "HW-L11_Standoff_M5x12",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "so_bar_x",
+    "y": "stile_y + rail_s/2",
+    "z": "desk_h + bar2_z + (rail_l/2 - rail_s/2)",
+    "yaw": "0 deg",
+    "legacy_body": "Standoff_BarHigh_R",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-02 crossbar high / FRM-05 panel",
+    "note": "Length must equal pnl_back_gap (12 mm = library part). Upper slot of the crossbar.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-27 Panel standoff post L",
+    "lib": "HW-L11_Standoff_M5x12",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "-(up_xc + (rail_l/2 - rail_s/2))",
+    "y": "up_y + rail_l/2",
+    "z": "frame_top - up_below/2",
+    "yaw": "0 deg",
+    "legacy_body": "Standoff_PostL",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-01 upright L / FRM-05 panel",
+    "note": "Length must equal pnl_back_gap (12 mm = library part). Outer slot of the upright.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-28 Panel standoff post R",
+    "lib": "HW-L11_Standoff_M5x12",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "(up_xc + (rail_l/2 - rail_s/2))",
+    "y": "up_y + rail_l/2",
+    "z": "frame_top - up_below/2",
+    "yaw": "0 deg",
+    "legacy_body": "Standoff_PostR",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-01 upright R / FRM-05 panel",
+    "note": "Length must equal pnl_back_gap (12 mm = library part). Outer slot of the upright.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-29 Side bolt L1",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      -1
+    ],
+    "x": "-(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (-leg_yc) - (ch_bar_gap + ch_bar_w)/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_L_M6x20 (7)",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03L side rail L / DSK top support",
+    "note": "Head on the drilled seat, shank inward; channel bar end.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-30 Side bolt L2",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      -1
+    ],
+    "x": "-(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (-leg_yc) - ts_bolt_pitch/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_L_M6x20 (6)",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03L side rail L / DSK top support",
+    "note": "Head on the drilled seat, shank inward; leg screw.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-31 Side bolt L3",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      -1
+    ],
+    "x": "-(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (-leg_yc) + ts_bolt_pitch/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_L_M6x20",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03L side rail L / DSK top support",
+    "note": "Head on the drilled seat, shank inward; leg screw.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-32 Side bolt L4",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      -1
+    ],
+    "x": "-(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (-leg_yc) + (ch_bar_gap + ch_bar_w)/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_L_M6x20 (8)",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03L side rail L / DSK top support",
+    "note": "Head on the drilled seat, shank inward; channel bar end.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-33 Side bolt L5",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      -1
+    ],
+    "x": "-(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (leg_yc) - (ch_bar_gap + ch_bar_w)/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_L_M6x20 (5)",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03L side rail L / DSK top support",
+    "note": "Head on the drilled seat, shank inward; channel bar end.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-34 Side bolt L6",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      -1
+    ],
+    "x": "-(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (leg_yc) - ts_bolt_pitch/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_L_M6x20 (2)",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03L side rail L / DSK top support",
+    "note": "Head on the drilled seat, shank inward; leg screw.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-35 Side bolt L7",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      -1
+    ],
+    "x": "-(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (leg_yc) + ts_bolt_pitch/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_L_M6x20 (3)",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03L side rail L / DSK top support",
+    "note": "Head on the drilled seat, shank inward; leg screw.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-36 Side bolt L8",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      -1
+    ],
+    "x": "-(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (leg_yc) + (ch_bar_gap + ch_bar_w)/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_L_M6x20 (4)",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03L side rail L / DSK top support",
+    "note": "Head on the drilled seat, shank inward; channel bar end.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-37 Side bolt R1",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (-leg_yc) - (ch_bar_gap + ch_bar_w)/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_R_M6x20 (5)",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03R side rail R / DSK top support",
+    "note": "Head on the drilled seat, shank inward; channel bar end.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-38 Side bolt R2",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (-leg_yc) - ts_bolt_pitch/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_R_M6x20 (3)",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03R side rail R / DSK top support",
+    "note": "Head on the drilled seat, shank inward; leg screw.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-39 Side bolt R3",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (-leg_yc) + ts_bolt_pitch/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_R_M6x20 (8)",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03R side rail R / DSK top support",
+    "note": "Head on the drilled seat, shank inward; leg screw.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-40 Side bolt R4",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (-leg_yc) + (ch_bar_gap + ch_bar_w)/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_R_M6x20 (7)",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03R side rail R / DSK top support",
+    "note": "Head on the drilled seat, shank inward; channel bar end.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-41 Side bolt R5",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (leg_yc) - (ch_bar_gap + ch_bar_w)/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_R_M6x20 (6)",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03R side rail R / DSK top support",
+    "note": "Head on the drilled seat, shank inward; channel bar end.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-42 Side bolt R6",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (leg_yc) - ts_bolt_pitch/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_R_M6x20",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03R side rail R / DSK top support",
+    "note": "Head on the drilled seat, shank inward; leg screw.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-43 Side bolt R7",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (leg_yc) + ts_bolt_pitch/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_R_M6x20 (2)",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03R side rail R / DSK top support",
+    "note": "Head on the drilled seat, shank inward; leg screw.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-44 Side bolt R8",
+    "lib": "HW-L10_M6x20_SHCS",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "(frame_w/2 + sr_seat_t)",
+    "y": "ch_y_off + (leg_yc) + (ch_bar_gap + ch_bar_w)/2",
+    "z": "frame_top - ts_bolt_z",
+    "yaw": "0 deg",
+    "legacy_body": "SideBolts_R_M6x20 (4)",
+    "verified_bbox_err_mm": 0.0,
+    "host": "FRM-03R side rail R / DSK top support",
+    "note": "Head on the drilled seat, shank inward; channel bar end.",
+    "joint_angle": "0 deg"
+  }
+]

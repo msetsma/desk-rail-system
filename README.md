@@ -1,16 +1,22 @@
 # Desk rail system
 
-Parametric CAD model of my desk: a DeskHaus Apex Pro 4-leg frame (Jiecang OEM), the desktop, and a
-Misumi HFS5 aluminium extrusion rail system that carries two monitors, Klipsch R-40M speakers, a
-hanging PC and a modesty panel.
+[![CAD: SolidCraft](https://img.shields.io/badge/CAD-SolidCraft-informational)](PROJECT.md)
+[![Extrusion: Misumi HFS5](https://img.shields.io/badge/extrusion-Misumi%20HFS5-lightgrey)](docs/EXTRUSION_GUIDE.md)
+[![Built with Claude Code](https://img.shields.io/badge/built%20with-Claude%20Code-d97757)](AGENTS.md)
+[![License](https://img.shields.io/github/license/msetsma/desk-rail-system)](LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/msetsma/desk-rail-system)](https://github.com/msetsma/desk-rail-system/commits/main)
+
+Parametric CAD model of a sit-stand desk: a DeskHaus Apex Pro 4-leg frame (Jiecang OEM), the
+desktop, and a Misumi HFS5 aluminium extrusion rail system that carries two monitors, Klipsch R-40M
+speakers, a hanging PC and a modesty panel.
 
 ![Isometric view of the desk rail system](docs/images/desk_iso.png)
 
 ## Built agentically
 
-This design is being developed agentically: an AI coding agent (Claude Code) drives
-SolidCraft over its MCP control interface and builds, edits, measures and
-checks the model while I review and steer. The project doubles as a testbed for:
+The design is developed agentically: an AI coding agent (Claude Code) drives SolidCraft over its
+MCP control interface and builds, edits, measures and checks the model while a human reviews and
+steers. The project doubles as a testbed for:
 
 - **SolidCraft's agent integration**: what works well, what doesn't, and the quirks found along the
   way (logged in `PROJECT.md`).
@@ -26,16 +32,53 @@ Expect the repo to change often while that workflow is worked out.
 
 ## Files
 
-- `desk_rails.solidcraft` — **source of truth**: the design. Edit it in SolidCraft (Parameters
-  table, timeline) and save. The old generator (`tools/gen_desk.py`, `tools/joints.py`,
-  `desk_rails.json`) was retired on 2026-10-27; it's in git history before commit `bd5ba5a`.
-- `profiles/` — extrusion cross-section DXFs used by the model. `refs/` — reference photos and data (vendor downloads are local only).
-- `tools/audit.py` — structural + balance audit (mass budget, tip margins, leg split, crossbar sag, joint loads) from a build `--json-out` report. Edit `MASS_INPUTS` when weighed.
-- `tools/check.py` — one-command build + checks (see below). `tools/bom.py` — writes `BOM.md` (cut list, hardware, fastener estimate).
-- `BOM.md` — generated bill of materials; don't hand-edit.
-- `tools/svg2dxf.py` — converts an SVG profile drawing to DXF (used for HFS5-4040).
-- `renders/` — snapshots.
-- `docs/EXTRUSION_GUIDE.md` — extrusion rules (loads, joints, wobble, fasteners) + decision log. Check it before any extrusion decision.
+- `desk_rails.solidcraft`: the **assembly**. It holds no geometry of its own, only linked part
+  files placed with joints. Open it in SolidCraft. Stored with Git LFS, like every `.solidcraft` file.
+- `skeleton/params.json`: the shared parameters (layout and `MEASURE` values). The assembly and
+  every size-driven part read it. `skeleton/hw_placements.json` places the hardware.
+- `parts/`: one file per real part (`parts/<PN>_<Name>.solidcraft`), each built around its own origin.
+  - `parts/src/`: the build script for each part. The script is the source of truth; the
+    `.solidcraft` file is its output.
+  - `parts/lib/`: purchased hardware (Misumi plates and gussets, screws, standoffs), one file each,
+    named by vendor part number. See `parts/lib/README.md`.
+  - `parts/_template.json`: materials and settings every new part starts from.
+- `legacy/desk_rails_legacy.solidcraft`: the old single-timeline model. Reference only.
+- `tools/`:
+  - `regen_parts.py`: pushes the skeleton parameters into the size-driven parts and rebuilds them.
+  - `build_assembly.py`: builds the whole assembly from scratch (inserts and places every part).
+  - `assembly_finish.py`: second pass after a build: materials, properties, views, display rows.
+  - `check.py`: one-command body report, overlap check, audit and BOM (see below).
+  - `bom.py`: writes `BOM.md` from the part numbers in the assembly.
+  - `audit.py`: structure and balance audit (mass, tip margins, leg split, crossbar sag, joint
+    loads). Edit `SPEC_KG` when things are weighed.
+  - `eval_bodies.py`: maps the bodies in the assembly back to their part and placement names.
+  - `svg2dxf.py`: converts an SVG profile drawing to DXF (used once for the HFS5-4040 profile).
+- `BOM.md`: generated bill of materials. Don't hand-edit it.
+- `docs/`: `EXTRUSION_GUIDE.md` (extrusion rules + decision log; check it before any extrusion
+  decision), `PART_BUILD_SPEC.md` (rules and part-number list for part files),
+  `COMPLIANCE_PLAN.md` (how the project got this structure), `images/`.
+- `refs/`: reference photos, drawings and data sheets (vendor downloads are local only).
+- `profiles/`: extrusion cross-section DXFs.
+- `renders/`: snapshots.
+
+## Workflow
+
+Change a size:
+
+1. Edit the value in `skeleton/params.json` (or change it in the assembly's Parameters table and
+   export it there with `parameters.export`).
+2. Run `python tools/regen_parts.py`. It rebuilds every part whose size depends on the skeleton.
+   Add a prefix (`python tools/regen_parts.py FRM-03`) to rebuild only some.
+3. In the assembly, run `component.update_links {}` (or reopen it). The parts refresh and the
+   joints move them to their new places.
+
+Rebuild the whole assembly from scratch:
+
+```sh
+python tools/build_assembly.py --out desk_rails.solidcraft
+```
+
+It also runs `tools/assembly_finish.py`, since links don't carry materials or properties.
 
 Check (one command, reads the saved design, never overwrites it):
 
@@ -45,136 +88,172 @@ python tools/check.py --renders  # also refresh renders/iso|front|back|right|top
 ```
 
 It exits non-zero if the report fails or any bodies overlap. Outputs (report JSON,
-interference results) go to `build/` (git-ignored). Save in SolidCraft, run the check, then
-commit: the `.solidcraft` file is binary, so git history is the undo (`git checkout <rev> -- desk_rails.solidcraft`).
+interference results) go to `build/` (git-ignored). The check is slow, so run it before a commit,
+not after every change. The `.solidcraft` files are binary, so git history is the undo
+(`git checkout <rev> -- desk_rails.solidcraft parts/`).
 
 ## Assemblies
 
-Root holds only assemblies; every part has a part-number name; `DSK-00` is grounded, the rest
-are rigid-jointed to it.
+The root holds only the group components. Each group holds linked part files. A part number belongs
+to the part **file**; a file used twice shows up twice. `DSK-00` is grounded. Every other part is
+placed by a joint from the root origin, driven by skeleton parameters.
 
-| Assembly | Contents |
-|---|---|
-| `DSK-00` Desk | desktop, frame (top supports, channel bars, legs, feet) |
-| `FRM-00` Monitor rail frame | side rails, uprights, crossbars, stiles, modesty panel |
-| `HW-00` Frame hardware | joining plates, gusset brackets, panel standoffs |
-| `MON-00` Monitors | 32in main, 27in portrait |
-| `SPK-00` Speakers | Klipsch R-40M pair + their swivel mounts |
-| `PC-00` PC | Fractal North hung on one 6in x 1/2in strap (`pc_leg_gap`, `strap_w`), walnut slat front |
-| `INP-00` Input devices | 16.5in mouse pad, Razer DeathAdder V3, ErgoDox EZ halves (`kb_gap`, `pad_kb_gap`, `kb_front_gap`, `pad_front_gap`). ErgoDox footprint = real case outline (202.3 x 176.3 mm per half) traced from ZSA's 1:1 printout (`refs/ergodox_ez/`), 15 mm case + 15 mm tapered keycap layer = ZSA's 30 mm. Mouse = DeathAdder V3 Pro, real STEP (`refs/razer_dav3pro/DAV3Pro.step`, 10 bodies `Mouse_DAV3Pro_*`) in `INP-02a`, rigid-jointed to the mouse pad's top-face centre so it follows `pad_x`/`pad_y` |
-| `REF-00` Reference | `Eye` marker |
+```mermaid
+graph TD
+  root[desk_rails] --> DSK[DSK-00 Desk frame]
+  root --> FRM[FRM-00 Monitor rail frame]
+  root --> HW[HW-00 Frame hardware]
+  root --> MON[MON-00 Monitors]
+  root --> SPK[SPK-00 Speakers]
+  root --> PC[PC-00 PC under-desk]
+  root --> INP[INP-00 Input devices]
+  root --> REF[REF-00 Skeleton]
+```
 
-The 80/20 and V-slot configuration rows still exist, but switching to one puts its rails loose
-at the root, outside `FRM-00`.
+| Group | Part file (`parts/`) | Count | What | Finish |
+|---|---|---|---|---|
+| `DSK-00` Desk frame | `DSK-01_Desktop` | 1 | desktop slab | butcher block |
+| | `DSK-02_TopSupport` | 2 | Apex Pro top support, an L-angle the desktop screws to | DeskHaus Silver |
+| | `DSK-03_ChannelBar` | 4 | slim bars running left-right; the legs sit between them | DeskHaus Silver |
+| | `DSK-04_Leg` | 4 | lifting column (envelope) | DeskHaus Silver |
+| | `DSK-05_Foot` | 2 | foot with glides | DeskHaus Silver |
+| `FRM-00` Monitor rail frame | `FRM-01_Upright_4040` | 2 | rear posts | aluminium |
+| | `FRM-02_Crossbar_2040` | 2 | lower and upper monitor bars | aluminium |
+| | `FRM-03L_SideRail_L_4040`, `FRM-03R_SideRail_R_4040` | 1 + 1 | side rails, drilled for 8 through-bolts each (D9, D15) | aluminium |
+| | `FRM-04_Stile_2040` | 2 | vertical bars between the crossbars; the monitors mount to these | aluminium |
+| | `FRM-05_Modesty_panel` | 1 | privacy panel behind the posts, on standoffs | slate |
+| `HW-00` Frame hardware | `lib/HW-L01_HPTTD5` | 2 | Misumi T-joining plate, side rail to upright | zinc |
+| | `lib/HW-L02_HPTLD5` | 4 | Misumi L-joining plate, crossbar ends | zinc |
+| | `lib/HW-L03_HBLFSN5` | 14 | Misumi gusset bracket | cast aluminium |
+| | `lib/HW-L10_M6x20_SHCS` | 16 | M6x20 socket-head screw, side rail to top support | black oxide |
+| | `lib/HW-L11_Standoff_M5x12` | 8 | panel standoff | zinc |
+| `MON-00` Monitors | `MON-01_Monitor_Main_32in` | 1 | 32in 16:9 main | near-black |
+| | `MON-02_Monitor_Side_27in` | 1 | 27in portrait, left | near-black |
+| `SPK-00` Speakers | `SPK-01_R40M_Speaker` | 2 | Klipsch R-40M, aimed at the eye point | black, copper woofer |
+| | `SPK-02_SpkMount_Flange` | 2 | mount plate in the upright front slot | black |
+| | `SPK-03_SpkMount_Block` | 2 | arm block | black |
+| | `SPK-04_SpkMount_Swivel` | 2 | ball swivel | black |
+| `PC-00` PC under-desk | `PC-01_FractalNorth` | 1 | Fractal North case | dark grey |
+| | `PC-02_WalnutSlatFront` | 1 | walnut slat front | walnut |
+| | `PC-03_Strap` | 1 | 6in x 1/2in strap under the channel bars | black |
+| `INP-00` Input devices | `INP-01_MousePad` | 1 | 16.5in mouse pad | black |
+| | `INP-02_DeathAdderV3Pro` | 1 | Razer DeathAdder V3 Pro, real vendor STEP | vendor colors |
+| | `INP-03_ErgoDoxEZ_Left`, `INP-04_ErgoDoxEZ_Right` | 1 + 1 | ErgoDox EZ halves, outline traced from ZSA's 1:1 printout | black |
+| `REF-00` Skeleton | (no part file) | | `SKL_Eye`: a sketch point at the seated eye position, not a body | red |
+
+That's 29 part numbers and 83 parts in total (see `BOM.md`). The hardware occurrences are named
+`HW-01` to `HW-44` by job (`HW-07 Gusset side rail L`). Side rails and keyboards have L and R files
+because they're mirror images; the other pairs reuse one file, turned 180°.
+
+Saved views: Overview, Front, Back, SideRailJoint_R/L, SpeakerMount_R, UnderDesk. Display rows
+(`config.activate`): Full, Frame only, No desktop, Monitors + speakers.
 
 Axes: origin = floor under frame center. X = width (+ right), Y = depth (+ toward wall), Z = up.
 
-## Parts
+## Key parameters
 
-| Body | What | Color |
+Set them in `skeleton/params.json`, then follow the [workflow](#workflow). Inches are fine
+(`"30 in"`). ★ = favourite.
+
+| Parameter | Default | What it does |
 |---|---|---|
-| `Desktop` | desktop | wood |
-| `TopSupport_R/L` | frame end brackets the desktop screws to | black |
-| `ChannelBar_{Back,Front}{Outer,Inner}` | 2 slim bars per channel; legs sit between them | black |
-| `Leg_{RB,RF,LB,LF}`, `Foot_R/L` | placeholder legs / feet | black |
-| `SideRail_R/L_<std>` | 2040 along each top support's outer face; end butts upright front face (T-joint) | silver |
-| `Upright_R/L_<std>` | 4040 rear posts; outer face flush with side rail (= desktop edge − `up_side_inset`) | silver |
-| `Crossbar_Low/High_<std>` | 2040 monitor bars between posts | silver |
-| `Stile_Main/Side_<std>` | vertical 2040 between the crossbars (resting on the lower one, faces flush); monitors VESA-mount to these | silver |
-| `Monitor_Main/Side` (+ `_Back`) | 32in 16:9, 27in portrait left: thin screen slab + rear bulge (no stands) | near-black |
-| `Standoff_*` | panel standoffs (M5), hold the panel `pnl_back_gap` off the back faces | orange |
-| `Plate_*`, `Bracket_*` | joint hardware: flat joining plates + gusset brackets (decisions D2, D6, D7 in the guide) | orange |
-| `Speaker_R/L` (+ `SpkFace_*_Horn/Woofer`) | Klipsch R-40M (spec size, 3.2 kg) with horn + spun-copper woofer faces; hung from their back swivel; toe-in + tilt aimed at `Eye` | dark brown |
-| `SpkMount_*` | speaker bracket: flange in the upright front slot, block, ball swivel | orange |
-| `Eye` | your eye position marker (ergonomics check in `tools/audit.py`) | red |
-| `ModestyPanel` | privacy panel behind the posts, from `pnl_drop` below the desk to just above the adapter tops, on standoffs; hangs free below the short upright stubs (`up_below`) | slate |
+| `desk_h` ★ | 30 in | desktop top height above the floor (sit or stand) |
+| `desk_w` ★, `desk_d` ★ | 70 in, 30 in | desktop width and depth; the frame width follows `desk_w` |
+| `mon_clearance` ★ | 8 in | gap from the desktop to the bottom of the monitors |
+| `pc_w` ★, `pc_leg_gap` ★ | 215 mm, 2 in | PC case width, and its gap from the left leg |
+| `kb_gap` ★ | 100 mm | gap between the keyboard halves |
+| `desk_t` | 1.5 in | desktop thickness |
+| `up_side_inset` | 0 in | side rail and upright inset from the desktop edge |
+| `rear_gap` | 10 mm | desktop back edge to the upright front face |
+| `m1_x`, `mon_gap` | 0, 10 mm | main monitor position, gap between monitors |
+| `m1_tilt`, `m3_yaw` | 0°, 15° | tilts both monitors back; turns the side monitor in |
+| `bar1_gap` | 25 mm | lower crossbar top below the monitors |
+| `spk_bot`, `spk_yaw_max` | `mon_clearance`, 25° | speaker height; toe-in limit (tilt and toe-in aim at the eye point) |
+| `pnl_drop`, `pnl_cover` | 14 in, 15 mm | panel drop below the desk; panel rise above the posts |
+| `eye_above_desk`, `eye_back` | 16 in, 6 in | eye point above the desk and in front of its edge |
 
-`<std>` = `HFS5`, `8020` or `VSLOT` (see Extrusion profiles).
+The other parameters are derived, so leave them alone. Each one has a comment in `params.json`.
 
 ## Measure checklist
 
-Inches are fine (`"1.45 in"`). Set in the app's Parameters table.
+These parameters are marked `MEASURE` in `params.json`: they're estimates until measured.
+Inches are fine.
 
-**TopSupport_R / TopSupport_L** (end brackets under the desktop)
-- `frame_w` is now **derived** (`desk_w - 2*(rail_s + up_side_inset)`): channel bars get cut to suit. Check result stays in frame's usable range (leg spacing, cable/PC clearance).
-- [ ] `ts_len` — length front to back (Y)
-- [ ] `ts_w` — width (X)
-- [ ] `ts_h` — height (Z)
-- [ ] cross-section shape (flat bar / angle / C / tube) + wall thickness — photo
-- [ ] holes on the **outer face** (where the side rail bolts on): each hole's distance from front end + from top edge, diameter, threaded (M6?) or through
+<details>
+<summary>Frame, monitors, speakers</summary>
 
-**ChannelBar_*** (the slim bars running left-right)
-- [ ] `ch_bar_w` — width of one bar (Y)
-- [ ] `ch_h` — height (Z)
-- [ ] `ch_bar_gap` — gap between the 2 bars of one channel (Y)
+**Top supports** (`DSK-02`; `frame_w` is derived from `desk_w`, the channel bars get cut to suit)
+- [ ] `ts_len`, `ts_w`, `ts_h`: length (Y), width (X), height (Z)
+- [ ] `ts_t`: sheet steel thickness
+- [ ] `ts_bolt_pitch`: spacing of the 2 leg screws per column (Y)
+- [ ] `ts_bolt_z`: leg screw center below the frame top (sets the side rail holes, D9)
 
-**Leg_*** (top of each leg, where it meets the frame)
-- [ ] `leg_x`, `leg_y` — top stage outside size (X, Y)
-- [ ] `leg_yc` — frame center to leg center, front-back (Y). Easier: measure front leg center to back leg center and halve it.
-- [ ] `leg_inset` — top support outer face to leg center (X)
-- [ ] `ch_y_off` — only if the legs aren't centered front-back on the top support (else 0)
+**Channel bars** (`DSK-03`)
+- [ ] `ch_h`: height (Z)
+- [ ] `ch_bar_w`: width of one bar (Y)
+- [ ] `ch_bar_gap`: gap between the 2 bars of one channel (now = `leg_y`)
+- [ ] `ch_y_off`: only if the legs aren't centered front to back (else 0)
 
-**Foot_*** (optional, only for looks/clearance)
-- [ ] `foot_w`, `foot_h`
+**Legs and feet** (`DSK-04`, `DSK-05`)
+- [ ] `leg_x`, `leg_y`: top stage size (X, Y)
+- [ ] `leg_yc`: frame center to leg center (Y). Easier: measure front leg center to back leg
+  center and halve it.
+- [ ] `foot_w`, `foot_h`: width and height with glides
 
-**Monitor_Main / Monitor_Side** (no stand; ruler is fine)
-- [ ] `m1_w/h/t`, `m3_w/h/t` — outside width, height, max depth incl. rear bulge
-- [ ] `mon_panel_t` — thin edge thickness (one value for all)
-- [ ] each: VESA pattern (100/75) + hole-pattern center from bottom edge and from left edge (for the printed adapters)
-- [ ] each: weight without stand (spec sheet)
-- [ ] `vesa` — VESA pattern size
+**Side rails** (`FRM-03L/R`)
+- [ ] `sr_seat_t`: inner wall thickness where the access hole stops (bolt head seat)
 
-**You** (for the ergonomics check)
-- [ ] `eye_above_desk` — sit as you type: floor-to-eye minus desk height
-- [ ] `eye_back` — eyes out from the desktop front edge
+**Monitors** (`MON-01`, `MON-02`; no stand, a ruler is fine)
+- [ ] `m1_w`, `m1_h`, `m1_t` and `m3_w`, `m3_h`, `m3_t`: width, height, max depth with the rear bulge
+- [ ] `mon_panel_t`: thin edge thickness
+- [ ] `vesa`: VESA hole pattern size
+- [ ] `vesa_adp`: VESA adapter outside size
 
-**Speakers** (Klipsch bookshelf)
-- [ ] `spk_w/d/h` — currently 5.75 x 7.5 x 11 in (W x D x H): confirm orientation
-- [ ] weight each (for the audit)
-- [ ] `spk_mount_frac` — swivel mount height on the back / speaker height (now 0.75)
-- [ ] `spk_tw_down` — tweeter center below the top (now 3 in)
-- [ ] swivel: thread size, how far it stands off the back (`spk_mount_d`), max turn / tilt angles
+**Speakers** (`SPK-01`)
+- [ ] `spk_horn`: horn faceplate size
+- [ ] `spk_wf_d`: woofer outside diameter with trim ring
+- [ ] `spk_tw_down`, `spk_wf_down`: tweeter and woofer centers below the top
+- [ ] `spk_mount_frac`: swivel height on the back, as a fraction of speaker height
 
-**Room / desk**
-- [ ] desk back edge to wall (for `rear_gap` + panel clearance)
-- [ ] `desk_h` — your usual sitting and standing heights (to check clearances at both)
+**Ergonomics**
+- [x] `eye_above_desk`: measured 2026-10-27 (seated eye ~46 in above the floor)
+- [ ] `eye_back`: eyes out from the desktop front edge
 
-## Design parameters
+Not parameters, but worth noting: weights of the monitors and speakers (for `tools/audit.py`),
+the desk back edge to the wall, and your usual sit and stand heights.
 
-`desk_w/d/t/h`, `desk_y_off`, `up_side_inset`, `rear_gap`, `up_below`, `side_front`,
-`m1_x`, `mon_clearance`, `m1_tilt` (main tilt back), `m3_yaw` (side toe-in about its inner front edge, default 15 deg; that edge stays at the main's front depth), `m1_tilt` tilts both monitors together, `spk_bot` (speaker height, slides on the upright slot), `spk_px` / `spk_mount_d` (swivel position), `spk_yaw_max` (toe-in limit; `spk_aim` = full aim at the Eye), `spk_tilt` (tilt down, auto-aimed at the Eye), `m3_bot`, `mon_gap`, `mon_standoff`, `m1_off/m3_off` (per-adapter thickness, to line
-up screen fronts), `vesa_adp` (adapter size; adapter tops set the upper crossbar + panel top), `bar2_z`, `bar1_gap` (lower crossbar top below the monitor bottoms: it shows in the gap for mounting things), `bar_y_off` (crossbars sit on the uprights' back slot: +10 mm; front slot: -10 mm) (crossbar heights and upright
-height follow the monitor stack),
-`pnl_drop`, `pnl_cover`, `pnl_above`, `pnl_t`, `pnl_back_gap`, `pnl_side`.
+</details>
 
 ## Extrusion profiles
 
-Real cross-sections (DXF, mm, centered) in `profiles/`, inserted into sketches, extruded to
-parameter lengths and placed with parametric moves. Pick the standard with a **configuration**
-(SolidCraft Configure > configuration table, or `config.activate {"row": ...}`):
+Real cross-sections (DXF, mm, centered) in `profiles/`. The extrusion part files sketch them and
+extrude them to parameter lengths. Only Misumi HFS5 is used. The 80/20 and V-slot variants are
+retired (D16); their DXFs stay in `profiles/` for reference.
 
-| Config row | 4040 (uprights) | 2040 (crossbars, side rails) | Source |
+| Profile | File | Used for | Source |
 |---|---|---|---|
-| `Misumi_HFS5` (default) | `misumi_hfs5_4040.dxf` | `misumi_hfs5_2040.dxf` | 4040: converted from SVG drawing in github.com/TheEnigmaBlade/dllpdf-frame-calculator (no license stated) via `tools/svg2dxf.py`; 2040: github.com/oysteinkrog/thing_libutils (LGPL-2.1) |
-| `8020_20series` | `8020_20-4040.dxf` | `8020_20-2040.dxf` | github.com/Thaddeus-Maximus/designlib (no license stated) |
-| `OpenBuilds_Vslot` | `openbuilds_vslot_4040.dxf` | `openbuilds_vslot_2040.dxf` | 4040: github.com/alex-crr/ExtrusionsGenerator (MIT); 2040: github.com/richard-scott/OpenBuilds |
+| HFS5-4040 | `misumi_hfs5_4040.dxf` | uprights, side rails | converted from an SVG drawing in github.com/TheEnigmaBlade/dllpdf-frame-calculator (no license stated) via `tools/svg2dxf.py` |
+| HFS5-2040 | `misumi_hfs5_2040.dxf` | crossbars, stiles | github.com/oysteinkrog/thing_libutils (LGPL-2.1) |
+| 80/20 (retired) | `8020_20-4040.dxf`, `8020_20-2040.dxf` | not used | github.com/Thaddeus-Maximus/designlib (no license stated) |
+| V-slot (retired) | `openbuilds_vslot_4040.dxf`, `openbuilds_vslot_2040.dxf` | not used | 4040: github.com/alex-crr/ExtrusionsGenerator (MIT); 2040: github.com/richard-scott/OpenBuilds |
 
-Checked cross-section areas: HFS5 4040 497 / 2040 323 mm²; 80/20 423 / 275; V-slot 433 / 300.
+Checked cross-section areas: HFS5 4040 497 mm², 2040 323 mm².
 
-Switch from the CLI:
+## Side rail joints
 
-```sh
-echo '{"commands":[{"command":"config.activate","params":{"row":"8020_20series"}}]}' > cfg.json
-solidcraft-cli run cfg.json --in desk_rails.solidcraft --save desk_rails.solidcraft --quiet
-```
+Each 4040 side rail runs along the outer face of a top support. Its back end butts the upright's
+front face, with the outer faces flush (a T-joint, D1).
 
-## Side rail to upright joint
+- **To the upright** (D2): a Misumi HPTTD5 T-plate on the shared outer face, an HBLFSN5 gusset
+  under the rail, and an end anchor inside the rail (not modelled).
+- **To the top support** (D9): 8 M6x20 socket-head screws per side, through the rail into the
+  top support. The rail needs drilling: an access hole in the outer face for the head and the key,
+  then a clearance hole through the inner wall.
 
-T-joint: side rail end butts the upright's front face, outer faces flush. Fastening, strongest first:
-
-1. Flat L/T joining plate on the shared outer face (tipping load from monitors is in this plane).
-2. Inside corner gusset bracket under the rail.
-3. End-tap screw or anchor fastener (hidden; locates the joint, weak alone).
-
-Plate thickness sticks out past the outer face; set `up_side_inset` >= plate thickness to keep it
+The plate sticks out 2.3 mm past the outer face. Set `up_side_inset` to at least that to keep it
 inside the desktop edge.
+
+## License
+
+[MIT](LICENSE) for the design, docs and tools. Extrusion profile DXFs in `profiles/` keep their
+upstream licenses (see the table above).

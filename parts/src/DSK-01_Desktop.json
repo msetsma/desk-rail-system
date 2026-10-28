@@ -1,0 +1,129 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "Desktop_Slab",
+    "body_name": "Desktop",
+    "length": "desk_w",
+    "width": "desk_d",
+    "height": "desk_t",
+    "corner": [
+     "-desk_w/2",
+     "-desk_d/2",
+     "0 mm"
+    ]
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Desktop"
+    ],
+    "material": "Butcher block (birch)"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Desktop"
+    ],
+    "color": "#b5835a"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "DSK-01",
+     "description": "Desktop slab desk_w x desk_d x desk_t (Karlby butcher block). Origin: underside centre (sits on frame_top); +X right, +Y toward wall, +Z up.",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Butcher block (birch)",
+      "ReleaseState": "WIP",
+      "Source": "Modelled from skeleton params (legacy box Desktop)"
+     }
+    }
+   }
+  }
+ ]
+}

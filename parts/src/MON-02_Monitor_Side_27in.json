@@ -1,0 +1,148 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "Monitor_Side_Slab",
+    "body_name": "Monitor_Side",
+    "length": "m3_w",
+    "width": "mon_panel_t",
+    "height": "m3_h",
+    "corner": [
+     "-m3_w/2",
+     "-m3_t",
+     "-m3_h/2"
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "Monitor_Side_Back",
+    "length": "m3_w*mon_back_frac",
+    "width": "m3_t - mon_panel_t + 0.1 mm",
+    "height": "m3_h*mon_back_frac",
+    "corner": [
+     "-m3_w*mon_back_frac/2",
+     "-(m3_t - mon_panel_t) - 0.1 mm",
+     "-m3_h*mon_back_frac/2"
+    ],
+    "operation": "join",
+    "targets": [
+     "Monitor_Side"
+    ]
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Monitor_Side"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Monitor_Side"
+    ],
+    "color": "#15171a"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "MON-02",
+     "description": "Side monitor 27in, portrait (envelope). Origin: VESA mount face centre (rear of bulge); screen faces -Y, X right, Z up (unyawed)",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "ABS",
+      "ReleaseState": "WIP",
+      "Source": "Envelope from skeleton m3_* MEASURE params"
+     }
+    }
+   }
+  }
+ ]
+}

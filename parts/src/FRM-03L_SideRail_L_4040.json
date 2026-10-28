@@ -1,0 +1,251 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XZ",
+    "name": "Profile_HFS5_4040"
+   }
+  },
+  {
+   "command": "sketch.insert_dxf",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/profiles/misumi_hfs5_4040.dxf",
+    "at": [
+     -20.0,
+     20.0
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "distance": "up_y - rail_l/2",
+    "distance2": "-side_front",
+    "body_name": "SideRail_L_4040",
+    "name": "Extrude_SideRail"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "YZ",
+    "offset": "-rail_l",
+    "name": "Sketch_BoltHoles"
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "ch_y_off + (-leg_yc) - ts_bolt_pitch/2",
+     "-ts_bolt_z"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "ch_y_off + (-leg_yc) + ts_bolt_pitch/2",
+     "-ts_bolt_z"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "ch_y_off + (-leg_yc) - (ch_bar_gap + ch_bar_w)/2",
+     "-ts_bolt_z"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "ch_y_off + (-leg_yc) + (ch_bar_gap + ch_bar_w)/2",
+     "-ts_bolt_z"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "ch_y_off + (leg_yc) - ts_bolt_pitch/2",
+     "-ts_bolt_z"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "ch_y_off + (leg_yc) + ts_bolt_pitch/2",
+     "-ts_bolt_z"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "ch_y_off + (leg_yc) - (ch_bar_gap + ch_bar_w)/2",
+     "-ts_bolt_z"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "ch_y_off + (leg_yc) + (ch_bar_gap + ch_bar_w)/2",
+     "-ts_bolt_z"
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.hole",
+   "params": {
+    "sketch": "Sketch_BoltHoles",
+    "type": "counterbore",
+    "diameter": "sr_clear_d",
+    "cb_diameter": "sr_access_d",
+    "cb_depth": "rail_l - sr_seat_t",
+    "targets": [
+     "SideRail_L_4040"
+    ],
+    "name": "Hole_SideBolts"
+   }
+  },
+  {
+   "command": "browser.visibility",
+   "params": {
+    "visible": false,
+    "items": [
+     "Sketch_BoltHoles"
+    ]
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "SideRail_L_4040"
+    ],
+    "material": "Al 6063-T5"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "SideRail_L_4040"
+    ],
+    "color": "#d4d8dd"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "FRM-03L",
+     "description": "Side rail L, Misumi HFS5-4040 drilled for 8 M6 through-bolts (D9): \u00d8 sr_access_d access from the outer (-X) face to a sr_seat_t seat, \u00d8 sr_clear_d through the inner wall; at ts_bolt_z below the top, Y = ch_y_off \u00b1 leg_yc \u00b1 ts_bolt_pitch/2 (leg screws) and \u00b1 (ch_bar_gap+ch_bar_w)/2 (channel bars). Ends: side_front .. up_y - rail_l/2. Origin: top edge of the inner (mating) face at the top-support centre station (Y=0), +Y toward wall, +Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Al 6063-T5",
+      "ReleaseState": "WIP",
+      "Source": "Misumi HFS5 profile DXF (profiles/), length from skeleton; holes per D9"
+     }
+    }
+   }
+  }
+ ]
+}

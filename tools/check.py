@@ -1,9 +1,12 @@
-"""One command: report, overlap check, audit, BOM (and optional renders) on desk_rails.solidcraft.
+"""One command: body report, overlap check, audit, BOM (and optional renders) on desk_rails.solidcraft.
 
     python tools/check.py            # checks + BOM
     python tools/check.py --renders  # also refresh renders/*.png
 
-The saved design file is the source of truth; nothing is regenerated or overwritten.
+The saved design file is the source of truth: every step runs headless solidcraft-cli on it
+read-only (no --save); nothing is regenerated or overwritten. Body names are the part-file names
+from the linked parts, with an occurrence suffix on repeated placements
+("Leg (DSK-00 Desk frame:1/DSK-04 Leg:3)"), so pairs below match by name prefix.
 Exits non-zero if the report fails or any bodies overlap.
 """
 
@@ -29,10 +32,12 @@ DESIGN = ROOT / "desk_rails.solidcraft"
 REPORT = BUILD / "report.json"
 VIEWS = ("iso", "front", "back", "right", "top")
 NEAR_MM, TOUCH_MM = 10.0, 0.01
-# Designed gaps, not warnings: speaker bracket parts, panel on standoffs past the plates,
-# mouse resting on the pad, gaps between the vendor mouse model's own parts.
-EXPECTED_NEAR = (("Speaker_", "SpkMount_"), ("SpkMount_", "Upright_"), ("ModestyPanel", "Plate_Bar"),
-                 ("Plate_SideRail", "Standoff_Post"), ("MousePad", "Mouse_"), ("Mouse_", "Mouse_"))
+# Designed gaps, not warnings: speaker on its bracket, bracket on the upright, panel on standoffs
+# past the crossbar L plates, side-rail T plate next to the panel post standoff, mouse resting
+# on the pad, gaps between the parts of the vendor mouse and speaker reference models.
+EXPECTED_NEAR = (("R40M_", "SpkMount_"), ("SpkMount_", "Upright_4040"), ("Modesty_Panel", "HPTLD5"),
+                 ("HPTTD5", "Standoff_M5x12"), ("MousePad", "Mouse_"), ("Mouse_", "Mouse_"),
+                 ("R40M_", "R40M_"))
 
 
 class CheckError(Exception):
@@ -49,10 +54,8 @@ def _cli(*args: str) -> None:
 
 
 def report() -> None:
-    """Body report (bboxes, masses) from the saved design via an empty command run."""
-    script = BUILD / "report_cmd.json"
-    script.write_text(json.dumps({"commands": []}), encoding="utf-8")
-    _cli("run", str(script), "--in", str(DESIGN), "--quiet", "--json-out", str(REPORT))
+    """Body report (bboxes, real-material masses and COGs, parameters) from the saved design."""
+    _cli("eval", str(DESIGN), "--json-out", str(REPORT))
 
 
 def interference() -> list[tuple[str, str]]:
@@ -104,7 +107,7 @@ def main(argv: Sequence[str]) -> int:
     for a, b, d in close:
         log.warning("  NEAR %s <-> %s: %.1f mm", a, b, d)
     audit.main(["audit", str(REPORT)])
-    bom.main(["bom", str(REPORT)])
+    bom.main(["bom", str(DESIGN)])
     if "--renders" in argv:
         renders()
     return 1 if overlaps else 0

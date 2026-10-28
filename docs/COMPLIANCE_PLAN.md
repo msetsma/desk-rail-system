@@ -1,7 +1,20 @@
 # Compliance plan: bring the desk project in line with AGENTS.md + cad-best-practices
 
-Status: **draft, 2026-10-28**. Follow `AGENTS.md`, `PROJECT.md` and the skill
+Status: **executed 2026-10-28**. Follow `AGENTS.md`, `PROJECT.md` and the skill
 `.claude/skills/cad-best-practices/SKILL.md` (load it first). The HBLFSD5 bracket swap waits until this plan is done.
+
+## Deviations
+
+What was done differently from the plan below:
+
+- **Placement**: parts are placed with planar joints (angle 0) from the root origin, not with moves.
+- **Speaker tilt**: lives inside `SPK-01`, driven by the skeleton, not by the placement.
+- **L/R files**: side rails (`FRM-03L/R`) and keyboards (`INP-03/04`) have two files each,
+  because they're mirror images. A 180° turn can't reproduce them.
+- **Display states**: SolidCraft has none, so they are config rows (Full, Frame only, No desktop,
+  Monitors + speakers).
+- **Library names**: `parts/lib/` files use vendor part numbers (`HW-L01_HPTTD5` …).
+- **Baseline**: the legacy timeline had 66 warnings, not 36.
 
 ## Where we are (audit, 2026-10-28)
 

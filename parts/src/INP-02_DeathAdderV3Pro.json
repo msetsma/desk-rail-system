@@ -1,0 +1,279 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "file.insert_step",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/refs/razer_dav3pro/DAV3Pro.step",
+    "name": "DAV3Pro (Razer CAD)"
+   }
+  },
+  {
+   "command": "component.activate",
+   "params": {
+    "component": "DAV3Pro (Razer CAD)"
+   }
+  },
+  {
+   "command": "solid.remove",
+   "params": {
+    "name": "Mouse_StripVendor",
+    "bodies": [
+     "Scroll1",
+     "Base"
+    ]
+   }
+  },
+  {
+   "command": "body.rename",
+   "params": {
+    "body": "Ergo v16",
+    "name": "Mouse_DAV3Pro_Shell"
+   }
+  },
+  {
+   "command": "body.rename",
+   "params": {
+    "body": "mb1",
+    "name": "Mouse_DAV3Pro_Btn1"
+   }
+  },
+  {
+   "command": "body.rename",
+   "params": {
+    "body": "mb2",
+    "name": "Mouse_DAV3Pro_Btn2"
+   }
+  },
+  {
+   "command": "body.rename",
+   "params": {
+    "body": "mb4",
+    "name": "Mouse_DAV3Pro_Btn4"
+   }
+  },
+  {
+   "command": "body.rename",
+   "params": {
+    "body": "mb5",
+    "name": "Mouse_DAV3Pro_Btn5"
+   }
+  },
+  {
+   "command": "body.rename",
+   "params": {
+    "body": "Scroll2",
+    "name": "Mouse_DAV3Pro_Scroll2"
+   }
+  },
+  {
+   "command": "body.rename",
+   "params": {
+    "body": "LED",
+    "name": "Mouse_DAV3Pro_LED"
+   }
+  },
+  {
+   "command": "body.rename",
+   "params": {
+    "body": "TypeC",
+    "name": "Mouse_DAV3Pro_TypeC"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Mouse_ScrollWheel",
+    "body_name": "Mouse_DAV3Pro_Scroll1",
+    "radius": "27.5 mm / 2",
+    "height": "6 mm",
+    "base": [
+     -3.5,
+     -36.73,
+     21.36
+    ],
+    "axis": "X",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": {
+     "face": [
+      -6.103378461201473,
+      -43.4,
+      3.25
+     ]
+    },
+    "name": "Mouse_BaseRim_Outline"
+   }
+  },
+  {
+   "command": "sketch.project",
+   "params": {
+    "refs": [
+     {
+      "face": [
+       -6.103378461201473,
+       -43.4,
+       3.25
+      ],
+      "body": "Mouse_DAV3Pro_Shell"
+     }
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Mouse_BaseRim_Outline",
+    "distance": "3.245 mm",
+    "operation": "new",
+    "name": "Mouse_BaseRim",
+    "body_name": "Mouse_DAV3Pro_Base"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Mouse_DAV3Pro_Shell",
+     "Mouse_DAV3Pro_Base",
+     "Mouse_DAV3Pro_Btn1",
+     "Mouse_DAV3Pro_Btn2",
+     "Mouse_DAV3Pro_Btn4",
+     "Mouse_DAV3Pro_Btn5",
+     "Mouse_DAV3Pro_Scroll2",
+     "Mouse_DAV3Pro_Scroll1",
+     "Mouse_DAV3Pro_TypeC",
+     "Mouse_DAV3Pro_LED"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Mouse_DAV3Pro_Shell",
+     "Mouse_DAV3Pro_Base",
+     "Mouse_DAV3Pro_Btn1",
+     "Mouse_DAV3Pro_Btn2",
+     "Mouse_DAV3Pro_Btn4",
+     "Mouse_DAV3Pro_Btn5",
+     "Mouse_DAV3Pro_Scroll2"
+    ],
+    "color": "#141414"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Mouse_DAV3Pro_Scroll1",
+     "Mouse_DAV3Pro_TypeC"
+    ],
+    "color": "#3c3c3c"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Mouse_DAV3Pro_LED"
+    ],
+    "color": "#28c83c"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "INP-02",
+     "description": "Razer DeathAdder V3 Pro mouse (vendor CAD, 10 bodies). Origin: vendor origin = bottom contact centre (Z 0 = pad surface); buttons toward -Y, Z up (place with yaw 180 deg)",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "ABS",
+      "ReleaseState": "WIP",
+      "Source": "Razer CAD refs/razer_dav3pro/DAV3Pro.step; Scroll1 simplified to a cylinder, Base rebuilt as the shell-rim foot"
+     }
+    }
+   }
+  }
+ ]
+}

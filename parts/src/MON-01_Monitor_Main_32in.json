@@ -1,0 +1,148 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "Monitor_Main_Slab",
+    "body_name": "Monitor_Main",
+    "length": "m1_w",
+    "width": "mon_panel_t",
+    "height": "m1_h",
+    "corner": [
+     "-m1_w/2",
+     "-m1_t",
+     "-m1_h/2"
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "Monitor_Main_Back",
+    "length": "m1_w*mon_back_frac",
+    "width": "m1_t - mon_panel_t + 0.1 mm",
+    "height": "m1_h*mon_back_frac",
+    "corner": [
+     "-m1_w*mon_back_frac/2",
+     "-(m1_t - mon_panel_t) - 0.1 mm",
+     "-m1_h*mon_back_frac/2"
+    ],
+    "operation": "join",
+    "targets": [
+     "Monitor_Main"
+    ]
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Monitor_Main"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Monitor_Main"
+    ],
+    "color": "#15171a"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "MON-01",
+     "description": "Main monitor 32in 16:9 (envelope). Origin: VESA mount face centre (rear of bulge); screen faces -Y, X right, Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "ABS",
+      "ReleaseState": "WIP",
+      "Source": "Envelope from skeleton m1_* MEASURE params"
+     }
+    }
+   }
+  }
+ ]
+}

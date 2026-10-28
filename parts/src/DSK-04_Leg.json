@@ -1,0 +1,181 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "Leg_Column",
+    "body_name": "Leg",
+    "length": "leg_x",
+    "width": "leg_y",
+    "height": "frame_top - foot_h",
+    "corner": [
+     "-leg_x/2",
+     "-leg_y/2",
+     "-(frame_top - foot_h)"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "Leg_UnderFlangeCut",
+    "operation": "cut",
+    "targets": [
+     "Leg"
+    ],
+    "length": "leg_x/2 - (leg_inset - ts_w) + 0.1 mm",
+    "width": "leg_y + 0.2 mm",
+    "height": "ts_t + 0.1 mm",
+    "corner": [
+     "leg_inset - ts_w",
+     "-leg_y/2 - 0.1 mm",
+     "-ts_t"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Leg_Tap",
+    "axis": "X",
+    "operation": "cut",
+    "targets": [
+     "Leg"
+    ],
+    "radius": "3 mm",
+    "height": "(sb_len - sr_seat_t - ts_t) + 0.1 mm",
+    "base": [
+     "leg_x/2 - (sb_len - sr_seat_t - ts_t)",
+     "-ts_bolt_pitch/2",
+     "-ts_bolt_z"
+    ]
+   }
+  },
+  {
+   "command": "solid.pattern.rectangular",
+   "params": {
+    "name": "Leg_Tap_Pattern",
+    "features": [
+     "Leg_Tap"
+    ],
+    "dir1": [
+     0,
+     1,
+     0
+    ],
+    "count1": 2,
+    "spacing1": "ts_bolt_pitch"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Leg"
+    ],
+    "material": "Steel powder-coated"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Leg"
+    ],
+    "color": "#a8acaf"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "DSK-04",
+     "description": "Apex Pro (Jiecang) lifting column, envelope leg_x x leg_y from foot top to frame_top; top notched ts_t under the top-support flange; 2 M6 taps (ts_bolt_pitch) in the outer face for the D9 leg screws. Origin: top face centre; +X toward the outer (top support) side, +Y toward wall, body below Z=0.",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Steel powder-coated",
+      "ReleaseState": "WIP",
+      "Source": "MEASURE: DeskHaus dimension sheet (legacy Leg_*)"
+     }
+    }
+   }
+  }
+ ]
+}

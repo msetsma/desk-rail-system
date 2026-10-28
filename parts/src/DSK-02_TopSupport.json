@@ -1,0 +1,260 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "TS_Web",
+    "body_name": "TopSupport_JC",
+    "length": "ts_t",
+    "width": "ts_len",
+    "height": "ts_h",
+    "corner": [
+     "-ts_t",
+     "-ts_len/2",
+     "-ts_h"
+    ]
+   }
+  },
+  {
+   "command": "solid.chamfer",
+   "params": {
+    "name": "TS_EndTaper",
+    "body": "TopSupport_JC",
+    "edges": [
+     [
+      -1.5,
+      268.28749999999997,
+      -39.878
+     ],
+     [
+      -1.5,
+      -268.28749999999997,
+      -39.878
+     ]
+    ],
+    "distance": "ts_h - ts_t - ts_lip",
+    "distance2": "ts_taper"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "TS_Flange",
+    "operation": "join",
+    "targets": [
+     "TopSupport_JC"
+    ],
+    "length": "ts_w - ts_t + 0.1 mm",
+    "width": "ts_len",
+    "height": "ts_t",
+    "corner": [
+     "-ts_w",
+     "-ts_len/2",
+     "-ts_t"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "TS_Hole_LegScrew",
+    "axis": "X",
+    "operation": "cut",
+    "targets": [
+     "TopSupport_JC"
+    ],
+    "radius": "sr_clear_d/2",
+    "height": "ts_t + 0.2 mm",
+    "base": [
+     "-ts_t - 0.1 mm",
+     "ch_y_off - leg_yc - ts_bolt_pitch/2",
+     "-ts_bolt_z"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "TS_Hole_ChannelBolt",
+    "axis": "X",
+    "operation": "cut",
+    "targets": [
+     "TopSupport_JC"
+    ],
+    "radius": "sr_clear_d/2",
+    "height": "ts_t + 0.2 mm",
+    "base": [
+     "-ts_t - 0.1 mm",
+     "ch_y_off - leg_yc - (ch_bar_gap/2 + ch_bar_w/2)",
+     "-ts_bolt_z"
+    ]
+   }
+  },
+  {
+   "command": "solid.pattern.rectangular",
+   "params": {
+    "name": "TS_Hole_LegScrew_Pattern",
+    "features": [
+     "TS_Hole_LegScrew"
+    ],
+    "dir1": [
+     0,
+     1,
+     0
+    ],
+    "count1": 2,
+    "spacing1": "ts_bolt_pitch"
+   }
+  },
+  {
+   "command": "solid.pattern.rectangular",
+   "params": {
+    "name": "TS_Hole_ChannelBolt_Pattern",
+    "features": [
+     "TS_Hole_ChannelBolt"
+    ],
+    "dir1": [
+     0,
+     1,
+     0
+    ],
+    "count1": 2,
+    "spacing1": "2*(ch_bar_gap/2 + ch_bar_w/2)"
+   }
+  },
+  {
+   "command": "solid.mirror",
+   "params": {
+    "name": "TS_Holes_Mirror",
+    "features": [
+     "TS_Hole_LegScrew",
+     "TS_Hole_ChannelBolt",
+     "TS_Hole_LegScrew_Pattern",
+     "TS_Hole_ChannelBolt_Pattern"
+    ],
+    "plane": {
+     "origin": [
+      "0 mm",
+      "ch_y_off",
+      "0 mm"
+     ],
+     "normal": [
+      0,
+      1,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "TopSupport_JC"
+    ],
+    "material": "Steel powder-coated"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "TopSupport_JC"
+    ],
+    "color": "#a8acaf"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "DSK-02",
+     "description": "Apex Pro (Jiecang OEM) top support: bent steel angle, outer web + inward top flange, web ends tapered to a ts_lip lip, 8 x sr_clear_d M6 holes in the web (D9: 4 leg screws + 4 channel-bar bolts). Origin: outer web face / flange top edge, mid-length; +X outward (away from desk centre), flange toward -X, +Y toward wall, body below Z=0. Serves L and R (L = yaw 180); hole pattern centred on ch_y_off, so this needs ch_y_off = 0.",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Steel powder-coated",
+      "ReleaseState": "WIP",
+      "Source": "MEASURE: DeskHaus dimension sheet + photos (refs/apex_pro)"
+     }
+    }
+   }
+  }
+ ]
+}

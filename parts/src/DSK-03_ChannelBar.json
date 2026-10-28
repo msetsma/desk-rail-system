@@ -1,0 +1,183 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "CB_Bar",
+    "body_name": "ChannelBar",
+    "length": "frame_w - 2*ts_w",
+    "width": "ch_bar_w",
+    "height": "ch_h",
+    "corner": [
+     "-(frame_w/2 - ts_w)",
+     "-ch_bar_w/2",
+     "-ch_h"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "CB_EndTabs",
+    "operation": "join",
+    "targets": [
+     "ChannelBar"
+    ],
+    "length": "frame_w - 2*ts_t",
+    "width": "ch_bar_w",
+    "height": "ch_h - ts_t",
+    "corner": [
+     "-(frame_w/2 - ts_t)",
+     "-ch_bar_w/2",
+     "-ch_h"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "CB_Tap_R",
+    "axis": "X",
+    "operation": "cut",
+    "targets": [
+     "ChannelBar"
+    ],
+    "radius": "3 mm",
+    "height": "sb_len - sr_seat_t - ts_t + 0.1 mm",
+    "base": [
+     "frame_w/2 - ts_t - (sb_len - sr_seat_t - ts_t)",
+     "0 mm",
+     "-ts_bolt_z"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "CB_Tap_L",
+    "axis": "X",
+    "operation": "cut",
+    "targets": [
+     "ChannelBar"
+    ],
+    "radius": "3 mm",
+    "height": "sb_len - sr_seat_t - ts_t + 0.1 mm",
+    "base": [
+     "-(frame_w/2 - ts_t) - 0.1 mm",
+     "0 mm",
+     "-ts_bolt_z"
+    ]
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "ChannelBar"
+    ],
+    "material": "Steel powder-coated"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "ChannelBar"
+    ],
+    "color": "#a8acaf"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "DSK-03",
+     "description": "Apex Pro channel bar (one of 4), length frame_w - 2*ts_w with end tabs under the top-support flanges reaching the web; M6 tap at each end for the D9 through-bolt. Origin: top face centre; +X along the bar, +Z up, body below Z=0.",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Steel powder-coated",
+      "ReleaseState": "WIP",
+      "Source": "MEASURE: DeskHaus dimension sheet (legacy ChannelBar_*)"
+     }
+    }
+   }
+  }
+ ]
+}

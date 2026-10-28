@@ -1,0 +1,130 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "corner": [
+     "-(up_xc + rail_l/2 - spk_px + 10 mm)/2",
+     "-(spk_mount_d - 18 mm)",
+     "-15 mm"
+    ],
+    "length": "up_xc + rail_l/2 - spk_px + 10 mm",
+    "width": "spk_mount_d - 18 mm",
+    "height": "30 mm",
+    "operation": "new",
+    "name": "SpkMount_Block",
+    "body_name": "SpkMount_Block"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "SpkMount_Block"
+    ],
+    "material": "Steel powder-coated"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "SpkMount_Block"
+    ],
+    "color": "#1c1c1c"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "SPK-03",
+     "description": "Speaker mount arm block from the flange to the swivel. Origin: centre of the rear face (on the flange front face); +Y toward the wall, +Z up. Length spans upright outer edge to 10 mm past the swivel X.",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Steel powder-coated",
+      "ReleaseState": "WIP",
+      "Source": "legacy SpkMount_*_Block (generic bracket, MEASURE)"
+     }
+    }
+   }
+  }
+ ]
+}

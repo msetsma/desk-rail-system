@@ -17,7 +17,8 @@ can be skipped for quick studies.
 - **Root holds components only.** No loose bodies or sketches at the top level.
   → After any feature that creates a body at the root, move the body into its component.
 - **One final body per released part.** Multibody files are fine while working; split or derive them
-  into separate parts for the assembly.
+  into separate parts for the assembly. Exception: a purchased reference model (vendor speaker,
+  mouse) may keep one body per finish colour, all inside its one component.
 - **Activate before modeling.** Activate the target component before sketching, so geometry lands in
   the right place. → `component.activate` (or the equivalent) before every sketch or feature.
 - **Purchased hardware as separate components:** screws, inserts, bearings, electronics, inserted as

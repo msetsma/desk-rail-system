@@ -1,0 +1,250 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "strap_r_in",
+    "expression": "6 mm",
+    "comment": "Strap inner bend radius (legacy value)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "strap_r_out",
+    "expression": "19 mm",
+    "comment": "Strap outer bend radius (legacy value)"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PC_Strap_Top",
+    "body_name": "PC_Strap",
+    "length": "pc_w + strap_t",
+    "width": "strap_w",
+    "height": "strap_t",
+    "corner": [
+     "-pc_w/2",
+     "-strap_w/2",
+     "0 mm"
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PC_Strap_Side",
+    "length": "strap_t",
+    "width": "strap_w",
+    "height": "pc_h + 2*strap_t",
+    "corner": [
+     "pc_w/2",
+     "-strap_w/2",
+     "-pc_h - strap_t"
+    ],
+    "operation": "join",
+    "targets": [
+     "PC_Strap"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PC_Strap_Bottom",
+    "length": "pc_w + 2*strap_t",
+    "width": "strap_w",
+    "height": "strap_t",
+    "corner": [
+     "-pc_w/2 - strap_t",
+     "-strap_w/2",
+     "-pc_h - strap_t"
+    ],
+    "operation": "join",
+    "targets": [
+     "PC_Strap"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PC_Strap_LeftLip",
+    "length": "strap_t",
+    "width": "strap_w",
+    "height": "strap_lip + strap_t",
+    "corner": [
+     "-pc_w/2 - strap_t",
+     "-strap_w/2",
+     "-pc_h - strap_t"
+    ],
+    "operation": "join",
+    "targets": [
+     "PC_Strap"
+    ]
+   }
+  },
+  {
+   "command": "solid.fillet",
+   "params": {
+    "name": "PC_Strap_OuterBends",
+    "body": "PC_Strap",
+    "radius": "strap_r_out",
+    "edges": [
+     [
+      120.2,
+      0,
+      12.7
+     ],
+     [
+      120.2,
+      0,
+      -459.7
+     ],
+     [
+      -120.2,
+      0,
+      -459.7
+     ]
+    ]
+   }
+  },
+  {
+   "command": "solid.fillet",
+   "params": {
+    "name": "PC_Strap_InnerBends",
+    "body": "PC_Strap",
+    "radius": "strap_r_in",
+    "edges": [
+     [
+      107.5,
+      0,
+      0
+     ],
+     [
+      107.5,
+      0,
+      -447
+     ],
+     [
+      -107.5,
+      0,
+      -447
+     ]
+    ]
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "PC_Strap"
+    ],
+    "material": "Steel powder-coated"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "PC_Strap"
+    ],
+    "color": "#1c1c1c"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "PC-03",
+     "description": "Under-desk PC strap (top, right side, bottom, left lip). Origin: centre of the top plate's underside = PC case top face centre; X right, +Y toward wall, Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Steel powder-coated",
+      "ReleaseState": "WIP",
+      "Source": "Skeleton strap_* / pc_* params; bend radii from legacy"
+     }
+    }
+   }
+  }
+ ]
+}

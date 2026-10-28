@@ -1,0 +1,155 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "name": "Keyboard_R_Outline"
+   }
+  },
+  {
+   "command": "sketch.insert_dxf",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/refs/ergodox_ez/ergodox_ez_right.dxf"
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Keyboard_R_Outline",
+    "distance": "kb_case_h",
+    "operation": "new",
+    "name": "Keyboard_R_Case",
+    "body_name": "Keyboard_R"
+   }
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Keyboard_R_Outline",
+    "distance": "kb_key_h",
+    "start_offset": "kb_case_h",
+    "taper": "-12 deg",
+    "operation": "join",
+    "targets": [
+     "Keyboard_R"
+    ],
+    "name": "Keyboard_R_Keys"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Keyboard_R"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Keyboard_R"
+    ],
+    "color": "#0f0f0f"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "INP-04",
+     "description": "ErgoDox EZ right half (case + tapered keycap envelope). Origin: DXF origin = front-left corner of the outline bbox on the bottom face; +Y toward wall, Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "ABS",
+      "ReleaseState": "WIP",
+      "Source": "ZSA 1:1 outline refs/ergodox_ez/ergodox_ez_right.dxf; heights kb_case_h + kb_key_h"
+     }
+    }
+   }
+  }
+ ]
+}

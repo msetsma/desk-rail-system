@@ -25,6 +25,8 @@ Core rules that always apply:
 - The design file named in `PROJECT.md` is the source of truth. Edit it live, save, commit when asked.
 - Verify narrowly after each change: measure or interference-check only the changed bodies and their
   neighbours. Run full checks, audits or BOM builds only when asked.
+- Before restructuring, dump a baseline (every body's bbox, volume, centre of mass). Afterwards, verify
+  by regression against it, not by screenshots.
 - Note estimated or unmeasured dimensions as such (e.g. a `MEASURE` comment) and say so when relying on them.
 - Purchased parts: use real vendor CAD when it exists, and model from photos or drawings only when it doesn't.
 - Color every part in its real finish, never a placeholder color.
@@ -100,3 +102,5 @@ subagents run, the main agent keeps working on non-conflicting tasks.
 | 2026-10-28 | Parts-in-assembly history slows everything | §2: part per file, linked in |
 | 2026-10-28 | User wants subagents used proactively, the lightest download path, no re-entering email | §4, §5 |
 | 2026-10-28 | User supplied a CAD best-practice list | New skill `cad-best-practices` + core rules at top |
+| 2026-10-28 | Compliance rebuild: 4 part-builder subagents ran headless in parallel (~10 min) while the main agent built the assembly | §5 pattern confirmed; spike the CAD API first (scratch, parallel) before restructuring |
+| 2026-10-28 | Generated assemblies (script + regression vs a baseline bbox dump) caught a placement bug at once | §1: take a baseline before restructuring; verify by regression, not screenshots |
