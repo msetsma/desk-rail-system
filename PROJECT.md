@@ -105,7 +105,9 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   yaw < 0 orbits toward +X. `snapshot --view NAME` works.
 - **No display states**: use config rows that suppress link features
   (`config.row {name, values:{"suppress:<feature>": true}}`). Rows: Full, Frame only, No desktop,
-  Monitors + speakers.
+  Monitors + speakers, Rails only, Desk only, Desk + rails, No chair. Named views don't carry a row:
+  pair `Rails`/`RailsBack`, `Desk` and `DeskRails` with their row by hand.
+- Home view (`view.home`) always fits the whole model; its zoom isn't configurable. Use the `Overview` view.
 - Naming: `timeline.rename`, `timeline.group {name, features}`. `solid.extrude` ignores `name` (the body
   stays `Body1`), so use `body_name` and check it. Patterns, chamfers and mirrors take `name`.
 - `solidcraft-cli script` fails on designs with components (#886).
