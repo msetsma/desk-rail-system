@@ -97,7 +97,7 @@
     "bodies": [
      "Desktop"
     ],
-    "material": "Butcher block (birch)"
+    "material": "Walnut"
    }
   },
   {
@@ -106,7 +106,7 @@
     "bodies": [
      "Desktop"
     ],
-    "color": "#b5835a"
+    "color": "#6b4a32"
    }
   },
   {
@@ -114,13 +114,13 @@
    "params": {
     "values": {
      "part_number": "DSK-01",
-     "description": "Desktop slab desk_w x desk_d x desk_t (Karlby butcher block). Origin: underside centre (sits on frame_top); +X right, +Y toward wall, +Z up.",
+     "description": "Desktop slab desk_w x desk_d x desk_t (IKEA KARLBY walnut veneer, 503.352.08). Origin: underside centre (sits on frame_top); +X right, +Y toward wall, +Z up.",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
-      "Material": "Butcher block (birch)",
+      "Material": "Walnut",
       "ReleaseState": "WIP",
-      "Source": "Modelled from skeleton params (legacy box Desktop)"
+      "Source": "Modelled from skeleton params; finish IKEA KARLBY walnut, colour estimated (MEASURE)"
      }
     }
    }

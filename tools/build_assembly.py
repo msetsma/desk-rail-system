@@ -44,6 +44,8 @@ GROUPS = (
     ("SPK-00 Speakers", "Klipsch R-40M speakers on swivel mounts"),
     ("PC-00 PC under-desk", "Fractal North case, slat front and strap"),
     ("INP-00 Input devices", "Mouse pad, mouse and split keyboard"),
+    ("LAP-00 Laptop", "User-built laptop mount and tray on the lower crossbar, MacBook Pro 14in"),
+    ("CHR-00 Chair", "Herman Miller Mirra 2 (Butterfly back), user's seat"),
     ("REF-00 Skeleton", "Layout datums (Eye point)"),
 )
 
@@ -75,7 +77,7 @@ def _occ(label: str, part: str, group: str, x: str, y: str, z: str, yaw: str = "
     return Occurrence(label, part, group, x, y, z, yaw)
 
 
-_DSK, _FRM, _MON, _SPK, _PC, _INP = (g for g, _ in GROUPS[:2] + GROUPS[3:7])
+_DSK, _FRM, _MON, _SPK, _PC, _INP, _LAP, _CHR = (g for g, _ in GROUPS[:2] + GROUPS[3:9])
 _LEG_X = "(frame_w/2 - leg_inset)"
 _CH = "(ch_bar_gap/2 + ch_bar_w/2)"
 
@@ -126,6 +128,10 @@ OCCURRENCES: tuple[Occurrence, ...] = (
     _occ("Mouse", "INP-02_DeathAdderV3Pro", _INP, "pad_x", "pad_y", "desk_h + pad_t", "180 deg"),
     _occ("Keyboard_L", "INP-03_ErgoDoxEZ_Left", _INP, "m1_x - kb_gap/2 - kb_w", "desk_front + kb_front_gap", "desk_h"),
     _occ("Keyboard_R", "INP-04_ErgoDoxEZ_Right", _INP, "m1_x + kb_gap/2", "desk_front + kb_front_gap", "desk_h"),
+    _occ("LaptopMount", "LAP-01_LaptopMount", _LAP, "lap_x", "stile_y", "lap_clamp_z"),
+    _occ("LaptopTray", "LAP-03_LaptopTray", _LAP, "lap_x", "lap_y", "desk_h + lap_tray_z", "-lap_yaw"),
+    _occ("Laptop", "LAP-02_MacBookPro14", _LAP, "lap_x", "lap_y", "desk_h + lap_tray_z", "-lap_yaw"),
+    _occ("Chair", "CHR-01_HermanMillerMirra2", _CHR, "m1_x", "eye_y - chr_eye_dy", "0 mm"),
 )
 
 

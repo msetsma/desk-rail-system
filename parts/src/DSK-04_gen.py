@@ -55,7 +55,7 @@ JC_SHARED = [
 LEG_PARAMS = [
     par("jc_top_min", "21.5 in", "Apex Pro frame-top height fully retracted (DeskHaus callout 21.5-47.5 in; spec sheet 22.5 in incl. 1 in top)"),
     par("jc_s0", "10 mm", "MEASURE visible length of each upper stage when fully retracted"),
-    par("jc_step", "3 mm", "MEASURE stage-to-stage inset per side (Jiecang 80x50 bottom / 74x44 / 68x38 top)"),
+    par("jc_step", "2.5 mm", "Stage-to-stage inset per side, measured 2026-10-29 (50.2x80.6 bottom / 45.2x75.4 / 40.3x70.3 top)"),
     par("jc_r", "4 mm", "MEASURE bottom-stage corner radius"),
     par("jc_ext", "max(frame_top - jc_top_min, 0 mm)", "Column extension above fully retracted"),
     par("jc_vis", "jc_s0 + jc_ext/2", "Visible length of the top and middle stages (extension split evenly)"),
@@ -71,8 +71,8 @@ def housing() -> list[dict]:
     return [
         cmd("sketch.create", plane="XY", name="Leg_Housing_Sketch"),
         cmd("sketch.line", closed=True, points=[
-            [xo, "-leg_y/2"], [xo, "leg_y/2"], [f"{xi} + 12 mm", "leg_y/2"], [xi, "leg_y/2 - 12 mm"],
-            [xi, "-(leg_y/2 - 12 mm)"], [f"{xi} + 12 mm", "-leg_y/2"]]),
+            [xo, "-leg_hsg_y/2"], [xo, "leg_hsg_y/2"], [f"{xi} + 12 mm", "leg_hsg_y/2"], [xi, "leg_hsg_y/2 - 12 mm"],
+            [xi, "-(leg_hsg_y/2 - 12 mm)"], [f"{xi} + 12 mm", "-leg_hsg_y/2"]]),
         cmd("sketch.finish"),
         cmd("solid.extrude", name="Leg_Housing", body_name="Leg", distance="jc_hsg_d", direction="negative"),
     ]
@@ -96,15 +96,15 @@ def cuts() -> list[dict]:
     """Flange notch, 2 M6 taps for the top-support screws, 4 M6 taps for the channel screws."""
     return [
         cmd("solid.box", name="Leg_UnderFlangeCut", operation="cut", targets=["Leg"],
-            length="(leg_inset - ts_t) - (leg_inset - ts_w) + 0.1 mm", width="leg_y + 0.2 mm", height="ts_t + 0.1 mm",
-            corner=["leg_inset - ts_w", "-leg_y/2 - 0.1 mm", "-ts_t"]),
+            length="(leg_inset - ts_t) - (leg_inset - ts_w) + 0.1 mm", width="leg_hsg_y + 0.2 mm", height="ts_t + 0.1 mm",
+            corner=["leg_inset - ts_w", "-leg_hsg_y/2 - 0.1 mm", "-ts_t"]),
         cmd("solid.cylinder", name="Leg_Tap", axis="X", operation="cut", targets=["Leg"], radius="3 mm",
             height="(sb_len - sr_seat_t - ts_t) + 0.1 mm",
             base=["(leg_inset - ts_t) - (sb_len - sr_seat_t - ts_t)", "-ts_bolt_pitch/2", "-ts_bolt_z"]),
         cmd("solid.pattern.rectangular", name="Leg_Tap_Pattern", features=["Leg_Tap"], dir1=[0, 1, 0], count1=2,
             spacing1="ts_bolt_pitch"),
         cmd("solid.cylinder", name="Leg_ChTap", axis="Y", operation="cut", targets=["Leg"], radius="2.5 mm",
-            height="leg_y + 0.2 mm", base=["jc_hsg_xc - jc_scr_pitch/2", "-leg_y/2 - 0.1 mm", "-ch_h/2"]),
+            height="leg_hsg_y + 0.2 mm", base=["jc_hsg_xc - jc_scr_pitch/2", "-leg_hsg_y/2 - 0.1 mm", "-ch_h/2"]),
         cmd("solid.pattern.rectangular", name="Leg_ChTap_Pattern", features=["Leg_ChTap"], dir1=[1, 0, 0], count1=2,
             spacing1="jc_scr_pitch"),
     ]

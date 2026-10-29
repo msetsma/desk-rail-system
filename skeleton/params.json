@@ -1,11 +1,11 @@
 [
   {
-    "comment": "Desktop TOP surface height above floor (range ~22.5-48.5 in)",
-    "expression": "30 in",
+    "comment": "Desktop TOP surface height above floor, measured 26.5 in with a tape 2026-10-29 (the height paddle reads high; range ~22.5-48.5 in)",
+    "expression": "26.5 in",
     "favorite": true,
     "name": "desk_h",
     "unit": "mm",
-    "value": 762.0
+    "value": 673.0999999999999
   },
   {
     "comment": "Desktop width X (Karlby 74; new top TBD)",
@@ -72,7 +72,7 @@
     "value": 1799.6
   },
   {
-    "comment": "MEASURE TopSupport: length front to back (Y), PDF 21.125",
+    "comment": "TopSupport: length front to back (Y), PDF 21.125 (confirmed by user 2026-10-29)",
     "expression": "21.125 in",
     "favorite": false,
     "name": "ts_len",
@@ -80,7 +80,7 @@
     "value": 536.5749999999999
   },
   {
-    "comment": "MEASURE TopSupport: width (X), PDF 1.45",
+    "comment": "TopSupport: width (X), PDF 1.45 (confirmed by user 2026-10-29)",
     "expression": "1.45 in",
     "favorite": false,
     "name": "ts_w",
@@ -88,31 +88,31 @@
     "value": 36.83
   },
   {
-    "comment": "MEASURE TopSupport: height (Z), PDF 1.57",
-    "expression": "1.57 in",
+    "comment": "TopSupport: height (Z), measured 2026-10-29",
+    "expression": "2 in",
     "favorite": false,
     "name": "ts_h",
     "unit": "mm",
-    "value": 39.878
+    "value": 50.8
   },
   {
-    "comment": "MEASURE ChannelBar: height (Z)",
-    "expression": "1.2 in",
+    "comment": "ChannelBar: height (Z), measured 2026-10-29",
+    "expression": "1.125 in",
     "favorite": false,
     "name": "ch_h",
     "unit": "mm",
-    "value": 30.479999999999997
+    "value": 28.575
   },
   {
-    "comment": "MEASURE ChannelBar: width of one bar (Y); 1.15 in makes the dimension sheet's 16.6 in outer / 5.8 in inner spans",
-    "expression": "1.15 in",
+    "comment": "ChannelBar: width of one bar (Y), from the measured 6 in between the inner bars of the front and back channels (2026-10-29); gives the dimension sheet 16.6 in outer span",
+    "expression": "leg_yc - ch_bar_gap/2 - 3 in",
     "favorite": false,
     "name": "ch_bar_w",
     "unit": "mm",
-    "value": 29.209999999999997
+    "value": 19.65
   },
   {
-    "comment": "MEASURE ChannelBar/Leg: front-back offset of leg pairs from top support center, +Y = wall",
+    "comment": "ChannelBar/Leg: front-back offset of leg pairs from top support center, +Y = wall (confirmed by user 2026-10-29)",
     "expression": "0 in",
     "favorite": false,
     "name": "ch_y_off",
@@ -120,36 +120,44 @@
     "value": 0.0
   },
   {
-    "comment": "MEASURE Leg: frame center to leg center (Y); front/back symmetric",
-    "expression": "5.6 in",
+    "comment": "Leg: frame center to leg center (Y); measured 14.5 in front face of front leg to back face of back leg, 2026-10-29",
+    "expression": "(14.5 in - leg_y)/2",
     "favorite": false,
     "name": "leg_yc",
     "unit": "mm",
-    "value": 142.23999999999998
+    "value": 143.85
   },
   {
-    "comment": "Leg column size along X (Jiecang JS36DR1-3-R 80x50; dimension sheet front view)",
-    "expression": "50 mm",
+    "comment": "Leg bottom (widest) stage size along X, measured 2026-10-29 (stages 50.2x80.6 / 45.2x75.4 / 40.3x70.3)",
+    "expression": "50.2 mm",
     "favorite": false,
     "name": "leg_x",
     "unit": "mm",
-    "value": 69.85
+    "value": 50.2
   },
   {
-    "comment": "Leg column size along Y (Jiecang 80x50; dimension sheet end view)",
-    "expression": "80 mm",
+    "comment": "Leg bottom (widest) stage size along Y, measured 2026-10-29",
+    "expression": "80.6 mm",
     "favorite": false,
     "name": "leg_y",
     "unit": "mm",
-    "value": 78.74
+    "value": 80.6
   },
   {
-    "comment": "MEASURE ChannelBar: gap between the 2 bars of one channel (leg sits in it)",
-    "expression": "leg_y",
+    "comment": "ChannelBar: gap between the 2 bars of one channel (leg housing sits in it), measured 2026-10-29",
+    "expression": "96 mm",
     "favorite": false,
     "name": "ch_bar_gap",
     "unit": "mm",
-    "value": 78.74
+    "value": 96.0
+  },
+  {
+    "comment": "Leg column-top housing width (Y) between the channel bars, measured 2026-10-29",
+    "expression": "95 mm",
+    "favorite": false,
+    "name": "leg_hsg_y",
+    "unit": "mm",
+    "value": 95.0
   },
   {
     "comment": "Top support outer face to leg center (X); dimension sheet front view 2.76 in to the column inner face",
@@ -168,7 +176,7 @@
     "value": 698.5
   },
   {
-    "comment": "MEASURE Foot: width (X)",
+    "comment": "Foot: width (X) (confirmed by user 2026-10-29)",
     "expression": "2.75 in",
     "favorite": false,
     "name": "foot_w",
@@ -176,12 +184,12 @@
     "value": 69.85
   },
   {
-    "comment": "Foot height incl. glides (dimension sheet end view: 32 mm body + 20 mm glide)",
-    "expression": "2 in",
+    "comment": "Foot height incl. glides: 1.25 in body (dimension sheet) + 1/3 in glide as adjusted (measured 2026-10-29)",
+    "expression": "1.25 in + 1 in/3",
     "favorite": false,
     "name": "foot_h",
     "unit": "mm",
-    "value": 31.75
+    "value": 40.216667
   },
   {
     "comment": "Derived: desktop underside = frame top",
@@ -480,12 +488,12 @@
     "value": -230.18749999999997
   },
   {
-    "comment": "MEASURED 2026-10-27: seated floor-to-eye ~46 in, minus desk_h 30 in (about the same standing)",
-    "expression": "16 in",
+    "comment": "Measured 2026-10-29: seated floor-to-eye 46 in (Mirra 2 seat all the way down), minus the desktop height",
+    "expression": "46 in - desk_h",
     "favorite": false,
     "name": "eye_above_desk",
     "unit": "mm",
-    "value": 406.4
+    "value": 495.29999999999995
   },
   {
     "comment": "MEASURE Eyes out from the desktop front edge (toward you, -Y) in your normal posture",
@@ -494,6 +502,14 @@
     "name": "eye_back",
     "unit": "mm",
     "value": 152.39999999999998
+  },
+  {
+    "comment": "MEASURE Chair: seated eye Y from the chair gas-cylinder axis (+Y toward the desk); posture estimate from the vendor model (seat at its 16 in minimum, eyes 762 mm above it), range -80..0",
+    "expression": "-55 mm",
+    "favorite": false,
+    "name": "chr_eye_dy",
+    "unit": "mm",
+    "value": -55.0
   },
   {
     "comment": "Speaker: width (X), R-40M spec",
@@ -808,12 +824,12 @@
     "value": 12.7
   },
   {
-    "comment": "PC strap width (Y)",
-    "expression": "6 in",
+    "comment": "PC C-bracket width (Y), measured 2026-10-29",
+    "expression": "4.5 in",
     "favorite": false,
     "name": "strap_w",
     "unit": "mm",
-    "value": 152.39999999999998
+    "value": 114.3
   },
   {
     "comment": "PC strap left lip rise above case bottom",
@@ -880,12 +896,20 @@
     "value": -776.1500000000001
   },
   {
-    "comment": "Derived: PC case top Z (strap under the channel bars)",
-    "expression": "frame_top - ch_h - strap_t",
+    "comment": "PC case top Z, fixed 1.7 in below the desktop underside (the C bracket screws into the desktop and hangs the case; position kept from Rev A)",
+    "expression": "frame_top - 1.7 in",
     "favorite": false,
     "name": "pc_top",
     "unit": "mm",
-    "value": 680.7199999999999
+    "value": 680.72
+  },
+  {
+    "comment": "Derived: gap from the PC case top up to the C-bracket top plate underside (plate screwed to the desktop)",
+    "expression": "frame_top - pc_top - strap_t",
+    "favorite": false,
+    "name": "strap_hang",
+    "unit": "mm",
+    "value": 30.48
   },
   {
     "comment": "Derived: PC case bottom Z",
@@ -944,12 +968,12 @@
     "value": 15.0
   },
   {
-    "comment": "ErgoDox EZ switch + SA R1 keycap above case (MEASURE: SA row heights estimated)",
-    "expression": "22.5 mm",
+    "comment": "ErgoDox EZ SA R1 keycap above case top (caps modelled flush on the case, no switch housings; MEASURE)",
+    "expression": "16.5 mm",
     "favorite": false,
     "name": "kb_key_h",
     "unit": "mm",
-    "value": 15.0
+    "value": 16.5
   },
   {
     "comment": "Gap between keyboard halves (X), centered on main monitor",
@@ -1008,7 +1032,7 @@
     "value": 15.0
   },
   {
-    "comment": "MEASURE TopSupport: sheet steel thickness (est. from photos)",
+    "comment": "TopSupport: sheet steel thickness (est. from photos) (confirmed by user 2026-10-29)",
     "expression": "3 mm",
     "favorite": false,
     "name": "ts_t",
@@ -1040,7 +1064,7 @@
     "value": 40.0
   },
   {
-    "comment": "MEASURE TopSupport: spacing of the 2 leg screws per column along Y (dimension sheet end view)",
+    "comment": "TopSupport: spacing of the 2 leg screws per column along Y (dimension sheet end view) (confirmed by user 2026-10-29)",
     "expression": "2.47 in",
     "favorite": false,
     "name": "ts_bolt_pitch",
@@ -1048,12 +1072,12 @@
     "value": 62.738
   },
   {
-    "comment": "MEASURE TopSupport: leg screw center below frame top (dimension sheet end view, rough)",
-    "expression": "16 mm",
+    "comment": "TopSupport: leg screw center below frame top, measured 2026-10-29",
+    "expression": "0.75 in",
     "favorite": false,
     "name": "ts_bolt_z",
     "unit": "mm",
-    "value": 16.0
+    "value": 19.05
   },
   {
     "comment": "Leg screw M6 button head diameter (ISO 7380)",
@@ -1118,5 +1142,145 @@
     "name": "sb_len",
     "unit": "mm",
     "value": 20.0
+  },
+  {
+    "comment": "MacBook Pro 14in M4 width (Apple tech specs); placement only",
+    "expression": "312.6 mm",
+    "favorite": false,
+    "name": "mbp_w",
+    "unit": "mm"
+  },
+  {
+    "comment": "MacBook Pro 14in M4 depth (Apple tech specs); placement only",
+    "expression": "221.2 mm",
+    "favorite": false,
+    "name": "mbp_d",
+    "unit": "mm"
+  },
+  {
+    "comment": "Derived: Eye point Y (the SKL_Eye sketch point)",
+    "expression": "desk_front - eye_back",
+    "favorite": false,
+    "name": "eye_y",
+    "unit": "mm"
+  },
+  {
+    "comment": "Laptop screen centre direction from the Eye, right of straight ahead (plan view) (2026-10-29: chosen by tools/sightlines.py search: middle of the 36-37 deg / 700-800 mm window with no clash, speakers, monitors and laptop screen all unblocked, screen centre ~8 deg below the eye)",
+    "expression": "36.5 deg",
+    "favorite": false,
+    "name": "lap_az",
+    "unit": "deg",
+    "value": 36.5
+  },
+  {
+    "comment": "Eye to laptop tray centre, plan distance (user 2026-10-29: pushed back; 825 mm hits the lower crossbar)",
+    "expression": "800 mm",
+    "favorite": false,
+    "name": "lap_dist",
+    "unit": "mm",
+    "value": 800.0
+  },
+  {
+    "comment": "Derived: laptop / tray centre X",
+    "expression": "m1_x + lap_dist*sin(lap_az)",
+    "favorite": false,
+    "name": "lap_x",
+    "unit": "mm"
+  },
+  {
+    "comment": "Derived: laptop / tray centre Y",
+    "expression": "eye_y + lap_dist*cos(lap_az)",
+    "favorite": false,
+    "name": "lap_y",
+    "unit": "mm"
+  },
+  {
+    "comment": "Derived: laptop + tray turn toward the Eye (applied as -lap_yaw on the right side)",
+    "expression": "lap_az",
+    "favorite": false,
+    "name": "lap_yaw",
+    "unit": "deg"
+  },
+  {
+    "comment": "Laptop tray top above desktop surface (laptop base bottom)",
+    "expression": "140 mm",
+    "favorite": false,
+    "name": "lap_tray_z",
+    "unit": "mm",
+    "value": 140.0
+  },
+  {
+    "comment": "Keyboard deck tilt below horizontal, front edge down (user 2026-10-29: about 20 deg, laptop opened obtuse)",
+    "expression": "20 deg",
+    "favorite": false,
+    "name": "lap_kb_tilt",
+    "unit": "deg",
+    "value": 20.0
+  },
+  {
+    "comment": "Derived: lid opening angle from the deck so the screen matches the monitor tilt (m1_tilt) with the deck at lap_kb_tilt",
+    "expression": "90 deg + lap_kb_tilt + m1_tilt",
+    "favorite": false,
+    "name": "lap_lid",
+    "unit": "deg"
+  },
+  {
+    "comment": "Laptop tray plate thickness (user-built jig)",
+    "expression": "6 mm",
+    "favorite": false,
+    "name": "lap_tray_t",
+    "unit": "mm"
+  },
+  {
+    "comment": "Laptop tray margin around the laptop footprint (sides and back)",
+    "expression": "10 mm",
+    "favorite": false,
+    "name": "lap_tray_m",
+    "unit": "mm"
+  },
+  {
+    "comment": "Laptop tray front lip height above the tray top (laptop front edge rests on it)",
+    "expression": "8 mm",
+    "favorite": false,
+    "name": "lap_lip_h",
+    "unit": "mm"
+  },
+  {
+    "comment": "Tray tilt hinge barrel radius under the tray centre (user-built jig, MEASURE)",
+    "expression": "8 mm",
+    "favorite": false,
+    "name": "lap_hinge_r",
+    "unit": "mm",
+    "value": 8.0
+  },
+  {
+    "comment": "Derived: tilt hinge axis below the tray top origin (tray frame Z; barrel overlaps the plate 0.1 mm)",
+    "expression": "-(lap_tray_t + lap_hinge_r - 0.1 mm)",
+    "favorite": false,
+    "name": "lap_hinge_z",
+    "unit": "mm",
+    "value": -13.9
+  },
+  {
+    "comment": "Derived: hinge stem bottom = pivot puck top (tray frame Z, 10 mm stem under the barrel)",
+    "expression": "lap_hinge_z - lap_hinge_r - 10 mm",
+    "favorite": false,
+    "name": "lap_yoke_bot",
+    "unit": "mm",
+    "value": -31.9
+  },
+  {
+    "comment": "Derived: laptop mount clamp seat = lower crossbar top face (world Z)",
+    "expression": "desk_h + bar1_z + rail_l/2",
+    "favorite": false,
+    "name": "lap_clamp_z",
+    "unit": "mm"
+  },
+  {
+    "comment": "Derived: lower crossbar centre to tray pivot (Y, toward you)",
+    "expression": "stile_y - lap_y",
+    "favorite": false,
+    "name": "lap_reach",
+    "unit": "mm"
   }
 ]

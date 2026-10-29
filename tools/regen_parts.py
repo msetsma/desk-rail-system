@@ -89,12 +89,17 @@ def _input_args(script: Path) -> list[str]:
 
 
 def _with_skeleton(commands: list[dict[str, object]], skeleton: Path) -> list[dict[str, object]]:
-    return [{**c, "params": {**c["params"], "path": skeleton.as_posix()}} if c["command"] == "parameters.import" else c
+    return [{**c, "params": {**c["params"], "path": skeleton.as_posix()}} if _is_skeleton_import(c) else c
             for c in commands]
 
 
+def _is_skeleton_import(command: dict[str, object]) -> bool:
+    """A file import of the skeleton (a part may also import its own parameters as `text`)."""
+    return command["command"] == "parameters.import" and "path" in command["params"]
+
+
 def _uses_skeleton(commands: Sequence[dict[str, object]]) -> bool:
-    return any(c["command"] == "parameters.import" for c in commands)
+    return any(_is_skeleton_import(c) for c in commands)
 
 
 def _digest(source: PartSource, skeleton: Path) -> str:

@@ -1,0 +1,276 @@
+{
+ "input": "refs/herman_miller_mirra2/converted/CHR-01_mirra2.step",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "chr_seat_h",
+    "expression": "16 in",
+    "comment": "Seat top (suspension peak) above floor: user setting all the way down (spec 16-20.5 in)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "chr_seat_h_vendor",
+    "expression": "496.5 mm",
+    "comment": "Seat top in the vendor model (fixed; the upper group moves by chr_seat_h - this)"
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "bodies": [
+     "Chair_Frame",
+     "Chair_BackFabric",
+     "Chair_Seat",
+     "Chair_Arm_R",
+     "Chair_Arm_L",
+     "Chair_ArmPad_R",
+     "Chair_ArmPad_L",
+     "Chair_Mechanism",
+     "Chair_Controls",
+     "Chair_GasRod"
+    ],
+    "translate": [
+     0,
+     0,
+     "chr_seat_h - chr_seat_h_vendor"
+    ],
+    "name": "CHR_SeatHeight"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Chair_Frame",
+     "Chair_Arm_R",
+     "Chair_Arm_L"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Chair_Frame",
+     "Chair_Arm_R",
+     "Chair_Arm_L"
+    ],
+    "color": "#e8e6e1"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Chair_BackFabric",
+     "Chair_Seat"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Chair_BackFabric",
+     "Chair_Seat"
+    ],
+    "color": "#2d2e30"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Chair_ArmPad_R",
+     "Chair_ArmPad_L"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Chair_ArmPad_R",
+     "Chair_ArmPad_L"
+    ],
+    "color": "#262729"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Chair_Base",
+     "Chair_Mechanism"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Chair_Base",
+     "Chair_Mechanism"
+    ],
+    "color": "#bdbfbe"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Chair_Controls"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Chair_Controls"
+    ],
+    "color": "#1f2022"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Chair_Cylinder",
+     "Chair_GasRod"
+    ],
+    "material": "Steel powder-coated"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Chair_Cylinder",
+     "Chair_GasRod"
+    ],
+    "color": "#1c1d1f"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Chair_Caster_1",
+     "Chair_Caster_2",
+     "Chair_Caster_3",
+     "Chair_Caster_4",
+     "Chair_Caster_5"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Chair_Caster_1",
+     "Chair_Caster_2",
+     "Chair_Caster_3",
+     "Chair_Caster_4",
+     "Chair_Caster_5"
+    ],
+    "color": "#1f2022"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "CHR-01",
+     "description": "Herman Miller Mirra 2 work chair, Butterfly (Suspension) back, adjustable arms; vendor 3D DWG mesh. Seat down, arms fully up and back. Studio White frame, Fog base, Graphite AireWeave. Origin: floor at the gas-cylinder axis; chair faces +Y, X right, Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "ABS (stand-in for glass-filled nylon frame/base and polyester textile); steel cylinder",
+      "ReleaseState": "WIP",
+      "Source": "Herman Miller 3D library DWG (refs/herman_miller_mirra2/raw/HMI_Mirra_2_Chair_Suspension_Back_Adjustable_Arms_3D.dwg) -> LibreDWG dwg2dxf -> parts/src/CHR-01_convert.py -> refs/herman_miller_mirra2/converted/CHR-01_mirra2.step (35403 triangles, sha256 3ef1d0b21558); arms +0.35 mm (pad top 200.0 mm above the seat), pads 25.4 mm back"
+     }
+    }
+   }
+  }
+ ]
+}

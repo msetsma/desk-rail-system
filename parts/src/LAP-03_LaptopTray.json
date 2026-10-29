@@ -1,0 +1,227 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "LTRAY_Plate",
+    "body_name": "LaptopTray",
+    "operation": "new",
+    "corner": [
+     "-mbp_w/2 - lap_tray_m",
+     "-mbp_d/2 - 0.1 mm - 4 mm",
+     "-lap_tray_t"
+    ],
+    "length": "mbp_w + 2*lap_tray_m",
+    "width": "mbp_d + 0.1 mm + 4 mm + lap_tray_m",
+    "height": "lap_tray_t"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "LTRAY_Lip",
+    "operation": "join",
+    "targets": [
+     "LaptopTray"
+    ],
+    "corner": [
+     "-mbp_w/2 - lap_tray_m",
+     "-mbp_d/2 - 0.1 mm - 4 mm",
+     "-0.1 mm"
+    ],
+    "length": "mbp_w + 2*lap_tray_m",
+    "width": "4 mm",
+    "height": "lap_lip_h + 0.1 mm"
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "LTRAY_ToHinge",
+    "bodies": [
+     "LaptopTray"
+    ],
+    "translate": [
+     "0 mm",
+     "0 mm",
+     "-lap_hinge_z"
+    ]
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "LTRAY_Tilt",
+    "bodies": [
+     "LaptopTray"
+    ],
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "angle": "lap_kb_tilt"
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "LTRAY_FromHinge",
+    "bodies": [
+     "LaptopTray"
+    ],
+    "translate": [
+     "0 mm",
+     "0 mm",
+     "lap_hinge_z"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "LTRAY_HingeBarrel",
+    "axis": "X",
+    "operation": "join",
+    "targets": [
+     "LaptopTray"
+    ],
+    "radius": "lap_hinge_r",
+    "height": "60 mm",
+    "base": [
+     "-60 mm/2",
+     "0 mm",
+     "lap_hinge_z"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "LTRAY_HingeStem",
+    "operation": "join",
+    "targets": [
+     "LaptopTray"
+    ],
+    "corner": [
+     "-60 mm/2",
+     "-lap_hinge_r",
+     "lap_yoke_bot"
+    ],
+    "length": "60 mm",
+    "width": "2*lap_hinge_r",
+    "height": "lap_hinge_z - lap_yoke_bot"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "LaptopTray"
+    ],
+    "material": "Al 6063-T5"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "LaptopTray"
+    ],
+    "color": "#2a2b2d"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "LAP-03",
+     "description": "User-built laptop tray (placeholder) sized to the MacBook Pro 14in footprint, front lip the laptop rests against, tilted lap_kb_tilt front-down on a hinge barrel + stem to the LAP-01 puck. Origin: tray top at the laptop footprint centre before the tilt (tilt axis: local X at z = lap_hinge_z); +Y toward the hinge, screen faces -Y, Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Al 6063-T5",
+      "ReleaseState": "WIP",
+      "Source": "Placeholder for the user's own jig; sized from Apple MacBook Pro 14 specs"
+     }
+    }
+   }
+  }
+ ]
+}

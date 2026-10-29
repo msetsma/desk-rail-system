@@ -1,0 +1,501 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "text": "[{\"name\": \"mbp14_w\", \"expression\": \"312.6 mm\", \"comment\": \"Width (Apple tech specs 121552)\"}, {\"name\": \"mbp14_d\", \"expression\": \"221.2 mm\", \"comment\": \"Depth (Apple tech specs 121552)\"}, {\"name\": \"mbp14_h\", \"expression\": \"15.5 mm\", \"comment\": \"Closed height incl. feet (Apple tech specs 121552)\"}, {\"name\": \"mbp14_foot_h\", \"expression\": \"0.9 mm\", \"comment\": \"MEASURE foot height below the base bottom (photos)\"}, {\"name\": \"mbp14_lid_t\", \"expression\": \"5.0 mm\", \"comment\": \"MEASURE lid thickness (side photos, ~1/3 of height)\"}, {\"name\": \"mbp14_base_t\", \"expression\": \"mbp14_h - mbp14_foot_h - mbp14_lid_t\", \"comment\": \"Base slab thickness (9.6)\"}, {\"name\": \"mbp14_r\", \"expression\": \"9 mm\", \"comment\": \"MEASURE plan-view corner radius, base and lid (photos)\"}, {\"name\": \"mbp14_lid_d\", \"expression\": \"mbp14_d - 1 mm\", \"comment\": \"MEASURE lid depth (lid sits ~flush with the base front)\"}, {\"name\": \"mbp14_lid_open\", \"expression\": \"lap_lid\", \"comment\": \"Lid opening angle from the base top (skeleton: screen at the monitor tilt)\"}, {\"name\": \"mbp14_foot_dia\", \"expression\": \"13 mm\", \"comment\": \"MEASURE rubber foot diameter (photos)\"}, {\"name\": \"mbp14_foot_ix\", \"expression\": \"25 mm\", \"comment\": \"MEASURE foot centre in from the side edges\"}, {\"name\": \"mbp14_foot_iy\", \"expression\": \"18 mm\", \"comment\": \"MEASURE foot centre in from the front/back edges\"}, {\"name\": \"mbp14_kb_w\", \"expression\": \"276 mm\", \"comment\": \"MEASURE keyboard well width (14.5 keys at ~19 mm pitch)\"}, {\"name\": \"mbp14_kb_d\", \"expression\": \"112 mm\", \"comment\": \"MEASURE keyboard well depth (6 rows incl. full-height F row)\"}, {\"name\": \"mbp14_kb_rear\", \"expression\": \"10 mm\", \"comment\": \"MEASURE base rear edge to keyboard well\"}, {\"name\": \"mbp14_kb_dep\", \"expression\": \"1.0 mm\", \"comment\": \"MEASURE keyboard well depth below the deck\"}, {\"name\": \"mbp14_key_recess\", \"expression\": \"0.2 mm\", \"comment\": \"MEASURE key tops below the deck\"}, {\"name\": \"mbp14_tp_w\", \"expression\": \"132 mm\", \"comment\": \"Trackpad width (NanoReview 13.2 cm; MEASURE)\"}, {\"name\": \"mbp14_tp_d\", \"expression\": \"81 mm\", \"comment\": \"Trackpad depth (NanoReview 8.1 cm; MEASURE)\"}, {\"name\": \"mbp14_tp_front\", \"expression\": \"8 mm\", \"comment\": \"MEASURE base front edge to trackpad\"}, {\"name\": \"mbp14_tp_dep\", \"expression\": \"0.4 mm\", \"comment\": \"MEASURE trackpad glass inset depth\"}, {\"name\": \"mbp14_scr_rim\", \"expression\": \"1.5 mm\", \"comment\": \"MEASURE aluminium rim around the black cover glass\"}, {\"name\": \"mbp14_scr_chin\", \"expression\": \"8 mm\", \"comment\": \"MEASURE hinge-side lid strip without glass (hinge cover)\"}, {\"name\": \"mbp14_scr_t\", \"expression\": \"0.3 mm\", \"comment\": \"Cover glass proud of the lid inner face (modelling choice)\"}, {\"name\": \"mbp14_aa_w\", \"expression\": \"302.4 mm\", \"comment\": \"Active area width (3024 px at 254 ppi)\"}, {\"name\": \"mbp14_aa_h\", \"expression\": \"196.4 mm\", \"comment\": \"Active area height (1964 px at 254 ppi)\"}]"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "MBP14_BaseSlab",
+    "body_name": "MBP_Base",
+    "operation": "new",
+    "corner": [
+     "-mbp14_w/2",
+     "-mbp14_d/2",
+     "mbp14_foot_h"
+    ],
+    "length": "mbp14_w",
+    "width": "mbp14_d",
+    "height": "mbp14_base_t"
+   }
+  },
+  {
+   "command": "solid.fillet",
+   "params": {
+    "name": "MBP14_BaseCorners",
+    "radius": "mbp14_r",
+    "edges": [
+     [
+      -156.3,
+      -110.6,
+      5.7
+     ],
+     [
+      -156.3,
+      110.6,
+      5.7
+     ],
+     [
+      156.3,
+      -110.6,
+      5.7
+     ],
+     [
+      156.3,
+      110.6,
+      5.7
+     ]
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "MBP14_Foot",
+    "operation": "join",
+    "targets": [
+     "MBP_Base"
+    ],
+    "diameter": "mbp14_foot_dia",
+    "height": "mbp14_foot_h + 0.1 mm",
+    "base": [
+     "-mbp14_w/2 + mbp14_foot_ix",
+     "-mbp14_d/2 + mbp14_foot_iy",
+     "0 mm"
+    ]
+   }
+  },
+  {
+   "command": "solid.pattern.rectangular",
+   "params": {
+    "name": "MBP14_Feet",
+    "features": [
+     "MBP14_Foot"
+    ],
+    "dir1": [
+     1,
+     0,
+     0
+    ],
+    "count1": 2,
+    "spacing1": "mbp14_w - 2*mbp14_foot_ix",
+    "dir2": [
+     0,
+     1,
+     0
+    ],
+    "count2": 2,
+    "spacing2": "mbp14_d - 2*mbp14_foot_iy"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "MBP14_KeyboardWell",
+    "operation": "cut",
+    "targets": [
+     "MBP_Base"
+    ],
+    "corner": [
+     "-mbp14_kb_w/2",
+     "mbp14_d/2 - mbp14_kb_rear - mbp14_kb_d",
+     "mbp14_foot_h + mbp14_base_t - mbp14_kb_dep"
+    ],
+    "length": "mbp14_kb_w",
+    "width": "mbp14_kb_d",
+    "height": "mbp14_kb_dep + 0.1 mm"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "MBP14_Keys",
+    "body_name": "MBP_Keyboard",
+    "operation": "new",
+    "corner": [
+     "-mbp14_kb_w/2",
+     "mbp14_d/2 - mbp14_kb_rear - mbp14_kb_d",
+     "mbp14_foot_h + mbp14_base_t - mbp14_kb_dep"
+    ],
+    "length": "mbp14_kb_w",
+    "width": "mbp14_kb_d",
+    "height": "mbp14_kb_dep - mbp14_key_recess"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "MBP14_TrackpadPocket",
+    "operation": "cut",
+    "targets": [
+     "MBP_Base"
+    ],
+    "corner": [
+     "-mbp14_tp_w/2",
+     "-mbp14_d/2 + mbp14_tp_front",
+     "mbp14_foot_h + mbp14_base_t - mbp14_tp_dep"
+    ],
+    "length": "mbp14_tp_w",
+    "width": "mbp14_tp_d",
+    "height": "mbp14_tp_dep + 0.1 mm"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "MBP14_TrackpadGlass",
+    "body_name": "MBP_Trackpad",
+    "operation": "new",
+    "corner": [
+     "-mbp14_tp_w/2",
+     "-mbp14_d/2 + mbp14_tp_front",
+     "mbp14_foot_h + mbp14_base_t - mbp14_tp_dep"
+    ],
+    "length": "mbp14_tp_w",
+    "width": "mbp14_tp_d",
+    "height": "mbp14_tp_dep"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "MBP14_LidSlab",
+    "body_name": "MBP_Lid",
+    "operation": "new",
+    "corner": [
+     "-mbp14_w/2",
+     "-mbp14_lid_d",
+     "-mbp14_lid_t/2"
+    ],
+    "length": "mbp14_w",
+    "width": "mbp14_lid_d",
+    "height": "mbp14_lid_t"
+   }
+  },
+  {
+   "command": "solid.fillet",
+   "params": {
+    "name": "MBP14_LidCorners",
+    "radius": "mbp14_r",
+    "edges": [
+     [
+      -156.3,
+      -220.2,
+      0.0
+     ],
+     [
+      -156.3,
+      0.0,
+      0.0
+     ],
+     [
+      156.3,
+      -220.2,
+      0.0
+     ],
+     [
+      156.3,
+      0.0,
+      0.0
+     ]
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "MBP14_CoverGlass",
+    "body_name": "MBP_Screen",
+    "operation": "new",
+    "corner": [
+     "-mbp14_w/2 + mbp14_scr_rim",
+     "-mbp14_lid_d + mbp14_scr_rim",
+     "-mbp14_lid_t/2 - mbp14_scr_t"
+    ],
+    "length": "mbp14_w - 2*mbp14_scr_rim",
+    "width": "mbp14_lid_d - mbp14_scr_rim - mbp14_scr_chin",
+    "height": "mbp14_scr_t"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "MBP14_HingeBarrel",
+    "axis": "X",
+    "operation": "join",
+    "targets": [
+     "MBP_Lid"
+    ],
+    "radius": "mbp14_lid_t/2 + 0.1 mm",
+    "height": "mbp14_w - 2*mbp14_r",
+    "base": [
+     "-(mbp14_w/2 - mbp14_r)",
+     "0 mm",
+     "0 mm"
+    ]
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "MBP14_LidOpen",
+    "bodies": [
+     "MBP_Lid",
+     "MBP_Screen"
+    ],
+    "axis": [
+     -1,
+     0,
+     0
+    ],
+    "angle": "mbp14_lid_open"
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "MBP14_LidToHinge",
+    "bodies": [
+     "MBP_Lid",
+     "MBP_Screen"
+    ],
+    "translate": [
+     "0 mm",
+     "mbp14_d/2",
+     "mbp14_foot_h + mbp14_base_t + mbp14_lid_t/2 + 0.1 mm"
+    ]
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "MBP14_ToHinge",
+    "bodies": [
+     "MBP_Base",
+     "MBP_Keyboard",
+     "MBP_Trackpad",
+     "MBP_Lid",
+     "MBP_Screen"
+    ],
+    "translate": [
+     "0 mm",
+     "0 mm",
+     "-lap_hinge_z"
+    ]
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "MBP14_Tilt",
+    "bodies": [
+     "MBP_Base",
+     "MBP_Keyboard",
+     "MBP_Trackpad",
+     "MBP_Lid",
+     "MBP_Screen"
+    ],
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "angle": "lap_kb_tilt"
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "MBP14_FromHinge",
+    "bodies": [
+     "MBP_Base",
+     "MBP_Keyboard",
+     "MBP_Trackpad",
+     "MBP_Lid",
+     "MBP_Screen"
+    ],
+    "translate": [
+     "0 mm",
+     "0 mm",
+     "lap_hinge_z"
+    ]
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "MBP_Base",
+     "MBP_Lid",
+     "MBP_Trackpad"
+    ],
+    "material": "Al 6063-T5"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "MBP_Keyboard"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "MBP_Screen"
+    ],
+    "material": "PC"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "MBP_Base",
+     "MBP_Lid"
+    ],
+    "color": "#2e2f31",
+    "pbr": {
+     "metallic": 0.9,
+     "roughness": 0.45,
+     "dielectric_ior": 1.5
+    }
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "MBP_Trackpad"
+    ],
+    "color": "#2e2f31",
+    "pbr": {
+     "metallic": 0.0,
+     "roughness": 0.06,
+     "dielectric_ior": 1.5
+    }
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "MBP_Keyboard"
+    ],
+    "color": "#0b0c0d"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "MBP_Screen"
+    ],
+    "color": "#050608",
+    "pbr": {
+     "metallic": 0.0,
+     "roughness": 0.06,
+     "dielectric_ior": 1.5
+    }
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "LAP-02",
+     "description": "Apple MacBook Pro 14in (M4, 2024), deck tilted lap_kb_tilt front-down with the tray, lid open to lap_lid so the screen matches the monitor tilt (purchased, reference model). Origin: footprint centre on the bottom plane of the feet (tray surface) before the tilt (tilt axis: local X at z = lap_hinge_z); +Y toward the hinge (wall side), screen faces -Y (user), X right, Z up. Finish Space Black.",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Al 6063-T5",
+      "ReleaseState": "WIP",
+      "Source": "Apple tech specs support.apple.com/en-us/121552 (W, D, H, display); lid/base split, radii, keyboard, trackpad, feet MEASURE (refs/macbook_pro_14/README.md)"
+     }
+    }
+   }
+  }
+ ]
+}

@@ -35,13 +35,14 @@ VIEWS: tuple[tuple[str, list[float], float, float, float], ...] = (
     ("SideRailJoint_L", [-900, 0, 690], 1.2, 0.35, 900),
     ("SpeakerMount_R", [880, 320, 1190], -1.57, 0.15, 650),
     ("UnderDesk", [0, 0, 500], 0.4, -0.3, 2500),
+    ("LaptopArm", [560, 150, 950], -0.7, 0.35, 1300),
 )
 # Visibility sets as configuration rows (SolidCraft has no display states): link groups suppressed.
 DISPLAY_ROWS: Mapping[str, tuple[str, ...]] = {
     "Full": (),
-    "Frame only": ("DSK-01", "MON-", "SPK-", "PC-", "INP-"),
+    "Frame only": ("DSK-01", "MON-", "SPK-", "PC-", "INP-", "LAP-", "CHR-"),
     "No desktop": ("DSK-01",),
-    "Monitors + speakers": ("DSK-", "HW-", "PC-", "INP-", "FRM-05"),
+    "Monitors + speakers": ("DSK-", "HW-", "PC-", "INP-", "LAP-", "CHR-", "FRM-05"),
 }
 
 

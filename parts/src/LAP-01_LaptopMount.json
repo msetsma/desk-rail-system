@@ -1,0 +1,292 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lmnt_w",
+    "expression": "40 mm",
+    "comment": "MEASURE clamp and riser width (X)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lmnt_t",
+    "expression": "6 mm",
+    "comment": "MEASURE clamp plate thickness"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lmnt_arm_w",
+    "expression": "30 mm",
+    "comment": "MEASURE arm width (X)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lmnt_arm_t",
+    "expression": "12 mm",
+    "comment": "MEASURE arm thickness (Z)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lmnt_puck_d",
+    "expression": "50 mm",
+    "comment": "MEASURE pivot puck size under the tray centre"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lmnt_puck_h",
+    "expression": "8 mm",
+    "comment": "MEASURE pivot puck height"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lmnt_tray_bot",
+    "expression": "lap_tray_z + lap_yoke_bot - bar1_z - rail_l/2",
+    "comment": "Puck top = LAP-03 hinge stem bottom, above the bar top (local Z)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lmnt_arm_z",
+    "expression": "lmnt_tray_bot - lmnt_puck_h - lmnt_arm_t",
+    "comment": "Arm underside above the bar top (local Z)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lmnt_front",
+    "expression": "rail_s/2 + 0.1 mm + lmnt_t",
+    "comment": "Clamp spine front face, in front of the bar centre line"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "LMNT_TopPlate",
+    "corner": [
+     "-lmnt_w/2",
+     "-lmnt_front",
+     "0.1 mm"
+    ],
+    "length": "lmnt_w",
+    "width": "lmnt_front + rail_s/2",
+    "height": "lmnt_t",
+    "body_name": "LaptopMount_Arm",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "LMNT_Spine",
+    "corner": [
+     "-lmnt_w/2",
+     "-lmnt_front",
+     "-rail_l - 0.1 mm - lmnt_t"
+    ],
+    "length": "lmnt_w",
+    "width": "lmnt_t",
+    "height": "rail_l + 0.2 mm + 2*lmnt_t",
+    "operation": "join",
+    "targets": [
+     "LaptopMount_Arm"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "LMNT_Jaw",
+    "corner": [
+     "-lmnt_w/2",
+     "-lmnt_front",
+     "-rail_l - 0.1 mm - lmnt_t"
+    ],
+    "length": "lmnt_w",
+    "width": "lmnt_front + rail_s/2",
+    "height": "lmnt_t",
+    "operation": "join",
+    "targets": [
+     "LaptopMount_Arm"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "LMNT_Riser",
+    "corner": [
+     "-lmnt_w/2",
+     "-lmnt_front - lmnt_w + 0.1 mm",
+     "min(0.1 mm, lmnt_arm_z)"
+    ],
+    "length": "lmnt_w",
+    "width": "lmnt_w",
+    "height": "max(lmnt_arm_z + lmnt_arm_t, lmnt_t + 0.1 mm) - min(0.1 mm, lmnt_arm_z)",
+    "operation": "join",
+    "targets": [
+     "LaptopMount_Arm"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "LMNT_Arm",
+    "corner": [
+     "-lmnt_arm_w/2",
+     "-lap_reach - lmnt_puck_d/2",
+     "lmnt_arm_z"
+    ],
+    "length": "lmnt_arm_w",
+    "width": "lap_reach + lmnt_puck_d/2 - lmnt_front - lmnt_w/2",
+    "height": "lmnt_arm_t",
+    "operation": "join",
+    "targets": [
+     "LaptopMount_Arm"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "LMNT_Puck",
+    "corner": [
+     "-lmnt_puck_d/2",
+     "-lap_reach - lmnt_puck_d/2",
+     "lmnt_arm_z + lmnt_arm_t - 0.1 mm"
+    ],
+    "length": "lmnt_puck_d",
+    "width": "lmnt_puck_d",
+    "height": "lmnt_puck_h",
+    "operation": "join",
+    "targets": [
+     "LaptopMount_Arm"
+    ]
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "LaptopMount_Arm"
+    ],
+    "material": "Al 6063-T5"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "LaptopMount_Arm"
+    ],
+    "color": "#2a2b2d"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "LAP-01",
+     "description": "User-built laptop mount (placeholder envelope): C-clamp on the lower 2040 crossbar, riser, straight arm toward the user, pivot puck under the LAP-03 tray centre. Origin: crossbar top face, clamp centre X, bar centre line Y; +Y toward the wall, Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Al 6063-T5",
+      "ReleaseState": "WIP",
+      "Source": "Placeholder for the user's own jig; sizes MEASURE"
+     }
+    }
+   }
+  }
+ ]
+}

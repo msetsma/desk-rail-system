@@ -128,8 +128,8 @@
    "command": "parameters.add",
    "params": {
     "name": "jc_step",
-    "expression": "3 mm",
-    "comment": "MEASURE stage-to-stage inset per side (Jiecang 80x50 bottom / 74x44 / 68x38 top)"
+    "expression": "2.5 mm",
+    "comment": "Stage-to-stage inset per side, measured 2026-10-29 (50.2x80.6 bottom / 45.2x75.4 / 40.3x70.3 top)"
    }
   },
   {
@@ -194,27 +194,27 @@
     "points": [
      [
       "leg_inset - ts_t",
-      "-leg_y/2"
+      "-leg_hsg_y/2"
      ],
      [
       "leg_inset - ts_t",
-      "leg_y/2"
+      "leg_hsg_y/2"
      ],
      [
       "-(leg_x/2 + jc_hsg_in) + 12 mm",
-      "leg_y/2"
+      "leg_hsg_y/2"
      ],
      [
       "-(leg_x/2 + jc_hsg_in)",
-      "leg_y/2 - 12 mm"
+      "leg_hsg_y/2 - 12 mm"
      ],
      [
       "-(leg_x/2 + jc_hsg_in)",
-      "-(leg_y/2 - 12 mm)"
+      "-(leg_hsg_y/2 - 12 mm)"
      ],
      [
       "-(leg_x/2 + jc_hsg_in) + 12 mm",
-      "-leg_y/2"
+      "-leg_hsg_y/2"
      ]
     ]
    }
@@ -421,11 +421,11 @@
      "Leg"
     ],
     "length": "(leg_inset - ts_t) - (leg_inset - ts_w) + 0.1 mm",
-    "width": "leg_y + 0.2 mm",
+    "width": "leg_hsg_y + 0.2 mm",
     "height": "ts_t + 0.1 mm",
     "corner": [
      "leg_inset - ts_w",
-     "-leg_y/2 - 0.1 mm",
+     "-leg_hsg_y/2 - 0.1 mm",
      "-ts_t"
     ]
    }
@@ -474,10 +474,10 @@
      "Leg"
     ],
     "radius": "2.5 mm",
-    "height": "leg_y + 0.2 mm",
+    "height": "leg_hsg_y + 0.2 mm",
     "base": [
      "jc_hsg_xc - jc_scr_pitch/2",
-     "-leg_y/2 - 0.1 mm",
+     "-leg_hsg_y/2 - 0.1 mm",
      "-ch_h/2"
     ]
    }

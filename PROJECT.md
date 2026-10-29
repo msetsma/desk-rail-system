@@ -36,6 +36,9 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
 - Narrow clearance after a change: `python tools/near_check.py <body prefixes>` (~4 s). It checks each
   changed body against its bbox neighbours and skips hardware-on-extrusion contacts.
   `--print-params` prints the commands for the live app. `--include-mating` keeps the contacts (slow).
+- Sightlines + laptop fit: `python tools/sightlines.py [--set lap_az=36 ...]` (seconds). Ray-casts from the Eye to the
+  speaker baffles, monitor screens and laptop screen, and box-checks the laptop against monitors, speakers and the frame.
+  A coarse grid search can miss a small block: re-run the chosen point at the default resolution.
 - Full check: `tools/check.py` (slow; run only on request). BOM: `tools/bom.py` -> `BOM.md`.
 - Decision log and extrusion rules: `docs/EXTRUSION_GUIDE.md`. Cite rule IDs (J*, M*, P*, W*) and
   log decisions (D*) there.
@@ -50,7 +53,7 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
 
 ## Conventions (for the cad-best-practices skill)
 - Part numbers belong to part **files**, not occurrences. Group components `DSK-00`, `FRM-00`, `HW-00`,
-  `MON-00`, `SPK-00`, `PC-00`, `INP-00`, `REF-00`; parts `DSK-01`…, library `HW-L01`…. Add `Rev X` when a
+  `MON-00`, `SPK-00`, `PC-00`, `INP-00`, `LAP-00`, `CHR-00`, `REF-00`; parts `DSK-01`…, library `HW-L01`…. Add `Rev X` when a
   part is released. `DSK-00` is grounded. The full list is in `docs/PART_BUILD_SPEC.md`.
 - One file per left/right pair when a 180° turn about Z reproduces the other side. Mirror-image parts
   (side rails, keyboards) get two files.
@@ -60,6 +63,8 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   - aluminium extrusion #d4d8dd
   - zinc plates #c4c9d0
   - as-cast Al gussets #a9adb2
+  - desktop (IKEA KARLBY walnut veneer, 503.352.08) and modesty panel (walnut veneer to match) #6b4a32,
+    estimated from product descriptions
 
   Reference geometry is red.
 - Materials are the custom set in `parts/_template.json`. They are stored in each part as
@@ -113,6 +118,9 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
 - `component.update_links {}` re-evaluates every link, even unchanged ones (~40 s). Pass `component`.
 - Full assembly builds log repeated non-fatal `knot vector consists single value` panics (source part
   not yet identified; likely a vendor NURBS body). The run still succeeds.
+- Edge-pick points (`solid.chamfer`/`fillet` `edges`) are plain numbers, so a hand-written script breaks when its driving parameters change (DSK-02 `TS_EndTaper` failed after `ts_h` changed). Update the points with the parameter.
+- `inspect.clearance` can report `0.000 mm` for a real 0.1 mm gap (seen on the laptop clamp vs the 2040 bar).
+  Treat sub-0.2 mm "near" values as contact-level, not as a measurement.
 - MCP `parameters.export` returns the full text even when given a `path`. `component.list` on the full
   assembly is large; use `solidcraft-cli ... --results --json-out` and summarize it.
 - Eval names a body in a repeated placement with its occurrence path:
@@ -120,5 +128,9 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
 - `solidcraft-cli eval <script> --in X` ignores the script; use `run --in X --save tmp`, then `eval`.
 - `sketch.rectangle.*` rejects expressions; use `sketch.line` with expression points. `sketch.create`
   takes a numeric origin only, and `{face, body}` needs `index`.
+- Mesh imports (`file.insert_mesh`: STL/OBJ/glTF) stay mesh bodies: no STEP export, and `insert_design` refuses a
+  design with only mesh bodies. Vendor meshes go through `tools/mesh_step.py` (planar-face STEP, imports as B-rep;
+  ~2 s linked insert per 11k triangles; the chair keeps the full 35k for looks). Keep touching pieces unwelded: edges with 3+ faces break STEP export.
+  DWG -> DXF: LibreDWG `dwg2dxf` (C:/Users/2015m/cad_tools/libredwg/), see refs/herman_miller_mirra2/README.md.
 - Misumi: 3D CAD is generated server-side (slow) and needs a login or email. HFS5 extrusion 3D
   CAD isn't offered; profiles come from DXFs in `profiles/` / `refs/ext_*`.

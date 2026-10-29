@@ -882,5 +882,49 @@
     "host": "FRM-03R side rail R / DSK top support",
     "note": "Head on the drilled seat, shank inward; leg screw.",
     "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-37 Joining plate side rail L inner",
+    "lib": "HW-L01_HPTTD5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      1,
+      0,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      -1
+    ],
+    "x": "-(up_xc - rail_l/2)",
+    "y": "up_y + 19 mm - 80 mm",
+    "z": "frame_top - rail_l/2",
+    "yaw": "0 deg",
+    "host": "FRM-03L side rail L / FRM-01 upright L",
+    "note": "Second HPTTD5 on the inner faces (user 2026-10-29: double the T-plates). Same plate as HW-01/02 turned 180 deg about the side rail axis (Y): the plate is symmetric about its stem, so it lands on the flush inner faces of the upright and rail. Local -Z (thickness) points toward the desk centre.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-38 Joining plate side rail R inner",
+    "lib": "HW-L01_HPTTD5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      -1,
+      0,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "up_xc - rail_l/2",
+    "y": "up_y + 19 mm - 80 mm",
+    "z": "frame_top - rail_l/2",
+    "yaw": "0 deg",
+    "host": "FRM-03R side rail R / FRM-01 upright R",
+    "note": "Second HPTTD5 on the inner faces (user 2026-10-29: double the T-plates). Same plate as HW-01/02 turned 180 deg about the side rail axis (Y): the plate is symmetric about its stem, so it lands on the flush inner faces of the upright and rail. Local -Z (thickness) points toward the desk centre.",
+    "joint_angle": "0 deg"
   }
 ]

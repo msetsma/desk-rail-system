@@ -121,11 +121,11 @@
     "points": [
      [
       "-pc_w/2",
-      "strap_t"
+      "strap_hang + strap_t"
      ],
      [
       "pc_w/2 + strap_t - strap_r_out",
-      "strap_t"
+      "strap_hang + strap_t"
      ]
     ]
    }
@@ -135,15 +135,15 @@
    "params": {
     "center": [
      "pc_w/2 + strap_t - strap_r_out",
-     "strap_t - strap_r_out"
+     "strap_hang + strap_t - strap_r_out"
     ],
     "start": [
      "pc_w/2 + strap_t",
-     "strap_t - strap_r_out"
+     "strap_hang + strap_t - strap_r_out"
     ],
     "end": [
      "pc_w/2 + strap_t - strap_r_out",
-     "strap_t"
+     "strap_hang + strap_t"
     ]
    }
   },
@@ -153,7 +153,7 @@
     "points": [
      [
       "pc_w/2 + strap_t",
-      "strap_t - strap_r_out"
+      "strap_hang + strap_t - strap_r_out"
      ],
      [
       "pc_w/2 + strap_t",
@@ -293,7 +293,7 @@
      ],
      [
       "pc_w/2",
-      "-strap_r_in"
+      "strap_hang - strap_r_in"
      ]
     ]
    }
@@ -303,15 +303,15 @@
    "params": {
     "center": [
      "pc_w/2 - strap_r_in",
-     "-strap_r_in"
+     "strap_hang - strap_r_in"
     ],
     "start": [
      "pc_w/2",
-     "-strap_r_in"
+     "strap_hang - strap_r_in"
     ],
     "end": [
      "pc_w/2 - strap_r_in",
-     "0 mm"
+     "strap_hang"
     ]
    }
   },
@@ -321,15 +321,15 @@
     "points": [
      [
       "pc_w/2 - strap_r_in",
-      "0 mm"
+      "strap_hang"
      ],
      [
       "-pc_w/2",
-      "0 mm"
+      "strap_hang"
      ],
      [
       "-pc_w/2",
-      "strap_t"
+      "strap_hang + strap_t"
      ]
     ]
    }
@@ -370,7 +370,7 @@
    "params": {
     "values": {
      "part_number": "PC-03",
-     "description": "Under-desk PC strap (top, right side, bottom, left lip); the bottom bears on the case body, between the feet. Origin: centre of the top plate's underside = PC case top face centre; X right, +Y toward wall, Z up",
+     "description": "Under-desk PC C-bracket (top plate screwed into the desktop underside, right side, bottom, left lip), strap_w wide; the bottom bears on the case body, between the feet; strap_hang gap above the case top. Origin: PC case top face centre; X right, +Y toward wall, Z up",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

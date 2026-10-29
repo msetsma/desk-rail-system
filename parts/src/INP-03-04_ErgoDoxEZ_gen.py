@@ -28,17 +28,14 @@ OUTLINE_W = 202.2584  # DXF x extent (kb_w = 202.26 mm)
 PITCH = 19.05  # 1u
 CAP_GAP = 0.85  # 1u cap footprint = 18.2 mm
 CAP_R = 3.0  # cap corner radius at the base (> kb_cap_inset so the tapered top stays valid)
-SW = 14.0  # MX switch housing top, square
 BOTTOM_ROW_Y = 66.0  # keys below this (non-thumb) are the bottom modifier row
 
 MATERIAL = "ABS"
 COLOR_CASE = "#1e1f21"  # ZSA black case (user, 2026-10-28)
-COLOR_SWITCH = "#2b2b2b"  # switch housings (dark)
 COLOR_CAPS = "#cdcdc8"  # light grey SA keycaps
 
 # name, expression, comment
 LOCAL_PARAMS = [
-    ("kb_sw_h", "6 mm", "MEASURE: switch housing exposed between plate (case top) and SA cap skirt"),
     ("kb_chamfer", "1 mm", "Case top edge chamfer"),
     ("kb_cap_inset", "2.75 mm", "SA cap top inset per side (18.2 base -> 12.7 top)"),
     ("sa_r1", "16.5 mm", "MEASURE: SA row 1 (number row) cap height, SP nominal 0.65 in"),
@@ -153,23 +150,6 @@ def case_cmds(side: str, dxf: Path) -> list[dict]:
     ]
 
 
-def switch_cmds(side: str, keys: Sequence[Key]) -> list[dict]:
-    """New bodies per sketch plane, then one combine (a join of disjoint pieces warns)."""
-    body = f"Keyboard_{side}_Switches"
-    cmds: list[dict] = []
-    pieces: list[str] = []
-    for ang in sorted({k.ang for k in keys}, key=abs):
-        tag = "Main" if ang == 0 else "Thumb"
-        sk = f"Sketch_{side}_Switches_{tag}"
-        rects = [_rect(*_local(k), SW, SW, None) for k in keys if k.ang == ang]
-        name = body if not pieces else f"{body}_{tag}"
-        cmds += _sketch(sk, ang, rects)
-        cmds.append(c("solid.extrude", sketch=sk, start_offset="kb_case_h", distance="kb_sw_h",
-                      operation="new", name=f"Extrude_{side}_Switches_{tag}", body_name=name))
-        pieces += _pieces(name, len(rects))
-    return cmds + [c("solid.combine", target=body, tools=pieces[1:], operation="join")]
-
-
 def cap_groups(keys: Sequence[Key]) -> list[tuple[str, float, str]]:
     """(row, angle, tag) per keycap body: one body per SA row height (and thumb plane)."""
     return [(row, ang, row.upper().replace("SA_", "") + ("" if ang == 0 else "_Thumb"))
@@ -183,7 +163,7 @@ def cap_cmds(side: str, keys: Sequence[Key]) -> list[dict]:
         sk = f"Sketch_{side}_Caps_{tag}"
         rects = [_rect(*_local(k), k.w, k.d, CAP_R) for k in keys if k.row == row and k.ang == ang]
         cmds += _sketch(sk, ang, rects)
-        cmds.append(c("solid.extrude", sketch=sk, start_offset="kb_case_h + kb_sw_h", distance=row,
+        cmds.append(c("solid.extrude", sketch=sk, start_offset="kb_case_h", distance=row,
                       taper=f"-atan(kb_cap_inset / {row})", operation="new",
                       name=f"Extrude_{side}_Caps_{tag}", body_name=f"Keyboard_{side}_Keycaps_{tag}"))
         cmds += _merge(f"Keyboard_{side}_Keycaps_{tag}", len(rects))
@@ -191,19 +171,18 @@ def cap_cmds(side: str, keys: Sequence[Key]) -> list[dict]:
 
 
 def finish_cmds(side: str, pn: str, dxf: Path, keys: Sequence[Key]) -> list[dict]:
-    case, sw = f"Keyboard_{side}_Case", f"Keyboard_{side}_Switches"
+    case = f"Keyboard_{side}_Case"
     caps = [f"Keyboard_{side}_Keycaps_{tag}" for _, _, tag in cap_groups(keys)]
     half = "left" if side == "L" else "right (mirror of left)"
     return [
-        c("material.assign", bodies=[case, sw, *caps], material=MATERIAL),
+        c("material.assign", bodies=[case, *caps], material=MATERIAL),
         c("appearance.assign", bodies=[case], color=COLOR_CASE),
-        c("appearance.assign", bodies=[sw], color=COLOR_SWITCH),
         c("appearance.assign", bodies=caps, color=COLOR_CAPS),
         c("document.metadata.set", values={
             "part_number": pn,
             "description": (
                 f"ZSA ErgoDox EZ {half}, black case, user's own light grey SA keycaps (38 keys, flat/untented). "
-                "Bodies: case (outline extrude, 1 mm top chamfer), switch housings, keycaps per SA row "
+                "Bodies: case (outline extrude, 1 mm top chamfer), keycaps per SA row sitting flush on the case top "
                 "(tapered rounded blocks: R1, R2, R3, R3_Thumb, R4). Origin: DXF origin = front-left corner "
                 "of the outline bbox on the bottom face; +Y toward wall, Z up"
             ),
@@ -223,7 +202,7 @@ def finish_cmds(side: str, pn: str, dxf: Path, keys: Sequence[Key]) -> list[dict
 
 def build(side: str, pn: str, dxf: Path, keys: Sequence[Key]) -> list[dict]:
     params = [c("parameters.add", name=n, expression=e, comment=m) for n, e, m in LOCAL_PARAMS]
-    return [*TEMPLATE, SKEL, *params, *case_cmds(side, dxf), *switch_cmds(side, keys),
+    return [*TEMPLATE, SKEL, *params, *case_cmds(side, dxf),
             *cap_cmds(side, keys), *finish_cmds(side, pn, dxf, keys)]
 
 

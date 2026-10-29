@@ -106,7 +106,7 @@
     "bodies": [
      "Modesty_Panel"
     ],
-    "color": "#4f6d7a"
+    "color": "#6b4a32"
    }
   },
   {
@@ -120,7 +120,7 @@
      "com.setsma.desk": {
       "Material": "MDF",
       "ReleaseState": "WIP",
-      "Source": "Modelled from skeleton (legacy ModestyPanel); colour from legacy model"
+      "Source": "Modelled from skeleton (legacy ModestyPanel); walnut-veneer finish to match the KARLBY walnut top, colour estimated (MEASURE)"
      }
     }
    }

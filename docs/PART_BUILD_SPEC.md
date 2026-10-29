@@ -65,7 +65,7 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 | FRM-04 | Stile 2040 | 2 | Stile_Main/Side_HFS5 |
 | FRM-05 | Modesty panel | 1 | ModestyPanel |
 | MON-01 | Main monitor 32in | 1 | Monitor_Main + Monitor_Main_Back (one body) |
-| MON-02 | Side monitor 27in | 1 | Monitor_Side + Monitor_Side_Back (one body) |
+| MON-02 | Side monitor 27in (generic, not picked yet) | 1 | Monitor_Side + Monitor_Side_Back (one body) |
 | SPK-01 | Klipsch R-40M speaker | 2 | Speaker_L_R40M + SpkFace_L_* (multibody allowed) |
 | SPK-02 | Speaker mount flange | 2 | SpkMount_L_Flange |
 | SPK-03 | Speaker mount block | 2 | SpkMount_L_Block |
@@ -77,6 +77,10 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 | INP-02 | Razer DeathAdder V3 Pro | 1 | Mouse_DAV3Pro_* (multibody allowed; source refs/razer_dav3pro/DAV3Pro.step) |
 | INP-03 | ErgoDox EZ left | 1 | Keyboard_L (outline refs/ergodox_ez/*.dxf) |
 | INP-04 | ErgoDox EZ right | 1 | Keyboard_R |
+| LAP-01 | Laptop mount arm (user-built jig placeholder, clamps the lower crossbar) | 1 | new (LaptopMount_Arm) |
+| LAP-02 | MacBook Pro 14in M4 | 1 | new (MBP_*, multibody allowed) |
+| LAP-03 | Laptop tray (user-built jig placeholder) | 1 | new (LaptopTray) |
+| CHR-01 | Herman Miller Mirra 2 chair, Butterfly back (vendor 3D DWG mesh: seat down, arms up and back) | 1 | Chair_* (multibody allowed; source refs/herman_miller_mirra2/converted/CHR-01_mirra2.step via parts/src/CHR-01_convert.py) |
 
 Hardware is in `parts/lib/` (HPTTD5, HPTLD5, HBLFSN5, M6x20 SHCS, standoff). Eye becomes a skeleton
 point in the assembly, not a part.
