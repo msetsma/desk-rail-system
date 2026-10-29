@@ -28,14 +28,14 @@ _COPIED = ("material.assign", "appearance.assign")
 
 # Camera: yaw 0 looks from the front (-Y), radians; target/distance in mm.
 VIEWS: tuple[tuple[str, list[float], float, float, float], ...] = (
-    ("Overview", [0, 0, 800], 0.6, 0.45, 4200),
-    ("Front", [0, 0, 900], 0.0, 0.1, 3800),
-    ("Back", [0, 300, 900], 3.1416, 0.2, 3800),
-    ("SideRailJoint_R", [900, 0, 690], -1.2, 0.35, 900),
-    ("SideRailJoint_L", [-900, 0, 690], 1.2, 0.35, 900),
-    ("SpeakerMount_R", [880, 320, 1190], -1.57, 0.15, 650),
-    ("UnderDesk", [0, 0, 500], 0.4, -0.3, 2500),
-    ("LaptopArm", [560, 150, 950], -0.7, 0.35, 1300),
+    ("Overview", [0, 0, 800], 0.6, 0.45, 3200),
+    ("Front", [0, 0, 900], 0.0, 0.1, 2900),
+    ("Back", [0, 300, 900], 3.1416, 0.2, 2900),
+    ("SideRailJoint_R", [900, 0, 690], -1.2, 0.35, 700),
+    ("SideRailJoint_L", [-900, 0, 690], 1.2, 0.35, 700),
+    ("SpeakerMount_R", [880, 320, 1190], -1.57, 0.15, 500),
+    ("UnderDesk", [0, 0, 500], 0.4, -0.3, 1900),
+    ("LaptopArm", [560, 150, 950], -0.7, 0.35, 1000),
 )
 # Visibility sets as configuration rows (SolidCraft has no display states): link groups suppressed.
 DISPLAY_ROWS: Mapping[str, tuple[str, ...]] = {
