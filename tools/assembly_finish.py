@@ -36,6 +36,11 @@ VIEWS: tuple[tuple[str, list[float], float, float, float], ...] = (
     ("SpeakerMount_R", [880, 320, 1190], -1.57, 0.15, 500),
     ("UnderDesk", [0, 0, 500], 0.4, -0.3, 1900),
     ("LaptopArm", [560, 150, 950], -0.7, 0.35, 1000),
+    # Framed for the matching display rows below (Rails only, Desk only, Desk + rails).
+    ("Rails", [0, 250, 1000], 0.6, 0.3, 2300),
+    ("RailsBack", [0, 250, 1000], 2.6, 0.25, 2300),
+    ("Desk", [0, 0, 450], 0.6, 0.4, 2500),
+    ("DeskRails", [0, 100, 700], 0.6, 0.4, 2800),
 )
 # Visibility sets as configuration rows (SolidCraft has no display states): link groups suppressed.
 DISPLAY_ROWS: Mapping[str, tuple[str, ...]] = {
@@ -43,6 +48,10 @@ DISPLAY_ROWS: Mapping[str, tuple[str, ...]] = {
     "Frame only": ("DSK-01", "MON-", "SPK-", "PC-", "INP-", "LAP-", "CHR-"),
     "No desktop": ("DSK-01",),
     "Monitors + speakers": ("DSK-", "HW-", "PC-", "INP-", "LAP-", "CHR-", "FRM-05"),
+    "Rails only": ("DSK-", "FRM-05", "MON-", "SPK-", "PC-", "INP-", "LAP-", "CHR-"),
+    "Desk only": ("FRM-", "HW-", "MON-", "SPK-", "PC-", "INP-", "LAP-", "CHR-"),
+    "Desk + rails": ("MON-", "SPK-", "PC-", "INP-", "LAP-", "CHR-"),
+    "No chair": ("CHR-",),
 }
 
 
