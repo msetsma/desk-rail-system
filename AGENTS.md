@@ -22,7 +22,9 @@ Core rules that always apply:
 
 ## 1. Workflow
 
-- The design file named in `PROJECT.md` is the source of truth. Edit it live, save, commit when asked.
+- The design file named in `PROJECT.md` is the source of truth. Edit it live and save.
+- **Commit each finished feature without asking** (conventional message, one commit per feature, after its
+  narrow checks pass and the cleanup checklist is run). Don't push unless asked.
 - Verify narrowly after each change: measure or interference-check only the changed bodies and their
   neighbours. Run full checks, audits or BOM builds only when asked.
   - Narrow means each changed body against only the bodies whose bounding boxes come near it, as
@@ -34,7 +36,11 @@ Core rules that always apply:
 - Before restructuring, dump a baseline (every body's bbox, volume, centre of mass). Afterwards, verify
   by regression against it, not by screenshots.
 - Note estimated or unmeasured dimensions as such (e.g. a `MEASURE` comment) and say so when relying on them.
-- Purchased parts: use real vendor CAD when it exists, and model from photos or drawings only when it doesn't.
+- Record how a measured value was taken (tape, calipers, spec sheet, display reading) and when. Check the
+  datum everything else hangs from (e.g. desk height) with a direct measurement, not an indicator.
+- Purchased parts: use real vendor CAD when it exists. If it's in a format the CAD app can't import (DWG,
+  SKP, Revit), convert it first (see `PROJECT.md`). Model from photos or drawings only when no CAD exists
+  or the conversion fails, and say which.
 - Color every part in its real finish, never a placeholder color.
 - Log design decisions where `PROJECT.md` says (decision log, guide) with the reasoning.
 
@@ -68,6 +74,10 @@ triggers a full rebuild.
   per instance.
 - Cut and join tools should overrun the faces they start or end on by ~0.1 mm. Coincident faces
   cause slow boolean retries.
+- Anything the CAD API takes only as numbers (edge/face pick points, sketch origins) is computed in the
+  part's generator from the same values that drive the geometry. Never hand-type it: it silently goes
+  stale when a parameter changes.
+- One source of truth per part: a generated script is never hand-edited (fix the generator).
 - **Profile any build slower than ~30 s once** (per-command timings / boolean profile). One slow
   feature in a part is paid again every time the part is inserted, refreshed, swept or rebuilt.
   Fix it before building on top of it.
@@ -135,5 +145,6 @@ subagents run, the main agent keeps working on non-conflicting tasks.
 | 2026-10-28 | Audit of the 1 h 42 min compliance run: one 46 s hole feature cost ~25-30 min across inserts, builds and the sweep | §3: profile builds over 30 s and fix the hot feature first |
 | 2026-10-28 | Speed spike: freezing linked parts and targeted link refresh. Inserts 42 s -> 9 s; a one-part refresh 40 s -> 0.3 s; a nested desk file flattened the BOM and saved < 1 s | §2: link frozen outputs, refresh only changed links, don't nest without measuring |
 | 2026-10-28 | A thread-eval suggested live-app checks. Measured: loading the frozen assembly takes 0.65 s; a 14-pair check took 113 s because hardware-on-extrusion contacts took ~25 s per pair, and one all-against-all call re-added them | §1: per-body neighbour pairs, skip designed contacts, cap threads -> 4 s |
+| 2026-10-29 | Rules audit: a hand-typed edge point broke DSK-02 on a parameter change; stale stored skeleton values had mis-placed PC fillet picks; a hand edit (walnut panel) lived only in a generated script; per-part link refresh was skipped for 25-part skeleton changes; mesh bodies came back "unchecked"; CRLF/LF handled by hand; a vendor DWG was skipped for an envelope; the desk height came from the paddle, 3.5 in off | §1: commit each finished feature unasked, record how values were measured, convert vendor CAD before modelling; §3: computed pick points, one source per part; PROJECT: expressions-only skeleton + `skeleton_values`, `generated_by` + auto-regen, refresh-vs-rebuild threshold, near_check bbox fallback, `.gitattributes` |
 | 2026-10-29 | Laptop fit: angular-bbox checks flagged false blocks, and a coarse (10x10 ray) placement search passed a spot that hid 2% of the monitor at full resolution | §1: check sightlines by ray casting against front faces; re-verify a searched optimum at full resolution, then pick the middle of the clear window |
 | 2026-10-28 | Same audit: a 10 min headless baseline re-eval, late-spawned placement and colour jobs (~6 min), a serial sweep (17 min vs ~5 parallel), 2 rebuilds from an untested 180° convention | §5: first wave, conventions in specs, reuse the loaded design, parallel check cases; §3: background long runs, no big dumps in context |

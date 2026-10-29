@@ -65,8 +65,12 @@ def standoff() -> dict:
     return {"commands": cmds + finish(b, "Standoff M5x12 d10", "Round standoff d10 x 12, M5 through bore (simplified), zinc-plated steel", "Steel zinc-plated", "#c4c9d0", "HW-L11_Standoff_M5x12")}
 
 
+def _write(name: str, script: dict) -> None:
+    (HERE / f"{name}.json").write_text(json.dumps({"generated_by": "parts/lib/src/gen_lib.py", **script}, indent=1))
+
+
 if __name__ == "__main__":
     for lab in STEP:
-        (HERE / f"{lab}.json").write_text(json.dumps(step_script(lab), indent=1))
-    (HERE / "HW-L10_M6x20_SHCS.json").write_text(json.dumps(screw(), indent=1))
-    (HERE / "HW-L11_Standoff_M5x12.json").write_text(json.dumps(standoff(), indent=1))
+        _write(lab, step_script(lab))
+    _write("HW-L10_M6x20_SHCS", screw())
+    _write("HW-L11_Standoff_M5x12", standoff())

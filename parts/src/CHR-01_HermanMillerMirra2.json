@@ -1,4 +1,5 @@
 {
+ "generated_by": "parts/src/CHR-01_gen.py",
  "input": "refs/herman_miller_mirra2/converted/CHR-01_mirra2.step",
  "commands": [
   {

@@ -82,7 +82,20 @@ def _commands(pairs: Mapping[str, list[str]], near: float) -> list[dict[str, obj
             for c, against in pairs.items() if against]
 
 
-def _report(result_json: Path) -> int:
+def _unchecked(u: Mapping[str, object], boxes: Mapping[str, Box]) -> None:
+    """Exact check impossible (open mesh shells, e.g. converted vendor models): fall back to the bboxes."""
+    a, b = str(u.get("a")), str(u.get("b"))
+    if a not in boxes or b not in boxes:
+        log.warning("unchecked %s | %s: %s", a, b, u.get("reason"))
+        return
+    gap = _gap(boxes[a], boxes[b])
+    if gap > 0:
+        log.info("clear   %s | %s  %.1f mm (bbox; open shell, no exact check)", a, b, gap)
+    else:
+        log.warning("BBOX    %s | %s  boxes overlap %.1f mm (open shell, no exact check): inspect", a, b, -gap)
+
+
+def _report(result_json: Path, boxes: Mapping[str, Box]) -> int:
     data = json.loads(result_json.read_text(encoding="utf-8"))
     results = data if isinstance(data, list) else data["results"]
     overlaps = checked = 0
@@ -92,7 +105,7 @@ def _report(result_json: Path) -> int:
         for n in result.get("near", []):
             log.info("near    %s | %s  %.3f mm", n["a"], n["b"], n["distance_mm"])
         for u in result.get("unchecked", []):
-            log.warning("unchecked %s | %s: %s", u.get("a"), u.get("b"), u.get("reason"))
+            _unchecked(u, boxes)
         overlaps += len(result["overlaps"])
         checked += result.get("pairs_checked", 0)
     log.info("%d overlap(s), %d pair(s) checked", overlaps, checked)
@@ -111,7 +124,8 @@ def main(argv: Sequence[str]) -> int:
     parser.add_argument("--print-params", action="store_true", help="print params for the live app")
     args = parser.parse_args(argv)
 
-    pairs = near_pairs(_boxes(args.design, args.threads), args.prefixes, args.margin, args.include_mating)
+    boxes = _boxes(args.design, args.threads)
+    pairs = near_pairs(boxes, args.prefixes, args.margin, args.include_mating)
     if not pairs:
         log.error("no bodies start with %s", args.prefixes)
         return 2
@@ -126,7 +140,7 @@ def main(argv: Sequence[str]) -> int:
     script, out = BUILD / "near_check_cmd.json", BUILD / "near_check.json"
     script.write_text(json.dumps({"commands": commands}), encoding="utf-8")
     _cli(["run", str(script), "--in", str(args.design), "--results", "--json-out", str(out), "--quiet"], args.threads)
-    return _report(out)
+    return _report(out, boxes)
 
 
 if __name__ == "__main__":

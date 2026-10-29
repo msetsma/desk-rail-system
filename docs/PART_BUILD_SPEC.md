@@ -15,9 +15,10 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
   `build/baseline.json`.
 
 ## Every part file
-1. The source of truth is a build script in `parts/src/<file>.json`. Its output is
-   `parts/<PN>_<Name>.solidcraft`. Rebuild with
-   `solidcraft-cli run parts/src/<file>.json --save parts/<file>.solidcraft`.
+1. The source of truth is the part's generator (`parts/src/<PN>_gen.py`), which writes the build script
+   `parts/src/<file>.json` marked `"generated_by"`; a few older parts have a hand-written script and no
+   generator. Rebuild with `python tools/regen_parts.py <PN>` (re-runs a stale generator, then builds and
+   freezes `parts/<PN>_<Name>.solidcraft`). Pick points are computed in the generator (AGENTS §3).
 2. The script starts with the materials from `parts/_template.json`. Parts sized by the layout or by a
    `MEASURE` estimate then run
    `parameters.import {path: "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"}`, and drive their

@@ -12,9 +12,13 @@ tracks the picked edges through later parameter changes.
 from __future__ import annotations
 
 import json
+import sys
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
+
+sys.path.insert(0, "C:/Users/2015m/DEV/CAD/desk/tools")
+import skeleton_values  # noqa: E402
 
 __all__ = ["build_pc01", "build_pc02", "main"]
 
@@ -40,11 +44,6 @@ Cmd = dict[str, Any]
 
 def cmd(command: str, **params: Any) -> Cmd:
     return {"command": command, "params": params}
-
-
-def skeleton_values() -> dict[str, float]:
-    data = json.loads((ROOT / "skeleton" / "params.json").read_text(encoding="utf-8"))
-    return {p["name"]: float(p["value"]) for p in data if isinstance(p.get("value"), (int, float))}
 
 
 def header(local_params: Sequence[tuple[str, str, str]]) -> list[Cmd]:
@@ -233,10 +232,10 @@ def build_pc02(v: Mapping[str, float]) -> list[Cmd]:
 
 
 def main() -> None:
-    v = skeleton_values()
+    v = skeleton_values.values()
     out = ROOT / "parts" / "src"
     for name, cmds in (("PC-01_FractalNorth", build_pc01(v)), ("PC-02_WalnutSlatFront", build_pc02(v))):
-        (out / f"{name}.json").write_text(json.dumps({"commands": cmds}, indent=1) + "\n", encoding="utf-8")
+        (out / f"{name}.json").write_text(json.dumps({"generated_by": "parts/src/PC-01_PC-02_gen.py", "commands": cmds}, indent=1) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

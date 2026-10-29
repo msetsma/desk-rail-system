@@ -208,7 +208,7 @@ def build(side: str, pn: str, dxf: Path, keys: Sequence[Key]) -> list[dict]:
 
 def _write(fname: str, cmds: list[dict]) -> None:
     out = ROOT / "parts/src" / f"{fname}.json"
-    out.write_text(json.dumps({"commands": cmds}, indent=1), encoding="utf-8")
+    out.write_text(json.dumps({"generated_by": "parts/src/INP-03-04_ErgoDoxEZ_gen.py", "commands": cmds}, indent=1), encoding="utf-8")
 
 
 def main() -> None:

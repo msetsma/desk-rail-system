@@ -7,21 +7,27 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   with joints from the skeleton parameters. Live app:
   `solidcraft --control 27878 --allow-path "C:\Users\<user>\DEV\CAD\desk"`.
 - Skeleton: `skeleton/params.json`, the shared layout and `MEASURE` parameters. Both the assembly and
-  every layout-driven part import it. `skeleton/hw_placements.json` holds the hardware placements.
-- Parts: the scripts `parts/src/<PN>_<Name>.json` and `parts/lib/src/HW-*.json` are the source of
-  truth. A script may name a vendor file to start from (`"input": "refs/..."`). New parts start from
-  `parts/_template.json` (materials) and follow `docs/PART_BUILD_SPEC.md`.
+  every layout-driven part import it. It stores **expressions only** (no values): for numbers, use
+  `tools/skeleton_values.py` (`values()`, evaluated with the CLI, cached by hash) or an eval report.
+  `skeleton/hw_placements.json` holds the hardware placements.
+- Parts: source of truth is the part's **generator** when its script says `"generated_by": "<gen>.py"`
+  (most parts: `parts/src/*_gen.py`, `FRM-gen.py`, `parts/lib/src/gen_lib.py`); otherwise the hand-written
+  script `parts/src/<PN>_<Name>.json` itself. Never hand-edit a generated script: the next generator run
+  overwrites it. A script may name a vendor file to start from (`"input": "refs/..."`). New parts start
+  from `parts/_template.json` (materials), get a generator, and follow `docs/PART_BUILD_SPEC.md`.
   - `parts/<PN>_<Name>.solidcraft` are **frozen** outputs: a STEP import plus materials, colours and
     metadata. They're what the assembly links, at about 1 s per insert. Don't edit them by hand.
   - Each part's build history is in `build/parts_hist/<stem>.solidcraft`. Open that one to inspect a part,
     then change the script.
 - **Edit loop (fast):**
   1. Edit `skeleton/params.json` or a part script.
-  2. Run `python tools/regen_parts.py` (it rebuilds only the parts whose script or skeleton changed, in
-     parallel). It prints the components to refresh.
-  3. In the live assembly, run `component.update_links {"component": "<name>"}` for each one (~0.3 s each).
-     **Never use the bare `update_links {}`**: it re-evaluates every link (~40 s).
-  4. A skeleton change also needs `parameters.import` of the skeleton into the assembly, for the placements.
+  2. Run `python tools/regen_parts.py`. It first re-runs stale generators (generator newer than its script,
+     or skeleton newer and the generator uses `skeleton_values`), then rebuilds only the parts whose script
+     or skeleton changed, in parallel. It prints the components to refresh.
+  3. **1-3 parts changed:** in the live assembly, run `component.update_links {"component": "<name>"}` for
+     each (~0.3 s each), plus `parameters.import` of the skeleton if it changed. **More than that** (any
+     skeleton change usually touches ~25 parts): rebuild the assembly (below, ~20 s), then `new_design` +
+     `open`. **Never use the bare `update_links {}`**: it re-evaluates every link (~40 s).
 - Parameter sweep (parallel, on private copies): `python tools/sweep.py`.
 - Rebuild the whole assembly from scratch (~20 s): `python tools/build_assembly.py --out desk_rails.solidcraft`.
   Build straight to that path (the design name comes from the build path, so a copied file keeps the
@@ -34,7 +40,8 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
 - Legacy single-timeline model (pre-compliance, reference only): `legacy/desk_rails_legacy.solidcraft`.
 - Headless CLI: `solidcraft-cli run <script.json> [--in X] --save Y`.
 - Narrow clearance after a change: `python tools/near_check.py <body prefixes>` (~4 s). It checks each
-  changed body against its bbox neighbours and skips hardware-on-extrusion contacts.
+  changed body against its bbox neighbours and skips hardware-on-extrusion contacts. Open mesh bodies
+  (the converted chair) can't be checked exactly; it falls back to their bboxes (`BBOX ... inspect`).
   `--print-params` prints the commands for the live app. `--include-mating` keeps the contacts (slow).
 - Sightlines + laptop fit: `python tools/sightlines.py [--set lap_az=36 ...]` (seconds). Ray-casts from the Eye to the
   speaker baffles, monitor screens and laptop screen, and box-checks the laptop against monitors, speakers and the frame.
@@ -118,7 +125,12 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
 - `component.update_links {}` re-evaluates every link, even unchanged ones (~40 s). Pass `component`.
 - Full assembly builds log repeated non-fatal `knot vector consists single value` panics (source part
   not yet identified; likely a vendor NURBS body). The run still succeeds.
-- Edge-pick points (`solid.chamfer`/`fillet` `edges`) are plain numbers, so a hand-written script breaks when its driving parameters change (DSK-02 `TS_EndTaper` failed after `ts_h` changed). Update the points with the parameter.
+- Edge/face pick points (`solid.chamfer`/`fillet` `edges`, `appearance.assign` `faces`) and `sketch.create`
+  origins are plain numbers. Generators compute them from `skeleton_values.values()` or their own local
+  constants (AGENTS §3). DSK-02 broke when a hand-typed point missed the new `ts_h`; the stale stored
+  skeleton values had also put the PC-01/02 fillet picks on the wrong edges.
+- Line endings: `.gitattributes` stores all text as LF; Windows generators may write CRLF and git
+  normalises on add, so don't hand-preserve line endings.
 - `inspect.clearance` can report `0.000 mm` for a real 0.1 mm gap (seen on the laptop clamp vs the 2040 bar).
   Treat sub-0.2 mm "near" values as contact-level, not as a measurement.
 - MCP `parameters.export` returns the full text even when given a `path`. `component.list` on the full

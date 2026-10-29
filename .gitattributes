@@ -1,3 +1,11 @@
+# Text is stored with LF in the repo whatever the working copy uses (generators on Windows write CRLF;
+# git normalises on add, so line endings never show up as diffs).
+* text=auto eol=lf
 *.solidcraft filter=lfs diff=lfs merge=lfs -text
+*.step -text
+*.stp -text
+*.pdf binary
+*.png binary
+*.jpg binary
 BOM.md linguist-generated
-*.dxf -diff
+*.dxf -text -diff

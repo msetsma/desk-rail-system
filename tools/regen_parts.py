@@ -4,7 +4,9 @@
     python tools/regen_parts.py --force      # rebuild everything
     python tools/regen_parts.py FRM-03 DSK   # only parts whose file name starts with these prefixes
 
-The build scripts (`parts/src/*.json`, `parts/lib/src/HW-*.json`) are the source of truth. Each part
+The build scripts (`parts/src/*.json`, `parts/lib/src/HW-*.json`) are the source of truth, except a script
+marked `"generated_by": "<generator>.py"`: its generator is, and it is re-run first when the generator is
+newer than the script, or when the skeleton is newer and the generator reads it (`skeleton_values`). Each part
 is built with its history into `build/parts_hist/<stem>.solidcraft` (open that one to inspect or edit
 interactively). It's then exported to STEP and re-imported as a single feature, with materials,
 colours and metadata replayed, into `parts/<stem>.solidcraft`, the file the assembly links. Inserting or
@@ -28,7 +30,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 
-__all__ = ["RegenError", "PartSource", "part_sources", "regen_part", "regen_all", "main"]
+__all__ = ["RegenError", "PartSource", "part_sources", "refresh_generated", "regen_part", "regen_all", "main"]
 
 log = logging.getLogger(__name__)
 
@@ -76,6 +78,33 @@ def _load(script: Path) -> dict[str, object]:
         return data
     except (OSError, json.JSONDecodeError, KeyError) as exc:
         raise RegenError(f"cannot read {script}: {exc}") from exc
+
+
+def _stale_generators(sources: Sequence[PartSource]) -> list[Path]:
+    generators: dict[Path, bool] = {}
+    for source in sources:
+        gen = _load(source.script).get("generated_by")
+        if not isinstance(gen, str):
+            continue
+        path = ROOT / gen
+        if not path.is_file():
+            raise RegenError(f"{source.script.name}: generator {gen} not found")
+        built = source.script.stat().st_mtime
+        stale = path.stat().st_mtime > built or (
+            SKELETON.stat().st_mtime > built and "skeleton_values" in path.read_text(encoding="utf-8"))
+        generators[path] = generators.get(path, False) or stale
+    return [g for g, stale in generators.items() if stale]
+
+
+def refresh_generated(sources: Sequence[PartSource]) -> list[Path]:
+    """Re-run the generators whose scripts are out of date (see the module docstring)."""
+    stale = _stale_generators(sources)
+    for gen in stale:
+        result = subprocess.run([sys.executable, str(gen)], cwd=gen.parent, capture_output=True, text=True, check=False)
+        if result.returncode != 0:
+            raise RegenError(f"{gen.name}: {(result.stderr or result.stdout).strip()[-400:]}")
+        log.info("regenerated scripts from %s", gen.name)
+    return stale
 
 
 def _commands(script: Path) -> list[dict[str, object]]:
@@ -175,6 +204,7 @@ def main(argv: Sequence[str]) -> int:
     parser.add_argument("--force", action="store_true", help="rebuild even if unchanged")
     args = parser.parse_args(argv)
     sources = [s for s in part_sources() if not args.prefixes or s.stem.startswith(tuple(args.prefixes))]
+    refresh_generated(sources)
     rebuilt, errors = regen_all(sources, force=args.force)
     for e in errors:
         log.error("%s", e)

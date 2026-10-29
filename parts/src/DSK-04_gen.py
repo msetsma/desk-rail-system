@@ -142,7 +142,7 @@ def build(skel: str = DEFAULT_SKEL) -> dict:
 def main(argv: list[str]) -> None:
     skel = argv[1] if len(argv) > 1 else DEFAULT_SKEL
     out = Path(argv[2]) if len(argv) > 2 else DEFAULT_OUT
-    out.write_text(json.dumps(build(skel), indent=1), encoding="utf-8")
+    out.write_text(json.dumps({"generated_by": "parts/src/DSK-04_gen.py", **build(skel)}, indent=1), encoding="utf-8")
 
 
 if __name__ == "__main__":

@@ -4,1144 +4,1001 @@
     "expression": "26.5 in",
     "favorite": true,
     "name": "desk_h",
-    "unit": "mm",
-    "value": 673.0999999999999
+    "unit": "mm"
   },
   {
     "comment": "Desktop width X (Karlby 74; new top TBD)",
     "expression": "74 in",
     "favorite": true,
     "name": "desk_w",
-    "unit": "mm",
-    "value": 1879.6
+    "unit": "mm"
   },
   {
     "comment": "Desktop depth Y (Karlby 26; new top TBD)",
     "expression": "26 in",
     "favorite": true,
     "name": "desk_d",
-    "unit": "mm",
-    "value": 660.4
+    "unit": "mm"
   },
   {
     "comment": "Desktop thickness",
     "expression": "1.5 in",
     "favorite": false,
     "name": "desk_t",
-    "unit": "mm",
-    "value": 38.099999999999994
+    "unit": "mm"
   },
   {
     "comment": "Desktop center offset from frame center, +Y = toward wall",
     "expression": "0 in",
     "favorite": false,
     "name": "desk_y_off",
-    "unit": "mm",
-    "value": 0.0
+    "unit": "mm"
   },
   {
     "comment": "Extrusion long side (4040 / 2040)",
     "expression": "40 mm",
     "favorite": false,
     "name": "rail_l",
-    "unit": "mm",
-    "value": 40.0
+    "unit": "mm"
   },
   {
     "comment": "Extrusion short side (2040)",
     "expression": "20 mm",
     "favorite": false,
     "name": "rail_s",
-    "unit": "mm",
-    "value": 20.0
+    "unit": "mm"
   },
   {
     "comment": "Side rail / upright outer face inset from desktop side edge (X)",
     "expression": "0 in",
     "favorite": false,
     "name": "up_side_inset",
-    "unit": "mm",
-    "value": 0.0
+    "unit": "mm"
   },
   {
     "comment": "Derived: TopSupport outer-to-outer (X). Channel bars get cut to suit; override with a number if needed",
     "expression": "desk_w - 2*(side_t + up_side_inset)",
     "favorite": false,
     "name": "frame_w",
-    "unit": "mm",
-    "value": 1799.6
+    "unit": "mm"
   },
   {
     "comment": "TopSupport: length front to back (Y), PDF 21.125 (confirmed by user 2026-10-29)",
     "expression": "21.125 in",
     "favorite": false,
     "name": "ts_len",
-    "unit": "mm",
-    "value": 536.5749999999999
+    "unit": "mm"
   },
   {
     "comment": "TopSupport: width (X), PDF 1.45 (confirmed by user 2026-10-29)",
     "expression": "1.45 in",
     "favorite": false,
     "name": "ts_w",
-    "unit": "mm",
-    "value": 36.83
+    "unit": "mm"
   },
   {
     "comment": "TopSupport: height (Z), measured 2026-10-29",
     "expression": "2 in",
     "favorite": false,
     "name": "ts_h",
-    "unit": "mm",
-    "value": 50.8
+    "unit": "mm"
   },
   {
     "comment": "ChannelBar: height (Z), measured 2026-10-29",
     "expression": "1.125 in",
     "favorite": false,
     "name": "ch_h",
-    "unit": "mm",
-    "value": 28.575
+    "unit": "mm"
   },
   {
     "comment": "ChannelBar: width of one bar (Y), from the measured 6 in between the inner bars of the front and back channels (2026-10-29); gives the dimension sheet 16.6 in outer span",
     "expression": "leg_yc - ch_bar_gap/2 - 3 in",
     "favorite": false,
     "name": "ch_bar_w",
-    "unit": "mm",
-    "value": 19.65
+    "unit": "mm"
   },
   {
     "comment": "ChannelBar/Leg: front-back offset of leg pairs from top support center, +Y = wall (confirmed by user 2026-10-29)",
     "expression": "0 in",
     "favorite": false,
     "name": "ch_y_off",
-    "unit": "mm",
-    "value": 0.0
+    "unit": "mm"
   },
   {
     "comment": "Leg: frame center to leg center (Y); measured 14.5 in front face of front leg to back face of back leg, 2026-10-29",
     "expression": "(14.5 in - leg_y)/2",
     "favorite": false,
     "name": "leg_yc",
-    "unit": "mm",
-    "value": 143.85
+    "unit": "mm"
   },
   {
     "comment": "Leg bottom (widest) stage size along X, measured 2026-10-29 (stages 50.2x80.6 / 45.2x75.4 / 40.3x70.3)",
     "expression": "50.2 mm",
     "favorite": false,
     "name": "leg_x",
-    "unit": "mm",
-    "value": 50.2
+    "unit": "mm"
   },
   {
     "comment": "Leg bottom (widest) stage size along Y, measured 2026-10-29",
     "expression": "80.6 mm",
     "favorite": false,
     "name": "leg_y",
-    "unit": "mm",
-    "value": 80.6
+    "unit": "mm"
   },
   {
     "comment": "ChannelBar: gap between the 2 bars of one channel (leg housing sits in it), measured 2026-10-29",
     "expression": "96 mm",
     "favorite": false,
     "name": "ch_bar_gap",
-    "unit": "mm",
-    "value": 96.0
+    "unit": "mm"
   },
   {
     "comment": "Leg column-top housing width (Y) between the channel bars, measured 2026-10-29",
     "expression": "95 mm",
     "favorite": false,
     "name": "leg_hsg_y",
-    "unit": "mm",
-    "value": 95.0
+    "unit": "mm"
   },
   {
     "comment": "Top support outer face to leg center (X); dimension sheet front view 2.76 in to the column inner face",
     "expression": "2.76 in - leg_x/2",
     "favorite": false,
     "name": "leg_inset",
-    "unit": "mm",
-    "value": 37.925
+    "unit": "mm"
   },
   {
     "comment": "Foot: length (Y)",
     "expression": "27.5 in",
     "favorite": false,
     "name": "foot_len",
-    "unit": "mm",
-    "value": 698.5
+    "unit": "mm"
   },
   {
     "comment": "Foot: width (X) (confirmed by user 2026-10-29)",
     "expression": "2.75 in",
     "favorite": false,
     "name": "foot_w",
-    "unit": "mm",
-    "value": 69.85
+    "unit": "mm"
   },
   {
     "comment": "Foot height incl. glides: 1.25 in body (dimension sheet) + 1/3 in glide as adjusted (measured 2026-10-29)",
     "expression": "1.25 in + 1 in/3",
     "favorite": false,
     "name": "foot_h",
-    "unit": "mm",
-    "value": 40.216667
+    "unit": "mm"
   },
   {
     "comment": "Derived: desktop underside = frame top",
     "expression": "desk_h - desk_t",
     "favorite": false,
     "name": "frame_top",
-    "unit": "mm",
-    "value": 723.9
+    "unit": "mm"
   },
   {
     "comment": "Gigabyte M32U width without stand (manual p.16)",
     "expression": "715.8 mm",
     "favorite": false,
     "name": "m1_w",
-    "unit": "mm",
-    "value": 714.0
+    "unit": "mm"
   },
   {
     "comment": "Gigabyte M32U height without stand (manual p.16)",
     "expression": "423.8 mm",
     "favorite": false,
     "name": "m1_h",
-    "unit": "mm",
-    "value": 420.0
+    "unit": "mm"
   },
   {
     "comment": "Gigabyte M32U depth without stand (manual p.16)",
     "expression": "68.2 mm",
     "favorite": false,
     "name": "m1_t",
-    "unit": "mm",
-    "value": 48.0
+    "unit": "mm"
   },
   {
     "comment": "MEASURE Monitor_Main: VESA centre above the screen outline centre (M32U manual drawing, +/-0.5)",
     "expression": "6.7 mm",
     "favorite": false,
     "name": "m1_vesa_dz",
-    "unit": "mm",
-    "value": 6.7
+    "unit": "mm"
   },
   {
     "comment": "MEASURE Monitor_Side: 27in rotated portrait, width (X)",
     "expression": "363 mm",
     "favorite": false,
     "name": "m3_w",
-    "unit": "mm",
-    "value": 363.0
+    "unit": "mm"
   },
   {
     "comment": "MEASURE Monitor_Side: height (Z)",
     "expression": "612 mm",
     "favorite": false,
     "name": "m3_h",
-    "unit": "mm",
-    "value": 612.0
+    "unit": "mm"
   },
   {
     "comment": "MEASURE Monitor_Side: max depth incl. rear bulge (Y)",
     "expression": "45 mm",
     "favorite": false,
     "name": "m3_t",
-    "unit": "mm",
-    "value": 45.0
+    "unit": "mm"
   },
   {
     "comment": "MEASURE Monitors: thin outer-edge thickness (screen slab)",
     "expression": "12 mm",
     "favorite": false,
     "name": "mon_panel_t",
-    "unit": "mm",
-    "value": 12.0
+    "unit": "mm"
   },
   {
     "comment": "Rear bulge size as a fraction of monitor width / height (envelope only)",
     "expression": "0.6",
     "favorite": false,
     "name": "mon_back_frac",
-    "unit": "",
-    "value": 0.6
+    "unit": ""
   },
   {
     "comment": "Main monitor center X",
     "expression": "0 mm",
     "favorite": false,
     "name": "m1_x",
-    "unit": "mm",
-    "value": 0.0
+    "unit": "mm"
   },
   {
     "comment": "Gap: desktop surface to bottom edge of the monitors (space for items under them)",
     "expression": "8 in",
     "favorite": true,
     "name": "mon_clearance",
-    "unit": "mm",
-    "value": 203.2
+    "unit": "mm"
   },
   {
     "comment": "Gap between monitor edges",
     "expression": "10 mm",
     "favorite": false,
     "name": "mon_gap",
-    "unit": "mm",
-    "value": 10.0
+    "unit": "mm"
   },
   {
     "comment": "Side monitor bottom edge above desktop surface",
     "expression": "mon_clearance",
     "favorite": false,
     "name": "m3_bot",
-    "unit": "mm",
-    "value": 203.2
+    "unit": "mm"
   },
   {
     "comment": "VESA adapter thickness: stile front face to monitor back",
     "expression": "15 mm",
     "favorite": false,
     "name": "mon_standoff",
-    "unit": "mm",
-    "value": 15.0
+    "unit": "mm"
   },
   {
     "comment": "MEASURE Monitors: VESA hole pattern size (100x100 typical at 27-32in)",
     "expression": "100 mm",
     "favorite": false,
     "name": "vesa",
-    "unit": "mm",
-    "value": 100.0
+    "unit": "mm"
   },
   {
     "comment": "Main monitor tilt back (top away from you), set by a wedge adapter",
     "expression": "0 deg",
     "favorite": false,
     "name": "m1_tilt",
-    "unit": "deg",
-    "value": 0.0
+    "unit": "deg"
   },
   {
     "comment": "Side monitor toe-in toward you about its inner front edge (stays at the main's front depth)",
     "expression": "15 deg",
     "favorite": false,
     "name": "m3_yaw",
-    "unit": "deg",
-    "value": 14.999999999999998
+    "unit": "deg"
   },
   {
     "comment": "Monitor_Main adapter thickness at the VESA center (grows with tilt so the bulge clears the stile)",
     "expression": "mon_standoff + m1_h*mon_back_frac/2*sin(m1_tilt)",
     "favorite": false,
     "name": "m1_off",
-    "unit": "mm",
-    "value": 15.0
+    "unit": "mm"
   },
   {
     "comment": "Lower crossbar top below the lowest monitor bottom edge (bar shows in the gap; mount things to it)",
     "expression": "25 mm",
     "favorite": false,
     "name": "bar1_gap",
-    "unit": "mm",
-    "value": 25.0
+    "unit": "mm"
   },
   {
     "comment": "Derived: side monitor inner (right) front edge X",
     "expression": "m1_x - m1_w/2 - mon_gap",
     "favorite": false,
     "name": "m3_edge_x",
-    "unit": "mm",
-    "value": -367.0
+    "unit": "mm"
   },
   {
     "comment": "Derived: side monitor VESA center X after toe-in (Stile_Side sits here)",
     "expression": "m3_edge_x - m3_w/2*cos(m3_yaw) - m3_t*sin(m3_yaw)",
     "favorite": false,
     "name": "m3_x",
-    "unit": "mm",
-    "value": -553.9623945010793
+    "unit": "mm"
   },
   {
     "comment": "MEASURE VESA adapter: outside size (square, centered on the VESA center)",
     "expression": "120 mm",
     "favorite": false,
     "name": "vesa_adp",
-    "unit": "mm",
-    "value": 120.0
+    "unit": "mm"
   },
   {
     "comment": "Derived: Monitor_Main adapter top above desktop surface (ports sit at/below it; before tilt)",
     "expression": "mon_clearance + m1_h/2 + m1_vesa_dz + vesa_adp/2",
     "favorite": false,
     "name": "m1_adp_top",
-    "unit": "mm",
-    "value": 473.2
+    "unit": "mm"
   },
   {
     "comment": "Derived: Monitor_Side adapter top above desktop surface (ports sit at/below it; before tilt)",
     "expression": "m3_bot + m3_h/2 + vesa_adp/2",
     "favorite": false,
     "name": "m3_adp_top",
-    "unit": "mm",
-    "value": 569.2
+    "unit": "mm"
   },
   {
     "comment": "Desktop rear edge to upright front face",
     "expression": "10 mm",
     "favorite": false,
     "name": "rear_gap",
-    "unit": "mm",
-    "value": 10.0
+    "unit": "mm"
   },
   {
     "comment": "Derived: upright center Y",
     "expression": "desk_d/2 + desk_y_off + rear_gap + rail_l/2",
     "favorite": false,
     "name": "up_y",
-    "unit": "mm",
-    "value": 360.2
+    "unit": "mm"
   },
   {
     "comment": "Derived: upright center X (outer face flush with side rail)",
     "expression": "frame_w/2 + side_t - rail_l/2",
     "favorite": false,
     "name": "up_xc",
-    "unit": "mm",
-    "value": 919.8
+    "unit": "mm"
   },
   {
     "comment": "Lower crossbar center above desktop surface (default: in the gap under the monitors)",
     "expression": "min(mon_clearance, m3_bot) - bar1_gap - rail_l/2",
     "favorite": false,
     "name": "bar1_z",
-    "unit": "mm",
-    "value": 158.2
+    "unit": "mm"
   },
   {
     "comment": "Upper crossbar center above desktop surface (default: top flush with the highest adapter top; stiles sit between the bars, so an adapter may overlap the coplanar bar front)",
     "expression": "max(m1_adp_top, m3_adp_top) - rail_l/2",
     "favorite": false,
     "name": "bar2_z",
-    "unit": "mm",
-    "value": 549.2
+    "unit": "mm"
   },
   {
     "comment": "Derived: upright top above desktop surface (flush with upper crossbar)",
     "expression": "bar2_z + rail_l/2",
     "favorite": false,
     "name": "up_above",
-    "unit": "mm",
-    "value": 569.2
+    "unit": "mm"
   },
   {
     "comment": "Crossbar center Y from upright center: +10 = on back slot (back faces flush), -10 = front slot",
     "expression": "rail_l/2 - rail_s/2",
     "favorite": false,
     "name": "bar_y_off",
-    "unit": "mm",
-    "value": 10.0
+    "unit": "mm"
   },
   {
     "comment": "Derived: stile center Y (between the crossbars, faces flush)",
     "expression": "up_y + bar_y_off",
     "favorite": false,
     "name": "stile_y",
-    "unit": "mm",
-    "value": 370.2
+    "unit": "mm"
   },
   {
     "comment": "Derived: stile front face Y (monitor adapters bolt here)",
     "expression": "stile_y - rail_s/2",
     "favorite": false,
     "name": "stile_front",
-    "unit": "mm",
-    "value": 360.2
+    "unit": "mm"
   },
   {
     "comment": "Derived: main monitor front face Y (before tilt)",
     "expression": "stile_front - m1_off - m1_t",
     "favorite": false,
     "name": "mon_front",
-    "unit": "mm",
-    "value": 297.2
+    "unit": "mm"
   },
   {
     "comment": "Derived: Monitor_Side adapter thickness at the VESA center (wedge; inner front edge meets the main's)",
     "expression": "stile_front - mon_front - m3_t*cos(m3_yaw) + m3_w/2*sin(m3_yaw)",
     "favorite": false,
     "name": "m3_off",
-    "unit": "mm",
-    "value": 66.50899450309944
+    "unit": "mm"
   },
   {
     "comment": "Side rail front end (Y): starts where the top support web reaches full height, clear of the tapered end",
     "expression": "-ts_len/2 + ts_taper",
     "favorite": false,
     "name": "side_front",
-    "unit": "mm",
-    "value": -230.18749999999997
+    "unit": "mm"
   },
   {
     "comment": "Measured 2026-10-29: seated floor-to-eye 46 in (Mirra 2 seat all the way down), minus the desktop height",
     "expression": "46 in - desk_h",
     "favorite": false,
     "name": "eye_above_desk",
-    "unit": "mm",
-    "value": 495.29999999999995
+    "unit": "mm"
   },
   {
     "comment": "MEASURE Eyes out from the desktop front edge (toward you, -Y) in your normal posture",
     "expression": "6 in",
     "favorite": false,
     "name": "eye_back",
-    "unit": "mm",
-    "value": 152.39999999999998
+    "unit": "mm"
   },
   {
     "comment": "MEASURE Chair: seated eye Y from the chair gas-cylinder axis (+Y toward the desk); posture estimate from the vendor model (seat at its 16 in minimum, eyes 762 mm above it), range -80..0",
     "expression": "-55 mm",
     "favorite": false,
     "name": "chr_eye_dy",
-    "unit": "mm",
-    "value": -55.0
+    "unit": "mm"
   },
   {
     "comment": "Speaker: width (X), R-40M spec",
     "expression": "147.6 mm",
     "favorite": false,
     "name": "spk_w",
-    "unit": "mm",
-    "value": 147.6
+    "unit": "mm"
   },
   {
     "comment": "Speaker: depth front to back (Y), R-40M spec",
     "expression": "214.3 mm",
     "favorite": false,
     "name": "spk_d",
-    "unit": "mm",
-    "value": 214.3
+    "unit": "mm"
   },
   {
     "comment": "Speaker: height (Z), R-40M spec",
     "expression": "298.5 mm",
     "favorite": false,
     "name": "spk_h",
-    "unit": "mm",
-    "value": 298.5
+    "unit": "mm"
   },
   {
     "comment": "MEASURE Speaker: square Tractrix horn faceplate size (1in tweeter, centered on it)",
     "expression": "110 mm",
     "favorite": false,
     "name": "spk_horn",
-    "unit": "mm",
-    "value": 110.0
+    "unit": "mm"
   },
   {
     "comment": "MEASURE Speaker: woofer outside diameter incl. trim ring (4in spun-copper cone)",
     "expression": "115 mm",
     "favorite": false,
     "name": "spk_wf_d",
-    "unit": "mm",
-    "value": 115.0
+    "unit": "mm"
   },
   {
     "comment": "MEASURE Speaker: swivel mount height on the back, as a fraction of height from the bottom",
     "expression": "0.75",
     "favorite": false,
     "name": "spk_mount_frac",
-    "unit": "",
-    "value": 0.75
+    "unit": ""
   },
   {
     "comment": "MEASURE Speaker: tweeter center below the speaker top",
     "expression": "3 in",
     "favorite": false,
     "name": "spk_tw_down",
-    "unit": "mm",
-    "value": 76.19999999999999
+    "unit": "mm"
   },
   {
     "comment": "MEASURE Speaker: woofer center below the speaker top (default: just under the horn)",
     "expression": "spk_tw_down + spk_horn/2 + 10 mm + spk_wf_d/2",
     "favorite": false,
     "name": "spk_wf_down",
-    "unit": "mm",
-    "value": 198.7
+    "unit": "mm"
   },
   {
     "comment": "Speaker bottom above desktop surface (bracket slides along the upright slot)",
     "expression": "mon_clearance",
     "favorite": false,
     "name": "spk_bot",
-    "unit": "mm",
-    "value": 203.2
+    "unit": "mm"
   },
   {
     "comment": "Upright front face to the speaker back at the swivel (bracket + swivel depth)",
     "expression": "30 mm",
     "favorite": false,
     "name": "spk_mount_d",
-    "unit": "mm",
-    "value": 30.0
+    "unit": "mm"
   },
   {
     "comment": "Speaker swivel X (default: speaker outer face flush with the upright before toe-in)",
     "expression": "up_xc + rail_l/2 - spk_w/2",
     "favorite": false,
     "name": "spk_px",
-    "unit": "mm",
-    "value": 866.0
+    "unit": "mm"
   },
   {
     "comment": "Derived: swivel Y (speaker back face)",
     "expression": "up_y - rail_l/2 - spk_mount_d",
     "favorite": false,
     "name": "spk_py",
-    "unit": "mm",
-    "value": 310.2
+    "unit": "mm"
   },
   {
     "comment": "Derived: swivel height above desktop surface",
     "expression": "spk_bot + spk_mount_frac*spk_h",
     "favorite": false,
     "name": "spk_pz",
-    "unit": "mm",
-    "value": 427.075
+    "unit": "mm"
   },
   {
     "comment": "Derived: toe-in that points the speakers straight at the Eye marker",
     "expression": "atan((spk_px - m1_x) / (spk_py - spk_d/2 + desk_d/2 - desk_y_off + eye_back))",
     "favorite": false,
     "name": "spk_aim",
-    "unit": "deg",
-    "value": 51.629803299347984
+    "unit": "deg"
   },
   {
     "comment": "Toe-in limit (the left speaker nears the portrait monitor past this)",
     "expression": "25 deg",
     "favorite": false,
     "name": "spk_yaw_max",
-    "unit": "deg",
-    "value": 25.0
+    "unit": "deg"
   },
   {
     "comment": "Speaker toe-in actually used",
     "expression": "min(spk_aim, spk_yaw_max)",
     "favorite": false,
     "name": "spk_yaw",
-    "unit": "deg",
-    "value": 25.0
+    "unit": "deg"
   },
   {
     "comment": "Derived: tilt down that points the tweeter at the Eye (negative = it would need to tilt up)",
     "expression": "atan((spk_bot + spk_h - spk_tw_down - eye_above_desk) * cos(spk_aim) / (spk_py - spk_d/2 + desk_d/2 - desk_y_off + eye_back))",
     "favorite": false,
     "name": "spk_tilt_aim",
-    "unit": "deg",
-    "value": 0.9906494509215347
+    "unit": "deg"
   },
   {
     "comment": "Speaker tilt down actually used (the swivel tilts down only)",
     "expression": "max(spk_tilt_aim, 0 deg)",
     "favorite": false,
     "name": "spk_tilt",
-    "unit": "deg",
-    "value": 0.9906494509215347
+    "unit": "deg"
   },
   {
     "comment": "Panel bottom below desktop underside",
     "expression": "14 in",
     "favorite": false,
     "name": "pnl_drop",
-    "unit": "mm",
-    "value": 355.59999999999997
+    "unit": "mm"
   },
   {
     "comment": "Panel rise past the highest of the upright tops and adapter tops (hides cable exits)",
     "expression": "15 mm",
     "favorite": false,
     "name": "pnl_cover",
-    "unit": "mm",
-    "value": 15.0
+    "unit": "mm"
   },
   {
     "comment": "Panel top above desktop surface (monitors show above it; ports + cables stay hidden)",
     "expression": "max(up_above, m1_adp_top, m3_adp_top) + pnl_cover",
     "favorite": false,
     "name": "pnl_above",
-    "unit": "mm",
-    "value": 584.2
+    "unit": "mm"
   },
   {
     "comment": "Panel thickness",
     "expression": "0.25 in",
     "favorite": false,
     "name": "pnl_t",
-    "unit": "mm",
-    "value": 6.35
+    "unit": "mm"
   },
   {
     "comment": "Standoff length: upright/crossbar back face to panel (clears plates + bolt heads)",
     "expression": "12 mm",
     "favorite": false,
     "name": "pnl_back_gap",
-    "unit": "mm",
-    "value": 12.0
+    "unit": "mm"
   },
   {
     "comment": "Panel overhang past each upright outer face (X)",
     "expression": "0 mm",
     "favorite": false,
     "name": "pnl_side",
-    "unit": "mm",
-    "value": 0.0
+    "unit": "mm"
   },
   {
     "comment": "Gusset bracket wall thickness",
     "expression": "5 mm",
     "favorite": false,
     "name": "brk_t",
-    "unit": "mm",
-    "value": 5.0
+    "unit": "mm"
   },
   {
     "comment": "Misumi HBLFSN5 gusset leg (1-slot) for the 2040 crossbar/stile joints; the 4040 side-rail joints use the 2-slot HBLFSD5 (HW-L04). Sketches hold fixed geometry",
     "expression": "30 mm",
     "favorite": false,
     "name": "brk_a",
-    "unit": "mm",
-    "value": 30.0
+    "unit": "mm"
   },
   {
     "comment": "Misumi HBLFSN5 gusset leg, stile joints (same part as brk_a)",
     "expression": "30 mm",
     "favorite": false,
     "name": "brk_a_small",
-    "unit": "mm",
-    "value": 30.0
+    "unit": "mm"
   },
   {
     "comment": "Misumi HPTTD5 / HPTLD5 sheet-metal plate thickness",
     "expression": "2.3 mm",
     "favorite": false,
     "name": "plate_t",
-    "unit": "mm",
-    "value": 2.3
+    "unit": "mm"
   },
   {
     "comment": "Plate arm past the upright along the horizontal member (HPTTD5 stem / HPTLD5 arm); sketches hold fixed geometry",
     "expression": "42 mm",
     "favorite": false,
     "name": "plate_arm",
-    "unit": "mm",
-    "value": 42.0
+    "unit": "mm"
   },
   {
     "comment": "HPTTD5 T-plate bar reach past the side rail along the upright ((110-38)/2); sets up_below",
     "expression": "36 mm",
     "favorite": false,
     "name": "plate_ext",
-    "unit": "mm",
-    "value": 36.0
+    "unit": "mm"
   },
   {
     "comment": "Upright length below desktop underside: to the side-rail T-plate bottom (the panel hangs past it)",
     "expression": "rail_l + plate_ext",
     "favorite": false,
     "name": "up_below",
-    "unit": "mm",
-    "value": 76.0
+    "unit": "mm"
   },
   {
     "comment": "Panel standoff diameter (M5 threaded standoff into a T-nut)",
     "expression": "10 mm",
     "favorite": false,
     "name": "so_d",
-    "unit": "mm",
-    "value": 10.0
+    "unit": "mm"
   },
   {
     "comment": "Panel standoffs on each crossbar: at x = 0 and +/- this",
     "expression": "up_xc/2",
     "favorite": false,
     "name": "so_bar_x",
-    "unit": "mm",
-    "value": 459.9
+    "unit": "mm"
   },
   {
     "comment": "PC case width X (Fractal North spec)",
     "expression": "215 mm",
     "favorite": true,
     "name": "pc_w",
-    "unit": "mm",
-    "value": 215.0
+    "unit": "mm"
   },
   {
     "comment": "PC case depth Y (Fractal North product sheet)",
     "expression": "447 mm",
     "favorite": false,
     "name": "pc_d",
-    "unit": "mm",
-    "value": 469.0
+    "unit": "mm"
   },
   {
     "comment": "PC case height Z incl. 19 mm feet (Fractal North product sheet)",
     "expression": "469 mm",
     "favorite": false,
     "name": "pc_h",
-    "unit": "mm",
-    "value": 447.0
+    "unit": "mm"
   },
   {
     "comment": "PC case foot height (Fractal North: 469 with feet, 450 without). The strap bears on the case body; the feet hang outside the strap",
     "expression": "19 mm",
     "favorite": false,
     "name": "pc_foot_h",
-    "unit": "mm",
-    "value": 19.0
+    "unit": "mm"
   },
   {
     "comment": "Gap: left leg inner face to PC case left side",
     "expression": "2 in",
     "favorite": true,
     "name": "pc_leg_gap",
-    "unit": "mm",
-    "value": 50.8
+    "unit": "mm"
   },
   {
     "comment": "PC strap metal thickness",
     "expression": "0.5 in",
     "favorite": false,
     "name": "strap_t",
-    "unit": "mm",
-    "value": 12.7
+    "unit": "mm"
   },
   {
     "comment": "PC C-bracket width (Y), measured 2026-10-29",
     "expression": "4.5 in",
     "favorite": false,
     "name": "strap_w",
-    "unit": "mm",
-    "value": 114.3
+    "unit": "mm"
   },
   {
     "comment": "PC strap left lip rise above case bottom",
     "expression": "6 in",
     "favorite": false,
     "name": "strap_lip",
-    "unit": "mm",
-    "value": 152.39999999999998
+    "unit": "mm"
   },
   {
     "comment": "PC front frame border, sides (X), Fractal North renders",
     "expression": "8.5 mm",
     "favorite": false,
     "name": "pc_bezel",
-    "unit": "mm",
-    "value": 10.0
+    "unit": "mm"
   },
   {
     "comment": "PC front frame border, top and bottom (Z), Fractal North renders",
     "expression": "18 mm",
     "favorite": false,
     "name": "pc_bezel_v",
-    "unit": "mm",
-    "value": 15.0
+    "unit": "mm"
   },
   {
     "comment": "Walnut slat width (X), Fractal North renders",
     "expression": "9 mm",
     "favorite": false,
     "name": "slat_w",
-    "unit": "mm",
-    "value": 8.466666666666665
+    "unit": "mm"
   },
   {
     "comment": "Walnut slat depth (Y)",
     "expression": "8 mm",
     "favorite": false,
     "name": "slat_t",
-    "unit": "mm",
-    "value": 8.0
+    "unit": "mm"
   },
   {
     "comment": "MEASURE Slat face set back from case front (renders)",
     "expression": "8 mm",
     "favorite": false,
     "name": "slat_inset",
-    "unit": "mm",
-    "value": 2.0
+    "unit": "mm"
   },
   {
     "comment": "Derived: gap between the 10 slats",
     "expression": "(pc_w - 2*pc_bezel - 10*slat_w) / 11",
     "favorite": false,
     "name": "slat_gap",
-    "unit": "mm",
-    "value": 10.030303030303031
+    "unit": "mm"
   },
   {
     "comment": "Derived: PC case left side X",
     "expression": "-(frame_w/2 - leg_inset - leg_x/2) + pc_leg_gap",
     "favorite": false,
     "name": "pc_x0",
-    "unit": "mm",
-    "value": -776.1500000000001
+    "unit": "mm"
   },
   {
     "comment": "PC case top Z, fixed 1.7 in below the desktop underside (the C bracket screws into the desktop and hangs the case; position kept from Rev A)",
     "expression": "frame_top - 1.7 in",
     "favorite": false,
     "name": "pc_top",
-    "unit": "mm",
-    "value": 680.72
+    "unit": "mm"
   },
   {
     "comment": "Derived: gap from the PC case top up to the C-bracket top plate underside (plate screwed to the desktop)",
     "expression": "frame_top - pc_top - strap_t",
     "favorite": false,
     "name": "strap_hang",
-    "unit": "mm",
-    "value": 30.48
+    "unit": "mm"
   },
   {
     "comment": "Derived: PC case bottom Z",
     "expression": "pc_top - pc_h",
     "favorite": false,
     "name": "pc_bot",
-    "unit": "mm",
-    "value": 233.7199999999999
+    "unit": "mm"
   },
   {
     "comment": "Mouse pad, square side",
     "expression": "16.5 in",
     "favorite": false,
     "name": "pad_size",
-    "unit": "mm",
-    "value": 419.09999999999997
+    "unit": "mm"
   },
   {
     "comment": "Mouse pad thickness",
     "expression": "3 mm",
     "favorite": false,
     "name": "pad_t",
-    "unit": "mm",
-    "value": 3.0
+    "unit": "mm"
   },
   {
     "comment": "Desk front edge to mouse pad front edge",
     "expression": "1 in",
     "favorite": false,
     "name": "pad_front_gap",
-    "unit": "mm",
-    "value": 25.4
+    "unit": "mm"
   },
   {
     "comment": "ErgoDox EZ half width X incl. thumb cluster (ZSA 1:1 outline, refs/ergodox_ez); placement only, outline is fixed",
     "expression": "202.26 mm",
     "favorite": false,
     "name": "kb_w",
-    "unit": "mm",
-    "value": 202.26
+    "unit": "mm"
   },
   {
     "comment": "ErgoDox EZ half depth Y (ZSA 1:1 outline); placement only",
     "expression": "176.25 mm",
     "favorite": false,
     "name": "kb_d",
-    "unit": "mm",
-    "value": 176.25
+    "unit": "mm"
   },
   {
     "comment": "ErgoDox EZ case height (3 cm total with stock DCS caps)",
     "expression": "12 mm",
     "favorite": false,
     "name": "kb_case_h",
-    "unit": "mm",
-    "value": 15.0
+    "unit": "mm"
   },
   {
     "comment": "ErgoDox EZ SA R1 keycap above case top (caps modelled flush on the case, no switch housings; MEASURE)",
     "expression": "16.5 mm",
     "favorite": false,
     "name": "kb_key_h",
-    "unit": "mm",
-    "value": 16.5
+    "unit": "mm"
   },
   {
     "comment": "Gap between keyboard halves (X), centered on main monitor",
     "expression": "100 mm",
     "favorite": true,
     "name": "kb_gap",
-    "unit": "mm",
-    "value": 100.0
+    "unit": "mm"
   },
   {
     "comment": "Desk front edge to keyboard front edge",
     "expression": "80 mm",
     "favorite": false,
     "name": "kb_front_gap",
-    "unit": "mm",
-    "value": 80.0
+    "unit": "mm"
   },
   {
     "comment": "Right keyboard half to mouse pad (right-handed)",
     "expression": "20 mm",
     "favorite": false,
     "name": "pad_kb_gap",
-    "unit": "mm",
-    "value": 20.0
+    "unit": "mm"
   },
   {
     "comment": "Derived: desktop front edge Y",
     "expression": "-desk_d/2 + desk_y_off",
     "favorite": false,
     "name": "desk_front",
-    "unit": "mm",
-    "value": -330.2
+    "unit": "mm"
   },
   {
     "comment": "Derived: mouse pad center X",
     "expression": "m1_x + kb_gap/2 + kb_w + pad_kb_gap + pad_size/2",
     "favorite": false,
     "name": "pad_x",
-    "unit": "mm",
-    "value": 481.80999999999995
+    "unit": "mm"
   },
   {
     "comment": "Derived: mouse pad center Y",
     "expression": "desk_front + pad_front_gap + pad_size/2",
     "favorite": false,
     "name": "pad_y",
-    "unit": "mm",
-    "value": -95.25000000000003
+    "unit": "mm"
   },
   {
     "comment": "Mouse pad corner radius",
     "expression": "15 mm",
     "favorite": false,
     "name": "pad_r",
-    "unit": "mm",
-    "value": 15.0
+    "unit": "mm"
   },
   {
     "comment": "TopSupport: sheet steel thickness (est. from photos) (confirmed by user 2026-10-29)",
     "expression": "3 mm",
     "favorite": false,
     "name": "ts_t",
-    "unit": "mm",
-    "value": 3.0
+    "unit": "mm"
   },
   {
     "comment": "TopSupport: web end taper length along Y (from dimension sheet side view)",
     "expression": "1.5 in",
     "favorite": false,
     "name": "ts_taper",
-    "unit": "mm",
-    "value": 38.099999999999994
+    "unit": "mm"
   },
   {
     "comment": "TopSupport: web lip height left at the tapered flange tips (from foot-kit photo)",
     "expression": "5 mm",
     "favorite": false,
     "name": "ts_lip",
-    "unit": "mm",
-    "value": 5.0
+    "unit": "mm"
   },
   {
     "comment": "Side rail thickness in X: 4040 = rail_l (2040 = rail_s). Frame width follows it",
     "expression": "rail_l",
     "favorite": false,
     "name": "side_t",
-    "unit": "mm",
-    "value": 40.0
+    "unit": "mm"
   },
   {
     "comment": "TopSupport: spacing of the 2 leg screws per column along Y (dimension sheet end view) (confirmed by user 2026-10-29)",
     "expression": "2.47 in",
     "favorite": false,
     "name": "ts_bolt_pitch",
-    "unit": "mm",
-    "value": 62.738
+    "unit": "mm"
   },
   {
     "comment": "TopSupport: leg screw center below frame top, measured 2026-10-29",
     "expression": "0.75 in",
     "favorite": false,
     "name": "ts_bolt_z",
-    "unit": "mm",
-    "value": 19.05
+    "unit": "mm"
   },
   {
     "comment": "Leg screw M6 button head diameter (ISO 7380)",
     "expression": "10.5 mm",
     "favorite": false,
     "name": "ts_bolt_head_d",
-    "unit": "mm",
-    "value": 10.5
+    "unit": "mm"
   },
   {
     "comment": "Leg screw M6 button head height (ISO 7380)",
     "expression": "3.3 mm",
     "favorite": false,
     "name": "ts_bolt_head_k",
-    "unit": "mm",
-    "value": 3.3
+    "unit": "mm"
   },
   {
     "comment": "MEASURE 4040 side rail: inner wall thickness where the access hole bottoms out (bolt head seat)",
     "expression": "4 mm",
     "favorite": false,
     "name": "sr_seat_t",
-    "unit": "mm",
-    "value": 4.0
+    "unit": "mm"
   },
   {
     "comment": "Side rail access hole for M6 socket head + hex key (drilled through the outer face)",
     "expression": "11 mm",
     "favorite": false,
     "name": "sr_access_d",
-    "unit": "mm",
-    "value": 11.0
+    "unit": "mm"
   },
   {
     "comment": "Side rail / top support clearance hole for M6",
     "expression": "6.6 mm",
     "favorite": false,
     "name": "sr_clear_d",
-    "unit": "mm",
-    "value": 6.6
+    "unit": "mm"
   },
   {
     "comment": "M6 socket head cap screw head diameter (ISO 4762)",
     "expression": "10 mm",
     "favorite": false,
     "name": "sb_head_d",
-    "unit": "mm",
-    "value": 10.0
+    "unit": "mm"
   },
   {
     "comment": "M6 socket head cap screw head height (ISO 4762)",
     "expression": "6 mm",
     "favorite": false,
     "name": "sb_head_k",
-    "unit": "mm",
-    "value": 6.0
+    "unit": "mm"
   },
   {
     "comment": "Side rail bolt length under head: M6x20 into leg thread / channel end",
     "expression": "20 mm",
     "favorite": false,
     "name": "sb_len",
-    "unit": "mm",
-    "value": 20.0
+    "unit": "mm"
   },
   {
     "comment": "MacBook Pro 14in M4 width (Apple tech specs); placement only",
@@ -1169,16 +1026,14 @@
     "expression": "36.5 deg",
     "favorite": false,
     "name": "lap_az",
-    "unit": "deg",
-    "value": 36.5
+    "unit": "deg"
   },
   {
     "comment": "Eye to laptop tray centre, plan distance (user 2026-10-29: pushed back; 825 mm hits the lower crossbar)",
     "expression": "800 mm",
     "favorite": false,
     "name": "lap_dist",
-    "unit": "mm",
-    "value": 800.0
+    "unit": "mm"
   },
   {
     "comment": "Derived: laptop / tray centre X",
@@ -1206,16 +1061,14 @@
     "expression": "140 mm",
     "favorite": false,
     "name": "lap_tray_z",
-    "unit": "mm",
-    "value": 140.0
+    "unit": "mm"
   },
   {
     "comment": "Keyboard deck tilt below horizontal, front edge down (user 2026-10-29: about 20 deg, laptop opened obtuse)",
     "expression": "20 deg",
     "favorite": false,
     "name": "lap_kb_tilt",
-    "unit": "deg",
-    "value": 20.0
+    "unit": "deg"
   },
   {
     "comment": "Derived: lid opening angle from the deck so the screen matches the monitor tilt (m1_tilt) with the deck at lap_kb_tilt",
@@ -1250,24 +1103,21 @@
     "expression": "8 mm",
     "favorite": false,
     "name": "lap_hinge_r",
-    "unit": "mm",
-    "value": 8.0
+    "unit": "mm"
   },
   {
     "comment": "Derived: tilt hinge axis below the tray top origin (tray frame Z; barrel overlaps the plate 0.1 mm)",
     "expression": "-(lap_tray_t + lap_hinge_r - 0.1 mm)",
     "favorite": false,
     "name": "lap_hinge_z",
-    "unit": "mm",
-    "value": -13.9
+    "unit": "mm"
   },
   {
     "comment": "Derived: hinge stem bottom = pivot puck top (tray frame Z, 10 mm stem under the barrel)",
     "expression": "lap_hinge_z - lap_hinge_r - 10 mm",
     "favorite": false,
     "name": "lap_yoke_bot",
-    "unit": "mm",
-    "value": -31.9
+    "unit": "mm"
   },
   {
     "comment": "Derived: laptop mount clamp seat = lower crossbar top face (world Z)",

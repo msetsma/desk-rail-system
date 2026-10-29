@@ -96,7 +96,7 @@ def build() -> dict:
 
 
 def main() -> None:
-    OUT.write_text(json.dumps(build(), indent=1), encoding="utf-8")
+    OUT.write_text(json.dumps({"generated_by": "parts/src/CHR-01_gen.py", **build()}, indent=1), encoding="utf-8")
 
 
 if __name__ == "__main__":

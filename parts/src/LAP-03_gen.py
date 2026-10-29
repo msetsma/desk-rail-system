@@ -79,7 +79,7 @@ def build() -> list[dict]:
 
 
 def main() -> None:
-    OUT.write_text(json.dumps({"commands": build()}, indent=1), encoding="utf-8")
+    OUT.write_text(json.dumps({"generated_by": "parts/src/LAP-03_gen.py", "commands": build()}, indent=1), encoding="utf-8")
 
 
 if __name__ == "__main__":

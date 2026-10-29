@@ -36,7 +36,8 @@ def profile(name: str, plane: object, dxf: str, at: list[float] | None = None) -
 def write(fname: str, cmds: list[dict]) -> None:
     out = ROOT / "parts/src" / f"{fname}.json"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps({"commands": TEMPLATE + [SKEL] + cmds}, indent=1), encoding="utf-8")
+    out.write_text(json.dumps({"generated_by": "parts/src/FRM-gen.py", "commands": TEMPLATE + [SKEL] + cmds}, indent=1),
+                   encoding="utf-8")
 
 
 SRC_DXF = "Misumi HFS5 profile DXF (profiles/), length from skeleton"
@@ -62,9 +63,9 @@ write("FRM-04_Stile_2040", profile("Profile_HFS5_2040", {"origin": [0, 0, 0], "x
 write("FRM-05_Modesty_panel", [
     c("solid.box", length="desk_w - 2*pnl_side", width="pnl_t", height="pnl_drop + desk_t + pnl_above",
       corner=["-(desk_w - 2*pnl_side)/2", "0 mm", "0 mm"], name="Box_Panel", body_name="Modesty_Panel"),
-] + finish("Modesty_Panel", "MDF", "#4f6d7a", "FRM-05",
+] + finish("Modesty_Panel", "MDF", "#6b4a32", "FRM-05",
            "Modesty / privacy panel, 1/4 in sheet, W = desk_w - 2*pnl_side, H = pnl_drop + desk_t + pnl_above. Origin: bottom edge centre of the front (-Y) face, +Y toward the room, +Z up",
-           "Modelled from skeleton (legacy ModestyPanel); colour from legacy model"))
+           "Modelled from skeleton (legacy ModestyPanel); walnut-veneer finish to match the KARLBY walnut top, colour estimated (MEASURE)"))
 
 
 def bolt_circles(sketch: str, offset: str, diameter: str, nominal: float, ys: list[str]) -> list[dict]:

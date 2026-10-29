@@ -12,7 +12,11 @@ Local frame (kept from Rev A): origin = VESA mounting face centre (rear of the V
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
+
+sys.path.insert(0, "C:/Users/2015m/DEV/CAD/desk/tools")
+import skeleton_values  # noqa: E402
 
 __all__ = ["build", "main"]
 
@@ -35,8 +39,13 @@ PARAMS: list[tuple[str, str, str]] = [
     ("m27_vesa", "100 mm", "VESA hole pattern"),
 ]
 
-# default-parameter numbers, only used to pick faces
-M3_W, M3_H, M3_T, AA_LONG, AA_SHORT = 363.0, 612.0, 45.0, 596.736, 335.664
+AA_LONG, AA_SHORT = 596.736, 335.664  # = m27_aa_long / m27_aa_short, for the face pick and sketch plane
+
+
+def m3() -> tuple[float, float, float]:
+    """Evaluated skeleton outline (m3_w, m3_h, m3_t): the screen sketch plane and face pick take numbers."""
+    v = skeleton_values.values()
+    return v["m3_w"], v["m3_h"], v["m3_t"]
 X_SCREEN_R = "m3_w/2 - m27_bez"
 X_SCREEN_L = "m3_w/2 - m27_bez - m27_aa_short"
 
@@ -82,7 +91,7 @@ def vesa_holes() -> list[dict]:
 def screen() -> list[dict]:
     zb, zt = "-m27_aa_long/2", "m27_aa_long/2"
     return [
-        xz_plane(-M3_T - 0.1, "Sk_M27_Screen"),
+        xz_plane(-m3()[2] - 0.1, "Sk_M27_Screen"),
         c("sketch.line", closed=True, points=[[X_SCREEN_L, zb], [X_SCREEN_R, zb], [X_SCREEN_R, zt], [X_SCREEN_L, zt]]),
         c("sketch.finish"),
         c("solid.extrude", sketch="Sk_M27_Screen", distance="0.4 mm", direction="negative",
@@ -91,15 +100,16 @@ def screen() -> list[dict]:
 
 
 def finish() -> list[dict]:
-    bez = (M3_H - AA_LONG) / 2
-    screen_x = M3_W / 2 - bez - AA_SHORT / 2
+    m3_w, m3_h, m3_t = m3()
+    bez = (m3_h - AA_LONG) / 2
+    screen_x = m3_w / 2 - bez - AA_SHORT / 2
     desc = ("Side monitor, generic 27in 16:9 in portrait, VESA 100x100 mounted (model not picked yet). "
             "Thin bezel top/bottom/inner edge, landscape chin on the outer (-X) edge. Origin: VESA mounting "
             "face centre (rear of the VESA boss); screen faces -Y, X right, Z up (unyawed)")
     return [
         c("material.assign", bodies=[BODY], material=MATERIAL),
         c("appearance.assign", bodies=[BODY], color=COLOR_HOUSING),
-        c("appearance.assign", faces=[[screen_x, -M3_T + 0.3, 0.0]], body=BODY, color=COLOR_SCREEN,
+        c("appearance.assign", faces=[[screen_x, -m3_t + 0.3, 0.0]], body=BODY, color=COLOR_SCREEN,
           pbr={"metallic": 0.0, "roughness": 0.08, "dielectric_ior": 1.5}),
         c("document.metadata.set", values={
             "part_number": "MON-02", "description": desc, "revision": "A", "project": "desk",
@@ -116,7 +126,7 @@ def build() -> list[dict]:
 
 
 def main() -> None:
-    OUT.write_text(json.dumps({"commands": build()}, indent=1), encoding="utf-8")
+    OUT.write_text(json.dumps({"generated_by": "parts/src/MON-02_gen.py", "commands": build()}, indent=1), encoding="utf-8")
 
 
 if __name__ == "__main__":
