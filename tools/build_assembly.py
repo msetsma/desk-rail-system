@@ -16,7 +16,7 @@ import json
 import logging
 import subprocess
 import sys
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -191,8 +191,12 @@ def _placement_joint(occ: Occurrence, occurrence_name: str) -> dict[str, object]
 
 
 def build_script(occurrences: Sequence[Occurrence], parts_dir: Path = PARTS,
-                 skeleton: Path = SKELETON) -> dict[str, object]:
-    """The full command script: skeleton, groups, linked parts, placement joints."""
+                 skeleton: Path = SKELETON, part_path: Callable[[str], Path] | None = None) -> dict[str, object]:
+    """The full command script: skeleton, groups, linked parts, placement joints.
+
+    `part_path(part)` maps an occurrence's part ("DSK-01_Desktop", "lib/HW-L01_HPTTD5") to its frozen file;
+    the default is `parts_dir/<part>.solidcraft`."""
+    resolve = part_path or (lambda part: parts_dir / f"{part}.solidcraft")
     commands = [*_template_commands(), _cmd("parameters.import", path=skeleton.as_posix())]
     commands += [_cmd("document.metadata.set", values={
         "part_number": "DESK-000", "description": "Desk rail system top-level assembly", "revision": "A"})]
@@ -208,7 +212,7 @@ def build_script(occurrences: Sequence[Occurrence], parts_dir: Path = PARTS,
         component = component_name(occ.part)
         reuse = component in counts
         counts[component] = counts.get(component, 0) + 1
-        commands.append(_cmd("component.insert_design", path=(parts_dir / f"{occ.part}.solidcraft").as_posix(),
+        commands.append(_cmd("component.insert_design", path=resolve(occ.part).as_posix(),
                              name=component, parent=occ.group, reuse=reuse))
         joints.append(_placement_joint(occ, f"{component}:{counts[component]}"))
     return {"commands": [*commands, *joints]}

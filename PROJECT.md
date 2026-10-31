@@ -29,6 +29,11 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
      skeleton change usually touches ~25 parts): rebuild the assembly (below, ~20 s), then `new_design` +
      `open`. **Never use the bare `update_links {}`**: it re-evaluates every link (~40 s).
 - Parameter sweep (parallel, on private copies): `python tools/sweep.py`.
+- Layout variants (own assembly file, main design untouched): `python tools/build_variant.py <name>` builds
+  `variants/<name>/variant.json` (skeleton overrides, `speakers: hung|laid`) into its `out` file, with the
+  variant skeleton and its skeleton-driven parts under `variants/<name>/`. `desk_62x32` ->
+  `desk_rails_62x32.solidcraft` (D17). Re-run it after a skeleton or part change; it re-solves the laid speaker
+  placement and laptop tray height. Checks take `--design desk_rails_62x32.solidcraft`.
 - Rebuild the whole assembly from scratch (~20 s): `python tools/build_assembly.py --out desk_rails.solidcraft`.
   Build straight to that path (the design name comes from the build path, so a copied file keeps the
   wrong name). Run `new_design` in the live app first, then `open`.

@@ -1,0 +1,214 @@
+{
+ "generated_by": "parts/src/SPK-05_gen.py",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "st_w",
+    "expression": "300.0 mm",
+    "comment": "MEASURE wedge length (X), ~ the laid R-40M's 298.5 mm"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "st_d",
+    "expression": "220.0 mm",
+    "comment": "MEASURE wedge depth (Y), ~ the R-40M's 214.3 mm"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "st_h",
+    "expression": "12.0 mm",
+    "comment": "MEASURE wedge thickness at the rear (thin end)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "st_tilt",
+    "expression": "8.0 deg",
+    "comment": "MEASURE wedge angle, front up"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "SW_Block",
+    "body_name": "SpkWedge",
+    "corner": [
+     "-st_w/2",
+     "-st_d",
+     "0 mm"
+    ],
+    "length": "st_w",
+    "width": "st_d",
+    "height": "st_h + st_d*tan(st_tilt) + 1 mm",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "SW_Cutter",
+    "body_name": "SpkWedge_TopCut",
+    "corner": [
+     "-st_w/2 - 1 mm",
+     "-st_d - 50 mm",
+     "0 mm"
+    ],
+    "length": "st_w + 2 mm",
+    "width": "st_d + 100 mm",
+    "height": "100 mm",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "SW_CutterTilt",
+    "bodies": [
+     "SpkWedge_TopCut"
+    ],
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "angle": "-st_tilt"
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "SW_CutterLift",
+    "bodies": [
+     "SpkWedge_TopCut"
+    ],
+    "translate": [
+     "0 mm",
+     "0 mm",
+     "st_h"
+    ]
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "name": "SW_TopFace",
+    "target": "SpkWedge",
+    "tools": [
+     "SpkWedge_TopCut"
+    ],
+    "operation": "cut",
+    "keep_tools": false
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "SpkWedge"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "SpkWedge"
+    ],
+    "color": "#2b2b2b"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "SPK-05",
+     "description": "Low-profile speaker tilt wedge (purchased, product TBD, envelope), 8.0 deg up. Origin: rear bottom edge centre on the desktop; -Y front, X long side, Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "ABS",
+      "ReleaseState": "WIP",
+      "Source": "Envelope; size and angle MEASURE until a product is picked"
+     }
+    }
+   }
+  }
+ ]
+}

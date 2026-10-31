@@ -28,10 +28,10 @@ class SkeletonError(Exception):
     """The skeleton could not be evaluated."""
 
 
-def _evaluate() -> dict[str, float]:
+def _evaluate(params: Path) -> dict[str, float]:
     with tempfile.TemporaryDirectory() as tmp:
         script, design, report = (Path(tmp) / n for n in ("skel.json", "skel.solidcraft", "eval.json"))
-        cmd = {"command": "parameters.import", "params": {"path": PARAMS.as_posix()}}
+        cmd = {"command": "parameters.import", "params": {"path": params.as_posix()}}
         script.write_text(json.dumps({"commands": [cmd]}), encoding="utf-8")
         for args in (["run", str(script), "--save", str(design)], ["eval", str(design), "--json-out", str(report)]):
             result = subprocess.run([CLI, *args], capture_output=True, text=True, check=False)
@@ -44,14 +44,15 @@ def _evaluate() -> dict[str, float]:
     return {r["name"]: float(r["value"]) for r in rows if isinstance(r.get("value"), (int, float))}
 
 
-def values() -> dict[str, float]:
-    """Every skeleton parameter's evaluated value, cached by the skeleton file's hash."""
-    digest = hashlib.sha256(PARAMS.read_bytes()).hexdigest()
-    if CACHE.is_file():
-        cached = json.loads(CACHE.read_text(encoding="utf-8"))
+def values(params: Path = PARAMS) -> dict[str, float]:
+    """Every parameter's evaluated value in `params` (default: the shared skeleton), cached by the file's hash."""
+    digest = hashlib.sha256(params.read_bytes()).hexdigest()
+    cache = CACHE if params == PARAMS else CACHE.with_name(f"skeleton_values_{digest[:12]}.json")
+    if cache.is_file():
+        cached = json.loads(cache.read_text(encoding="utf-8"))
         if cached.get("sha256") == digest:
             return cached["values"]
-    result = _evaluate()
-    CACHE.parent.mkdir(exist_ok=True)
-    CACHE.write_text(json.dumps({"sha256": digest, "values": result}, indent=1), encoding="utf-8")
+    result = _evaluate(params)
+    cache.parent.mkdir(exist_ok=True)
+    cache.write_text(json.dumps({"sha256": digest, "values": result}, indent=1), encoding="utf-8")
     return result

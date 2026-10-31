@@ -1,0 +1,6 @@
+{
+ "description": "62 x 32 in desktop (smaller room footprint); R-40M speakers laid on their side on low 8 deg wedges under the side screens, laptop tray raised to clear the right speaker",
+ "out": "desk_rails_62x32.solidcraft",
+ "overrides": {"desk_w": "62 in", "desk_d": "32 in"},
+ "speakers": "laid"
+}

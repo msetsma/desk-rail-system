@@ -33,7 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DESIGN = ROOT / "desk_rails.solidcraft"
 EVAL = ROOT / "build" / "desk_rails_near_eval.json"
 CLI = "solidcraft-cli"
-ANGLES = ("spk_yaw", "spk_yaw_max", "spk_aim", "m3_yaw", "lap_az", "lap_yaw", "lap_lid", "lap_kb_tilt", "m1_tilt",
+ANGLES = ("spk_lay_yaw", "spk_st_tilt", "spk_yaw", "spk_yaw_max", "spk_aim", "m3_yaw", "lap_az", "lap_yaw", "lap_lid", "lap_kb_tilt", "m1_tilt",
           "spk_tilt")
 TARGETS = ("Speaker_L", "Speaker_R", "Monitor_Main", "Monitor_Side", "Laptop_Lid")
 
@@ -102,12 +102,13 @@ class Window:
 
 
 def _params(design: Path) -> dict[str, float]:
-    if not EVAL.is_file() or EVAL.stat().st_mtime < design.stat().st_mtime:
-        result = subprocess.run([CLI, "eval", str(design), "--json-out", str(EVAL)], capture_output=True, text=True,
+    report = EVAL if design == DESIGN else EVAL.with_name(f"{design.stem}_near_eval.json")
+    if not report.is_file() or report.stat().st_mtime < design.stat().st_mtime:
+        result = subprocess.run([CLI, "eval", str(design), "--json-out", str(report)], capture_output=True, text=True,
                                 check=False)
         if result.returncode != 0:
             raise RuntimeError((result.stderr or result.stdout).strip()[:400])
-    rows = json.loads(EVAL.read_text(encoding="utf-8"))["params"]
+    rows = json.loads(report.read_text(encoding="utf-8"))["params"]
     return {r["name"]: r["value"] for r in rows if isinstance(r.get("value"), (int, float))}
 
 
@@ -146,13 +147,25 @@ def laptop(v: Mapping[str, float]) -> list[Shape]:
     ]
 
 
-def shapes(v: Mapping[str, float]) -> list[Shape]:
-    """Speaker cabinets, monitors and the laptop as boxes (heights above the desktop)."""
+def speakers(v: Mapping[str, float]) -> list[Shape]:
+    """Speaker cabinets: hung on the uprights, or laid on wedges when the skeleton has the laid layout
+    (a layout variant's `spk_lay_*` parameters, tools/spk_laid.py)."""
+    if "spk_lay_x" in v:
+        import spk_laid  # local: spk_laid builds on this module
+
+        layout = spk_laid.LaidLayout(v["spk_lay_x"], v["spk_lay_y"], v["spk_lay_yaw"], v["spk_st_tilt"],
+                                     v["spk_st_w"], v["spk_st_d"], v["spk_st_h"])
+        return spk_laid.speaker_shapes(v, layout)
     spk_z = (v["spk_bot"], v["spk_bot"] + v["spk_h"])
     spk = ((-v["spk_w"] / 2, v["spk_w"] / 2), (-v["spk_d"], 0.0), spk_z)
+    return [boxed("Speaker_L", -v["spk_px"], v["spk_py"], v["spk_yaw"], *spk),
+            boxed("Speaker_R", v["spk_px"], v["spk_py"], -v["spk_yaw"], *spk)]
+
+
+def shapes(v: Mapping[str, float]) -> list[Shape]:
+    """Speaker cabinets, monitors and the laptop as boxes (heights above the desktop)."""
     return [
-        boxed("Speaker_L", -v["spk_px"], v["spk_py"], v["spk_yaw"], *spk),
-        boxed("Speaker_R", v["spk_px"], v["spk_py"], -v["spk_yaw"], *spk),
+        *speakers(v),
         boxed("Monitor_Main", v["m1_x"], v["mon_front"] + v["m1_t"], 0.0, (-v["m1_w"] / 2, v["m1_w"] / 2),
               (-v["m1_t"], 0.0), (v["mon_clearance"], v["mon_clearance"] + v["m1_h"])),
         boxed("Monitor_Side", v["m3_x"], v["stile_front"] - v["m3_off"], v["m3_yaw"], (-v["m3_w"] / 2, v["m3_w"] / 2),

@@ -71,6 +71,7 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 | SPK-02 | Speaker mount flange | 2 | SpkMount_L_Flange |
 | SPK-03 | Speaker mount block | 2 | SpkMount_L_Block |
 | SPK-04 | Speaker mount swivel | 2 | SpkMount_L_Swivel |
+| SPK-05 | Speaker tilt wedge (62x32 variant only) | 2 | SpkWedge (new, no legacy body) |
 | PC-01 | Fractal North case | 1 | PC_FractalNorth |
 | PC-02 | Walnut slat front | 1 | PC_FrontSlats |
 | PC-03 | Under-desk strap | 1 | PC_Strap |

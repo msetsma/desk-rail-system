@@ -1,0 +1,4923 @@
+{
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/params.json"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "DESK-000",
+     "description": "Desk rail system top-level assembly",
+     "revision": "A"
+    }
+   }
+  },
+  {
+   "command": "component.create",
+   "params": {
+    "name": "DSK-00 Desk frame",
+    "parent": 0,
+    "activate": false,
+    "grounded": true
+   }
+  },
+  {
+   "command": "component.metadata.set",
+   "params": {
+    "component": "DSK-00 Desk frame",
+    "part_number": "DSK-00",
+    "description": "DeskHaus Apex Pro 4-leg frame and desktop",
+    "revision": "A"
+   }
+  },
+  {
+   "command": "component.create",
+   "params": {
+    "name": "FRM-00 Monitor rail frame",
+    "parent": 0,
+    "activate": false,
+    "grounded": false
+   }
+  },
+  {
+   "command": "component.metadata.set",
+   "params": {
+    "component": "FRM-00 Monitor rail frame",
+    "part_number": "FRM-00",
+    "description": "Misumi HFS5 rail frame and modesty panel",
+    "revision": "A"
+   }
+  },
+  {
+   "command": "component.create",
+   "params": {
+    "name": "HW-00 Frame hardware",
+    "parent": 0,
+    "activate": false,
+    "grounded": false
+   }
+  },
+  {
+   "command": "component.metadata.set",
+   "params": {
+    "component": "HW-00 Frame hardware",
+    "part_number": "HW-00",
+    "description": "Misumi plates, gussets, standoffs and screws",
+    "revision": "A"
+   }
+  },
+  {
+   "command": "component.create",
+   "params": {
+    "name": "MON-00 Monitors",
+    "parent": 0,
+    "activate": false,
+    "grounded": false
+   }
+  },
+  {
+   "command": "component.metadata.set",
+   "params": {
+    "component": "MON-00 Monitors",
+    "part_number": "MON-00",
+    "description": "Main 32in and side 27in portrait monitors",
+    "revision": "A"
+   }
+  },
+  {
+   "command": "component.create",
+   "params": {
+    "name": "SPK-00 Speakers",
+    "parent": 0,
+    "activate": false,
+    "grounded": false
+   }
+  },
+  {
+   "command": "component.metadata.set",
+   "params": {
+    "component": "SPK-00 Speakers",
+    "part_number": "SPK-00",
+    "description": "Klipsch R-40M speakers on swivel mounts",
+    "revision": "A"
+   }
+  },
+  {
+   "command": "component.create",
+   "params": {
+    "name": "PC-00 PC under-desk",
+    "parent": 0,
+    "activate": false,
+    "grounded": false
+   }
+  },
+  {
+   "command": "component.metadata.set",
+   "params": {
+    "component": "PC-00 PC under-desk",
+    "part_number": "PC-00",
+    "description": "Fractal North case, slat front and strap",
+    "revision": "A"
+   }
+  },
+  {
+   "command": "component.create",
+   "params": {
+    "name": "INP-00 Input devices",
+    "parent": 0,
+    "activate": false,
+    "grounded": false
+   }
+  },
+  {
+   "command": "component.metadata.set",
+   "params": {
+    "component": "INP-00 Input devices",
+    "part_number": "INP-00",
+    "description": "Mouse pad, mouse and split keyboard",
+    "revision": "A"
+   }
+  },
+  {
+   "command": "component.create",
+   "params": {
+    "name": "LAP-00 Laptop",
+    "parent": 0,
+    "activate": false,
+    "grounded": false
+   }
+  },
+  {
+   "command": "component.metadata.set",
+   "params": {
+    "component": "LAP-00 Laptop",
+    "part_number": "LAP-00",
+    "description": "User-built laptop mount and tray on the lower crossbar, MacBook Pro 14in",
+    "revision": "A"
+   }
+  },
+  {
+   "command": "component.create",
+   "params": {
+    "name": "CHR-00 Chair",
+    "parent": 0,
+    "activate": false,
+    "grounded": false
+   }
+  },
+  {
+   "command": "component.metadata.set",
+   "params": {
+    "component": "CHR-00 Chair",
+    "part_number": "CHR-00",
+    "description": "Herman Miller Mirra 2 (Butterfly back), user's seat",
+    "revision": "A"
+   }
+  },
+  {
+   "command": "component.create",
+   "params": {
+    "name": "REF-00 Skeleton",
+    "parent": 0,
+    "activate": false,
+    "grounded": false
+   }
+  },
+  {
+   "command": "component.metadata.set",
+   "params": {
+    "component": "REF-00 Skeleton",
+    "part_number": "REF-00",
+    "description": "Layout datums (Eye point)",
+    "revision": "A"
+   }
+  },
+  {
+   "command": "component.activate",
+   "params": {
+    "component": "REF-00 Skeleton"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "desk_h + eye_above_desk",
+    "name": "SKL_Eye"
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "m1_x",
+     "desk_front - eye_back"
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "component.activate",
+   "params": {
+    "component": 0
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/DSK-01_Desktop.solidcraft",
+    "name": "DSK-01 Desktop",
+    "parent": "DSK-00 Desk frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/DSK-02_TopSupport.solidcraft",
+    "name": "DSK-02 TopSupport",
+    "parent": "DSK-00 Desk frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/DSK-02_TopSupport.solidcraft",
+    "name": "DSK-02 TopSupport",
+    "parent": "DSK-00 Desk frame",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/DSK-03_ChannelBar.solidcraft",
+    "name": "DSK-03 ChannelBar",
+    "parent": "DSK-00 Desk frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/DSK-03_ChannelBar.solidcraft",
+    "name": "DSK-03 ChannelBar",
+    "parent": "DSK-00 Desk frame",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/DSK-03_ChannelBar.solidcraft",
+    "name": "DSK-03 ChannelBar",
+    "parent": "DSK-00 Desk frame",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/DSK-03_ChannelBar.solidcraft",
+    "name": "DSK-03 ChannelBar",
+    "parent": "DSK-00 Desk frame",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/DSK-04_Leg.solidcraft",
+    "name": "DSK-04 Leg",
+    "parent": "DSK-00 Desk frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/DSK-04_Leg.solidcraft",
+    "name": "DSK-04 Leg",
+    "parent": "DSK-00 Desk frame",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/DSK-04_Leg.solidcraft",
+    "name": "DSK-04 Leg",
+    "parent": "DSK-00 Desk frame",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/DSK-04_Leg.solidcraft",
+    "name": "DSK-04 Leg",
+    "parent": "DSK-00 Desk frame",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/DSK-05_Foot.solidcraft",
+    "name": "DSK-05 Foot",
+    "parent": "DSK-00 Desk frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/DSK-05_Foot.solidcraft",
+    "name": "DSK-05 Foot",
+    "parent": "DSK-00 Desk frame",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-01_Upright_4040.solidcraft",
+    "name": "FRM-01 Upright 4040",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-01_Upright_4040.solidcraft",
+    "name": "FRM-01 Upright 4040",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-02_Crossbar_2040.solidcraft",
+    "name": "FRM-02 Crossbar 2040",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-02_Crossbar_2040.solidcraft",
+    "name": "FRM-02 Crossbar 2040",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-03L_SideRail_L_4040.solidcraft",
+    "name": "FRM-03L SideRail L 4040",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-03R_SideRail_R_4040.solidcraft",
+    "name": "FRM-03R SideRail R 4040",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-04_Stile_2040.solidcraft",
+    "name": "FRM-04 Stile 2040",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-04_Stile_2040.solidcraft",
+    "name": "FRM-04 Stile 2040",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-05_Modesty_panel.solidcraft",
+    "name": "FRM-05 Modesty panel",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/MON-01_Monitor_Main_32in.solidcraft",
+    "name": "MON-01 Monitor Main 32in",
+    "parent": "MON-00 Monitors",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/MON-02_Monitor_Side_27in.solidcraft",
+    "name": "MON-02 Monitor Side 27in",
+    "parent": "MON-00 Monitors",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/PC-01_FractalNorth.solidcraft",
+    "name": "PC-01 FractalNorth",
+    "parent": "PC-00 PC under-desk",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/PC-02_WalnutSlatFront.solidcraft",
+    "name": "PC-02 WalnutSlatFront",
+    "parent": "PC-00 PC under-desk",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/PC-03_Strap.solidcraft",
+    "name": "PC-03 Strap",
+    "parent": "PC-00 PC under-desk",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/INP-01_MousePad.solidcraft",
+    "name": "INP-01 MousePad",
+    "parent": "INP-00 Input devices",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/INP-02_DeathAdderV3Pro.solidcraft",
+    "name": "INP-02 DeathAdderV3Pro",
+    "parent": "INP-00 Input devices",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/INP-03_ErgoDoxEZ_Left.solidcraft",
+    "name": "INP-03 ErgoDoxEZ Left",
+    "parent": "INP-00 Input devices",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/INP-04_ErgoDoxEZ_Right.solidcraft",
+    "name": "INP-04 ErgoDoxEZ Right",
+    "parent": "INP-00 Input devices",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/LAP-01_LaptopMount.solidcraft",
+    "name": "LAP-01 LaptopMount",
+    "parent": "LAP-00 Laptop",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/LAP-03_LaptopTray.solidcraft",
+    "name": "LAP-03 LaptopTray",
+    "parent": "LAP-00 Laptop",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/LAP-02_MacBookPro14.solidcraft",
+    "name": "LAP-02 MacBookPro14",
+    "parent": "LAP-00 Laptop",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/CHR-01_HermanMillerMirra2.solidcraft",
+    "name": "CHR-01 HermanMillerMirra2",
+    "parent": "CHR-00 Chair",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L01_HPTTD5.solidcraft",
+    "name": "HW-L01 HPTTD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L01_HPTTD5.solidcraft",
+    "name": "HW-L01 HPTTD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L02_HPTLD5.solidcraft",
+    "name": "HW-L02 HPTLD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L02_HPTLD5.solidcraft",
+    "name": "HW-L02 HPTLD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L02_HPTLD5.solidcraft",
+    "name": "HW-L02 HPTLD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L02_HPTLD5.solidcraft",
+    "name": "HW-L02 HPTLD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L04_HBLFSD5.solidcraft",
+    "name": "HW-L04 HBLFSD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L04_HBLFSD5.solidcraft",
+    "name": "HW-L04 HBLFSD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
+    "name": "HW-L11 Standoff M5x12",
+    "parent": "HW-00 Frame hardware",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
+    "name": "HW-L11 Standoff M5x12",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
+    "name": "HW-L11 Standoff M5x12",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
+    "name": "HW-L11 Standoff M5x12",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
+    "name": "HW-L11 Standoff M5x12",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
+    "name": "HW-L11 Standoff M5x12",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
+    "name": "HW-L11 Standoff M5x12",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
+    "name": "HW-L11 Standoff M5x12",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
+    "name": "HW-L10 M6x20 SHCS",
+    "parent": "HW-00 Frame hardware",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
+    "name": "HW-L10 M6x20 SHCS",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
+    "name": "HW-L10 M6x20 SHCS",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
+    "name": "HW-L10 M6x20 SHCS",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
+    "name": "HW-L10 M6x20 SHCS",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
+    "name": "HW-L10 M6x20 SHCS",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
+    "name": "HW-L10 M6x20 SHCS",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
+    "name": "HW-L10 M6x20 SHCS",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L01_HPTTD5.solidcraft",
+    "name": "HW-L01 HPTTD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L01_HPTTD5.solidcraft",
+    "name": "HW-L01 HPTTD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/SPK-01_R40M_Speaker.solidcraft",
+    "name": "SPK-01 R40M Speaker",
+    "parent": "SPK-00 Speakers",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/SPK-05_SpkWedge.solidcraft",
+    "name": "SPK-05 SpkWedge",
+    "parent": "SPK-00 Speakers",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/SPK-01_R40M_Speaker.solidcraft",
+    "name": "SPK-01 R40M Speaker",
+    "parent": "SPK-00 Speakers",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/SPK-05_SpkWedge.solidcraft",
+    "name": "SPK-05 SpkWedge",
+    "parent": "SPK-00 Speakers",
+    "reuse": true
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Desktop",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "DSK-01 Desktop:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "0 mm",
+     "desk_y_off",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_TopSupport_R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "DSK-02 TopSupport:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "frame_w/2",
+     "0 mm",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_TopSupport_L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "DSK-02 TopSupport:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-frame_w/2",
+     "0 mm",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_ChannelBar_BackOuter",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "DSK-03 ChannelBar:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "0 mm",
+     "ch_y_off + leg_yc + (ch_bar_gap/2 + ch_bar_w/2)",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_ChannelBar_BackInner",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "DSK-03 ChannelBar:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "0 mm",
+     "ch_y_off + leg_yc - (ch_bar_gap/2 + ch_bar_w/2)",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_ChannelBar_FrontOuter",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "DSK-03 ChannelBar:3",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "0 mm",
+     "ch_y_off - leg_yc - (ch_bar_gap/2 + ch_bar_w/2)",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_ChannelBar_FrontInner",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "DSK-03 ChannelBar:4",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "0 mm",
+     "ch_y_off - leg_yc + (ch_bar_gap/2 + ch_bar_w/2)",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Leg_RB",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "DSK-04 Leg:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "(frame_w/2 - leg_inset)",
+     "ch_y_off + leg_yc",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Leg_RF",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "DSK-04 Leg:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "(frame_w/2 - leg_inset)",
+     "ch_y_off - leg_yc",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Leg_LB",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "DSK-04 Leg:3",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-(frame_w/2 - leg_inset)",
+     "ch_y_off + leg_yc",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Leg_LF",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "DSK-04 Leg:4",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-(frame_w/2 - leg_inset)",
+     "ch_y_off - leg_yc",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Foot_R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "DSK-05 Foot:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "(frame_w/2 - leg_inset)",
+     "ch_y_off",
+     "0 deg"
+    ],
+    "offset": "0 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Foot_L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "DSK-05 Foot:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-(frame_w/2 - leg_inset)",
+     "ch_y_off",
+     "0 deg"
+    ],
+    "offset": "0 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Upright_L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-01 Upright 4040:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-up_xc",
+     "up_y",
+     "0 deg"
+    ],
+    "offset": "frame_top - up_below",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Upright_R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-01 Upright 4040:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "up_xc",
+     "up_y",
+     "0 deg"
+    ],
+    "offset": "frame_top - up_below",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Crossbar_Low",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-02 Crossbar 2040:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "0 mm",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Crossbar_High",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-02 Crossbar 2040:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "0 mm",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar2_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_SideRail_L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-03L SideRail L 4040:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-frame_w/2",
+     "0 mm",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_SideRail_R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-03R SideRail R 4040:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "frame_w/2",
+     "0 mm",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Stile_Main",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-04 Stile 2040:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m1_x",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Stile_Side",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-04 Stile 2040:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m3_x",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_ModestyPanel",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-05 Modesty panel:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "0 mm",
+     "stile_y + rail_s/2 + pnl_back_gap",
+     "0 deg"
+    ],
+    "offset": "frame_top - pnl_drop",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Monitor_Main",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "MON-01 Monitor Main 32in:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m1_x",
+     "stile_front - m1_off",
+     "0 deg"
+    ],
+    "offset": "desk_h + mon_clearance + m1_h/2 + m1_vesa_dz",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Monitor_Side",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "MON-02 Monitor Side 27in:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m3_x",
+     "stile_front - m3_off",
+     "m3_yaw"
+    ],
+    "offset": "desk_h + m3_bot + m3_h/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_PC_Case",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "PC-01 FractalNorth:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "pc_x0 + pc_w/2",
+     "0 mm",
+     "0 deg"
+    ],
+    "offset": "pc_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_PC_Slats",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "PC-02 WalnutSlatFront:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "pc_x0 + pc_w/2",
+     "-pc_d/2 + slat_inset",
+     "0 deg"
+    ],
+    "offset": "pc_top - pc_h/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_PC_Strap",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "PC-03 Strap:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "pc_x0 + pc_w/2",
+     "0 mm",
+     "0 deg"
+    ],
+    "offset": "pc_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_MousePad",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "INP-01 MousePad:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "pad_x",
+     "pad_y",
+     "0 deg"
+    ],
+    "offset": "desk_h",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Mouse",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "INP-02 DeathAdderV3Pro:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "pad_x",
+     "pad_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + pad_t",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Keyboard_L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "INP-03 ErgoDoxEZ Left:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m1_x - kb_gap/2 - kb_w",
+     "desk_front + kb_front_gap",
+     "0 deg"
+    ],
+    "offset": "desk_h",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Keyboard_R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "INP-04 ErgoDoxEZ Right:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m1_x + kb_gap/2",
+     "desk_front + kb_front_gap",
+     "0 deg"
+    ],
+    "offset": "desk_h",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_LaptopMount",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "LAP-01 LaptopMount:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "lap_x",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "lap_clamp_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_LaptopTray",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "LAP-03 LaptopTray:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "lap_x",
+     "lap_y",
+     "-lap_yaw"
+    ],
+    "offset": "desk_h + lap_tray_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Laptop",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "LAP-02 MacBookPro14:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "lap_x",
+     "lap_y",
+     "-lap_yaw"
+    ],
+    "offset": "desk_h + lap_tray_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Chair",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "CHR-01 HermanMillerMirra2:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m1_x",
+     "eye_y - chr_eye_dy",
+     "0 deg"
+    ],
+    "offset": "0 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-01 Joining plate side rail L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L01 HPTTD5:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      -1,
+      0,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      1
+     ]
+    },
+    "values": [
+     "-(up_xc + rail_l/2)",
+     "up_y + 19 mm - 80 mm",
+     "0 deg"
+    ],
+    "offset": "frame_top - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-02 Joining plate side rail R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L01 HPTTD5:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      1,
+      0,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      -1
+     ]
+    },
+    "values": [
+     "up_xc + rail_l/2",
+     "up_y + 19 mm - 80 mm",
+     "0 deg"
+    ],
+    "offset": "frame_top - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-03 Joining plate low bar L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L02 HPTLD5:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-(up_xc + 19 mm)",
+     "up_y + rail_l/2",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z - 19 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-04 Joining plate low bar R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L02 HPTLD5:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      1,
+      0,
+      0
+     ],
+     "x": [
+      0,
+      -1,
+      0
+     ]
+    },
+    "values": [
+     "(up_xc + 19 mm)",
+     "up_y + rail_l/2",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z - 19 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-05 Joining plate high bar L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L02 HPTLD5:3",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      -1,
+      0,
+      0
+     ],
+     "x": [
+      0,
+      1,
+      0
+     ]
+    },
+    "values": [
+     "-(up_xc + 19 mm)",
+     "up_y + rail_l/2",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar2_z + 19 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-06 Joining plate high bar R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L02 HPTLD5:4",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "(up_xc + 19 mm)",
+     "up_y + rail_l/2",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar2_z + 19 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-07 Gusset side rail L (HBLFSD5)",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L04 HBLFSD5:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      -1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-up_xc",
+     "up_y - rail_l/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - rail_l",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-08 Gusset side rail R (HBLFSD5)",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L04 HBLFSD5:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      -1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "up_xc",
+     "up_y - rail_l/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - rail_l",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-09 Gusset low bar L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-(up_xc - rail_l/2)",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-10 Gusset low bar R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "(up_xc - rail_l/2)",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-11 Gusset high bar L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:3",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-(up_xc - rail_l/2)",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar2_z - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-12 Gusset high bar R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:4",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "(up_xc - rail_l/2)",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar2_z - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-13 Gusset main stile low L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:5",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m1_x - rail_l/2",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-14 Gusset main stile low R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:6",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m1_x + rail_l/2",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-15 Gusset main stile high L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:7",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m1_x - rail_l/2",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar2_z - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-16 Gusset main stile high R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:8",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m1_x + rail_l/2",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar2_z - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-17 Gusset side stile low L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:9",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m3_x - rail_l/2",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-18 Gusset side stile low R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:10",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m3_x + rail_l/2",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-19 Gusset side stile high L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:11",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m3_x - rail_l/2",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar2_z - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-20 Gusset side stile high R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:12",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m3_x + rail_l/2",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar2_z - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-21 Panel standoff low bar L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L11 Standoff M5x12:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-so_bar_x",
+     "stile_y + rail_s/2",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + (rail_l/2 - rail_s/2)",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-22 Panel standoff low bar C",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L11 Standoff M5x12:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "0 mm",
+     "stile_y + rail_s/2",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + (rail_l/2 - rail_s/2)",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-23 Panel standoff low bar R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L11 Standoff M5x12:3",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "so_bar_x",
+     "stile_y + rail_s/2",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + (rail_l/2 - rail_s/2)",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-24 Panel standoff high bar L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L11 Standoff M5x12:4",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-so_bar_x",
+     "stile_y + rail_s/2",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar2_z + (rail_l/2 - rail_s/2)",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-25 Panel standoff high bar C",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L11 Standoff M5x12:5",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "0 mm",
+     "stile_y + rail_s/2",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar2_z + (rail_l/2 - rail_s/2)",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-26 Panel standoff high bar R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L11 Standoff M5x12:6",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "so_bar_x",
+     "stile_y + rail_s/2",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar2_z + (rail_l/2 - rail_s/2)",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-27 Panel standoff post L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L11 Standoff M5x12:7",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-(up_xc + (rail_l/2 - rail_s/2))",
+     "up_y + rail_l/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - up_below/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-28 Panel standoff post R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L11 Standoff M5x12:8",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "(up_xc + (rail_l/2 - rail_s/2))",
+     "up_y + rail_l/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - up_below/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-29 Side bolt L1",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L10 M6x20 SHCS:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      -1
+     ]
+    },
+    "values": [
+     "-(frame_w/2 + sr_seat_t)",
+     "ch_y_off + (-leg_yc) - ts_bolt_pitch/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - ts_bolt_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-30 Side bolt L2",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L10 M6x20 SHCS:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      -1
+     ]
+    },
+    "values": [
+     "-(frame_w/2 + sr_seat_t)",
+     "ch_y_off + (-leg_yc) + ts_bolt_pitch/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - ts_bolt_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-31 Side bolt L3",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L10 M6x20 SHCS:3",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      -1
+     ]
+    },
+    "values": [
+     "-(frame_w/2 + sr_seat_t)",
+     "ch_y_off + (leg_yc) - ts_bolt_pitch/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - ts_bolt_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-32 Side bolt L4",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L10 M6x20 SHCS:4",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      -1
+     ]
+    },
+    "values": [
+     "-(frame_w/2 + sr_seat_t)",
+     "ch_y_off + (leg_yc) + ts_bolt_pitch/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - ts_bolt_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-33 Side bolt R1",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L10 M6x20 SHCS:5",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      1
+     ]
+    },
+    "values": [
+     "(frame_w/2 + sr_seat_t)",
+     "ch_y_off + (-leg_yc) - ts_bolt_pitch/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - ts_bolt_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-34 Side bolt R2",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L10 M6x20 SHCS:6",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      1
+     ]
+    },
+    "values": [
+     "(frame_w/2 + sr_seat_t)",
+     "ch_y_off + (-leg_yc) + ts_bolt_pitch/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - ts_bolt_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-35 Side bolt R3",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L10 M6x20 SHCS:7",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      1
+     ]
+    },
+    "values": [
+     "(frame_w/2 + sr_seat_t)",
+     "ch_y_off + (leg_yc) - ts_bolt_pitch/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - ts_bolt_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-36 Side bolt R4",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L10 M6x20 SHCS:8",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      1
+     ]
+    },
+    "values": [
+     "(frame_w/2 + sr_seat_t)",
+     "ch_y_off + (leg_yc) + ts_bolt_pitch/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - ts_bolt_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-37 Joining plate side rail L inner",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L01 HPTTD5:3",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      1,
+      0,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      -1
+     ]
+    },
+    "values": [
+     "-(up_xc - rail_l/2)",
+     "up_y + 19 mm - 80 mm",
+     "0 deg"
+    ],
+    "offset": "frame_top - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-38 Joining plate side rail R inner",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L01 HPTTD5:4",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      -1,
+      0,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      1
+     ]
+    },
+    "values": [
+     "up_xc - rail_l/2",
+     "up_y + 19 mm - 80 mm",
+     "0 deg"
+    ],
+    "offset": "frame_top - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Speaker_L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "SPK-01 R40M Speaker:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0.990268069,
+      -0.139173101,
+      0.0
+     ],
+     "x": [
+      0.0,
+      0.0,
+      -1.0
+     ]
+    },
+    "values": [
+     "-(spk_lay_x + spk_st_d/2*sin(spk_lay_yaw) + (spk_mount_frac - 0.5)*spk_h*cos(spk_lay_yaw) + spk_w/2*sin(spk_st_tilt)*sin(spk_lay_yaw))",
+     "spk_lay_y + spk_st_d/2*cos(spk_lay_yaw) - (spk_mount_frac - 0.5)*spk_h*sin(spk_lay_yaw) + spk_w/2*sin(spk_st_tilt)*cos(spk_lay_yaw)",
+     "spk_lay_yaw"
+    ],
+    "offset": "desk_h + spk_st_h + spk_w/2*cos(spk_st_tilt)",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_SpkStand_L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "SPK-05 SpkWedge:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-(spk_lay_x + spk_st_d/2*sin(spk_lay_yaw))",
+     "spk_lay_y + spk_st_d/2*cos(spk_lay_yaw)",
+     "spk_lay_yaw"
+    ],
+    "offset": "desk_h",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Speaker_R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "SPK-01 R40M Speaker:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      -0.990268069,
+      -0.139173101,
+      0.0
+     ],
+     "x": [
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    "values": [
+     "(spk_lay_x + spk_st_d/2*sin(spk_lay_yaw) + (spk_mount_frac - 0.5)*spk_h*cos(spk_lay_yaw) + spk_w/2*sin(spk_st_tilt)*sin(spk_lay_yaw))",
+     "spk_lay_y + spk_st_d/2*cos(spk_lay_yaw) - (spk_mount_frac - 0.5)*spk_h*sin(spk_lay_yaw) + spk_w/2*sin(spk_st_tilt)*cos(spk_lay_yaw)",
+     "-spk_lay_yaw"
+    ],
+    "offset": "desk_h + spk_st_h + spk_w/2*cos(spk_st_tilt)",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_SpkStand_R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "SPK-05 SpkWedge:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "(spk_lay_x + spk_st_d/2*sin(spk_lay_yaw))",
+     "spk_lay_y + spk_st_d/2*cos(spk_lay_yaw)",
+     "-spk_lay_yaw"
+    ],
+    "offset": "desk_h",
+    "angle": "0 deg"
+   }
+  }
+ ]
+}
