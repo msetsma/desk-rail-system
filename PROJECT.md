@@ -42,7 +42,7 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   - a linked sub-assembly is flattened to one BOM row
   - links don't chain, so every change becomes a two-step refresh
   - all of DSK costs < 1 s to insert
-- Legacy single-timeline model (pre-compliance, reference only): `legacy/desk_rails_legacy.solidcraft`.
+- Legacy single-timeline model and `docs/COMPLIANCE_PLAN.md`: removed 2026-10-31; recover from git history if needed.
 - Headless CLI: `solidcraft-cli run <script.json> [--in X] --save Y`.
 - Narrow clearance after a change: `python tools/near_check.py <body prefixes>` (~4 s). It checks each
   changed body against its bbox neighbours and skips hardware-on-extrusion contacts. Open mesh bodies
@@ -153,3 +153,7 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   DWG -> DXF: LibreDWG `dwg2dxf` (C:/Users/2015m/cad_tools/libredwg/), see refs/herman_miller_mirra2/README.md.
 - Misumi: 3D CAD is generated server-side (slow) and needs a login or email. HFS5 extrusion 3D
   CAD isn't offered; profiles come from DXFs in `profiles/` / `refs/ext_*`.
+- Rendering: the full assembly (~330k triangles) exceeds the CPU preview cap (262k); use CPU raytrace with
+  `budget: "studio"` or GPU path. The GPU path tracer needs Vulkan, but the Windows viewport defaults to D3D12
+  (issue #7623), so `%APPDATA%\SolidCraft\graphics.json` sets `{"backend": "vulkan"}` (2026-10-29). The first
+  GPU render compiles shaders (~3 min, ~7 GB RAM). The `Hero` render setup lives in the assembly.

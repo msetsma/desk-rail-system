@@ -11,8 +11,7 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
   `solidcraft-cli snapshot --in X --out build/parts_snapshots/<file>.png`.
 - Reference geometry, in world coordinates of the legacy assembly, is exported as STEP in `build/export/`
   (`DSK.step`, `FRM.step`, `MON_PC_INP_REF.step`, `SPK.step`). Bodies keep their legacy names.
-  Import a STEP into a scratch design to measure it. Legacy volumes, bboxes and centres of mass are in
-  `build/baseline.json`.
+  Import a STEP into a scratch design to measure it. (The legacy model and its `build/baseline.json` were removed 2026-10-31; both are in git history.)
 
 ## Every part file
 1. The source of truth is the part's generator (`parts/src/<PN>_gen.py`), which writes the build script

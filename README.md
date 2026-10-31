@@ -42,7 +42,6 @@ Expect the repo to change often while that workflow is worked out.
   - `parts/lib/`: purchased hardware (Misumi plates and gussets, screws, standoffs), one file each,
     named by vendor part number. See `parts/lib/README.md`.
   - `parts/_template.json`: materials and settings every new part starts from.
-- `legacy/desk_rails_legacy.solidcraft`: the old single-timeline model. Reference only.
 - `tools/`:
   - `regen_parts.py`: pushes the skeleton parameters into the size-driven parts and rebuilds them.
   - `build_assembly.py`: builds the whole assembly from scratch (inserts and places every part).
@@ -55,11 +54,9 @@ Expect the repo to change often while that workflow is worked out.
   - `svg2dxf.py`: converts an SVG profile drawing to DXF (used once for the HFS5-4040 profile).
 - `BOM.md`: generated bill of materials. Don't hand-edit it.
 - `docs/`: `EXTRUSION_GUIDE.md` (extrusion rules + decision log; check it before any extrusion
-  decision), `PART_BUILD_SPEC.md` (rules and part-number list for part files),
-  `COMPLIANCE_PLAN.md` (how the project got this structure), `images/`.
+  decision), `PART_BUILD_SPEC.md` (rules and part-number list for part files), `images/`.
 - `refs/`: reference photos, drawings and data sheets (vendor downloads are local only).
 - `profiles/`: extrusion cross-section DXFs.
-- `renders/`: snapshots.
 
 ## Workflow
 
@@ -84,7 +81,7 @@ Check (one command, reads the saved design, never overwrites it):
 
 ```sh
 python tools/check.py            # report, overlap check, audit, BOM.md
-python tools/check.py --renders  # also refresh renders/iso|front|back|right|top.png
+python tools/check.py --renders  # also write build/renders/<view>.png
 ```
 
 It exits non-zero if the report fails or any bodies overlap. Outputs (report JSON,
@@ -227,15 +224,13 @@ the desk back edge to the wall, and your usual sit and stand heights.
 ## Extrusion profiles
 
 Real cross-sections (DXF, mm, centered) in `profiles/`. The extrusion part files sketch them and
-extrude them to parameter lengths. Only Misumi HFS5 is used. The 80/20 and V-slot variants are
-retired (D16); their DXFs stay in `profiles/` for reference.
+extrude them to parameter lengths. Only Misumi HFS5 is used. The 80/20 and V-slot variants were
+retired (D16) and their DXFs removed (in git history before 2026-10-31).
 
 | Profile | File | Used for | Source |
 |---|---|---|---|
 | HFS5-4040 | `misumi_hfs5_4040.dxf` | uprights, side rails | converted from an SVG drawing in github.com/TheEnigmaBlade/dllpdf-frame-calculator (no license stated) via `tools/svg2dxf.py` |
 | HFS5-2040 | `misumi_hfs5_2040.dxf` | crossbars, stiles | github.com/oysteinkrog/thing_libutils (LGPL-2.1) |
-| 80/20 (retired) | `8020_20-4040.dxf`, `8020_20-2040.dxf` | not used | github.com/Thaddeus-Maximus/designlib (no license stated) |
-| V-slot (retired) | `openbuilds_vslot_4040.dxf`, `openbuilds_vslot_2040.dxf` | not used | 4040: github.com/alex-crr/ExtrusionsGenerator (MIT); 2040: github.com/richard-scott/OpenBuilds |
 
 Checked cross-section areas: HFS5 4040 497 mm², 2040 323 mm².
 

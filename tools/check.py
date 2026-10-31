@@ -1,7 +1,7 @@
 """One command: body report, overlap check, audit, BOM (and optional renders) on desk_rails.solidcraft.
 
     python tools/check.py            # checks + BOM
-    python tools/check.py --renders  # also refresh renders/*.png
+    python tools/check.py --renders  # also write build/renders/<view>.png
 
 The saved design file is the source of truth: every step runs headless solidcraft-cli on it
 read-only (no --save); nothing is regenerated or overwritten. Body names are the part-file names
@@ -86,8 +86,10 @@ def _expected(a: str, b: str) -> bool:
 
 
 def renders() -> None:
+    out = BUILD / "renders"
+    out.mkdir(parents=True, exist_ok=True)
     for view in VIEWS:
-        _cli("snapshot", "--in", str(DESIGN), "--out", f"renders/{view}.png", "--view", view)
+        _cli("snapshot", "--in", str(DESIGN), "--out", str(out / f"{view}.png"), "--view", view)
 
 
 def main(argv: Sequence[str]) -> int:
