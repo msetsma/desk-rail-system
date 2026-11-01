@@ -43,9 +43,9 @@ def write(fname: str, cmds: list[dict]) -> None:
 SRC_DXF = "Misumi HFS5 profile DXF (profiles/), length from skeleton"
 
 write("FRM-01_Upright_4040", profile("Profile_HFS5_4040", "XY", DXF4040) + [
-    c("solid.extrude", distance="up_below + desk_t + up_above", body_name="Upright_4040", name="Extrude_Upright"),
+    c("solid.extrude", distance="up_below + hang_t + desk_t + up_above", body_name="Upright_4040", name="Extrude_Upright"),
 ] + finish("Upright_4040", AL, AL_COLOR, "FRM-01",
-           "Upright, Misumi HFS5-4040, L = up_below + desk_t + up_above. Origin: bottom end face centre, +Z up along the bar",
+           "Upright, Misumi HFS5-4040, L = up_below + hang_t + desk_t + up_above. Origin: bottom end face centre, +Z up along the bar",
            SRC_DXF))
 
 write("FRM-02_Crossbar_2040", profile("Profile_HFS5_2040", "YZ", DXF2040) + [

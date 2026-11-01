@@ -97,7 +97,7 @@
   {
    "command": "solid.extrude",
    "params": {
-    "distance": "up_below + desk_t + up_above",
+    "distance": "up_below + hang_t + desk_t + up_above",
     "body_name": "Upright_4040",
     "name": "Extrude_Upright"
    }
@@ -125,7 +125,7 @@
    "params": {
     "values": {
      "part_number": "FRM-01",
-     "description": "Upright, Misumi HFS5-4040, L = up_below + desk_t + up_above. Origin: bottom end face centre, +Z up along the bar",
+     "description": "Upright, Misumi HFS5-4040, L = up_below + hang_t + desk_t + up_above. Origin: bottom end face centre, +Z up along the bar",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

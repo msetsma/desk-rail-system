@@ -473,6 +473,24 @@
   {
    "command": "component.insert_design",
    "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-07L_HangerPlate_L.solidcraft",
+    "name": "FRM-07L HangerPlate L",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-07R_HangerPlate_R.solidcraft",
+    "name": "FRM-07R HangerPlate R",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
     "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-06_Brace_2040.solidcraft",
     "name": "FRM-06 Brace 2040",
     "parent": "FRM-00 Monitor rail frame",
@@ -1138,7 +1156,7 @@
      "desk_y_off",
      "0 deg"
     ],
-    "offset": "frame_top",
+    "offset": "desk_h - desk_t",
     "angle": "0 deg"
    }
   },
@@ -2065,6 +2083,108 @@
    "params": {
     "type": "planar",
     "flip": true,
+    "name": "J_HangerPlate_L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-07L HangerPlate L:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-frame_w/2",
+     "0 mm",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HangerPlate_R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-07R HangerPlate R:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "frame_w/2",
+     "0 mm",
+     "0 deg"
+    ],
+    "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
     "name": "J_Brace_L",
     "a": {
      "occurrence": 0,
@@ -2362,7 +2482,7 @@
      "stile_y + rail_s/2 + pnl_back_gap",
      "0 deg"
     ],
-    "offset": "frame_top - pnl_drop",
+    "offset": "desk_h - desk_t - pnl_drop",
     "angle": "0 deg"
    }
   },

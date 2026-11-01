@@ -1,0 +1,283 @@
+{
+ "generated_by": "parts/src/FRM-07_gen.py",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "Box_HangerPlate",
+    "body_name": "HangerPlate_R",
+    "length": "hang_w",
+    "width": "hang_len",
+    "height": "hang_t",
+    "corner": [
+     "rail_l - hang_w",
+     "ts_len/2 - hang_len",
+     "0 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "hang_t",
+    "name": "Sketch_HangerHoles"
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "(rail_l/4)",
+     "-200 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "(3*rail_l/4)",
+     "-200 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "(rail_l/4)",
+     "-20 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "(3*rail_l/4)",
+     "-20 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "(rail_l/4)",
+     "130 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "(3*rail_l/4)",
+     "130 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "(rail_l/4)",
+     "195 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "(3*rail_l/4)",
+     "195 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "(rail_l/4)",
+     "255 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "(3*rail_l/4)",
+     "255 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "(-(ts_t + (ts_w - ts_t)/2))",
+     "-hang_scr_y"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "(-(ts_t + (ts_w - ts_t)/2))",
+     "0 mm"
+    ]
+   }
+  },
+  {
+   "command": "sketch.point",
+   "params": {
+    "point": [
+     "(-(ts_t + (ts_w - ts_t)/2))",
+     "hang_scr_y"
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.hole",
+   "params": {
+    "name": "Hole_M5_Csk",
+    "sketch": "Sketch_HangerHoles",
+    "clearance": "M5",
+    "fit": "normal",
+    "type": "countersink",
+    "cs_diameter": 11.4,
+    "cs_angle": "90 deg",
+    "targets": [
+     "HangerPlate_R"
+    ]
+   }
+  },
+  {
+   "command": "browser.visibility",
+   "params": {
+    "visible": false,
+    "items": [
+     "Sketch_HangerHoles"
+    ]
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "HangerPlate_R"
+    ],
+    "material": "Steel zinc-plated"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "HangerPlate_R"
+    ],
+    "color": "#c4c9d0"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "FRM-07R",
+     "description": "Hanger plate R (D21): steel flat bar hang_t x hang_w x hang_len, zinc plated, on the top-support flange under the desktop, flush with the side rail's outer (+X) face, rear end flush with the flange's rear end. 13 x M5 countersunk (ISO 10642) through holes: 5 pairs over the rail's top slots (T-nuts) and 3 on the mid-flange line (flange screws + nylocs). Origin: top-support outer web face / top edge at Y = 0, +Y toward wall, +Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Steel zinc-plated",
+      "ReleaseState": "WIP",
+      "Source": "side-rail-recommended-changes.pdf Change 1 (2026-11-01), dimensions checked against the skeleton"
+     }
+    }
+   }
+  }
+ ]
+}

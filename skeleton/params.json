@@ -168,10 +168,38 @@
     "unit": "mm"
   },
   {
-    "comment": "Derived: desktop underside = frame top",
-    "expression": "desk_h - desk_t",
+    "comment": "Derived: frame top = top-support flange top = side-rail top; the desktop sits hang_t higher on the D21 hanger plates (desk_h stays the measured desktop-top datum)",
+    "expression": "desk_h - desk_t - hang_t",
     "favorite": false,
     "name": "frame_top",
+    "unit": "mm"
+  },
+  {
+    "comment": "Hanger plate (D21) thickness: steel flat bar between the top-support flange and the desktop; the desktop sits this much above the frame top",
+    "expression": "5 mm",
+    "favorite": false,
+    "name": "hang_t",
+    "unit": "mm"
+  },
+  {
+    "comment": "Hanger plate width (X), stock 80 mm flat bar: side-rail outer face inboard past the flange (rail_l + ts_w = 76.8, so it overhangs the flange edge by ~3 mm)",
+    "expression": "80 mm",
+    "favorite": false,
+    "name": "hang_w",
+    "unit": "mm"
+  },
+  {
+    "comment": "Hanger plate length (Y); rear end flush with the top-support rear end, front ends ts_len - hang_len behind the flange front",
+    "expression": "530 mm",
+    "favorite": false,
+    "name": "hang_len",
+    "unit": "mm"
+  },
+  {
+    "comment": "Hanger plate flange screws (M5 csk + nyloc through the top-support flange) at Y = 0 and +/- this; outside the channel bars (end ~212) and clear of the plate ends",
+    "expression": "225 mm",
+    "favorite": false,
+    "name": "hang_scr_y",
     "unit": "mm"
   },
   {

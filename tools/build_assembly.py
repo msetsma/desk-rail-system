@@ -83,7 +83,7 @@ _LEG_X = "(frame_w/2 - leg_inset)"
 _CH = "(ch_bar_gap/2 + ch_bar_w/2)"
 
 OCCURRENCES: tuple[Occurrence, ...] = (
-    _occ("Desktop", "DSK-01_Desktop", _DSK, "0 mm", "desk_y_off", "frame_top"),
+    _occ("Desktop", "DSK-01_Desktop", _DSK, "0 mm", "desk_y_off", "desk_h - desk_t"),
     _occ("TopSupport_R", "DSK-02_TopSupport", _DSK, "frame_w/2", "0 mm", "frame_top"),
     _occ("TopSupport_L", "DSK-02_TopSupport", _DSK, "-frame_w/2", "0 mm", "frame_top", "180 deg"),
     _occ("ChannelBar_BackOuter", "DSK-03_ChannelBar", _DSK, "0 mm", f"ch_y_off + leg_yc + {_CH}", "frame_top"),
@@ -102,13 +102,15 @@ OCCURRENCES: tuple[Occurrence, ...] = (
     _occ("Crossbar_High", "FRM-02_Crossbar_2040", _FRM, "0 mm", "stile_y", "desk_h + bar2_z"),
     _occ("SideRail_L", "FRM-03L_SideRail_L_4040", _FRM, "-frame_w/2", "0 mm", "frame_top"),
     _occ("SideRail_R", "FRM-03R_SideRail_R_4040", _FRM, "frame_w/2", "0 mm", "frame_top"),
+    _occ("HangerPlate_L", "FRM-07L_HangerPlate_L", _FRM, "-frame_w/2", "0 mm", "frame_top"),
+    _occ("HangerPlate_R", "FRM-07R_HangerPlate_R", _FRM, "frame_w/2", "0 mm", "frame_top"),
     _occ("Brace_L", "FRM-06_Brace_2040", _FRM, "-up_xc", "up_y - rail_l/2 - brace_c", "frame_top - rail_l - brace_c"),
     _occ("Brace_R", "FRM-06_Brace_2040", _FRM, "up_xc", "up_y - rail_l/2 - brace_c", "frame_top - rail_l - brace_c"),
     _occ("Stile_Main", "FRM-04_Stile_2040", _FRM, "m1_x", "stile_y", "desk_h + bar1_z + rail_l/2"),
     _occ("Stile_Side", "FRM-04_Stile_2040", _FRM, "m3_x", "stile_y", "desk_h + bar1_z + rail_l/2"),
     _occ("Stile_Right", "FRM-04_Stile_2040", _FRM, "stile_r_x", "stile_y", "desk_h + bar1_z + rail_l/2"),
     _occ("ModestyPanel", "FRM-05_Modesty_panel", _FRM, "0 mm", "stile_y + rail_s/2 + pnl_back_gap",
-         "frame_top - pnl_drop"),
+         "desk_h - desk_t - pnl_drop"),
     _occ("Monitor_Main", "MON-01_Monitor_Main_32in", _MON, "m1_x", "stile_front - m1_off",
          "desk_h + mon_clearance + m1_h/2 + m1_vesa_dz"),
     _occ("Monitor_Side", "MON-02_Monitor_Side_27in", _MON, "m3_x", "stile_front - m3_off",

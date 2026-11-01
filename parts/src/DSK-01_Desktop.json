@@ -114,7 +114,7 @@
    "params": {
     "values": {
      "part_number": "DSK-01",
-     "description": "Desktop slab desk_w x desk_d x desk_t (IKEA KARLBY walnut veneer, 503.352.08). Origin: underside centre (sits on frame_top); +X right, +Y toward wall, +Z up.",
+     "description": "Desktop slab desk_w x desk_d x desk_t (IKEA KARLBY walnut veneer, 503.352.08). Origin: underside centre (sits on the D21 hanger plates at desk_h - desk_t = frame_top + hang_t); +X right, +Y toward wall, +Z up.",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

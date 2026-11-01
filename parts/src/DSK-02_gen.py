@@ -53,12 +53,20 @@ def holes() -> list[dict]:
           dir1=[0, 1, 0], count1=2, spacing1="ts_bolt_pitch"),
         c("solid.mirror", name="TS_Holes_Mirror", features=["TS_Hole_LegScrew", "TS_Hole_LegScrew_Pattern"],
           plane={"origin": ["0 mm", "ch_y_off", "0 mm"], "normal": [0, 1, 0]}),
+        # D21: 3 x M5 clearance (user drilled) for the hanger-plate flange screws, mid-flange at Y = 0, +/-hang_scr_y.
+        # Symmetric about Y = 0, so the L occurrence (yaw 180) gets the same holes.
+        c("solid.cylinder", name="TS_Hole_HangerScrew", axis="Z", operation="cut", targets=[BODY],
+          radius="5.5 mm/2", height="ts_t + 0.2 mm",
+          base=["-(ts_t + (ts_w - ts_t)/2)", "-hang_scr_y", "-ts_t - 0.1 mm"]),
+        c("solid.pattern.rectangular", name="TS_Hole_HangerScrew_Pattern", features=["TS_Hole_HangerScrew"],
+          dir1=[0, 1, 0], count1=3, spacing1="hang_scr_y"),
     ]
 
 
 def finish() -> list[dict]:
     desc = ("Apex Pro (Jiecang OEM) top support: bent steel angle, outer web + inward top flange, web ends tapered "
-            "to a ts_lip lip, 4 x sr_clear_d M6 holes in the web (D9: leg screws, 2 per leg column). Origin: outer "
+            "to a ts_lip lip, 4 x sr_clear_d M6 holes in the web (D9: leg screws, 2 per leg column), 3 x 5.5 mm holes "
+            "mid-flange at Y = 0, +/-hang_scr_y (D21: hanger-plate screws, user drilled). Origin: outer "
             "web face / flange top edge, mid-length; +X outward (away from desk centre), flange toward -X, +Y "
             "toward wall, body below Z=0. Serves L and R (L = yaw 180); hole pattern centred on ch_y_off, so this "
             "needs ch_y_off = 0.")

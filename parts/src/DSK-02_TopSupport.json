@@ -188,6 +188,40 @@
    }
   },
   {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "TS_Hole_HangerScrew",
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "TopSupport_JC"
+    ],
+    "radius": "5.5 mm/2",
+    "height": "ts_t + 0.2 mm",
+    "base": [
+     "-(ts_t + (ts_w - ts_t)/2)",
+     "-hang_scr_y",
+     "-ts_t - 0.1 mm"
+    ]
+   }
+  },
+  {
+   "command": "solid.pattern.rectangular",
+   "params": {
+    "name": "TS_Hole_HangerScrew_Pattern",
+    "features": [
+     "TS_Hole_HangerScrew"
+    ],
+    "dir1": [
+     0,
+     1,
+     0
+    ],
+    "count1": 3,
+    "spacing1": "hang_scr_y"
+   }
+  },
+  {
    "command": "material.assign",
    "params": {
     "bodies": [
@@ -210,7 +244,7 @@
    "params": {
     "values": {
      "part_number": "DSK-02",
-     "description": "Apex Pro (Jiecang OEM) top support: bent steel angle, outer web + inward top flange, web ends tapered to a ts_lip lip, 4 x sr_clear_d M6 holes in the web (D9: leg screws, 2 per leg column). Origin: outer web face / flange top edge, mid-length; +X outward (away from desk centre), flange toward -X, +Y toward wall, body below Z=0. Serves L and R (L = yaw 180); hole pattern centred on ch_y_off, so this needs ch_y_off = 0.",
+     "description": "Apex Pro (Jiecang OEM) top support: bent steel angle, outer web + inward top flange, web ends tapered to a ts_lip lip, 4 x sr_clear_d M6 holes in the web (D9: leg screws, 2 per leg column), 3 x 5.5 mm holes mid-flange at Y = 0, +/-hang_scr_y (D21: hanger-plate screws, user drilled). Origin: outer web face / flange top edge, mid-length; +X outward (away from desk centre), flange toward -X, +Y toward wall, body below Z=0. Serves L and R (L = yaw 180); hole pattern centred on ch_y_off, so this needs ch_y_off = 0.",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
