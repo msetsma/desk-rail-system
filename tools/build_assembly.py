@@ -102,6 +102,8 @@ OCCURRENCES: tuple[Occurrence, ...] = (
     _occ("Crossbar_High", "FRM-02_Crossbar_2040", _FRM, "0 mm", "stile_y", "desk_h + bar2_z"),
     _occ("SideRail_L", "FRM-03L_SideRail_L_4040", _FRM, "-frame_w/2", "0 mm", "frame_top"),
     _occ("SideRail_R", "FRM-03R_SideRail_R_4040", _FRM, "frame_w/2", "0 mm", "frame_top"),
+    _occ("Brace_L", "FRM-06_Brace_2040", _FRM, "-up_xc", "up_y - rail_l/2 - brace_c", "frame_top - rail_l - brace_c"),
+    _occ("Brace_R", "FRM-06_Brace_2040", _FRM, "up_xc", "up_y - rail_l/2 - brace_c", "frame_top - rail_l - brace_c"),
     _occ("Stile_Main", "FRM-04_Stile_2040", _FRM, "m1_x", "stile_y", "desk_h + bar1_z + rail_l/2"),
     _occ("Stile_Side", "FRM-04_Stile_2040", _FRM, "m3_x", "stile_y", "desk_h + bar1_z + rail_l/2"),
     _occ("Stile_Right", "FRM-04_Stile_2040", _FRM, "stile_r_x", "stile_y", "desk_h + bar1_z + rail_l/2"),

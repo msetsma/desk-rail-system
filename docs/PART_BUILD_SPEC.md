@@ -65,6 +65,7 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 | FRM-03R | Side rail 4040 right, drilled | 1 | SideRail_R_4040_HFS5 |
 | FRM-04 | Stile 2040 | 3 | Stile_Main/Side/Right_HFS5 |
 | FRM-05 | Modesty panel | 1 | ModestyPanel |
+| FRM-06 | Knee brace 2040, 45 deg mitred (D20) | 2 | Brace_L/R (new, no legacy body) |
 | MON-01 | Main monitor 32in | 1 | Monitor_Main + Monitor_Main_Back (one body) |
 | MON-02 | Side monitor 27in (generic, not picked yet) | 1 | Monitor_Side + Monitor_Side_Back (one body) |
 | SPK-01 | Klipsch R-40M speaker | 2 | Speaker_L_R40M + SpkFace_L_* (multibody allowed) |

@@ -100,6 +100,8 @@ Use the **lightest, quickest path** that works, in this order:
 
 - Batch every part you need into one run and run it in the background, so one slow vendor doesn't block other work.
 - Vendor forms that ask for the user's email: fill it in from memory. Don't make the user re-enter it.
+- When a request names a hardware type (a plate, a bracket), confirm a catalog part exists and fits its envelope
+  before building geometry around it.
 - Save downloads and photos under `refs/<vendor-or-part>/` with a short README giving the source
   and what is estimated.
 
@@ -154,4 +156,5 @@ subagents run, the main agent keeps working on non-conflicting tasks.
 | 2026-10-29 | Laptop fit: angular-bbox checks flagged false blocks, and a coarse (10x10 ray) placement search passed a spot that hid 2% of the monitor at full resolution | §1: check sightlines by ray casting against front faces; re-verify a searched optimum at full resolution, then pick the middle of the clear window |
 | 2026-11-01 | Bolt-length change (M6x20 -> M6x55) took several extra minutes: a heredoc command hung on a stray stdin read (2 min timeout), a CRLF file broke a multi-line match mid-script, a generator-created library part needed a second regen pass, parallel main/variant builds raced on a shared scratch file (one extra rebuild), and deleting 2 unused skeleton params rebuilt ~24 parts instead of ~5 | §3: one grep + one file-tool edit script, line-ending-agnostic matches, retire layout params lazily; tools: regen re-reads the part list after generators and flags orphaned frozen parts, finish scratch files named per design |
 | 2026-11-01 | Crossbar drop + right stile: 4 subagents (part build, rules review, generator cleanup, docs/tools) ran while the main agent did skeleton, placements and assembly; one regen + build at the end. A near_check on main + variant raced on shared scratch files (second instance of the shared-scratch bug) | Tools: every design-aware tool (near_check, sightlines, assembly_finish) names its scratch files per design; §5 pattern confirmed: review agent first, cleanup agents on disjoint file sets, one final rebuild |
+| 2026-11-01 | Knee brace: the requested part (flat 45 deg joining plate) does not exist in the Misumi catalog, and the catalog bracket that does (HBL45TD5) forced a longer brace (120 -> 150 mm). Found only after the brace part and skeleton were built; one extra 27-part regen | §4: when a request names a hardware type, confirm a catalog part exists (and its envelope) in the first research wave, before building geometry around it |
 | 2026-10-28 | Same audit: a 10 min headless baseline re-eval, late-spawned placement and colour jobs (~6 min), a serial sweep (17 min vs ~5 parallel), 2 rebuilds from an untested 180° convention | §5: first wave, conventions in specs, reuse the loaded design, parallel check cases; §3: background long runs, no big dumps in context |

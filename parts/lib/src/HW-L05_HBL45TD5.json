@@ -1,0 +1,235 @@
+{
+ "generated_by": "parts/lib/src/gen_lib.py",
+ "input": "refs/misumi_brackets/HBL45T5/HBL45TS5-SET.stp",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "face": [
+     7,
+     2,
+     30
+    ],
+    "face_body": "HBL45TS5_b",
+    "distance": 34,
+    "operation": "new",
+    "body_name": "HBL45TD5",
+    "name": "Extrude_TD5_Profile"
+   }
+  },
+  {
+   "command": "solid.remove",
+   "params": {
+    "bodies": [
+     "HBL45TS5_b",
+     "CBM5-14_b",
+     "HNTT5-5_1",
+     "CBM5-14_b (HBL45TS5-SET:1/CBM5-14_b:2)",
+     "HNTT5-5_1 (HBL45TS5-SET:1/HNTT5-5_1:2)"
+    ]
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "bodies": [
+     "HBL45TD5"
+    ],
+    "translate": [
+     -24,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "diameter": 5.5,
+    "height": 15,
+    "base": [
+     -10.0,
+     -1,
+     72.12
+    ],
+    "axis": "Y",
+    "operation": "cut",
+    "targets": [
+     "HBL45TD5"
+    ],
+    "name": "Hole_Base_L"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "diameter": 5.5,
+    "height": 15,
+    "base": [
+     -10.0,
+     51.7071,
+     50.2929
+    ],
+    "axis": [
+     0,
+     -1,
+     1
+    ],
+    "operation": "cut",
+    "targets": [
+     "HBL45TD5"
+    ],
+    "name": "Hole_Angled_L"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "diameter": 5.5,
+    "height": 15,
+    "base": [
+     10.0,
+     -1,
+     72.12
+    ],
+    "axis": "Y",
+    "operation": "cut",
+    "targets": [
+     "HBL45TD5"
+    ],
+    "name": "Hole_Base_R"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "diameter": 5.5,
+    "height": 15,
+    "base": [
+     10.0,
+     51.7071,
+     50.2929
+    ],
+    "axis": [
+     0,
+     -1,
+     1
+    ],
+    "operation": "cut",
+    "targets": [
+     "HBL45TD5"
+    ],
+    "name": "Hole_Angled_R"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "HBL45TD5"
+    ],
+    "material": "Al 6063-T5"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "HBL45TD5"
+    ],
+    "color": "#c8ccd1"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "HBL45TD5",
+     "description": "Misumi HBL45TD5 45 deg angled bracket, 5 series, 2 slots (34 wide), 4 x M5, 1470 N",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "lib_id": "HW-L05_HBL45TD5",
+      "Material": "Al 6063-T5",
+      "ReleaseState": "Released",
+      "Source": "Modelled from Misumi vendor STEP refs/misumi_brackets/HBL45T5/HBL45TS5-SET.stp (HBL45TS5 section) + catalog p2255 (HBL45TD5: 34 wide, 4 holes)"
+     }
+    }
+   }
+  },
+  {
+   "command": "document.metadata",
+   "params": {}
+  }
+ ]
+}

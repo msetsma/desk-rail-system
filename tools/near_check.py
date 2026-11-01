@@ -34,8 +34,8 @@ Box = tuple[list[float], list[float]]
 # Catalog hardware bolted flat onto HFS5 extrusions: the face-to-face contact makes the exact check
 # very slow (~25 s per pair on the detailed DXF profile). Their seating is verified at placement
 # (skeleton/hw_placements.json), so these pairs are skipped unless --include-mating is given.
-MATING = (("HBLFSD5", "HBLFSN5", "HPTTD5", "HPTLD5", "Standoff_M5x12", "M6x55_SHCS"),
-          ("Upright_4040", "SideRail_", "Crossbar_2040", "Stile_2040"))
+MATING = (("HBLFSD5", "HBLFSN5", "HPTTD5", "HPTLD5", "Standoff_M5x12", "M6x55_SHCS", "HBL45TD5"),
+          ("Upright_4040", "SideRail_", "Crossbar_2040", "Stile_2040", "Brace_2040"))
 
 
 class CheckError(Exception):

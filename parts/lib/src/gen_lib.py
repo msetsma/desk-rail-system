@@ -69,6 +69,43 @@ def standoff() -> dict:
     return {"commands": cmds + finish(b, "Standoff M5x12 d10", "Round standoff d10 x 12, M5 through bore (simplified), zinc-plated steel", "Steel zinc-plated", "#c4c9d0", "HW-L11_Standoff_M5x12", SIMPLIFIED)}
 
 
+TS5_STEP = "refs/misumi_brackets/HBL45T5/HBL45TS5-SET.stp"
+TD5_HALF_PITCH = 10.0  # 2 slots on the 20 mm HFS5 pitch
+TD5_HOLE_D = 5.5
+TD5_BASE_HOLE_Z = 72.12  # vendor HBL45TS5 STEP: base-face hole, 72.12 from the vertex
+TD5_ANGLED_HOLE = 51.0   # angled-face hole at (y, z) = (51, 51)
+
+
+def angle_bracket_2slot() -> dict:
+    """HBL45TD5: the vendor HBL45TS5 extruded profile (14 wide) widened to 34, with 2 holes per face at x = +/-10.
+
+    Catalog p2255: same section, 34 wide, 4 x d5.5 on the 20 mm pitch. The profile is taken from the TS5 STEP's
+    end face (x = +7), extruded 34 as a new body (no holes) and centred, then the 4 holes are cut.
+    """
+    b = "HBL45TD5"
+    hole_cmds = []
+    for x in (-TD5_HALF_PITCH, TD5_HALF_PITCH):
+        hole_cmds += [
+            {"command": "solid.cylinder", "params": {"diameter": TD5_HOLE_D, "height": 15, "base": [x, -1, TD5_BASE_HOLE_Z],
+                                                     "axis": "Y", "operation": "cut", "targets": [b], "name": f"Hole_Base_{'L' if x < 0 else 'R'}"}},
+            {"command": "solid.cylinder", "params": {"diameter": TD5_HOLE_D, "height": 15,
+                                                     "base": [x, TD5_ANGLED_HOLE + 0.7071, TD5_ANGLED_HOLE - 0.7071],
+                                                     "axis": [0, -1, 1], "operation": "cut", "targets": [b], "name": f"Hole_Angled_{'L' if x < 0 else 'R'}"}},
+        ]
+    cmds = list(TEMPLATE) + [
+        {"command": "solid.extrude", "params": {"face": [7, 2, 30], "face_body": "HBL45TS5_b", "distance": 34,
+                                                "operation": "new", "body_name": b, "name": "Extrude_TD5_Profile"}},
+        {"command": "solid.remove", "params": {"bodies": ["HBL45TS5_b", "CBM5-14_b", "HNTT5-5_1",
+                                                          "CBM5-14_b (HBL45TS5-SET:1/CBM5-14_b:2)",
+                                                          "HNTT5-5_1 (HBL45TS5-SET:1/HNTT5-5_1:2)"]}},
+        {"command": "solid.move", "params": {"bodies": [b], "translate": [-24, 0, 0]}},
+    ] + hole_cmds
+    source = f"Modelled from Misumi vendor STEP {TS5_STEP} (HBL45TS5 section) + catalog p2255 (HBL45TD5: 34 wide, 4 holes)"
+    return {"input": TS5_STEP, "commands": cmds + finish(
+        b, "HBL45TD5", "Misumi HBL45TD5 45 deg angled bracket, 5 series, 2 slots (34 wide), 4 x M5, 1470 N",
+        "Al 6063-T5", "#c8ccd1", "HW-L05_HBL45TD5", source)}
+
+
 def _write(name: str, script: dict) -> None:
     (HERE / f"{name}.json").write_text(json.dumps({"generated_by": "parts/lib/src/gen_lib.py", **script}, indent=1))
 
@@ -76,5 +113,6 @@ def _write(name: str, script: dict) -> None:
 if __name__ == "__main__":
     for lab in STEP:
         _write(lab, step_script(lab))
+    _write("HW-L05_HBL45TD5", angle_bracket_2slot())
     _write("HW-L10_M6x55_SHCS", screw())
     _write("HW-L11_Standoff_M5x12", standoff())

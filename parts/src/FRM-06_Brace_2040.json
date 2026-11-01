@@ -1,0 +1,223 @@
+{
+ "generated_by": "parts/src/FRM-gen.py",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": {
+     "origin": [
+      0,
+      0,
+      0
+     ],
+     "x_dir": [
+      0,
+      0.70710678,
+      0.70710678
+     ],
+     "y_dir": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "name": "Profile_HFS5_2040"
+   }
+  },
+  {
+   "command": "sketch.insert_dxf",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/profiles/misumi_hfs5_2040.dxf"
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "distance": "2*brace_leg",
+    "direction": "symmetric",
+    "body_name": "Brace_2040",
+    "name": "Extrude_Brace"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "YZ",
+    "name": "Sketch_BraceMitre"
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "points": [
+     [
+      "brace_c",
+      "brace_c - brace_leg - 0.2 mm"
+     ],
+     [
+      "brace_c",
+      "brace_c - brace_leg + rail_s*sqrt(2) + 0.2 mm"
+     ],
+     [
+      "brace_c - brace_leg + rail_s*sqrt(2) + 0.2 mm",
+      "brace_c"
+     ],
+     [
+      "brace_c - brace_leg - 0.2 mm",
+      "brace_c"
+     ]
+    ],
+    "closed": true
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Sketch_BraceMitre",
+    "distance": "rail_l + 0.2 mm",
+    "direction": "symmetric",
+    "operation": "new",
+    "body_name": "BraceBlank",
+    "name": "Extrude_BraceBlank"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "target": "Brace_2040",
+    "tools": [
+     "BraceBlank"
+    ],
+    "operation": "intersect",
+    "name": "Intersect_BraceMitre"
+   }
+  },
+  {
+   "command": "browser.visibility",
+   "params": {
+    "visible": false,
+    "items": [
+     "Sketch_BraceMitre"
+    ]
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Brace_2040"
+    ],
+    "material": "Al 6063-T5"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Brace_2040"
+    ],
+    "color": "#d4d8dd"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "FRM-06",
+     "description": "Knee brace (D20), Misumi HFS5-2040, 40 across X, both ends cut 45 deg; long edge = brace_leg*sqrt(2), from the upright front face up to the side-rail underside. Same part L and R. Origin: middle of the brace axis; the upright/rail inside corner is at local (Y, Z) = (brace_c, brace_c)",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Al 6063-T5",
+      "ReleaseState": "WIP",
+      "Source": "Misumi HFS5 profile DXF (profiles/), length from skeleton; 45 deg mitre both ends"
+     }
+    }
+   }
+  }
+ ]
+}

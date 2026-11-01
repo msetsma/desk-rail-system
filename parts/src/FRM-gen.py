@@ -68,6 +68,38 @@ write("FRM-05_Modesty_panel", [
            "Modelled from skeleton (legacy ModestyPanel); walnut-veneer finish to match the KARLBY walnut top, colour estimated (MEASURE)"))
 
 
+def knee_brace() -> list[dict]:
+    """D20: 45 deg 2040 knee brace, 40 across X, in the side-rail plane, both ends mitred 45 deg.
+
+    Origin: middle of the brace axis. The inside corner (upright front face / rail underside) sits at
+    local (Y, Z) = (+brace_c, +brace_c); the brace runs from the upright (bottom end) up to the rail (top end).
+    """
+    h, top, w = "brace_c", "brace_c - brace_leg", "rail_s*sqrt(2)"
+    # Axis direction (Y,Z) = (-1, 1)/sqrt2; the profile's 20 side lies along (1, 1)/sqrt2, its 40 side along X.
+    plane = {"origin": [0, 0, 0], "x_dir": [0, 0.70710678, 0.70710678], "y_dir": [-1, 0, 0]}
+    # Blank: the mitred trapezoid, end cuts exactly on the upright / rail faces; long sides overrun the
+    # profile faces by 0.2 mm (measured along Y/Z) so the intersect has no coincident faces (AGENTS.md §3).
+    blank = [[h, f"{top} - 0.2 mm"], [h, f"{top} + {w} + 0.2 mm"],
+             [f"{top} + {w} + 0.2 mm", h], [f"{top} - 0.2 mm", h]]
+    return profile("Profile_HFS5_2040", plane, DXF2040) + [
+        c("solid.extrude", distance="2*brace_leg", direction="symmetric", body_name="Brace_2040", name="Extrude_Brace"),
+        c("sketch.create", plane="YZ", name="Sketch_BraceMitre"),
+        c("sketch.line", points=blank, closed=True),
+        c("sketch.finish"),
+        c("solid.extrude", sketch="Sketch_BraceMitre", distance="rail_l + 0.2 mm", direction="symmetric",
+          operation="new", body_name="BraceBlank", name="Extrude_BraceBlank"),
+        c("solid.combine", target="Brace_2040", tools=["BraceBlank"], operation="intersect", name="Intersect_BraceMitre"),
+        c("browser.visibility", visible=False, items=["Sketch_BraceMitre"]),
+    ] + finish("Brace_2040", AL, AL_COLOR, "FRM-06",
+               "Knee brace (D20), Misumi HFS5-2040, 40 across X, both ends cut 45 deg; long edge = brace_leg*sqrt(2), "
+               "from the upright front face up to the side-rail underside. Same part L and R. Origin: middle of the "
+               "brace axis; the upright/rail inside corner is at local (Y, Z) = (brace_c, brace_c)",
+               SRC_DXF + "; 45 deg mitre both ends")
+
+
+write("FRM-06_Brace_2040", knee_brace())
+
+
 def bolt_circles(sketch: str, offset: str, diameter: str, nominal: float, ys: list[str]) -> list[dict]:
     """One YZ sketch with a circle per bolt station, diameter driven by a skeleton parameter."""
     return [c("sketch.create", plane="YZ", offset=offset, name=sketch)] + [

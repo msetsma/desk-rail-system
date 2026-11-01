@@ -65,10 +65,10 @@ DESKTOP_FACTOR = (0.93, 1.0, 1.43)
 # Real-geometry bodies keep their model mass; prefix -> report group.
 GROUPS: tuple[tuple[str, str], ...] = (
     ("Desktop", "desktop"), ("Modesty_Panel", "panel"),
-    ("Upright_4040", "rails"), ("Crossbar_2040", "rails"), ("SideRail_", "rails"), ("Stile_2040", "rails"),
+    ("Upright_4040", "rails"), ("Crossbar_2040", "rails"), ("SideRail_", "rails"), ("Stile_2040", "rails"), ("Brace_2040", "rails"),
     ("SpkMount_", "speakers"), ("MousePad", "input"), ("Mouse_", "input"), ("Keyboard_", "input"),
     ("LaptopMount", "laptop"), ("LaptopTray", "laptop"),
-    ("HPTTD5", "hardware"), ("HPTLD5", "hardware"), ("HBLFSN5", "hardware"), ("HBLFSD5", "hardware"),
+    ("HPTTD5", "hardware"), ("HPTLD5", "hardware"), ("HBLFSN5", "hardware"), ("HBLFSD5", "hardware"), ("HBL45TD5", "hardware"),
     ("Standoff_M5x12", "hardware"), ("M6x55_SHCS", "hardware"),
 )
 # Bodies that stand on the floor on their own (not carried by the desk): no mass, no warning.

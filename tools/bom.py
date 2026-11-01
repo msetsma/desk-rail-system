@@ -39,12 +39,14 @@ MACHINING: Mapping[str, str] = {
     "FRM-03L": "rear end tapped M5 (M1, D8)",
     "FRM-03R": "rear end tapped M5 (M1, D8)",
     "FRM-04": "both ends tapped M5 for end anchors into the crossbar slots (M1, D7)",
+    "FRM-06": "cut to length with both ends mitred 45 deg, long edge = brace_leg*sqrt(2) (D20)",
 }
 # (bolts into T-nuts, other screws) per piece. Misumi counts from the catalog
 # (refs/misumi_brackets/p2259.pdf); the -SET suffix ships them with each part.
 FASTENERS: Mapping[str, tuple[int, int]] = {
     "HBLFSN5": (2, 0),             # 1 bolt per leg
     "HBLFSD5": (4, 0),             # 2 bolts per leg, 4 x CBM5-10 + HNTT5-5 (D15)
+    "HBL45TD5": (4, 0),            # 2 bolts per face, -SET: CBM5-14 + HNTT5-5 (D20)
     "HPTTD5": (8, 0),              # 8 x M5
     "HPTLD5": (8, 0),              # 8 x M5
     "Standoff M5x12 d10": (1, 1),  # into a T-nut, + 1 screw through the panel

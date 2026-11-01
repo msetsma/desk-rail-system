@@ -1014,5 +1014,105 @@
     "host": "FRM-04 stile right / FRM-02 crossbar high",
     "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
     "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-43 Brace bracket L upright end (HBL45TD5)",
+    "lib": "HW-L05_HBL45TD5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      0,
+      1
+    ],
+    "xl": [
+      -1,
+      0,
+      0
+    ],
+    "x": "-up_xc",
+    "y": "up_y - rail_l/2",
+    "z": "frame_top - rail_l - brace_in",
+    "yaw": "0 deg",
+    "legacy_body": null,
+    "verified_bbox_err_mm": null,
+    "verified_com_err_mm": null,
+    "host": "FRM-06 knee brace L / FRM-03L side rail L / FRM-01 upright L",
+    "note": "Vendor frame (HBL45TS5 section): vertex line on local X, base on local y=0 running +z, angled face on y=z. Upright end: base on the upright front face, vertex where the brace's inner face meets it (brace_in below the rail), base running up toward the corner; local x->-X, y->-Y, z->+Z (half turn about Z). Both slots of the upright front face and the brace's inner 40 face, 20 mm pitch.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-44 Brace bracket L rail end (HBL45TD5)",
+    "lib": "HW-L05_HBL45TD5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "-up_xc",
+    "y": "up_y - rail_l/2 - brace_in",
+    "z": "frame_top - rail_l",
+    "yaw": "0 deg",
+    "legacy_body": null,
+    "verified_bbox_err_mm": null,
+    "verified_com_err_mm": null,
+    "host": "FRM-06 knee brace L / FRM-03L side rail L / FRM-01 upright L",
+    "note": "Vendor frame (HBL45TS5 section): vertex line on local X, base on local y=0 running +z, angled face on y=z. Rail end: base on the rail underside, vertex where the brace's inner face meets it (brace_in in front of the upright), base running back toward the corner; local x->+X, y->-Z, z->+Y. Both slots of the rail bottom face and the brace's inner 40 face.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-45 Brace bracket R upright end (HBL45TD5)",
+    "lib": "HW-L05_HBL45TD5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      0,
+      1
+    ],
+    "xl": [
+      -1,
+      0,
+      0
+    ],
+    "x": "up_xc",
+    "y": "up_y - rail_l/2",
+    "z": "frame_top - rail_l - brace_in",
+    "yaw": "0 deg",
+    "legacy_body": null,
+    "verified_bbox_err_mm": null,
+    "verified_com_err_mm": null,
+    "host": "FRM-06 knee brace R / FRM-03R side rail R / FRM-01 upright R",
+    "note": "Vendor frame (HBL45TS5 section): vertex line on local X, base on local y=0 running +z, angled face on y=z. Upright end: base on the upright front face, vertex where the brace's inner face meets it (brace_in below the rail), base running up toward the corner; local x->-X, y->-Y, z->+Z (half turn about Z). Both slots of the upright front face and the brace's inner 40 face, 20 mm pitch.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-46 Brace bracket R rail end (HBL45TD5)",
+    "lib": "HW-L05_HBL45TD5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "up_xc",
+    "y": "up_y - rail_l/2 - brace_in",
+    "z": "frame_top - rail_l",
+    "yaw": "0 deg",
+    "legacy_body": null,
+    "verified_bbox_err_mm": null,
+    "verified_com_err_mm": null,
+    "host": "FRM-06 knee brace R / FRM-03R side rail R / FRM-01 upright R",
+    "note": "Vendor frame (HBL45TS5 section): vertex line on local X, base on local y=0 running +z, angled face on y=z. Rail end: base on the rail underside, vertex where the brace's inner face meets it (brace_in in front of the upright), base running back toward the corner; local x->+X, y->-Z, z->+Y. Both slots of the rail bottom face and the brace's inner 40 face.",
+    "joint_angle": "0 deg"
   }
 ]

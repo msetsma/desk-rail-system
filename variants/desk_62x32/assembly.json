@@ -473,6 +473,24 @@
   {
    "command": "component.insert_design",
    "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-06_Brace_2040.solidcraft",
+    "name": "FRM-06 Brace 2040",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-06_Brace_2040.solidcraft",
+    "name": "FRM-06 Brace 2040",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
     "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-04_Stile_2040.solidcraft",
     "name": "FRM-04 Stile 2040",
     "parent": "FRM-00 Monitor rail frame",
@@ -997,6 +1015,42 @@
    "params": {
     "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
     "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L05_HBL45TD5.solidcraft",
+    "name": "HW-L05 HBL45TD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L05_HBL45TD5.solidcraft",
+    "name": "HW-L05 HBL45TD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L05_HBL45TD5.solidcraft",
+    "name": "HW-L05 HBL45TD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L05_HBL45TD5.solidcraft",
+    "name": "HW-L05 HBL45TD5",
     "parent": "HW-00 Frame hardware",
     "reuse": true
    }
@@ -2003,6 +2057,108 @@
      "0 deg"
     ],
     "offset": "frame_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Brace_L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-06 Brace 2040:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-up_xc",
+     "up_y - rail_l/2 - brace_c",
+     "0 deg"
+    ],
+    "offset": "frame_top - rail_l - brace_c",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Brace_R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-06 Brace 2040:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "up_xc",
+     "up_y - rail_l/2 - brace_c",
+     "0 deg"
+    ],
+    "offset": "frame_top - rail_l - brace_c",
     "angle": "0 deg"
    }
   },
@@ -5012,6 +5168,210 @@
      "0 deg"
     ],
     "offset": "desk_h + bar2_z - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-43 Brace bracket L upright end (HBL45TD5)",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L05 HBL45TD5:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-up_xc",
+     "up_y - rail_l/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - rail_l - brace_in",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-44 Brace bracket L rail end (HBL45TD5)",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L05 HBL45TD5:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-up_xc",
+     "up_y - rail_l/2 - brace_in",
+     "0 deg"
+    ],
+    "offset": "frame_top - rail_l",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-45 Brace bracket R upright end (HBL45TD5)",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L05 HBL45TD5:3",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "up_xc",
+     "up_y - rail_l/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - rail_l - brace_in",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-46 Brace bracket R rail end (HBL45TD5)",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L05 HBL45TD5:4",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "up_xc",
+     "up_y - rail_l/2 - brace_in",
+     "0 deg"
+    ],
+    "offset": "frame_top - rail_l",
     "angle": "0 deg"
    }
   },

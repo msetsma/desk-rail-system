@@ -616,8 +616,29 @@
   "unit": "mm"
  },
  {
-  "comment": "Upright length below desktop underside: to the side-rail T-plate bottom (the panel hangs past it)",
-  "expression": "rail_l + plate_ext",
+  "comment": "Knee brace (D20): leg of the 45 deg triangle along the upright and along the rail, from the inside corner (upright front face / rail underside) to the brace's outer (long) edge. User asked ~120 mm; 150 so each HBL45TD5 (82 mm base) clears the HBLFSD5 gusset (30 mm legs) by 9.6 mm and the two brackets' tips clear each other by ~9 mm",
+  "expression": "150 mm",
+  "favorite": false,
+  "name": "brace_leg",
+  "unit": "mm"
+ },
+ {
+  "comment": "Derived: knee brace part origin (centre of its axis) behind/below the corner, along -Y and -Z",
+  "expression": "(brace_leg - rail_s/sqrt(2))/2",
+  "favorite": false,
+  "name": "brace_c",
+  "unit": "mm"
+ },
+ {
+  "comment": "Derived: knee brace inner (40 mm) face meets the upright front face / rail underside this far from the inside corner; the HBL45TD5 vertices sit there",
+  "expression": "brace_leg - rail_s*sqrt(2)",
+  "favorite": false,
+  "name": "brace_in",
+  "unit": "mm"
+ },
+ {
+  "comment": "Upright length below desktop underside: down to the knee brace's lower end (D20; was the side-rail T-plate bottom). The panel hangs past it",
+  "expression": "rail_l + max(plate_ext, brace_leg)",
   "favorite": false,
   "name": "up_below",
   "unit": "mm"
