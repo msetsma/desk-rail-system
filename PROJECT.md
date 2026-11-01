@@ -136,6 +136,7 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   origins are plain numbers. Generators compute them from `skeleton_values.values()` or their own local
   constants (AGENTS §3). DSK-02 broke when a hand-typed point missed the new `ts_h`; the stale stored
   skeleton values had also put the PC-01/02 fillet picks on the wrong edges.
+- `build_assembly.py` and `build_variant.py` both write `build/assembly_finish.json`: run them one after the other, never in parallel.
 - Line endings: `.gitattributes` stores all text as LF; Windows generators may write CRLF and git
   normalises on add, so don't hand-preserve line endings.
 - `inspect.clearance` can report `0.000 mm` for a real 0.1 mm gap (seen on the laptop clamp vs the 2040 bar).
