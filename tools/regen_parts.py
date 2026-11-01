@@ -6,7 +6,9 @@
 
 The build scripts (`parts/src/*.json`, `parts/lib/src/HW-*.json`) are the source of truth, except a script
 marked `"generated_by": "<generator>.py"`: its generator is, and it is re-run first when the generator is
-newer than the script, or when the skeleton is newer and the generator reads it (`skeleton_values`). Each part
+newer than the script, or when the skeleton is newer and the generator reads it (`skeleton_values`). The part
+list is re-read after generators run, so a script a generator just created (or renamed) builds in the same
+pass. Frozen files left without a script (a renamed part) are reported as stale. Each part
 is built with its history into `build/parts_hist/<stem>.solidcraft` (open that one to inspect or edit
 interactively). It's then exported to STEP and re-imported as a single feature, with materials,
 colours and metadata replayed, into `parts/<stem>.solidcraft`, the file the assembly links. Inserting or
@@ -30,7 +32,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 
-__all__ = ["RegenError", "PartSource", "part_sources", "refresh_generated", "regen_part", "regen_all", "main"]
+__all__ = ["RegenError", "PartSource", "part_sources", "refresh_generated", "orphaned_outputs", "regen_part", "regen_all", "main"]
 
 log = logging.getLogger(__name__)
 
@@ -197,14 +199,28 @@ def regen_all(sources: Sequence[PartSource], skeleton: Path = SKELETON, parts_di
     return rebuilt, errors
 
 
+def _selected(prefixes: Sequence[str]) -> list[PartSource]:
+    return [s for s in part_sources() if not prefixes or s.stem.startswith(tuple(prefixes))]
+
+
+def orphaned_outputs(parts_dir: Path = PARTS) -> list[Path]:
+    """Frozen part files whose build script no longer exists."""
+    expected = {parts_dir / s.rel_out for s in part_sources()}
+    frozen = [*parts_dir.glob("*.solidcraft"), *(parts_dir / "lib").glob("*.solidcraft")]
+    return sorted(f for f in frozen if f not in expected and not f.name.startswith("_"))  # _template.*
+
+
 def main(argv: Sequence[str]) -> int:
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("prefixes", nargs="*", help="only part files starting with these")
     parser.add_argument("--force", action="store_true", help="rebuild even if unchanged")
     args = parser.parse_args(argv)
-    sources = [s for s in part_sources() if not args.prefixes or s.stem.startswith(tuple(args.prefixes))]
-    refresh_generated(sources)
+    sources = _selected(args.prefixes)
+    if refresh_generated(sources):
+        sources = _selected(args.prefixes)  # generators may have added or renamed scripts
+    for orphan in orphaned_outputs():
+        log.warning("stale frozen part (no script): %s; git rm it", orphan.relative_to(ROOT).as_posix())
     rebuilt, errors = regen_all(sources, force=args.force)
     for e in errors:
         log.error("%s", e)

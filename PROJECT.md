@@ -23,17 +23,23 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   1. Edit `skeleton/params.json` or a part script.
   2. Run `python tools/regen_parts.py`. It first re-runs stale generators (generator newer than its script,
      or skeleton newer and the generator uses `skeleton_values`), then rebuilds only the parts whose script
-     or skeleton changed, in parallel. It prints the components to refresh.
+     or skeleton changed, in parallel. It prints the components to refresh. It re-reads the part list after
+     the generators, so a part a generator just created or renamed builds in the same pass, and it warns about
+     frozen files left without a script (`git rm` them).
   3. **1-3 parts changed:** in the live assembly, run `component.update_links {"component": "<name>"}` for
      each (~0.3 s each), plus `parameters.import` of the skeleton if it changed. **More than that** (any
      skeleton change usually touches ~25 parts): rebuild the assembly (below, ~20 s), then `new_design` +
      `open`. **Never use the bare `update_links {}`**: it re-evaluates every link (~40 s).
+     Removing or renaming a skeleton parameter is a skeleton change too. When a change only retires a
+     parameter, leave it unused (say so in its comment) and delete it with the next real skeleton change.
 - Parameter sweep (parallel, on private copies): `python tools/sweep.py`.
 - Layout variants (own assembly file, main design untouched): `python tools/build_variant.py <name>` builds
   `variants/<name>/variant.json` (skeleton overrides, `speakers: hung|laid`) into its `out` file, with the
   variant skeleton and its skeleton-driven parts under `variants/<name>/`. `desk_62x32` ->
   `desk_rails_62x32.solidcraft` (D17). Re-run it after a skeleton or part change; it re-solves the laid speaker
-  placement and laptop tray height. Checks take `--design desk_rails_62x32.solidcraft`.
+  placement and laptop tray height. Checks take `--design desk_rails_62x32.solidcraft`. It can run in parallel
+  with `build_assembly.py`: `assembly_finish.py` names its scratch files after the design
+  (`build/<design>_finish.json`, `build/<design>_eval.json`).
 - Rebuild the whole assembly from scratch (~20 s): `python tools/build_assembly.py --out desk_rails.solidcraft`.
   Build straight to that path (the design name comes from the build path, so a copied file keeps the
   wrong name). Run `new_design` in the live app first, then `open`.
@@ -136,9 +142,9 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   origins are plain numbers. Generators compute them from `skeleton_values.values()` or their own local
   constants (AGENTS §3). DSK-02 broke when a hand-typed point missed the new `ts_h`; the stale stored
   skeleton values had also put the PC-01/02 fillet picks on the wrong edges.
-- `build_assembly.py` and `build_variant.py` both write `build/assembly_finish.json`: run them one after the other, never in parallel.
 - Line endings: `.gitattributes` stores all text as LF; Windows generators may write CRLF and git
-  normalises on add, so don't hand-preserve line endings.
+  normalises on add, so don't hand-preserve line endings. Working copies can still be CRLF (e.g.
+  `FRM-gen.py`): edit scripts that match multi-line text must convert the pattern to the file's line ending.
 - `inspect.clearance` can report `0.000 mm` for a real 0.1 mm gap (seen on the laptop clamp vs the 2040 bar).
   Treat sub-0.2 mm "near" values as contact-level, not as a measurement.
 - MCP `parameters.export` returns the full text even when given a `path`. `component.list` on the full

@@ -84,6 +84,11 @@ triggers a full rebuild.
 - Query the design narrowly (single feature, single command schema). Full design dumps are huge.
   Write big listings to a file and summarize them with a script. Don't pull them into context.
 - Long calls may move to the background. Wait for the completion notification and don't resend.
+- Cross-file edits (a rename, a retired part): grep every reference first, then make all edits in one script
+  written with the file tool. Don't build scripts with heredocs inside longer shell commands: a stray
+  command reading stdin hangs until the timeout. Match multi-line text regardless of line endings.
+- Retiring a shared layout parameter is a layout change and rebuilds everything that reads the layout.
+  Leave it unused and remove it with the next real layout change.
 - Run anything over ~1 min (builds, sweeps, full checks) in the background, and keep working.
 
 ## 4. Getting vendor parts and references
@@ -147,4 +152,5 @@ subagents run, the main agent keeps working on non-conflicting tasks.
 | 2026-10-28 | A thread-eval suggested live-app checks. Measured: loading the frozen assembly takes 0.65 s; a 14-pair check took 113 s because hardware-on-extrusion contacts took ~25 s per pair, and one all-against-all call re-added them | §1: per-body neighbour pairs, skip designed contacts, cap threads -> 4 s |
 | 2026-10-29 | Rules audit: a hand-typed edge point broke DSK-02 on a parameter change; stale stored skeleton values had mis-placed PC fillet picks; a hand edit (walnut panel) lived only in a generated script; per-part link refresh was skipped for 25-part skeleton changes; mesh bodies came back "unchecked"; CRLF/LF handled by hand; a vendor DWG was skipped for an envelope; the desk height came from the paddle, 3.5 in off | §1: commit each finished feature unasked, record how values were measured, convert vendor CAD before modelling; §3: computed pick points, one source per part; PROJECT: expressions-only skeleton + `skeleton_values`, `generated_by` + auto-regen, refresh-vs-rebuild threshold, near_check bbox fallback, `.gitattributes` |
 | 2026-10-29 | Laptop fit: angular-bbox checks flagged false blocks, and a coarse (10x10 ray) placement search passed a spot that hid 2% of the monitor at full resolution | §1: check sightlines by ray casting against front faces; re-verify a searched optimum at full resolution, then pick the middle of the clear window |
+| 2026-11-01 | Bolt-length change (M6x20 -> M6x55) took several extra minutes: a heredoc command hung on a stray stdin read (2 min timeout), a CRLF file broke a multi-line match mid-script, a generator-created library part needed a second regen pass, parallel main/variant builds raced on a shared scratch file (one extra rebuild), and deleting 2 unused skeleton params rebuilt ~24 parts instead of ~5 | §3: one grep + one file-tool edit script, line-ending-agnostic matches, retire layout params lazily; tools: regen re-reads the part list after generators and flags orphaned frozen parts, finish scratch files named per design |
 | 2026-10-28 | Same audit: a 10 min headless baseline re-eval, late-spawned placement and colour jobs (~6 min), a serial sweep (17 min vs ~5 parallel), 2 rebuilds from an untested 180° convention | §5: first wave, conventions in specs, reuse the loaded design, parallel check cases; §3: background long runs, no big dumps in context |

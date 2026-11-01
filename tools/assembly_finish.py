@@ -20,8 +20,7 @@ log = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parent.parent
 PARTS = ROOT / "parts"
-SCRIPT_OUT = ROOT / "build" / "assembly_finish.json"
-EVAL_OUT = ROOT / "build" / "assembly_eval.json"
+BUILD = ROOT / "build"
 CLI = "solidcraft-cli"
 META_KEY = "com.setsma.desk"
 _COPIED = ("material.assign", "appearance.assign")
@@ -131,11 +130,14 @@ def _group_commands(links: Sequence[str]) -> list[dict[str, object]]:
 
 def finish_assembly(design: Path, components: Sequence[str]) -> None:
     """Apply materials, appearance, properties, views, display rows and timeline groups in place."""
-    _run(["eval", str(design), "--json-out", str(EVAL_OUT)])
-    real = _real_bodies(EVAL_OUT)
+    # Scratch files are named after the design, so the main and variant builds can run in parallel.
+    script_out, eval_out = BUILD / f"{design.stem}_finish.json", BUILD / f"{design.stem}_eval.json"
+    BUILD.mkdir(exist_ok=True)
+    _run(["eval", str(design), "--json-out", str(eval_out)])
+    real = _real_bodies(eval_out)
     links = list(dict.fromkeys(components))
     commands = [c for comp in links for c in _part_commands(comp, real)]
     commands += _view_commands() + _config_commands(links) + _group_commands(links)
-    SCRIPT_OUT.write_text(json.dumps({"commands": commands}, indent=1), encoding="utf-8")
-    log.info("wrote %s (%d commands)", SCRIPT_OUT.relative_to(ROOT), len(commands))
-    _run(["run", str(SCRIPT_OUT), "--in", str(design), "--save", str(design), "--quiet"])
+    script_out.write_text(json.dumps({"commands": commands}, indent=1), encoding="utf-8")
+    log.info("wrote %s (%d commands)", script_out.relative_to(ROOT), len(commands))
+    _run(["run", str(script_out), "--in", str(design), "--save", str(design), "--quiet"])
