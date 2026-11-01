@@ -225,7 +225,7 @@ def build(variant: Variant) -> None:
     if result.returncode != 0:
         raise VariantError((result.stderr or result.stdout).strip()[:600])
     try:
-        finish_assembly(variant.out, [build_assembly.component_name(o.part) for o in occs])
+        finish_assembly(variant.out, [build_assembly.component_name(o.part) for o in occs], values)
     except FinishError as exc:
         raise VariantError(f"finish pass failed: {exc}") from exc
     log.info("saved %s", variant.out.relative_to(ROOT))

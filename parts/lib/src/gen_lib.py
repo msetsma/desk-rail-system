@@ -6,13 +6,13 @@ HERE = Path(__file__).parent
 TEMPLATE = json.loads((HERE.parent.parent / "_template.json").read_text())["commands"]
 
 
-def finish(body: str, pn: str, desc: str, material: str, color: str, label: str) -> list[dict]:
+def finish(body: str, pn: str, desc: str, material: str, color: str, label: str, source: str) -> list[dict]:
     return [
         {"command": "material.assign", "params": {"bodies": [body], "material": material}},
         {"command": "appearance.assign", "params": {"bodies": [body], "color": color}},
         {"command": "document.metadata.set", "params": {"values": {
             "part_number": pn, "description": desc, "revision": "A", "project": "desk",
-            "com.setsma.desk": {"lib_id": label, "Material": material, "ReleaseState": "Released"},
+            "com.setsma.desk": {"lib_id": label, "Material": material, "ReleaseState": "Released", "Source": source},
         }}},
         {"command": "document.metadata", "params": {}},
     ]
@@ -40,7 +40,11 @@ def step_script(label: str) -> dict:
     cmds = list(TEMPLATE)
     if old:
         cmds.append({"command": "body.rename", "params": {"body": old, "name": new}})
-    return {"input": INPUT[label], "commands": cmds + finish(new, pn, desc, mat, col, label)}
+    source = f"Misumi vendor STEP {INPUT[label]}"
+    return {"input": INPUT[label], "commands": cmds + finish(new, pn, desc, mat, col, label, source)}
+
+
+SIMPLIFIED = "Modelled (simplified)"
 
 
 def screw() -> dict:
@@ -53,7 +57,7 @@ def screw() -> dict:
         {"command": "sketch.finish", "params": {}},
         {"command": "solid.extrude", "params": {"distance": 3.1, "direction": "negative", "operation": "cut", "targets": [b], "name": "HexSocket"}},
     ]
-    return {"commands": cmds + finish(b, "ISO 4762 M6x55", "Socket head cap screw M6x55, black-oxide steel (simplified, no thread)", "Steel black-oxide", "#2b2b2b", "HW-L10_M6x55_SHCS")}
+    return {"commands": cmds + finish(b, "ISO 4762 M6x55", "Socket head cap screw M6x55, black-oxide steel (simplified, no thread)", "Steel black-oxide", "#2b2b2b", "HW-L10_M6x55_SHCS", SIMPLIFIED)}
 
 
 def standoff() -> dict:
@@ -62,7 +66,7 @@ def standoff() -> dict:
         {"command": "solid.cylinder", "params": {"diameter": 10, "height": 12, "base": [0, 0, 0], "name": "Standoff", "body_name": b}},
         {"command": "solid.cylinder", "params": {"diameter": 5, "height": 12.2, "base": [0, 0, -0.1], "operation": "cut", "targets": [b], "name": "BoreM5"}},
     ]
-    return {"commands": cmds + finish(b, "Standoff M5x12 d10", "Round standoff d10 x 12, M5 through bore (simplified), zinc-plated steel", "Steel zinc-plated", "#c4c9d0", "HW-L11_Standoff_M5x12")}
+    return {"commands": cmds + finish(b, "Standoff M5x12 d10", "Round standoff d10 x 12, M5 through bore (simplified), zinc-plated steel", "Steel zinc-plated", "#c4c9d0", "HW-L11_Standoff_M5x12", SIMPLIFIED)}
 
 
 def _write(name: str, script: dict) -> None:

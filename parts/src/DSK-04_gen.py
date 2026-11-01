@@ -17,7 +17,7 @@ from pathlib import Path
 
 __all__ = ["build", "main"]
 
-ROOT = Path("C:/Users/2015m/DEV/CAD/desk")
+ROOT = Path(__file__).resolve().parents[2]
 TEMPLATE = ROOT / "parts" / "_template.json"
 DEFAULT_SKEL = "skeleton/params.json"
 DEFAULT_OUT = ROOT / "parts" / "src" / "DSK-04_Leg.json"

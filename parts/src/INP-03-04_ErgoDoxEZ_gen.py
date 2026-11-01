@@ -19,7 +19,7 @@ from pathlib import Path
 
 __all__ = ["build", "main"]
 
-ROOT = Path("C:/Users/2015m/DEV/CAD/desk")
+ROOT = Path(__file__).resolve().parents[2]
 REFS = ROOT / "refs/ergodox_ez"
 TEMPLATE = json.loads((ROOT / "parts/_template.json").read_text(encoding="utf-8"))["commands"]
 SKEL = {"command": "parameters.import", "params": {"path": f"{ROOT.as_posix()}/skeleton/params.json"}}

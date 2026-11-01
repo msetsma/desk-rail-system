@@ -20,7 +20,7 @@ import skeleton_values  # noqa: E402
 
 __all__ = ["build", "main"]
 
-ROOT = Path("C:/Users/2015m/DEV/CAD/desk")
+ROOT = Path(__file__).resolve().parents[2]
 TEMPLATE = json.loads((ROOT / "parts/_template.json").read_text(encoding="utf-8"))["commands"]
 SKEL = {"command": "parameters.import", "params": {"path": f"{ROOT.as_posix()}/skeleton/params.json"}}
 OUT = ROOT / "parts/src/MON-02_Monitor_Side_27in.json"

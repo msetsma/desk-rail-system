@@ -1,19 +1,28 @@
 """Generate parts/src/MON-01_Monitor_Main_32in.json (Gigabyte M32U, stand removed, VESA mounted).
 
-Purchased fixed-shape model: no skeleton import. Vendor dimensions are local `m32u_*` parameters.
-Sources and estimates: refs/gigabyte_m32u/README.md.
+Purchased fixed-shape model. The outline (width, height, depth, VESA offset) is the skeleton's `m1_w`,
+`m1_h`, `m1_t`, `m1_vesa_dz` (single source: the assembly places the monitor from the same values), so the part
+imports the skeleton. Detail dimensions that only this part uses are local `m32u_*` parameters.
+Edge/face pick points are computed from the evaluated skeleton (tools/skeleton_values.py) and the local
+PARAMS, never hand-typed (AGENTS §3). Sources and estimates: refs/gigabyte_m32u/README.md.
 
 Local frame: origin = VESA mounting face centre (rear face of the VESA boss), screen faces -Y,
-X right, Z up. The VESA centre sits m32u_vesa_dz above the overall outline centre.
+X right, Z up. The VESA centre sits m1_vesa_dz above the overall outline centre.
 """
 from __future__ import annotations
 
 import json
+import sys
+from collections.abc import Mapping
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools"))
+import skeleton_values  # noqa: E402
 
 __all__ = ["build", "main"]
 
-ROOT = Path("C:/Users/2015m/DEV/CAD/desk")
+SKEL = {"command": "parameters.import", "params": {"path": f"{ROOT.as_posix()}/skeleton/params.json"}}
 TEMPLATE = json.loads((ROOT / "parts/_template.json").read_text(encoding="utf-8"))["commands"]
 OUT = ROOT / "parts/src/MON-01_Monitor_Main_32in.json"
 BODY = "Monitor_Main"
@@ -22,15 +31,13 @@ COLOR_HOUSING = "#15171a"  # matte black plastic (legacy colour)
 COLOR_SCREEN = "#050608"  # panel face, off
 
 # name, expression, comment (MEASURE = estimate, see refs/gigabyte_m32u/README.md)
+# Outline from the skeleton: m1_w (width), m1_h (height), m1_t (depth, screen front to VESA boss face),
+# m1_vesa_dz (VESA centre above the outline centre).
 PARAMS: list[tuple[str, str, str]] = [
-    ("m32u_w", "715.8 mm", "Width without stand (Gigabyte spec page)"),
-    ("m32u_h", "423.8 mm", "Height without stand (Gigabyte spec page)"),
-    ("m32u_d", "68.2 mm", "Depth without stand, screen front to VESA boss face (Gigabyte spec page)"),
     ("m32u_aa_w", "697.3056 mm", "Active area width (manual p.39)"),
     ("m32u_aa_h", "392.2344 mm", "Active area height (manual p.39)"),
-    ("m32u_bez_side", "(m32u_w - m32u_aa_w)/2", "Side bezel to active area (9.25)"),
+    ("m32u_bez_side", "(m1_w - m32u_aa_w)/2", "Side bezel to active area (9.25)"),
     ("m32u_bez_top", "m32u_bez_side", "Top bezel = side (dual-stage, reviews 8-9 mm)"),
-    ("m32u_vesa_dz", "6.7 mm", "VESA centre above outline centre (scaled manual p.16 drawing, +-0.5)"),
     ("m32u_slab_t", "18 mm", "MEASURE panel thickness at the edge (photo; review says ~17 thinnest)"),
     ("m32u_back_d", "54 mm", "MEASURE screen front to rear housing back (side photo)"),
     ("m32u_hsg_drop", "106.4 mm", "Top edge down to rear housing top (manual p.16 drawing)"),
@@ -43,10 +50,19 @@ PARAMS: list[tuple[str, str, str]] = [
     ("m32u_vesa", "100 mm", "VESA hole pattern (manual p.16)"),
 ]
 
-Z_TOP = "m32u_h/2 - m32u_vesa_dz"
-Z_BOT = "-m32u_h/2 - m32u_vesa_dz"
-Y_FRONT = "-m32u_d"
-Y_BACK = "-m32u_d + m32u_back_d"
+Z_TOP = "m1_h/2 - m1_vesa_dz"
+Z_BOT = "-m1_h/2 - m1_vesa_dz"
+Y_FRONT = "-m1_t"
+Y_BACK = "-m1_t + m32u_back_d"
+
+
+def local_mm(name: str) -> float:
+    """Value of a plain-number local parameter ("<n> mm") from PARAMS, for pick points."""
+    expr = next(e for n, e, _ in PARAMS if n == name)
+    number, unit = expr.split()
+    if unit != "mm":
+        raise ValueError(f"{name}: expected '<n> mm', got {expr!r}")
+    return float(number)
 
 
 def c(cmd: str, **params: object) -> dict:
@@ -66,20 +82,20 @@ def params_cmd() -> dict:
 def shell() -> list[dict]:
     return [
         c("solid.box", name="M32U_Panel", body_name=BODY, operation="new",
-          corner=["-m32u_w/2", Y_FRONT, Z_BOT], length="m32u_w", width="m32u_slab_t", height="m32u_h"),
+          corner=["-m1_w/2", Y_FRONT, Z_BOT], length="m1_w", width="m32u_slab_t", height="m1_h"),
         c("solid.box", name="M32U_RearHousing", operation="join", targets=[BODY],
-          corner=["-m32u_w/2 + 1 mm", "-m32u_d + m32u_slab_t - 0.1 mm", f"{Z_BOT} + 1 mm"],
-          length="m32u_w - 2 mm", width="m32u_back_d - m32u_slab_t + 0.1 mm",
-          height="m32u_h - m32u_hsg_drop - 1 mm"),
+          corner=["-m1_w/2 + 1 mm", "-m1_t + m32u_slab_t - 0.1 mm", f"{Z_BOT} + 1 mm"],
+          length="m1_w - 2 mm", width="m32u_back_d - m32u_slab_t + 0.1 mm",
+          height="m1_h - m32u_hsg_drop - 1 mm"),
         c("solid.box", name="M32U_VesaBoss", operation="join", targets=[BODY],
           corner=["-m32u_boss/2", f"{Y_BACK} - 0.1 mm", "-m32u_boss/2"],
-          length="m32u_boss", width="m32u_d - m32u_back_d + 0.1 mm", height="m32u_boss"),
+          length="m32u_boss", width="m1_t - m32u_back_d + 0.1 mm", height="m32u_boss"),
     ]
 
 
-def housing_round(back_y: float, top_z: float) -> list[dict]:
-    """One fillet on the top-back edge of the rear housing (point given in default-param mm)."""
-    return [c("solid.fillet", edges=[[200.0, back_y, top_z]], radius="m32u_hsg_r", name="M32U_HousingRound")]
+def housing_round(x: float, back_y: float, top_z: float) -> list[dict]:
+    """One fillet on the top-back edge of the rear housing (point from the evaluated parameters)."""
+    return [c("solid.fillet", edges=[[x, back_y, top_z]], radius="m32u_hsg_r", name="M32U_HousingRound")]
 
 
 def io_pocket(back_y: float) -> list[dict]:
@@ -107,7 +123,7 @@ def vesa_holes() -> list[dict]:
 
 
 def screen(front_y: float) -> list[dict]:
-    zb = f"{Z_BOT} + m32u_h - m32u_bez_top - m32u_aa_h"
+    zb = f"{Z_BOT} + m1_h - m32u_bez_top - m32u_aa_h"
     zt = f"{Z_TOP} - m32u_bez_top"
     return [
         xz_plane(front_y - 0.1, "Sk_M32U_Screen"),
@@ -119,10 +135,10 @@ def screen(front_y: float) -> list[dict]:
     ]
 
 
-def finish(front_y: float, screen_z: float) -> list[dict]:
+def finish(front_y: float, screen_z: float, vesa_dz: float) -> list[dict]:
     desc = ("Gigabyte M32U 31.5in 4K monitor, stand removed, VESA 100x100 mounted (purchased, reference model). "
             "Origin: VESA mounting face centre (rear of VESA boss); screen faces -Y, X right, Z up. "
-            "VESA centre is m32u_vesa_dz = 6.7 mm above the outline centre (= active-area centre).")
+            f"VESA centre is m1_vesa_dz = {vesa_dz:g} mm above the outline centre (= active-area centre).")
     return [
         c("material.assign", bodies=[BODY], material=MATERIAL),
         c("appearance.assign", bodies=[BODY], color=COLOR_HOUSING),
@@ -139,22 +155,23 @@ def finish(front_y: float, screen_z: float) -> list[dict]:
     ]
 
 
-def build() -> list[dict]:
-    # default-parameter numbers, only used to pick edges/faces
-    d, h, dz, back_d, drop = 68.2, 423.8, 6.7, 54.0, 106.4
-    front_y, back_y = -d, -d + back_d
+def build(v: Mapping[str, float] | None = None) -> list[dict]:
+    v = skeleton_values.values() if v is None else v
+    w, h, d, dz = v["m1_w"], v["m1_h"], v["m1_t"], v["m1_vesa_dz"]
+    front_y, back_y = -d, -d + local_mm("m32u_back_d")
     z_top = h / 2 - dz
-    bez = (715.8 - 697.3056) / 2
-    screen_z = z_top - bez - 392.2344 / 2
+    bez = (w - local_mm("m32u_aa_w")) / 2
+    screen_z = z_top - bez - local_mm("m32u_aa_h") / 2
     return [
         *TEMPLATE,
+        SKEL,
         params_cmd(),
         *shell(),
-        *housing_round(back_y, z_top - drop),
+        *housing_round(w / 4, back_y, z_top - local_mm("m32u_hsg_drop")),
         *io_pocket(back_y),
         *vesa_holes(),
         *screen(front_y),
-        *finish(front_y, screen_z),
+        *finish(front_y, screen_z, dz),
     ]
 
 

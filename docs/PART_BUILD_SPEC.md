@@ -33,7 +33,7 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 5. Assign a material from the template with `material.assign`, and an appearance colour (PROJECT.md):
    - DeskHaus Silver powder-coated steel frame `#a8acaf`
    - aluminium extrusion `#d4d8dd`
-   - wood: use what the legacy model had (measure the colour, or use a sensible walnut or butcher-block colour)
+   - wood: walnut veneer `#6b4a32` (desktop, modesty panel); the PC slat front is walnut too
    - vendor parts keep their legacy colours. You can read colours in a scratch import, or ask in your report.
 6. **Local origin**: choose a functional datum (mating face or centre line), and document it in the
    description, e.g. "origin: top face centre, +Y toward wall". For left/right pairs, one file serves both
@@ -61,8 +61,9 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 | DSK-05 | Foot | 2 | Foot_L, Foot_R |
 | FRM-01 | Upright 4040 | 2 | Upright_L/R_HFS5 |
 | FRM-02 | Crossbar 2040 | 2 | Crossbar_Low/High_HFS5 |
-| FRM-03 | Side rail 4040, drilled | 2 | SideRail_L/R_4040_HFS5 |
-| FRM-04 | Stile 2040 | 2 | Stile_Main/Side_HFS5 |
+| FRM-03L | Side rail 4040 left, drilled (mirror of FRM-03R, so its own file) | 1 | SideRail_L_4040_HFS5 |
+| FRM-03R | Side rail 4040 right, drilled | 1 | SideRail_R_4040_HFS5 |
+| FRM-04 | Stile 2040 | 3 | Stile_Main/Side/Right_HFS5 |
 | FRM-05 | Modesty panel | 1 | ModestyPanel |
 | MON-01 | Main monitor 32in | 1 | Monitor_Main + Monitor_Main_Back (one body) |
 | MON-02 | Side monitor 27in (generic, not picked yet) | 1 | Monitor_Side + Monitor_Side_Back (one body) |
@@ -78,12 +79,13 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 | INP-02 | Razer DeathAdder V3 Pro | 1 | Mouse_DAV3Pro_* (multibody allowed; source refs/razer_dav3pro/DAV3Pro.step) |
 | INP-03 | ErgoDox EZ left | 1 | Keyboard_L (outline refs/ergodox_ez/*.dxf) |
 | INP-04 | ErgoDox EZ right | 1 | Keyboard_R |
-| LAP-01 | Laptop mount arm (user-built jig placeholder, clamps the lower crossbar) | 1 | new (LaptopMount_Arm) |
+| LAP-01 | Laptop mount arm (user-built jig placeholder, bolts to the right stile's front slot, D19) | 1 | new (LaptopMount_Arm) |
 | LAP-02 | MacBook Pro 14in M4 | 1 | new (MBP_*, multibody allowed) |
 | LAP-03 | Laptop tray (user-built jig placeholder) | 1 | new (LaptopTray) |
 | CHR-01 | Herman Miller Mirra 2 chair, Butterfly back (vendor 3D DWG mesh: seat down, arms up and back) | 1 | Chair_* (multibody allowed; source refs/herman_miller_mirra2/converted/CHR-01_mirra2.step via parts/src/CHR-01_convert.py) |
 
-Hardware is in `parts/lib/` (HPTTD5, HPTLD5, HBLFSN5, M6x55 SHCS, standoff). Eye becomes a skeleton
+Hardware is in `parts/lib/` (HW-L01 HPTTD5, HW-L02 HPTLD5, HW-L03 HBLFSN5, HW-L04 HBLFSD5, HW-L10 M6x55
+SHCS, HW-L11 standoff); its occurrences HW-01..HW-42 come from `skeleton/hw_placements.json`. Eye becomes a skeleton
 point in the assembly, not a part.
 
 ## Edit speed (applies to every part)

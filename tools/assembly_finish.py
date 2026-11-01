@@ -1,5 +1,5 @@
-"""Second pass on the built assembly (compliance Phase 5): materials, appearance, properties,
-named views and visibility configurations.
+"""Second pass on a built assembly (tools/build_assembly.py, tools/build_variant.py): materials,
+appearance, properties, named views, visibility configurations and timeline folders.
 
 Linked parts don't carry their material or free properties into the assembly, and multi-lump
 bodies come in split ("PC_FrontSlats (2)"), so the real body names are read from an eval of the
@@ -14,7 +14,9 @@ import subprocess
 from collections.abc import Iterable, Mapping, Sequence
 from pathlib import Path
 
-__all__ = ["FinishError", "finish_assembly"]
+import skeleton_values
+
+__all__ = ["FinishError", "finish_assembly", "skeleton_views"]
 
 log = logging.getLogger(__name__)
 
@@ -25,22 +27,46 @@ CLI = "solidcraft-cli"
 META_KEY = "com.setsma.desk"
 _COPIED = ("material.assign", "appearance.assign")
 
-# Camera: yaw 0 looks from the front (-Y), radians; target/distance in mm.
-VIEWS: tuple[tuple[str, list[float], float, float, float], ...] = (
+# Camera: yaw 0 looks from the front (-Y), radians; target/distance in mm. Views centred on the frame
+# keep fixed targets; detail views follow the skeleton (frame width, stile and mount positions), so a
+# variant with a different desk size frames the same features.
+View = tuple[str, list[float], float, float, float]
+FIXED_VIEWS: tuple[View, ...] = (
     ("Overview", [0, 0, 800], 0.6, 0.45, 3200),
     ("Front", [0, 0, 900], 0.0, 0.1, 2900),
     ("Back", [0, 300, 900], 3.1416, 0.2, 2900),
-    ("SideRailJoint_R", [900, 0, 690], -1.2, 0.35, 700),
-    ("SideRailJoint_L", [-900, 0, 690], 1.2, 0.35, 700),
-    ("SpeakerMount_R", [880, 320, 1190], -1.57, 0.15, 500),
     ("UnderDesk", [0, 0, 500], 0.4, -0.3, 1900),
-    ("LaptopArm", [560, 150, 950], -0.7, 0.35, 1000),
     # Framed for the matching display rows below (Rails only, Desk only, Desk + rails).
     ("Rails", [0, 250, 1000], 0.6, 0.3, 2300),
     ("RailsBack", [0, 250, 1000], 2.6, 0.25, 2300),
     ("Desk", [0, 0, 450], 0.6, 0.4, 2500),
     ("DeskRails", [0, 100, 700], 0.6, 0.4, 2800),
 )
+SIDE_RAIL_VIEW_DZ = 55.0  # target above the frame top: middle of the side-rail to top-support joint
+VIEW_ORDER = ("Overview", "Front", "Back", "SideRailJoint_R", "SideRailJoint_L", "SpeakerMount_R",
+              "UnderDesk", "LaptopArm", "Rails", "RailsBack", "Desk", "DeskRails")
+
+
+def skeleton_views(v: Mapping[str, float]) -> tuple[View, ...]:
+    """All named views, detail targets computed from evaluated skeleton values `v` (mm)."""
+    try:
+        rail_z = v["frame_top"] + SIDE_RAIL_VIEW_DZ
+        detail: tuple[View, ...] = (
+            ("SideRailJoint_R", [v["frame_w"] / 2, 0, rail_z], -1.2, 0.35, 700),
+            ("SideRailJoint_L", [-v["frame_w"] / 2, 0, rail_z], 1.2, 0.35, 700),
+            # Between the upright front slot and the speaker swivel, at the mount height.
+            ("SpeakerMount_R", [(v["up_xc"] + v["spk_px"]) / 2, v["up_y"] - v["rail_l"],
+                                v["desk_h"] + v["spk_pz"]], -1.57, 0.15, 500),
+            # LAP-01 base on the right stile front slot, arm reaching forward to the tray.
+            ("LaptopArm", [v["stile_r_x"], v["stile_front"] - v["lap_reach"] / 2, v["lap_mount_z"]],
+             -0.7, 0.35, 1000),
+        )
+    except KeyError as exc:
+        raise FinishError(f"skeleton lacks {exc} needed for the named views") from exc
+    by_name = {view[0]: view for view in (*FIXED_VIEWS, *detail)}
+    return tuple(by_name[n] for n in VIEW_ORDER)
+
+
 # Visibility sets as configuration rows (SolidCraft has no display states): link groups suppressed.
 DISPLAY_ROWS: Mapping[str, tuple[str, ...]] = {
     "Full": (),
@@ -101,15 +127,16 @@ def _part_commands(component: str, real: Sequence[str]) -> list[dict[str, object
             commands.append(_cmd(c["command"], **{**params, "bodies": _expand(params["bodies"], real)}))
         elif c["command"] == "document.metadata.set":
             meta = params.get("values", {}).get(META_KEY) or {}
-            props = {k: str(meta[k]) for k in ("Material", "ReleaseState") if k in meta}
+            props = {k: str(meta[k]) for k in ("Material", "ReleaseState", "Source") if k in meta}
     if props:
         commands.append(_cmd("component.metadata.set", component=component, properties=props))
     return commands
 
 
-def _view_commands() -> list[dict[str, object]]:
-    return [_cmd("view.save", name=n, camera={"target": t, "yaw": y, "pitch": p, "distance": d})
-            for n, t, y, p, d in VIEWS]
+def _view_commands(views: Sequence[View]) -> list[dict[str, object]]:
+    return [_cmd("view.save", name=n, camera={"target": [round(c, 1) for c in t], "yaw": y, "pitch": p,
+                                               "distance": d})
+            for n, t, y, p, d in views]
 
 
 def _config_commands(links: Sequence[str]) -> list[dict[str, object]]:
@@ -120,16 +147,59 @@ def _config_commands(links: Sequence[str]) -> list[dict[str, object]]:
     return [*commands, _cmd("config.activate", row="Full")]
 
 
-def _group_commands(links: Sequence[str]) -> list[dict[str, object]]:
-    """One timeline folder per group prefix (DSK, FRM, HW, ...), plus the skeleton sketch."""
+def _folder(component: str) -> str:
+    return f"{component.split('-')[0]} parts"
+
+
+def _joint_names(design: Path, out: Path) -> list[str]:
+    """Placement joint names in creation order (`joint.list`, ~2 s headless)."""
+    script = out.with_suffix(".script.json")
+    script.write_text(json.dumps({"commands": [_cmd("joint.list")]}), encoding="utf-8")
+    _run(["run", str(script), "--in", str(design), "--results", "--quiet", "--json-out", str(out)])
+    try:
+        joints = json.loads(out.read_text(encoding="utf-8"))[0]["joints"]
+        return [j["name"] for j in sorted(joints, key=lambda j: j["id"])]
+    except (OSError, json.JSONDecodeError, LookupError, TypeError) as exc:
+        raise FinishError(f"unexpected joint.list result in {out}: {exc}") from exc
+
+
+def _group_commands(links: Sequence[str], joint_folders: Mapping[str, str]) -> list[dict[str, object]]:
+    """One timeline folder per group prefix (DSK, FRM, HW, ...) holding its links and their placement
+    joints, plus the skeleton sketch."""
     groups: dict[str, list[str]] = {"REF skeleton": ["SKL_Eye"]}
+    joints: dict[str, list[str]] = {}
     for link in links:
-        groups.setdefault(f"{link.split('-')[0]} parts", []).append(link)
-    return [_cmd("timeline.group", name=name, features=features) for name, features in groups.items()]
+        groups.setdefault(_folder(link), []).append(link)
+    for joint, folder in joint_folders.items():
+        joints.setdefault(folder, []).append(joint)
+    return [_cmd("timeline.group", name=name, features=features, **({"joints": joints[name]} if name in joints else {}))
+            for name, features in groups.items()]
 
 
-def finish_assembly(design: Path, components: Sequence[str]) -> None:
-    """Apply materials, appearance, properties, views, display rows and timeline groups in place."""
+def _joint_folders(names: Sequence[str], components: Sequence[str]) -> dict[str, str]:
+    """{joint: folder}. build_script creates one placement joint per occurrence, in occurrence order,
+    and `components` is one entry per occurrence in that order, so the two zip."""
+    if len(names) != len(components):
+        raise FinishError(f"{len(names)} joints for {len(components)} occurrences: can't match them")
+    folders = {joint: _folder(comp) for joint, comp in zip(names, components)}
+    stray = [j for j, f in folders.items() if j.startswith("J_HW-") != (f == _folder("HW-"))]
+    if stray:
+        raise FinishError(f"joint order doesn't match the occurrences (e.g. {stray[0]})")
+    return folders
+
+
+def finish_assembly(design: Path, components: Sequence[str], values: Mapping[str, float] | None = None) -> None:
+    """Apply materials, appearance, properties, views, display rows and timeline groups in place.
+
+    `components` holds one component name per occurrence, in build order (as build_script inserts them).
+
+    `values` are the evaluated skeleton values of the design (for the view targets); default: the main
+    skeleton. Variants pass their own.
+    """
+    try:
+        views = skeleton_views(values if values is not None else skeleton_values.values())
+    except skeleton_values.SkeletonError as exc:
+        raise FinishError(f"cannot evaluate the skeleton for the views: {exc}") from exc
     # Scratch files are named after the design, so the main and variant builds can run in parallel.
     script_out, eval_out = BUILD / f"{design.stem}_finish.json", BUILD / f"{design.stem}_eval.json"
     BUILD.mkdir(exist_ok=True)
@@ -137,7 +207,8 @@ def finish_assembly(design: Path, components: Sequence[str]) -> None:
     real = _real_bodies(eval_out)
     links = list(dict.fromkeys(components))
     commands = [c for comp in links for c in _part_commands(comp, real)]
-    commands += _view_commands() + _config_commands(links) + _group_commands(links)
+    joint_folders = _joint_folders(_joint_names(design, BUILD / f"{design.stem}_joints.json"), components)
+    commands += _view_commands(views) + _config_commands(links) + _group_commands(links, joint_folders)
     script_out.write_text(json.dumps({"commands": commands}, indent=1), encoding="utf-8")
     log.info("wrote %s (%d commands)", script_out.relative_to(ROOT), len(commands))
     _run(["run", str(script_out), "--in", str(design), "--save", str(design), "--quiet"])

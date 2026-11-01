@@ -1,4 +1,5 @@
 {
+ "generated_by": "parts/src/SPK-01_gen.py",
  "commands": [
   {
    "command": "material.create",
@@ -303,9 +304,9 @@
    "command": "solid.cylinder",
    "params": {
     "base": [
-     0,
-     -181.3,
-     4.125
+     "0 mm",
+     "-spk_d + 33 mm",
+     "spk_h*(1 - spk_mount_frac) - 70.5 mm"
     ],
     "axis": [
      0,
@@ -323,9 +324,9 @@
    "command": "solid.cylinder",
    "params": {
     "base": [
-     0,
-     -182.8,
-     4.125
+     "0 mm",
+     "-spk_d + 31.5 mm",
+     "spk_h*(1 - spk_mount_frac) - 70.5 mm"
     ],
     "axis": [
      0,
@@ -413,9 +414,9 @@
    "command": "solid.cylinder",
    "params": {
     "base": [
-     0,
-     -206.3,
-     -145.875
+     "0 mm",
+     "-spk_d + 8 mm",
+     "-spk_mount_frac*spk_h + 78 mm"
     ],
     "axis": [
      0,
@@ -435,9 +436,9 @@
    "command": "solid.cylinder",
    "params": {
     "base": [
-     0,
-     -206.3,
-     -145.875
+     "0 mm",
+     "-spk_d + 8 mm",
+     "-spk_mount_frac*spk_h + 78 mm"
     ],
     "axis": [
      0,
@@ -506,9 +507,9 @@
    "command": "solid.cylinder",
    "params": {
     "base": [
-     0,
-     -206.3,
-     -145.875
+     "0 mm",
+     "-spk_d + 8 mm",
+     "-spk_mount_frac*spk_h + 78 mm"
     ],
     "axis": [
      0,
@@ -526,9 +527,9 @@
    "command": "solid.cylinder",
    "params": {
     "base": [
-     0,
-     -206.3,
-     -145.875
+     "0 mm",
+     "-spk_d + 8 mm",
+     "-spk_mount_frac*spk_h + 78 mm"
     ],
     "axis": [
      0,
@@ -548,9 +549,9 @@
    "command": "solid.cylinder",
    "params": {
     "base": [
-     0,
-     -206.3,
-     -145.875
+     "0 mm",
+     "-spk_d + 8 mm",
+     "-spk_mount_frac*spk_h + 78 mm"
     ],
     "axis": [
      0,
@@ -568,9 +569,9 @@
    "command": "solid.cylinder",
    "params": {
     "base": [
-     0,
-     -206.3,
-     -145.875
+     "0 mm",
+     "-spk_d + 8 mm",
+     "-spk_mount_frac*spk_h + 78 mm"
     ],
     "axis": [
      0,
@@ -590,9 +591,9 @@
    "command": "solid.cylinder",
    "params": {
     "base": [
-     0,
-     -199.0,
-     -145.875
+     "0 mm",
+     "-spk_d + 15.3 mm",
+     "-spk_mount_frac*spk_h + 78 mm"
     ],
     "axis": [
      0,
@@ -712,9 +713,9 @@
    "command": "solid.cylinder",
    "params": {
     "base": [
-     0,
-     -6.0,
-     -65.375
+     "0 mm",
+     "-6 mm",
+     "-spk_mount_frac*spk_h + 158.5 mm"
     ],
     "axis": [
      0,
@@ -734,9 +735,9 @@
    "command": "solid.cylinder",
    "params": {
     "base": [
-     -13.0,
-     -0.5,
-     -182.375
+     "-13 mm",
+     "-0.5 mm",
+     "-spk_mount_frac*spk_h + 41.5 mm"
     ],
     "axis": [
      0,
@@ -754,9 +755,9 @@
    "command": "solid.cylinder",
    "params": {
     "base": [
-     13.0,
-     -0.5,
-     -182.375
+     "13 mm",
+     "-0.5 mm",
+     "-spk_mount_frac*spk_h + 41.5 mm"
     ],
     "axis": [
      0,
@@ -774,9 +775,9 @@
    "command": "solid.cylinder",
    "params": {
     "base": [
-     -13.0,
-     11.5,
-     -182.375
+     "-13 mm",
+     "11.5 mm",
+     "-spk_mount_frac*spk_h + 41.5 mm"
     ],
     "axis": [
      0,
@@ -796,9 +797,9 @@
    "command": "solid.cylinder",
    "params": {
     "base": [
-     13.0,
-     11.5,
-     -182.375
+     "13 mm",
+     "11.5 mm",
+     "-spk_mount_frac*spk_h + 41.5 mm"
     ],
     "axis": [
      0,
@@ -6972,7 +6973,7 @@
    "params": {
     "values": {
      "part_number": "SPK-01",
-     "description": "Klipsch R-40M bookshelf speaker (purchased, reference model, multibody per finish). Origin: swivel point = centre of the rear face at spk_mount_frac*spk_h above the bottom; +Z up, -Y = front (baffle faces the listener), un-tilted, un-yawed. Outer box from spk_w/spk_d/spk_h; face details at fixed legacy coordinates (MEASURE estimates).",
+     "description": "Klipsch R-40M bookshelf speaker (purchased, reference model, multibody per finish). Origin: swivel point = centre of the rear face at spk_mount_frac*spk_h above the bottom; +Z up, -Y = front (baffle faces the listener), un-tilted, un-yawed. Outer box from spk_w/spk_d/spk_h; face details placed from the box (front face, top and bottom edges), sizes MEASURE estimates.",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

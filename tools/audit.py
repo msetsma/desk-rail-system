@@ -2,7 +2,7 @@
 
 Reads the placed bodies from a ``solidcraft-cli eval --json-out`` report of the linked assembly
 (see tools/eval_bodies.py). Masses and centres of mass come from the model's real materials,
-except for envelope models of purchased items (desk frame, monitors, speakers, PC), whose solid
+except for envelope models of purchased items (desk frame, monitors, speakers, PC, laptop), whose solid
 envelopes would weigh far too much: those take the spec weights in SPEC_KG at the envelope's
 centre of mass. Reports: mass budget, center of mass vs the feet (tip margins), push force to tip
 at sit/stand height, leg load split, crossbar sag and the load on the side-rail joints.
@@ -56,17 +56,23 @@ SPEC_KG: tuple[Spec, ...] = (
     Spec("speakers", "R40M_", (3.2, 3.2, 3.2)),     # Klipsch R-40M, each (spec: 7 lb / 3.2 kg)
     # MEASURE: Fractal North case ~7.6 kg empty; built PC + slats + strap estimated.
     Spec("pc", "PC_", (7.6, 13.0, 18.0), per_placement=False),
+    # MacBook Pro 14in (Apple spec 1.55-1.62 kg); the model is a solid envelope.
+    Spec("laptop", "MBP_", (1.55, 1.6, 1.62), per_placement=False),
 )
-# Desktop: model material mass (Karlby birch) scaled for the cases; high = dense butcher block.
+# Desktop: model material mass (IKEA KARLBY walnut veneer, modelled as Walnut) scaled for the cases;
+# high = a solid hardwood top.
 DESKTOP_FACTOR = (0.93, 1.0, 1.43)
 # Real-geometry bodies keep their model mass; prefix -> report group.
 GROUPS: tuple[tuple[str, str], ...] = (
     ("Desktop", "desktop"), ("Modesty_Panel", "panel"),
     ("Upright_4040", "rails"), ("Crossbar_2040", "rails"), ("SideRail_", "rails"), ("Stile_2040", "rails"),
     ("SpkMount_", "speakers"), ("MousePad", "input"), ("Mouse_", "input"), ("Keyboard_", "input"),
-    ("HPTTD5", "hardware"), ("HPTLD5", "hardware"), ("HBLFSN5", "hardware"),
+    ("LaptopMount", "laptop"), ("LaptopTray", "laptop"),
+    ("HPTTD5", "hardware"), ("HPTLD5", "hardware"), ("HBLFSN5", "hardware"), ("HBLFSD5", "hardware"),
     ("Standoff_M5x12", "hardware"), ("M6x55_SHCS", "hardware"),
 )
+# Bodies that stand on the floor on their own (not carried by the desk): no mass, no warning.
+FLOOR_ITEMS: tuple[str, ...] = ("Chair_",)
 FASTENERS_KG = 0.6             # T-nuts + plate/bracket bolts on the rail joints (not modelled)
 I_2040_STRONG = 5.13e4         # mm^4
 KG_PER_M_2040 = 0.88           # Misumi HFS5 (guide section 2)
@@ -79,7 +85,7 @@ BOLT_SPREAD_MM = 100.0         # assumed spacing of side-rail -> top-support bol
 @dataclass(frozen=True)
 class Mass:
     name: str
-    group: str        # frame / desktop / rails / monitors / speakers / panel / pc / input / hardware
+    group: str        # frame / desktop / rails / monitors / speakers / panel / pc / input / laptop / hardware
     kg: float
     x: float          # mm
     y: float
@@ -134,7 +140,7 @@ def masses(bodies: Sequence[Body], case: int, mount_case: int | None = None,
     for b in bodies:
         group = next((g for p, g in group_of.items() if _starts(b, p)), None)
         if group is None:
-            if not _starts(b, FRAME_BODIES) and not any(_starts(b, s.prefix) for s in SPEC_KG):
+            if not _starts(b, FLOOR_ITEMS) and not _starts(b, FRAME_BODIES) and not any(_starts(b, s.prefix) for s in SPEC_KG):
                 log.warning("audit: no mass rule for body %s, skipped", b.name)
             continue
         out.append(Mass(b.label, group, _model_kg(b, case, panel_density), b.com[0], b.com[1], True))
@@ -222,13 +228,20 @@ def _report_legs(bodies: Sequence[Body], ms: Sequence[Mass]) -> None:
 
 
 def _report_crossbars(bodies: Sequence[Body], ms: Sequence[Mass]) -> None:
+    """Vertical loads on each 2040 crossbar. Monitors hang on their stiles at their own x. The laptop
+    group (LAP-01 mount, tray, MacBook) bolts to the right stile, so its weight acts at that stile's x.
+    Each stile ties both bars: half of every load per bar. The laptop arm's cantilever moment (twist
+    on the stile and bars) is not modelled."""
     bar = _by_label(bodies, "Crossbar_Low")
     span, x_left = bar.size[0], bar.lo[0]
+    stile_r_x = _by_label(bodies, "Stile_Right").center[0]
     panel = next(p for p in ms if p.group == "panel")
     loads: list[tuple[float, float]] = []
     for m in ms:
         if m.group == "monitors":
             loads.append((m.kg * G / 2, m.x - x_left))  # stile ties both bars: half each
+        elif m.group == "laptop":
+            loads.append((m.kg * G / 2, stile_r_x - x_left))
         elif "standoff" in m.name and " bar " in m.name:
             loads.append((panel.kg * G * PANEL_LOAD_SHARE, m.x - x_left))
     sag = _sag_mm(span, loads, KG_PER_M_2040 * G / 1000)
@@ -245,7 +258,7 @@ def _side_loads(ms: Sequence[Mass], x_r: float, x_l: float) -> dict[str, list[tu
     """Split rail-system masses (not the side-rail joint) onto the R/L uprights by the lever rule."""
     side: dict[str, list[tuple[float, float]]] = {"R": [], "L": []}
     for m in ms:
-        if m.group not in ("rails", "monitors", "panel", "hardware", "speakers") or _on_side_joint(m.name):
+        if m.group not in ("rails", "monitors", "panel", "hardware", "speakers", "laptop") or _on_side_joint(m.name):
             continue
         fr = min(max((m.x - x_l) / (x_r - x_l), 0.0), 1.0)
         side["R"].append((m.kg * G * fr, m.y))

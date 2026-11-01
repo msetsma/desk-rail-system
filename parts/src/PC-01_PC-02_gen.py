@@ -3,10 +3,11 @@
 Run: python parts/src/PC-01_PC-02_gen.py
 Writes parts/src/PC-01_FractalNorth.json and parts/src/PC-02_WalnutSlatFront.json.
 
-Geometry is driven by skeleton parameters (pc_*, slat_*) plus a few fixed vendor constants
-(pcn_*) measured from the official Fractal renders (see refs/fractal_north/README.md).
-Fillet edge picks are numeric points computed here from the current skeleton values; SolidCraft
-tracks the picked edges through later parameter changes.
+Geometry is driven by skeleton parameters (pc_*, slat_*; the foot height is the skeleton's pc_foot_h) plus a
+few fixed vendor constants (pcn_*) measured from the official Fractal renders (see refs/fractal_north/README.md).
+Fillet edge picks are numeric points computed here from the current skeleton values and the local pcn_*
+values (local_mm), never hand-typed (AGENTS §3); SolidCraft tracks the picked edges through later parameter
+changes.
 """
 
 from __future__ import annotations
@@ -17,13 +18,14 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-sys.path.insert(0, "C:/Users/2015m/DEV/CAD/desk/tools")
-import skeleton_values  # noqa: E402
 
 __all__ = ["build_pc01", "build_pc02", "main"]
 
 ROOT = Path(__file__).resolve().parents[2]
-SKELETON = "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+sys.path.insert(0, str(ROOT / "tools"))
+import skeleton_values  # noqa: E402
+
+SKELETON = f"{ROOT.as_posix()}/skeleton/params.json"
 TEMPLATE = ROOT / "parts" / "_template.json"
 
 CHARCOAL = "#333437"
@@ -78,10 +80,29 @@ def metadata(pn: str, desc: str, material: str, source: str) -> Cmd:
 
 
 SHARED_PARAMS = [
-    ("pcn_foot_h", "19 mm", "Fractal North feet height (spec: 469 overall - 450 w/o feet)"),
-    ("pcn_frame_d", "slat_inset + slat_t + 3 mm", "Front panel frame depth (Y): slat recess + slats + 3 mm rails"),
+    ("pcn_frame_rail", "3 mm", "Front panel frame rails behind the slats (Y)"),
+    ("pcn_frame_d", "slat_inset + slat_t + pcn_frame_rail", "Front panel frame depth (Y): slat recess + slats + rails"),
     ("pcn_edge_r", "6 mm", "Fractal North long-edge radius (MEASURE from renders)"),
 ]
+PC01_PARAMS = [
+    ("pcn_rear", "9 mm", "Rear thumbscrew protrusion (MEASURE, side render)"),
+    ("pcn_front_d", "102 mm", "Front section depth: front to top-mesh / side-panel seam (MEASURE)"),
+]
+PC02_PARAMS = [("pcn_lip", "5 mm", "Front frame visible lip width (MEASURE, front render)")]
+
+
+def local_mm(name: str) -> float:
+    """Value of a plain-number local parameter ("<n> mm"), for pick points."""
+    expr = next(e for n, e, _ in (*SHARED_PARAMS, *PC01_PARAMS, *PC02_PARAMS) if n == name)
+    number, unit = expr.split()
+    if unit != "mm":
+        raise ValueError(f"{name}: expected '<n> mm', got {expr!r}")
+    return float(number)
+
+
+def frame_depth(v: Mapping[str, float]) -> float:
+    """Evaluated pcn_frame_d."""
+    return v["slat_inset"] + v["slat_t"] + local_mm("pcn_frame_rail")
 
 
 def _y_edges(x: float, z0: float, z1: float, y: float) -> list[list[float]]:
@@ -91,18 +112,15 @@ def _y_edges(x: float, z0: float, z1: float, y: float) -> list[list[float]]:
 def build_pc01(v: Mapping[str, float]) -> list[Cmd]:
     body = "PC_FractalNorth"
     brass = "PC_North_Brass"
-    body_h = "(pc_h - pcn_foot_h)"
+    body_h = "(pc_h - pc_foot_h)"
     rear_y = "(pc_d/2 - pcn_rear)"
-    w2, d2, foot_h, rear = v["pc_w"] / 2, v["pc_d"] / 2, 19.0, 9.0
-    frame_d = v["slat_inset"] + v["slat_t"] + 3.0
+    w2, d2, foot_h, rear = v["pc_w"] / 2, v["pc_d"] / 2, v["pc_foot_h"], local_mm("pcn_rear")
+    frame_d = frame_depth(v)
     y_mid = (-d2 + frame_d + d2 - rear) / 2
     feet_x, feet_yf, feet_yr = "pc_w/2 - 25 mm", "-pc_d/2 + 34 mm", "pc_d/2 - pcn_rear - 32 mm"
     feet = [[f"-({feet_x})", feet_yf], [feet_x, feet_yf], [f"-({feet_x})", feet_yr], [feet_x, feet_yr]]
 
-    c = header(SHARED_PARAMS + [
-        ("pcn_rear", "9 mm", "Rear thumbscrew protrusion (MEASURE, side render)"),
-        ("pcn_front_d", "102 mm", "Front section depth: front to top-mesh / side-panel seam (MEASURE)"),
-    ])
+    c = header(SHARED_PARAMS + PC01_PARAMS)
     c += [
         cmd("solid.box", name="PC01_Body", body_name=body, operation="new",
             length="pc_w", width="pc_d - pcn_frame_d - pcn_rear", height=body_h,
@@ -150,7 +168,7 @@ def build_pc01(v: Mapping[str, float]) -> list[Cmd]:
         cmd("sketch.create", plane="XY", offset=f"-{body_h} + 0.1 mm", name="PC01_Feet_Sketch"),
         *[cmd("sketch.circle.center", center=p, diameter=22) for p in feet],
         cmd("sketch.finish"),
-        cmd("solid.extrude", name="PC01_Feet", sketch="PC01_Feet_Sketch", distance="pcn_foot_h - 6 mm + 0.1 mm",
+        cmd("solid.extrude", name="PC01_Feet", sketch="PC01_Feet_Sketch", distance="pc_foot_h - 6 mm + 0.1 mm",
             direction="negative", operation="join", targets=[body]),
         cmd("sketch.create", plane="XY", offset="-pc_h", name="PC01_FeetBrass_Sketch"),
         *[cmd("sketch.circle.center", center=p, diameter=22) for p in feet],
@@ -187,28 +205,28 @@ def build_pc01(v: Mapping[str, float]) -> list[Cmd]:
 
 def build_pc02(v: Mapping[str, float]) -> list[Cmd]:
     frame, slats = "PC_FrontFrame", "PC_FrontSlats"
-    body_h = "(pc_h - pcn_foot_h)"
+    body_h = "(pc_h - pc_foot_h)"
     w2, h2 = v["pc_w"] / 2, v["pc_h"] / 2
-    frame_d = v["slat_inset"] + v["slat_t"] + 3.0
+    frame_d = frame_depth(v)
     y_mid = -v["slat_inset"] + frame_d / 2
     x0 = "-pc_w/2 + pc_bezel + slat_gap"
 
-    c = header(SHARED_PARAMS + [("pcn_lip", "5 mm", "Front frame visible lip width (MEASURE, front render)")])
+    c = header(SHARED_PARAMS + PC02_PARAMS)
     c += [
         cmd("solid.box", name="PC02_Frame", body_name=frame, operation="new",
             length="pc_w", width="pcn_frame_d", height=body_h,
-            corner=["-pc_w/2", "-slat_inset", "-pc_h/2 + pcn_foot_h"]),
+            corner=["-pc_w/2", "-slat_inset", "-pc_h/2 + pc_foot_h"]),
         cmd("solid.fillet", name="PC02_FrameEdgeRound", radius="pcn_edge_r",
-            edges=_y_edges(w2, h2, -h2 + 19.0, y_mid)),
+            edges=_y_edges(w2, h2, -h2 + v["pc_foot_h"], y_mid)),
         cmd("solid.box", name="PC02_FrameOpening", operation="cut", targets=[frame],
             length="pc_w - 2*pcn_lip", width="slat_inset + slat_t + 0.1 mm", height=f"{body_h} - 2*pcn_lip",
-            corner=["-pc_w/2 + pcn_lip", "-slat_inset - 0.1 mm", "-pc_h/2 + pcn_foot_h + pcn_lip"]),
+            corner=["-pc_w/2 + pcn_lip", "-slat_inset - 0.1 mm", "-pc_h/2 + pc_foot_h + pcn_lip"]),
         cmd("solid.box", name="PC02_FrameBackOpening", operation="cut", targets=[frame],
             length="pc_w - 2*pcn_lip", width="3.2 mm", height=f"{body_h} - 2*pc_bezel_v - 16 mm",
-            corner=["-pc_w/2 + pcn_lip", "slat_t - 0.1 mm", "-pc_h/2 + pcn_foot_h + pc_bezel_v + 8 mm"]),
+            corner=["-pc_w/2 + pcn_lip", "slat_t - 0.1 mm", "-pc_h/2 + pc_foot_h + pc_bezel_v + 8 mm"]),
         # Slats: XZ sketch (sketch v = -Z), 10 slats patterned in X.
         cmd("sketch.create", plane="XZ", name="PC02_Slats_Sketch"),
-        rect(x0, "-(pc_h/2 - pc_bezel_v)", f"{x0} + slat_w", "pc_h/2 - pcn_foot_h - pc_bezel_v"),
+        rect(x0, "-(pc_h/2 - pc_bezel_v)", f"{x0} + slat_w", "pc_h/2 - pc_foot_h - pc_bezel_v"),
         cmd("sketch.pattern.rectangular", entities=["l1", "l2", "l3", "l4"], count=10,
             spacing="slat_w + slat_gap", dir=[1, 0]),
         cmd("sketch.finish"),
@@ -223,7 +241,7 @@ def build_pc02(v: Mapping[str, float]) -> list[Cmd]:
         "PC-02",
         "Fractal North front panel, dark walnut: 10 vertical walnut slats in the charcoal front frame "
         "(5 mm lip, top/bottom rails). Origin: placement datum on the slat front face, X centred, "
-        "Z = case height centre incl. feet (slat array centre is pcn_foot_h/2 above it); "
+        "Z = case height centre incl. feet (slat array centre is pc_foot_h/2 above it); "
         "slats extend +Y (toward wall), X right, Z up.",
         "Walnut",
         "Fractal North official renders (refs/fractal_north/), sizes from skeleton slat_* / pc_*",

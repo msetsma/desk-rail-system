@@ -80,7 +80,7 @@
   {
    "command": "parameters.import",
    "params": {
-    "text": "[{\"name\": \"mbp14_w\", \"expression\": \"312.6 mm\", \"comment\": \"Width (Apple tech specs 121552)\"}, {\"name\": \"mbp14_d\", \"expression\": \"221.2 mm\", \"comment\": \"Depth (Apple tech specs 121552)\"}, {\"name\": \"mbp14_h\", \"expression\": \"15.5 mm\", \"comment\": \"Closed height incl. feet (Apple tech specs 121552)\"}, {\"name\": \"mbp14_foot_h\", \"expression\": \"0.9 mm\", \"comment\": \"MEASURE foot height below the base bottom (photos)\"}, {\"name\": \"mbp14_lid_t\", \"expression\": \"5.0 mm\", \"comment\": \"MEASURE lid thickness (side photos, ~1/3 of height)\"}, {\"name\": \"mbp14_base_t\", \"expression\": \"mbp14_h - mbp14_foot_h - mbp14_lid_t\", \"comment\": \"Base slab thickness (9.6)\"}, {\"name\": \"mbp14_r\", \"expression\": \"9 mm\", \"comment\": \"MEASURE plan-view corner radius, base and lid (photos)\"}, {\"name\": \"mbp14_lid_d\", \"expression\": \"mbp14_d - 1 mm\", \"comment\": \"MEASURE lid depth (lid sits ~flush with the base front)\"}, {\"name\": \"mbp14_lid_open\", \"expression\": \"lap_lid\", \"comment\": \"Lid opening angle from the base top (skeleton: screen at the monitor tilt)\"}, {\"name\": \"mbp14_foot_dia\", \"expression\": \"13 mm\", \"comment\": \"MEASURE rubber foot diameter (photos)\"}, {\"name\": \"mbp14_foot_ix\", \"expression\": \"25 mm\", \"comment\": \"MEASURE foot centre in from the side edges\"}, {\"name\": \"mbp14_foot_iy\", \"expression\": \"18 mm\", \"comment\": \"MEASURE foot centre in from the front/back edges\"}, {\"name\": \"mbp14_kb_w\", \"expression\": \"276 mm\", \"comment\": \"MEASURE keyboard well width (14.5 keys at ~19 mm pitch)\"}, {\"name\": \"mbp14_kb_d\", \"expression\": \"112 mm\", \"comment\": \"MEASURE keyboard well depth (6 rows incl. full-height F row)\"}, {\"name\": \"mbp14_kb_rear\", \"expression\": \"10 mm\", \"comment\": \"MEASURE base rear edge to keyboard well\"}, {\"name\": \"mbp14_kb_dep\", \"expression\": \"1.0 mm\", \"comment\": \"MEASURE keyboard well depth below the deck\"}, {\"name\": \"mbp14_key_recess\", \"expression\": \"0.2 mm\", \"comment\": \"MEASURE key tops below the deck\"}, {\"name\": \"mbp14_tp_w\", \"expression\": \"132 mm\", \"comment\": \"Trackpad width (NanoReview 13.2 cm; MEASURE)\"}, {\"name\": \"mbp14_tp_d\", \"expression\": \"81 mm\", \"comment\": \"Trackpad depth (NanoReview 8.1 cm; MEASURE)\"}, {\"name\": \"mbp14_tp_front\", \"expression\": \"8 mm\", \"comment\": \"MEASURE base front edge to trackpad\"}, {\"name\": \"mbp14_tp_dep\", \"expression\": \"0.4 mm\", \"comment\": \"MEASURE trackpad glass inset depth\"}, {\"name\": \"mbp14_scr_rim\", \"expression\": \"1.5 mm\", \"comment\": \"MEASURE aluminium rim around the black cover glass\"}, {\"name\": \"mbp14_scr_chin\", \"expression\": \"8 mm\", \"comment\": \"MEASURE hinge-side lid strip without glass (hinge cover)\"}, {\"name\": \"mbp14_scr_t\", \"expression\": \"0.3 mm\", \"comment\": \"Cover glass proud of the lid inner face (modelling choice)\"}, {\"name\": \"mbp14_aa_w\", \"expression\": \"302.4 mm\", \"comment\": \"Active area width (3024 px at 254 ppi)\"}, {\"name\": \"mbp14_aa_h\", \"expression\": \"196.4 mm\", \"comment\": \"Active area height (1964 px at 254 ppi)\"}]"
+    "text": "[{\"name\": \"mbp14_h\", \"expression\": \"15.5 mm\", \"comment\": \"Closed height incl. feet (Apple tech specs 121552)\"}, {\"name\": \"mbp14_foot_h\", \"expression\": \"0.9 mm\", \"comment\": \"MEASURE foot height below the base bottom (photos)\"}, {\"name\": \"mbp14_lid_t\", \"expression\": \"5.0 mm\", \"comment\": \"MEASURE lid thickness (side photos, ~1/3 of height)\"}, {\"name\": \"mbp14_base_t\", \"expression\": \"mbp14_h - mbp14_foot_h - mbp14_lid_t\", \"comment\": \"Base slab thickness (9.6)\"}, {\"name\": \"mbp14_r\", \"expression\": \"9 mm\", \"comment\": \"MEASURE plan-view corner radius, base and lid (photos)\"}, {\"name\": \"mbp14_lid_gap\", \"expression\": \"1 mm\", \"comment\": \"MEASURE lid set back from the base front (lid sits ~flush)\"}, {\"name\": \"mbp14_lid_d\", \"expression\": \"mbp_d - mbp14_lid_gap\", \"comment\": \"Lid depth\"}, {\"name\": \"mbp14_lid_open\", \"expression\": \"lap_lid\", \"comment\": \"Lid opening angle from the base top (skeleton: screen at the monitor tilt)\"}, {\"name\": \"mbp14_foot_dia\", \"expression\": \"13 mm\", \"comment\": \"MEASURE rubber foot diameter (photos)\"}, {\"name\": \"mbp14_foot_ix\", \"expression\": \"25 mm\", \"comment\": \"MEASURE foot centre in from the side edges\"}, {\"name\": \"mbp14_foot_iy\", \"expression\": \"18 mm\", \"comment\": \"MEASURE foot centre in from the front/back edges\"}, {\"name\": \"mbp14_kb_w\", \"expression\": \"276 mm\", \"comment\": \"MEASURE keyboard well width (14.5 keys at ~19 mm pitch)\"}, {\"name\": \"mbp14_kb_d\", \"expression\": \"112 mm\", \"comment\": \"MEASURE keyboard well depth (6 rows incl. full-height F row)\"}, {\"name\": \"mbp14_kb_rear\", \"expression\": \"10 mm\", \"comment\": \"MEASURE base rear edge to keyboard well\"}, {\"name\": \"mbp14_kb_dep\", \"expression\": \"1.0 mm\", \"comment\": \"MEASURE keyboard well depth below the deck\"}, {\"name\": \"mbp14_key_recess\", \"expression\": \"0.2 mm\", \"comment\": \"MEASURE key tops below the deck\"}, {\"name\": \"mbp14_tp_w\", \"expression\": \"132 mm\", \"comment\": \"Trackpad width (NanoReview 13.2 cm; MEASURE)\"}, {\"name\": \"mbp14_tp_d\", \"expression\": \"81 mm\", \"comment\": \"Trackpad depth (NanoReview 8.1 cm; MEASURE)\"}, {\"name\": \"mbp14_tp_front\", \"expression\": \"8 mm\", \"comment\": \"MEASURE base front edge to trackpad\"}, {\"name\": \"mbp14_tp_dep\", \"expression\": \"0.4 mm\", \"comment\": \"MEASURE trackpad glass inset depth\"}, {\"name\": \"mbp14_scr_rim\", \"expression\": \"1.5 mm\", \"comment\": \"MEASURE aluminium rim around the black cover glass\"}, {\"name\": \"mbp14_scr_chin\", \"expression\": \"8 mm\", \"comment\": \"MEASURE hinge-side lid strip without glass (hinge cover)\"}, {\"name\": \"mbp14_scr_t\", \"expression\": \"0.3 mm\", \"comment\": \"Cover glass proud of the lid inner face (modelling choice)\"}, {\"name\": \"mbp14_aa_w\", \"expression\": \"302.4 mm\", \"comment\": \"Active area width (3024 px at 254 ppi)\"}, {\"name\": \"mbp14_aa_h\", \"expression\": \"196.4 mm\", \"comment\": \"Active area height (1964 px at 254 ppi)\"}]"
    }
   },
   {
@@ -90,12 +90,12 @@
     "body_name": "MBP_Base",
     "operation": "new",
     "corner": [
-     "-mbp14_w/2",
-     "-mbp14_d/2",
+     "-mbp_w/2",
+     "-mbp_d/2",
      "mbp14_foot_h"
     ],
-    "length": "mbp14_w",
-    "width": "mbp14_d",
+    "length": "mbp_w",
+    "width": "mbp_d",
     "height": "mbp14_base_t"
    }
   },
@@ -139,8 +139,8 @@
     "diameter": "mbp14_foot_dia",
     "height": "mbp14_foot_h + 0.1 mm",
     "base": [
-     "-mbp14_w/2 + mbp14_foot_ix",
-     "-mbp14_d/2 + mbp14_foot_iy",
+     "-mbp_w/2 + mbp14_foot_ix",
+     "-mbp_d/2 + mbp14_foot_iy",
      "0 mm"
     ]
    }
@@ -158,14 +158,14 @@
      0
     ],
     "count1": 2,
-    "spacing1": "mbp14_w - 2*mbp14_foot_ix",
+    "spacing1": "mbp_w - 2*mbp14_foot_ix",
     "dir2": [
      0,
      1,
      0
     ],
     "count2": 2,
-    "spacing2": "mbp14_d - 2*mbp14_foot_iy"
+    "spacing2": "mbp_d - 2*mbp14_foot_iy"
    }
   },
   {
@@ -178,7 +178,7 @@
     ],
     "corner": [
      "-mbp14_kb_w/2",
-     "mbp14_d/2 - mbp14_kb_rear - mbp14_kb_d",
+     "mbp_d/2 - mbp14_kb_rear - mbp14_kb_d",
      "mbp14_foot_h + mbp14_base_t - mbp14_kb_dep"
     ],
     "length": "mbp14_kb_w",
@@ -194,7 +194,7 @@
     "operation": "new",
     "corner": [
      "-mbp14_kb_w/2",
-     "mbp14_d/2 - mbp14_kb_rear - mbp14_kb_d",
+     "mbp_d/2 - mbp14_kb_rear - mbp14_kb_d",
      "mbp14_foot_h + mbp14_base_t - mbp14_kb_dep"
     ],
     "length": "mbp14_kb_w",
@@ -212,7 +212,7 @@
     ],
     "corner": [
      "-mbp14_tp_w/2",
-     "-mbp14_d/2 + mbp14_tp_front",
+     "-mbp_d/2 + mbp14_tp_front",
      "mbp14_foot_h + mbp14_base_t - mbp14_tp_dep"
     ],
     "length": "mbp14_tp_w",
@@ -228,7 +228,7 @@
     "operation": "new",
     "corner": [
      "-mbp14_tp_w/2",
-     "-mbp14_d/2 + mbp14_tp_front",
+     "-mbp_d/2 + mbp14_tp_front",
      "mbp14_foot_h + mbp14_base_t - mbp14_tp_dep"
     ],
     "length": "mbp14_tp_w",
@@ -243,11 +243,11 @@
     "body_name": "MBP_Lid",
     "operation": "new",
     "corner": [
-     "-mbp14_w/2",
+     "-mbp_w/2",
      "-mbp14_lid_d",
      "-mbp14_lid_t/2"
     ],
-    "length": "mbp14_w",
+    "length": "mbp_w",
     "width": "mbp14_lid_d",
     "height": "mbp14_lid_t"
    }
@@ -288,11 +288,11 @@
     "body_name": "MBP_Screen",
     "operation": "new",
     "corner": [
-     "-mbp14_w/2 + mbp14_scr_rim",
+     "-mbp_w/2 + mbp14_scr_rim",
      "-mbp14_lid_d + mbp14_scr_rim",
      "-mbp14_lid_t/2 - mbp14_scr_t"
     ],
-    "length": "mbp14_w - 2*mbp14_scr_rim",
+    "length": "mbp_w - 2*mbp14_scr_rim",
     "width": "mbp14_lid_d - mbp14_scr_rim - mbp14_scr_chin",
     "height": "mbp14_scr_t"
    }
@@ -307,9 +307,9 @@
      "MBP_Lid"
     ],
     "radius": "mbp14_lid_t/2 + 0.1 mm",
-    "height": "mbp14_w - 2*mbp14_r",
+    "height": "mbp_w - 2*mbp14_r",
     "base": [
-     "-(mbp14_w/2 - mbp14_r)",
+     "-(mbp_w/2 - mbp14_r)",
      "0 mm",
      "0 mm"
     ]
@@ -341,7 +341,7 @@
     ],
     "translate": [
      "0 mm",
-     "mbp14_d/2",
+     "mbp_d/2",
      "mbp14_foot_h + mbp14_base_t + mbp14_lid_t/2 + 0.1 mm"
     ]
    }

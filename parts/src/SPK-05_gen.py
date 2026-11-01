@@ -19,7 +19,7 @@ from pathlib import Path
 
 __all__ = ["STAND", "build", "main"]
 
-ROOT = Path("C:/Users/2015m/DEV/CAD/desk")
+ROOT = Path(__file__).resolve().parents[2]
 TEMPLATE = json.loads((ROOT / "parts/_template.json").read_text(encoding="utf-8"))["commands"]
 OUT = ROOT / "parts/src/SPK-05_SpkWedge.json"
 BODY = "SpkWedge"

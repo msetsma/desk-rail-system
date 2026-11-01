@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-ROOT = Path("C:/Users/2015m/DEV/CAD/desk")
+ROOT = Path(__file__).resolve().parents[2]
 TEMPLATE = json.loads((ROOT / "parts/_template.json").read_text(encoding="utf-8"))["commands"]
 SKEL = {"command": "parameters.import", "params": {"path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"}}
 DXF4040 = "C:/Users/2015m/DEV/CAD/desk/profiles/misumi_hfs5_4040.dxf"

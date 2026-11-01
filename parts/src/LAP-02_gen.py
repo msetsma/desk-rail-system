@@ -1,8 +1,10 @@
 """Generate parts/src/LAP-02_MacBookPro14.json (Apple MacBook Pro 14in, M4, 2024, lid open).
 
 Purchased fixed-shape model; it imports the skeleton for the lid angle (`lap_lid`, screen at the
-monitor tilt) and the tray tilt (`lap_kb_tilt` about the jig hinge axis at `lap_hinge_z`, front edge down). Apple dimensions are local `mbp14_*` parameters
-(prefix chosen so they never clash with the skeleton's `mbp_w` / `mbp_d`).
+monitor tilt) and the tray tilt (`lap_kb_tilt` about the jig hinge axis at `lap_hinge_z`, front edge down).
+The footprint is the skeleton's `mbp_w` / `mbp_d` (single source: the assembly places the laptop from the same
+values); detail dimensions only this part uses are local `mbp14_*` parameters. Fillet pick points are computed
+from the evaluated skeleton (tools/skeleton_values.py) and the local PARAMS, never hand-typed (AGENTS §3).
 Sources and estimates: refs/macbook_pro_14/README.md.
 
 Local frame: origin = footprint centre on the bottom plane of the feet (the tray surface it rests
@@ -14,11 +16,16 @@ The lid is built closed with its hinge line on the world X axis, rotated open by
 from __future__ import annotations
 
 import json
+import sys
+from collections.abc import Mapping
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools"))
+import skeleton_values  # noqa: E402
 
 __all__ = ["build", "main"]
 
-ROOT = Path("C:/Users/2015m/DEV/CAD/desk")
 TEMPLATE = json.loads((ROOT / "parts/_template.json").read_text(encoding="utf-8"))["commands"]
 OUT = ROOT / "parts/src/LAP-02_MacBookPro14.json"
 SKEL = {"command": "parameters.import", "params": {"path": f"{ROOT.as_posix()}/skeleton/params.json"}}
@@ -33,15 +40,15 @@ ALU_PBR = {"metallic": 0.9, "roughness": 0.45, "dielectric_ior": 1.5}
 GLASS_PBR = {"metallic": 0.0, "roughness": 0.06, "dielectric_ior": 1.5}
 
 # name, expression, comment (MEASURE = estimate, see refs/macbook_pro_14/README.md)
+# Footprint from the skeleton: mbp_w (width), mbp_d (depth), Apple tech specs 121552.
 PARAMS: list[tuple[str, str, str]] = [
-    ("mbp14_w", "312.6 mm", "Width (Apple tech specs 121552)"),
-    ("mbp14_d", "221.2 mm", "Depth (Apple tech specs 121552)"),
     ("mbp14_h", "15.5 mm", "Closed height incl. feet (Apple tech specs 121552)"),
     ("mbp14_foot_h", "0.9 mm", "MEASURE foot height below the base bottom (photos)"),
     ("mbp14_lid_t", "5.0 mm", "MEASURE lid thickness (side photos, ~1/3 of height)"),
     ("mbp14_base_t", "mbp14_h - mbp14_foot_h - mbp14_lid_t", "Base slab thickness (9.6)"),
     ("mbp14_r", "9 mm", "MEASURE plan-view corner radius, base and lid (photos)"),
-    ("mbp14_lid_d", "mbp14_d - 1 mm", "MEASURE lid depth (lid sits ~flush with the base front)"),
+    ("mbp14_lid_gap", "1 mm", "MEASURE lid set back from the base front (lid sits ~flush)"),
+    ("mbp14_lid_d", "mbp_d - mbp14_lid_gap", "Lid depth"),
     ("mbp14_lid_open", "lap_lid", "Lid opening angle from the base top (skeleton: screen at the monitor tilt)"),
     ("mbp14_foot_dia", "13 mm", "MEASURE rubber foot diameter (photos)"),
     ("mbp14_foot_ix", "25 mm", "MEASURE foot centre in from the side edges"),
@@ -63,8 +70,27 @@ PARAMS: list[tuple[str, str, str]] = [
 ]
 
 Z_DECK = "mbp14_foot_h + mbp14_base_t"  # base top surface
-HINGE_Y = "mbp14_d/2"
+HINGE_Y = "mbp_d/2"
 HINGE_Z = f"{Z_DECK} + mbp14_lid_t/2 + 0.1 mm"  # barrel radius lid_t/2 + 0.1 mm sits on the deck (no coincident faces with the slab)
+
+
+def local_mm(name: str) -> float:
+    """Value of a plain-number local parameter ("<n> mm") from PARAMS, for pick points."""
+    expr = next(e for n, e, _ in PARAMS if n == name)
+    number, unit = expr.split()
+    if unit != "mm":
+        raise ValueError(f"{name}: expected '<n> mm', got {expr!r}")
+    return float(number)
+
+
+def pick_dims(v: Mapping[str, float]) -> dict[str, float]:
+    """Evaluated dimensions used for fillet pick points (same formulas as the PARAMS expressions)."""
+    foot_h = local_mm("mbp14_foot_h")
+    return {
+        "w": v["mbp_w"], "d": v["mbp_d"], "foot_h": foot_h,
+        "base_t": local_mm("mbp14_h") - foot_h - local_mm("mbp14_lid_t"),
+        "lid_d": v["mbp_d"] - local_mm("mbp14_lid_gap"),
+    }
 
 
 def c(cmd: str, **params: object) -> dict:
@@ -77,7 +103,7 @@ def params_cmd() -> dict:
 
 
 def corner_edges(w: float, d: float, y0: float, z: float) -> list[list[float]]:
-    """Points on the 4 vertical edges of a w x d box spanning y0..y0+d (default-param mm)."""
+    """Points on the 4 vertical edges of a w x d box spanning y0..y0+d (evaluated mm)."""
     return [[sx * w / 2, y, z] for sx in (-1, 1) for y in (y0, y0 + d)]
 
 
@@ -85,21 +111,21 @@ def base(d: dict[str, float]) -> list[dict]:
     zm = d["foot_h"] + d["base_t"] / 2
     return [
         c("solid.box", name="MBP14_BaseSlab", body_name=BASE, operation="new",
-          corner=["-mbp14_w/2", "-mbp14_d/2", "mbp14_foot_h"],
-          length="mbp14_w", width="mbp14_d", height="mbp14_base_t"),
+          corner=["-mbp_w/2", "-mbp_d/2", "mbp14_foot_h"],
+          length="mbp_w", width="mbp_d", height="mbp14_base_t"),
         c("solid.fillet", name="MBP14_BaseCorners", radius="mbp14_r",
           edges=corner_edges(d["w"], d["d"], -d["d"] / 2, zm)),
         c("solid.cylinder", name="MBP14_Foot", operation="join", targets=[BASE],
           diameter="mbp14_foot_dia", height="mbp14_foot_h + 0.1 mm",
-          base=["-mbp14_w/2 + mbp14_foot_ix", "-mbp14_d/2 + mbp14_foot_iy", "0 mm"]),
+          base=["-mbp_w/2 + mbp14_foot_ix", "-mbp_d/2 + mbp14_foot_iy", "0 mm"]),
         c("solid.pattern.rectangular", name="MBP14_Feet", features=["MBP14_Foot"],
-          dir1=[1, 0, 0], count1=2, spacing1="mbp14_w - 2*mbp14_foot_ix",
-          dir2=[0, 1, 0], count2=2, spacing2="mbp14_d - 2*mbp14_foot_iy"),
+          dir1=[1, 0, 0], count1=2, spacing1="mbp_w - 2*mbp14_foot_ix",
+          dir2=[0, 1, 0], count2=2, spacing2="mbp_d - 2*mbp14_foot_iy"),
     ]
 
 
 def keyboard() -> list[dict]:
-    y0 = "mbp14_d/2 - mbp14_kb_rear - mbp14_kb_d"
+    y0 = "mbp_d/2 - mbp14_kb_rear - mbp14_kb_d"
     return [
         c("solid.box", name="MBP14_KeyboardWell", operation="cut", targets=[BASE],
           corner=["-mbp14_kb_w/2", y0, f"{Z_DECK} - mbp14_kb_dep"],
@@ -111,7 +137,7 @@ def keyboard() -> list[dict]:
 
 
 def trackpad() -> list[dict]:
-    y0 = "-mbp14_d/2 + mbp14_tp_front"
+    y0 = "-mbp_d/2 + mbp14_tp_front"
     return [
         c("solid.box", name="MBP14_TrackpadPocket", operation="cut", targets=[BASE],
           corner=["-mbp14_tp_w/2", y0, f"{Z_DECK} - mbp14_tp_dep"],
@@ -126,18 +152,18 @@ def lid(d: dict[str, float]) -> list[dict]:
     """Lid built closed with the hinge line on world X (lid spans y -lid_d..0, z -t/2..t/2)."""
     return [
         c("solid.box", name="MBP14_LidSlab", body_name=LID, operation="new",
-          corner=["-mbp14_w/2", "-mbp14_lid_d", "-mbp14_lid_t/2"],
-          length="mbp14_w", width="mbp14_lid_d", height="mbp14_lid_t"),
+          corner=["-mbp_w/2", "-mbp14_lid_d", "-mbp14_lid_t/2"],
+          length="mbp_w", width="mbp14_lid_d", height="mbp14_lid_t"),
         c("solid.fillet", name="MBP14_LidCorners", radius="mbp14_r",
           edges=corner_edges(d["w"], d["lid_d"], -d["lid_d"], 0.0)),
         c("solid.box", name="MBP14_CoverGlass", body_name=SCREEN, operation="new",
-          corner=["-mbp14_w/2 + mbp14_scr_rim", "-mbp14_lid_d + mbp14_scr_rim", "-mbp14_lid_t/2 - mbp14_scr_t"],
-          length="mbp14_w - 2*mbp14_scr_rim", width="mbp14_lid_d - mbp14_scr_rim - mbp14_scr_chin",
+          corner=["-mbp_w/2 + mbp14_scr_rim", "-mbp14_lid_d + mbp14_scr_rim", "-mbp14_lid_t/2 - mbp14_scr_t"],
+          length="mbp_w - 2*mbp14_scr_rim", width="mbp14_lid_d - mbp14_scr_rim - mbp14_scr_chin",
           height="mbp14_scr_t"),
         # rounded hinge end (display wraps the hinge): the lid's end face sits on this barrel, so the opened lid
         # meets the deck at the hinge line with no wedge gap
         c("solid.cylinder", name="MBP14_HingeBarrel", axis="X", operation="join", targets=[LID],
-          radius="mbp14_lid_t/2 + 0.1 mm", height="mbp14_w - 2*mbp14_r", base=["-(mbp14_w/2 - mbp14_r)", "0 mm", "0 mm"]),
+          radius="mbp14_lid_t/2 + 0.1 mm", height="mbp_w - 2*mbp14_r", base=["-(mbp_w/2 - mbp14_r)", "0 mm", "0 mm"]),
         # axis -X: the free end swings up and back toward +Y
         c("solid.move", name="MBP14_LidOpen", bodies=[LID, SCREEN], axis=[-1, 0, 0], angle="mbp14_lid_open"),
         c("solid.move", name="MBP14_LidToHinge", bodies=[LID, SCREEN], translate=["0 mm", HINGE_Y, HINGE_Z]),
@@ -179,9 +205,8 @@ def finish() -> list[dict]:
     ]
 
 
-def build() -> list[dict]:
-    # default-parameter numbers, only used to pick edges
-    d = {"w": 312.6, "d": 221.2, "foot_h": 0.9, "base_t": 9.6, "lid_d": 220.2}
+def build(v: Mapping[str, float] | None = None) -> list[dict]:
+    d = pick_dims(skeleton_values.values() if v is None else v)
     return [*TEMPLATE, SKEL, params_cmd(), *base(d), *keyboard(), *trackpad(), *lid(d), *tilt(), *finish()]
 
 

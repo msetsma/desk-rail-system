@@ -2,7 +2,9 @@
 
 Standard purchased parts, one file per part, one named body each. Insert with
 `component.insert_design {path, name}` and place with joints. Built headless with `solidcraft-cli`;
-build scripts are in `src/` (`python src/gen_lib.py` regenerates them from `../_template.json`).
+build scripts are in `src/` (`python src/gen_lib.py` regenerates them from `../_template.json`; then
+`python tools/regen_parts.py HW-L` rebuilds the frozen files). `tools/assembly_finish.py` re-applies
+the material and properties in the assembly.
 
 | File | Part number | Body | Source | Material | Color | Local origin / frame | BBox min .. max (mm) |
 |---|---|---|---|---|---|---|---|
@@ -17,11 +19,13 @@ All files: revision A, ReleaseState Released, project `desk`. Volumes: 12786 / 1
 
 ## Metadata notes
 - Document metadata: `part_number`, `description`, `revision`, `project`, plus key `com.setsma.desk`
-  = `{lib_id, Material, ReleaseState}`. A part file has no component to hold free properties
-  (`component.metadata.set` refuses the root), so Material/ReleaseState live under that key.
+  = `{lib_id, Material, ReleaseState, Source}` (the project property set, plus `lib_id`). `Source` is
+  `Misumi vendor STEP <path>` for the STEP parts and `Modelled (simplified)` for the screw and standoff.
+  A part file has no component to hold free properties (`component.metadata.set` refuses the root),
+  so they live under that key.
 - On `component.insert_design` the metadata (including `com.setsma.desk`) is copied to the component,
   but `properties` is empty and the body material is `Default`. In the assembly, run
-  `component.metadata.set {component, properties:{Material, ReleaseState}}` and
+  `component.metadata.set {component, properties:{Material, ReleaseState, Source}}` and
   `material.assign {bodies, material}` (create the material there first, see `../_template.json`).
 - HBLFSN5 orientation was taken from the vendor STEP as-is; check the leg/face directions against
   the catalog drawing before mating.

@@ -131,7 +131,8 @@
      "com.setsma.desk": {
       "lib_id": "HW-L11_Standoff_M5x12",
       "Material": "Steel zinc-plated",
-      "ReleaseState": "Released"
+      "ReleaseState": "Released",
+      "Source": "Modelled (simplified)"
      }
     }
    }

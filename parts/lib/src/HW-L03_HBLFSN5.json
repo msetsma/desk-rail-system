@@ -108,7 +108,8 @@
      "com.setsma.desk": {
       "lib_id": "HW-L03_HBLFSN5",
       "Material": "Al ADC12 cast",
-      "ReleaseState": "Released"
+      "ReleaseState": "Released",
+      "Source": "Misumi vendor STEP refs/misumi_brackets/HBLFSN5/HBLFSN5_bracket.stp"
      }
     }
    }

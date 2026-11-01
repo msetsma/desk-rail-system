@@ -44,12 +44,16 @@ MACHINING: Mapping[str, str] = {
 # (refs/misumi_brackets/p2259.pdf); the -SET suffix ships them with each part.
 FASTENERS: Mapping[str, tuple[int, int]] = {
     "HBLFSN5": (2, 0),             # 1 bolt per leg
+    "HBLFSD5": (4, 0),             # 2 bolts per leg, 4 x CBM5-10 + HNTT5-5 (D15)
     "HPTTD5": (8, 0),              # 8 x M5
     "HPTLD5": (8, 0),              # 8 x M5
     "Standoff M5x12 d10": (1, 1),  # into a T-nut, + 1 screw through the panel
     "MON-01": (2, 4),              # VESA adapter: 2 into the stile T-nuts, 4 M4 into the monitor
     "MON-02": (2, 4),
     "SPK-02": (2, 0),              # flange: 2 into the upright front slot
+    # MEASURE (estimate, mount not designed in detail): LAP-01 base plate, 2 x M5x12 into HFS5 T-nuts
+    # in the right stile's front slot.
+    "LAP-01": (2, 0),
 }
 END_ANCHORS: Mapping[str, int] = {"FRM-02": 2, "FRM-04": 2, "FRM-03L": 1, "FRM-03R": 1}
 

@@ -108,7 +108,8 @@
      "com.setsma.desk": {
       "lib_id": "HW-L01_HPTTD5",
       "Material": "Steel zinc-plated",
-      "ReleaseState": "Released"
+      "ReleaseState": "Released",
+      "Source": "Misumi vendor STEP refs/misumi_brackets/HPTTD5/HPTTD5_plate.stp"
      }
     }
    }

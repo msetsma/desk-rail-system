@@ -166,7 +166,8 @@
      "com.setsma.desk": {
       "lib_id": "HW-L10_M6x55_SHCS",
       "Material": "Steel black-oxide",
-      "ReleaseState": "Released"
+      "ReleaseState": "Released",
+      "Source": "Modelled (simplified)"
      }
     }
    }

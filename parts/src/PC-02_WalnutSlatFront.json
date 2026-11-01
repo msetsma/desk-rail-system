@@ -80,17 +80,17 @@
   {
    "command": "parameters.add",
    "params": {
-    "name": "pcn_foot_h",
-    "expression": "19 mm",
-    "comment": "Fractal North feet height (spec: 469 overall - 450 w/o feet)"
+    "name": "pcn_frame_rail",
+    "expression": "3 mm",
+    "comment": "Front panel frame rails behind the slats (Y)"
    }
   },
   {
    "command": "parameters.add",
    "params": {
     "name": "pcn_frame_d",
-    "expression": "slat_inset + slat_t + 3 mm",
-    "comment": "Front panel frame depth (Y): slat recess + slats + 3 mm rails"
+    "expression": "slat_inset + slat_t + pcn_frame_rail",
+    "comment": "Front panel frame depth (Y): slat recess + slats + rails"
    }
   },
   {
@@ -117,11 +117,11 @@
     "operation": "new",
     "length": "pc_w",
     "width": "pcn_frame_d",
-    "height": "(pc_h - pcn_foot_h)",
+    "height": "(pc_h - pc_foot_h)",
     "corner": [
      "-pc_w/2",
      "-slat_inset",
-     "-pc_h/2 + pcn_foot_h"
+     "-pc_h/2 + pc_foot_h"
     ]
    }
   },
@@ -164,11 +164,11 @@
     ],
     "length": "pc_w - 2*pcn_lip",
     "width": "slat_inset + slat_t + 0.1 mm",
-    "height": "(pc_h - pcn_foot_h) - 2*pcn_lip",
+    "height": "(pc_h - pc_foot_h) - 2*pcn_lip",
     "corner": [
      "-pc_w/2 + pcn_lip",
      "-slat_inset - 0.1 mm",
-     "-pc_h/2 + pcn_foot_h + pcn_lip"
+     "-pc_h/2 + pc_foot_h + pcn_lip"
     ]
    }
   },
@@ -182,11 +182,11 @@
     ],
     "length": "pc_w - 2*pcn_lip",
     "width": "3.2 mm",
-    "height": "(pc_h - pcn_foot_h) - 2*pc_bezel_v - 16 mm",
+    "height": "(pc_h - pc_foot_h) - 2*pc_bezel_v - 16 mm",
     "corner": [
      "-pc_w/2 + pcn_lip",
      "slat_t - 0.1 mm",
-     "-pc_h/2 + pcn_foot_h + pc_bezel_v + 8 mm"
+     "-pc_h/2 + pc_foot_h + pc_bezel_v + 8 mm"
     ]
    }
   },
@@ -212,11 +212,11 @@
      ],
      [
       "-pc_w/2 + pc_bezel + slat_gap + slat_w",
-      "pc_h/2 - pcn_foot_h - pc_bezel_v"
+      "pc_h/2 - pc_foot_h - pc_bezel_v"
      ],
      [
       "-pc_w/2 + pc_bezel + slat_gap",
-      "pc_h/2 - pcn_foot_h - pc_bezel_v"
+      "pc_h/2 - pc_foot_h - pc_bezel_v"
      ]
     ]
    }
@@ -318,7 +318,7 @@
    "params": {
     "values": {
      "part_number": "PC-02",
-     "description": "Fractal North front panel, dark walnut: 10 vertical walnut slats in the charcoal front frame (5 mm lip, top/bottom rails). Origin: placement datum on the slat front face, X centred, Z = case height centre incl. feet (slat array centre is pcn_foot_h/2 above it); slats extend +Y (toward wall), X right, Z up.",
+     "description": "Fractal North front panel, dark walnut: 10 vertical walnut slats in the charcoal front frame (5 mm lip, top/bottom rails). Origin: placement datum on the slat front face, X centred, Z = case height centre incl. feet (slat array centre is pc_foot_h/2 above it); slats extend +Y (toward wall), X right, Z up.",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

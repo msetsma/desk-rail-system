@@ -80,17 +80,17 @@
   {
    "command": "parameters.add",
    "params": {
-    "name": "pcn_foot_h",
-    "expression": "19 mm",
-    "comment": "Fractal North feet height (spec: 469 overall - 450 w/o feet)"
+    "name": "pcn_frame_rail",
+    "expression": "3 mm",
+    "comment": "Front panel frame rails behind the slats (Y)"
    }
   },
   {
    "command": "parameters.add",
    "params": {
     "name": "pcn_frame_d",
-    "expression": "slat_inset + slat_t + 3 mm",
-    "comment": "Front panel frame depth (Y): slat recess + slats + 3 mm rails"
+    "expression": "slat_inset + slat_t + pcn_frame_rail",
+    "comment": "Front panel frame depth (Y): slat recess + slats + rails"
    }
   },
   {
@@ -125,11 +125,11 @@
     "operation": "new",
     "length": "pc_w",
     "width": "pc_d - pcn_frame_d - pcn_rear",
-    "height": "(pc_h - pcn_foot_h)",
+    "height": "(pc_h - pc_foot_h)",
     "corner": [
      "-pc_w/2",
      "-pc_d/2 + pcn_frame_d",
-     "-(pc_h - pcn_foot_h)"
+     "-(pc_h - pc_foot_h)"
     ]
    }
   },
@@ -262,11 +262,11 @@
     ],
     "length": "0.9 mm",
     "width": "pc_d - pcn_front_d - pcn_rear - 3 mm",
-    "height": "(pc_h - pcn_foot_h) - 32 mm",
+    "height": "(pc_h - pc_foot_h) - 32 mm",
     "corner": [
      "-pc_w/2 - 0.1 mm",
      "-pc_d/2 + pcn_front_d",
-     "-(pc_h - pcn_foot_h) + 25 mm"
+     "-(pc_h - pc_foot_h) + 25 mm"
     ]
    }
   },
@@ -280,11 +280,11 @@
     ],
     "length": "0.7 mm",
     "width": "1 mm",
-    "height": "(pc_h - pcn_foot_h) + 0.2 mm",
+    "height": "(pc_h - pc_foot_h) + 0.2 mm",
     "corner": [
      "pc_w/2 - 0.6 mm",
      "-pc_d/2 + pcn_front_d - 0.5 mm",
-     "-(pc_h - pcn_foot_h) - 0.1 mm"
+     "-(pc_h - pc_foot_h) - 0.1 mm"
     ]
    }
   },
@@ -462,7 +462,7 @@
    "params": {
     "center": [
      "-(pc_w/2 - 8 mm)",
-     "(pc_h - pcn_foot_h) - 40 mm"
+     "(pc_h - pc_foot_h) - 40 mm"
     ],
     "diameter": 10
    }
@@ -482,7 +482,7 @@
    "params": {
     "center": [
      "pc_w/2 - 8 mm",
-     "(pc_h - pcn_foot_h) - 40 mm"
+     "(pc_h - pc_foot_h) - 40 mm"
     ],
     "diameter": 10
    }
@@ -507,7 +507,7 @@
    "command": "sketch.create",
    "params": {
     "plane": "XY",
-    "offset": "-(pc_h - pcn_foot_h) + 0.1 mm",
+    "offset": "-(pc_h - pc_foot_h) + 0.1 mm",
     "name": "PC01_Feet_Sketch"
    }
   },
@@ -560,7 +560,7 @@
    "params": {
     "name": "PC01_Feet",
     "sketch": "PC01_Feet_Sketch",
-    "distance": "pcn_foot_h - 6 mm + 0.1 mm",
+    "distance": "pc_foot_h - 6 mm + 0.1 mm",
     "direction": "negative",
     "operation": "join",
     "targets": [
