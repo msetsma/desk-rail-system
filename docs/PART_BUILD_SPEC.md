@@ -83,7 +83,7 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 | LAP-03 | Laptop tray (user-built jig placeholder) | 1 | new (LaptopTray) |
 | CHR-01 | Herman Miller Mirra 2 chair, Butterfly back (vendor 3D DWG mesh: seat down, arms up and back) | 1 | Chair_* (multibody allowed; source refs/herman_miller_mirra2/converted/CHR-01_mirra2.step via parts/src/CHR-01_convert.py) |
 
-Hardware is in `parts/lib/` (HPTTD5, HPTLD5, HBLFSN5, M6x20 SHCS, standoff). Eye becomes a skeleton
+Hardware is in `parts/lib/` (HPTTD5, HPTLD5, HBLFSN5, M6x55 SHCS, standoff). Eye becomes a skeleton
 point in the assembly, not a part.
 
 ## Edit speed (applies to every part)

@@ -441,9 +441,9 @@
      "Leg"
     ],
     "radius": "3 mm",
-    "height": "(sb_len - sr_seat_t - ts_t) + 0.1 mm",
+    "height": "(sb_len - side_t - ts_t) + 0.1 mm",
     "base": [
-     "(leg_inset - ts_t) - (sb_len - sr_seat_t - ts_t)",
+     "(leg_inset - ts_t) - (sb_len - side_t - ts_t)",
      "-ts_bolt_pitch/2",
      "-ts_bolt_z"
     ]

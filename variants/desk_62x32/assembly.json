@@ -869,8 +869,8 @@
   {
    "command": "component.insert_design",
    "params": {
-    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
-    "name": "HW-L10 M6x20 SHCS",
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x55_SHCS.solidcraft",
+    "name": "HW-L10 M6x55 SHCS",
     "parent": "HW-00 Frame hardware",
     "reuse": false
    }
@@ -878,8 +878,8 @@
   {
    "command": "component.insert_design",
    "params": {
-    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
-    "name": "HW-L10 M6x20 SHCS",
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x55_SHCS.solidcraft",
+    "name": "HW-L10 M6x55 SHCS",
     "parent": "HW-00 Frame hardware",
     "reuse": true
    }
@@ -887,8 +887,8 @@
   {
    "command": "component.insert_design",
    "params": {
-    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
-    "name": "HW-L10 M6x20 SHCS",
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x55_SHCS.solidcraft",
+    "name": "HW-L10 M6x55 SHCS",
     "parent": "HW-00 Frame hardware",
     "reuse": true
    }
@@ -896,8 +896,8 @@
   {
    "command": "component.insert_design",
    "params": {
-    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
-    "name": "HW-L10 M6x20 SHCS",
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x55_SHCS.solidcraft",
+    "name": "HW-L10 M6x55 SHCS",
     "parent": "HW-00 Frame hardware",
     "reuse": true
    }
@@ -905,8 +905,8 @@
   {
    "command": "component.insert_design",
    "params": {
-    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
-    "name": "HW-L10 M6x20 SHCS",
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x55_SHCS.solidcraft",
+    "name": "HW-L10 M6x55 SHCS",
     "parent": "HW-00 Frame hardware",
     "reuse": true
    }
@@ -914,8 +914,8 @@
   {
    "command": "component.insert_design",
    "params": {
-    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
-    "name": "HW-L10 M6x20 SHCS",
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x55_SHCS.solidcraft",
+    "name": "HW-L10 M6x55 SHCS",
     "parent": "HW-00 Frame hardware",
     "reuse": true
    }
@@ -923,8 +923,8 @@
   {
    "command": "component.insert_design",
    "params": {
-    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
-    "name": "HW-L10 M6x20 SHCS",
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x55_SHCS.solidcraft",
+    "name": "HW-L10 M6x55 SHCS",
     "parent": "HW-00 Frame hardware",
     "reuse": true
    }
@@ -932,8 +932,8 @@
   {
    "command": "component.insert_design",
    "params": {
-    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x20_SHCS.solidcraft",
-    "name": "HW-L10 M6x20 SHCS",
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L10_M6x55_SHCS.solidcraft",
+    "name": "HW-L10 M6x55 SHCS",
     "parent": "HW-00 Frame hardware",
     "reuse": true
    }
@@ -4230,7 +4230,7 @@
      ]
     },
     "b": {
-     "occurrence": "HW-L10 M6x20 SHCS:1",
+     "occurrence": "HW-L10 M6x55 SHCS:1",
      "point": [
       0,
       0,
@@ -4248,7 +4248,7 @@
      ]
     },
     "values": [
-     "-(frame_w/2 + sr_seat_t)",
+     "-(frame_w/2 + side_t)",
      "ch_y_off + (-leg_yc) - ts_bolt_pitch/2",
      "0 deg"
     ],
@@ -4281,7 +4281,7 @@
      ]
     },
     "b": {
-     "occurrence": "HW-L10 M6x20 SHCS:2",
+     "occurrence": "HW-L10 M6x55 SHCS:2",
      "point": [
       0,
       0,
@@ -4299,7 +4299,7 @@
      ]
     },
     "values": [
-     "-(frame_w/2 + sr_seat_t)",
+     "-(frame_w/2 + side_t)",
      "ch_y_off + (-leg_yc) + ts_bolt_pitch/2",
      "0 deg"
     ],
@@ -4332,7 +4332,7 @@
      ]
     },
     "b": {
-     "occurrence": "HW-L10 M6x20 SHCS:3",
+     "occurrence": "HW-L10 M6x55 SHCS:3",
      "point": [
       0,
       0,
@@ -4350,7 +4350,7 @@
      ]
     },
     "values": [
-     "-(frame_w/2 + sr_seat_t)",
+     "-(frame_w/2 + side_t)",
      "ch_y_off + (leg_yc) - ts_bolt_pitch/2",
      "0 deg"
     ],
@@ -4383,7 +4383,7 @@
      ]
     },
     "b": {
-     "occurrence": "HW-L10 M6x20 SHCS:4",
+     "occurrence": "HW-L10 M6x55 SHCS:4",
      "point": [
       0,
       0,
@@ -4401,7 +4401,7 @@
      ]
     },
     "values": [
-     "-(frame_w/2 + sr_seat_t)",
+     "-(frame_w/2 + side_t)",
      "ch_y_off + (leg_yc) + ts_bolt_pitch/2",
      "0 deg"
     ],
@@ -4434,7 +4434,7 @@
      ]
     },
     "b": {
-     "occurrence": "HW-L10 M6x20 SHCS:5",
+     "occurrence": "HW-L10 M6x55 SHCS:5",
      "point": [
       0,
       0,
@@ -4452,7 +4452,7 @@
      ]
     },
     "values": [
-     "(frame_w/2 + sr_seat_t)",
+     "(frame_w/2 + side_t)",
      "ch_y_off + (-leg_yc) - ts_bolt_pitch/2",
      "0 deg"
     ],
@@ -4485,7 +4485,7 @@
      ]
     },
     "b": {
-     "occurrence": "HW-L10 M6x20 SHCS:6",
+     "occurrence": "HW-L10 M6x55 SHCS:6",
      "point": [
       0,
       0,
@@ -4503,7 +4503,7 @@
      ]
     },
     "values": [
-     "(frame_w/2 + sr_seat_t)",
+     "(frame_w/2 + side_t)",
      "ch_y_off + (-leg_yc) + ts_bolt_pitch/2",
      "0 deg"
     ],
@@ -4536,7 +4536,7 @@
      ]
     },
     "b": {
-     "occurrence": "HW-L10 M6x20 SHCS:7",
+     "occurrence": "HW-L10 M6x55 SHCS:7",
      "point": [
       0,
       0,
@@ -4554,7 +4554,7 @@
      ]
     },
     "values": [
-     "(frame_w/2 + sr_seat_t)",
+     "(frame_w/2 + side_t)",
      "ch_y_off + (leg_yc) - ts_bolt_pitch/2",
      "0 deg"
     ],
@@ -4587,7 +4587,7 @@
      ]
     },
     "b": {
-     "occurrence": "HW-L10 M6x20 SHCS:8",
+     "occurrence": "HW-L10 M6x55 SHCS:8",
      "point": [
       0,
       0,
@@ -4605,7 +4605,7 @@
      ]
     },
     "values": [
-     "(frame_w/2 + sr_seat_t)",
+     "(frame_w/2 + side_t)",
      "ch_y_off + (leg_yc) + ts_bolt_pitch/2",
      "0 deg"
     ],

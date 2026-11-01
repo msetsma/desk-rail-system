@@ -122,7 +122,7 @@ graph TD
 | `HW-00` Frame hardware | `lib/HW-L01_HPTTD5` | 2 | Misumi T-joining plate, side rail to upright | zinc |
 | | `lib/HW-L02_HPTLD5` | 4 | Misumi L-joining plate, crossbar ends | zinc |
 | | `lib/HW-L03_HBLFSN5` | 14 | Misumi gusset bracket | cast aluminium |
-| | `lib/HW-L10_M6x20_SHCS` | 16 | M6x20 socket-head screw, side rail to top support | black oxide |
+| | `lib/HW-L10_M6x55_SHCS` | 8 | M6x55 socket-head screw, side rail to top support | black oxide |
 | | `lib/HW-L11_Standoff_M5x12` | 8 | panel standoff | zinc |
 | `MON-00` Monitors | `MON-01_Monitor_Main_32in` | 1 | 32in 16:9 main | near-black |
 | | `MON-02_Monitor_Side_27in` | 1 | 27in portrait, left | near-black |
@@ -198,7 +198,7 @@ Inches are fine.
 - [ ] `foot_w`, `foot_h`: width and height with glides
 
 **Side rails** (`FRM-03L/R`)
-- [ ] `sr_seat_t`: inner wall thickness where the access hole stops (bolt head seat)
+- [ ] leg column thread depth: the M6x55 needs 12 mm of free thread (stock M6x14 uses 11)
 
 **Monitors** (`MON-01`, `MON-02`; no stand, a ruler is fine)
 - [ ] `m1_w`, `m1_h`, `m1_t` and `m3_w`, `m3_h`, `m3_t`: width, height, max depth with the rear bulge
@@ -241,9 +241,9 @@ front face, with the outer faces flush (a T-joint, D1).
 
 - **To the upright** (D2): a Misumi HPTTD5 T-plate on the shared outer face, an HBLFSN5 gusset
   under the rail, and an end anchor inside the rail (not modelled).
-- **To the top support** (D9): 8 M6x20 socket-head screws per side, through the rail into the
-  top support. The rail needs drilling: an access hole in the outer face for the head and the key,
-  then a clearance hole through the inner wall.
+- **To the top support** (D9): 4 M6x55 socket-head screws per side, straight through the rail and
+  the top support's web into the leg column threads. The rail needs one Ø6.6 hole through both
+  walls per screw; the head sits on the outer face.
 
 The plate sticks out 2.3 mm past the outer face. Set `up_side_inset` to at least that to keep it
 inside the desktop edge.

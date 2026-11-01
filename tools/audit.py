@@ -65,7 +65,7 @@ GROUPS: tuple[tuple[str, str], ...] = (
     ("Upright_4040", "rails"), ("Crossbar_2040", "rails"), ("SideRail_", "rails"), ("Stile_2040", "rails"),
     ("SpkMount_", "speakers"), ("MousePad", "input"), ("Mouse_", "input"), ("Keyboard_", "input"),
     ("HPTTD5", "hardware"), ("HPTLD5", "hardware"), ("HBLFSN5", "hardware"),
-    ("Standoff_M5x12", "hardware"), ("M6x20_SHCS", "hardware"),
+    ("Standoff_M5x12", "hardware"), ("M6x55_SHCS", "hardware"),
 )
 FASTENERS_KG = 0.6             # T-nuts + plate/bracket bolts on the rail joints (not modelled)
 I_2040_STRONG = 5.13e4         # mm^4

@@ -959,20 +959,6 @@
     "unit": "mm"
   },
   {
-    "comment": "MEASURE 4040 side rail: inner wall thickness where the access hole bottoms out (bolt head seat)",
-    "expression": "4 mm",
-    "favorite": false,
-    "name": "sr_seat_t",
-    "unit": "mm"
-  },
-  {
-    "comment": "Side rail access hole for M6 socket head + hex key (drilled through the outer face)",
-    "expression": "11 mm",
-    "favorite": false,
-    "name": "sr_access_d",
-    "unit": "mm"
-  },
-  {
     "comment": "Side rail / top support clearance hole for M6",
     "expression": "6.6 mm",
     "favorite": false,
@@ -994,8 +980,8 @@
     "unit": "mm"
   },
   {
-    "comment": "Side rail bolt length under head: M6x20 into leg thread / channel end",
-    "expression": "20 mm",
+    "comment": "Side rail bolt length under head: M6x55, head on the rail's outer face, through the 4040 + top-support web into the leg thread (55 - side_t - ts_t = 12 mm engagement; stock M6x14 gives 11)",
+    "expression": "55 mm",
     "favorite": false,
     "name": "sb_len",
     "unit": "mm"

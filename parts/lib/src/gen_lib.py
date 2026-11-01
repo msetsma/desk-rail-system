@@ -44,16 +44,16 @@ def step_script(label: str) -> dict:
 
 
 def screw() -> dict:
-    b = "M6x20_SHCS"
+    b = "M6x55_SHCS"
     cmds = list(TEMPLATE) + [
         {"command": "solid.cylinder", "params": {"diameter": 10, "height": 6, "base": [0, 0, 0], "name": "Head", "body_name": b}},
-        {"command": "solid.cylinder", "params": {"diameter": 6, "height": 20.05, "base": [0, 0, -20], "operation": "join", "targets": [b], "name": "Shank"}},
+        {"command": "solid.cylinder", "params": {"diameter": 6, "height": 55.05, "base": [0, 0, -55], "operation": "join", "targets": [b], "name": "Shank"}},
         {"command": "sketch.create", "params": {"plane": "XY", "offset": 6.1, "name": "HexSocketSketch"}},
         {"command": "sketch.polygon.circumscribed", "params": {"center": [0, 0], "radius": 2.5, "sides": 6}},
         {"command": "sketch.finish", "params": {}},
         {"command": "solid.extrude", "params": {"distance": 3.1, "direction": "negative", "operation": "cut", "targets": [b], "name": "HexSocket"}},
     ]
-    return {"commands": cmds + finish(b, "ISO 4762 M6x20", "Socket head cap screw M6x20, black-oxide steel (simplified, no thread)", "Steel black-oxide", "#2b2b2b", "HW-L10_M6x20_SHCS")}
+    return {"commands": cmds + finish(b, "ISO 4762 M6x55", "Socket head cap screw M6x55, black-oxide steel (simplified, no thread)", "Steel black-oxide", "#2b2b2b", "HW-L10_M6x55_SHCS")}
 
 
 def standoff() -> dict:
@@ -72,5 +72,5 @@ def _write(name: str, script: dict) -> None:
 if __name__ == "__main__":
     for lab in STEP:
         _write(lab, step_script(lab))
-    _write("HW-L10_M6x20_SHCS", screw())
+    _write("HW-L10_M6x55_SHCS", screw())
     _write("HW-L11_Standoff_M5x12", standoff())
