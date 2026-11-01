@@ -14,9 +14,12 @@ Speaker part frame (SPK-01): origin = rear face centre at spk_mount_frac*spk_h a
 
 from __future__ import annotations
 
+import importlib.util
 import math
+import re
 from collections.abc import Mapping
 from dataclasses import dataclass, replace
+from pathlib import Path
 
 from sightlines import (
     IDENTITY,
@@ -100,6 +103,9 @@ def speaker_origin(side: int, layout: LaidLayout, v: Mapping[str, float]) -> Poi
     return _add(stand_origin(side, layout), apply(rot_z(_yaw(side, layout)), local))
 
 
+LAP01_GEN = Path(__file__).resolve().parent.parent / "parts" / "src" / "LAP-01_gen.py"
+
+
 def speaker_shapes(v: Mapping[str, float], layout: LaidLayout, pad: float = 0.0) -> list[Shape]:
     """Speaker cabinets (front = local -Y) and stands as boxes, optionally grown by `pad` mm."""
     out = []
@@ -115,7 +121,8 @@ def speaker_shapes(v: Mapping[str, float], layout: LaidLayout, pad: float = 0.0)
     return out
 
 
-OBSTACLES = ("Monitor_Main", "Monitor_Side", "MousePad_Zone", "Crossbar_Low", "Upright_L", "Upright_R", "Stile_Main")
+OBSTACLES = ("Monitor_Main", "Monitor_Side", "MousePad_Zone", "Crossbar_Low", "Upright_L", "Upright_R", "Stile_Main",
+             "Stile_Side", "Stile_Right")
 
 
 def _on_desk(v: Mapping[str, float], layout: LaidLayout) -> bool:
@@ -167,11 +174,37 @@ def solve(v: Mapping[str, float], stand: Mapping[str, float], yaw_max: float = Y
     raise LayoutError("speakers don't fit between the monitors and the mouse pad at any toe-in")
 
 
-def _arm(v: Mapping[str, float], tray_z: float) -> Shape:
-    """LAP-01 arm + puck envelope (generator defaults: 30 mm arm, 12 mm thick, 50 mm puck, 8 mm high)."""
-    top = tray_z + v["lap_yoke_bot"] - 8.0
-    return Shape("Laptop_Arm", (v["lap_x"], 0.0, 0.0), IDENTITY, (-25.0, 25.0),
-                 (v["lap_y"] - 25.0, v["stile_y"]), (top - 12.0, top + 8.0))
+def _lmnt_sizes() -> dict[str, float]:
+    """The LAP-01 generator's fixed jig sizes (`lmnt_* = "<n> mm"`), so this envelope has one source (AGENTS §3)."""
+    spec = importlib.util.spec_from_file_location("lap01_gen", LAP01_GEN)
+    if spec is None or spec.loader is None:
+        raise LayoutError(f"cannot load {LAP01_GEN}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return {n: float(e.removesuffix(" mm")) for n, e, _ in module.PARAMS if re.fullmatch(r"[\d.]+ mm", e)}
+
+
+def _arm(v: Mapping[str, float], tray_z: float) -> list[Shape]:
+    """LAP-01 envelope (D19): riser in front of the right stile, an L arm (Y leg at the stile, X leg at the
+    pivot depth) and the puck under the tray centre. World frame; mirrors LAP-01_gen.arm()."""
+    s = _lmnt_sizes()
+    puck_top = tray_z + v["lap_yoke_bot"]
+    arm_bot = puck_top - s["lmnt_puck_h"] - s["lmnt_arm_t"]
+    x0, y0 = v["stile_r_x"], v["stile_front"]
+    plate_top = v["bar1_z"] + v["rail_l"] / 2 + s["lmnt_plate_bot"] + s["lmnt_plate_h"]
+    riser_y = y0 - s["lmnt_t"] - s["lmnt_riser_d"] - 0.1
+    half_w, half_a = s["lmnt_w"] / 2, s["lmnt_arm_w"] / 2
+    xs = sorted((x0, v["lap_x"]))
+    return [
+        Shape("Laptop_ArmRiser", (0.0, 0.0, 0.0), IDENTITY, (x0 - half_w, x0 + half_w), (riser_y, y0),
+              (arm_bot, plate_top)),
+        Shape("Laptop_ArmY", (0.0, 0.0, 0.0), IDENTITY, (x0 - half_a, x0 + half_a), (v["lap_y"] - half_a, riser_y),
+              (arm_bot, arm_bot + s["lmnt_arm_t"])),
+        Shape("Laptop_ArmX", (0.0, 0.0, 0.0), IDENTITY, (xs[0] - half_a, xs[1] + half_a),
+              (v["lap_y"] - half_a, v["lap_y"] + half_a), (arm_bot, arm_bot + s["lmnt_arm_t"])),
+        Shape("Laptop_Puck", (0.0, 0.0, 0.0), IDENTITY, (v["lap_x"] - s["lmnt_puck_d"] / 2, v["lap_x"] + s["lmnt_puck_d"] / 2),
+              (v["lap_y"] - s["lmnt_puck_d"] / 2, v["lap_y"] + s["lmnt_puck_d"] / 2), (puck_top - s["lmnt_puck_h"], puck_top)),
+    ]
 
 
 def min_tray_z(v: Mapping[str, float], layout: LaidLayout, laptop_shapes: object, step: float = 5.0) -> float:
@@ -182,7 +215,7 @@ def min_tray_z(v: Mapping[str, float], layout: LaidLayout, laptop_shapes: object
     z = v["lap_tray_z"]
     while z < 600.0:
         trial = {**v, "lap_tray_z": z}
-        lap = [*laptop_shapes(trial), _arm(trial, z)]  # type: ignore[operator]
+        lap = [*laptop_shapes(trial), *_arm(trial, z)]  # type: ignore[operator]
         if not any(overlap(a, b) for a in lap for b in speaker):
             return z
         z += step

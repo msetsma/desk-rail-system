@@ -1,4 +1,4 @@
-"""Generate and build the desk assembly from linked part files (compliance Phase 4).
+"""Generate and build the desk assembly from linked part files.
 
     python tools/build_assembly.py                 # writes build/assembly.json, builds build/desk_rails_new.solidcraft
     python tools/build_assembly.py --out X.solidcraft
@@ -6,7 +6,8 @@
 Every part is inserted as a linked component under its group and placed with a planar joint
 from the root origin whose x, y, yaw and z offset are skeleton-parameter expressions
 (PROJECT.md "Standard placement"). Hardware placements come from skeleton/hw_placements.json.
-The script is scaffolding: once the assembly is built, the design file is the source of truth.
+This script is the source of truth for the assembly: edit it (or the skeleton) and rebuild, don't hand-edit
+the design (PROJECT.md edit loop).
 """
 
 from __future__ import annotations
@@ -44,7 +45,7 @@ GROUPS = (
     ("SPK-00 Speakers", "Klipsch R-40M speakers on swivel mounts"),
     ("PC-00 PC under-desk", "Fractal North case, slat front and strap"),
     ("INP-00 Input devices", "Mouse pad, mouse and split keyboard"),
-    ("LAP-00 Laptop", "User-built laptop mount and tray on the lower crossbar, MacBook Pro 14in"),
+    ("LAP-00 Laptop", "User-built laptop mount and tray on the right stile, MacBook Pro 14in"),
     ("CHR-00 Chair", "Herman Miller Mirra 2 (Butterfly back), user's seat"),
     ("REF-00 Skeleton", "Layout datums (Eye point)"),
 )
@@ -103,6 +104,7 @@ OCCURRENCES: tuple[Occurrence, ...] = (
     _occ("SideRail_R", "FRM-03R_SideRail_R_4040", _FRM, "frame_w/2", "0 mm", "frame_top"),
     _occ("Stile_Main", "FRM-04_Stile_2040", _FRM, "m1_x", "stile_y", "desk_h + bar1_z + rail_l/2"),
     _occ("Stile_Side", "FRM-04_Stile_2040", _FRM, "m3_x", "stile_y", "desk_h + bar1_z + rail_l/2"),
+    _occ("Stile_Right", "FRM-04_Stile_2040", _FRM, "stile_r_x", "stile_y", "desk_h + bar1_z + rail_l/2"),
     _occ("ModestyPanel", "FRM-05_Modesty_panel", _FRM, "0 mm", "stile_y + rail_s/2 + pnl_back_gap",
          "frame_top - pnl_drop"),
     _occ("Monitor_Main", "MON-01_Monitor_Main_32in", _MON, "m1_x", "stile_front - m1_off",
@@ -128,7 +130,7 @@ OCCURRENCES: tuple[Occurrence, ...] = (
     _occ("Mouse", "INP-02_DeathAdderV3Pro", _INP, "pad_x", "pad_y", "desk_h + pad_t", "180 deg"),
     _occ("Keyboard_L", "INP-03_ErgoDoxEZ_Left", _INP, "m1_x - kb_gap/2 - kb_w", "desk_front + kb_front_gap", "desk_h"),
     _occ("Keyboard_R", "INP-04_ErgoDoxEZ_Right", _INP, "m1_x + kb_gap/2", "desk_front + kb_front_gap", "desk_h"),
-    _occ("LaptopMount", "LAP-01_LaptopMount", _LAP, "lap_x", "stile_y", "lap_clamp_z"),
+    _occ("LaptopMount", "LAP-01_LaptopMount", _LAP, "stile_r_x", "stile_front", "lap_mount_z"),
     _occ("LaptopTray", "LAP-03_LaptopTray", _LAP, "lap_x", "lap_y", "desk_h + lap_tray_z", "-lap_yaw"),
     _occ("Laptop", "LAP-02_MacBookPro14", _LAP, "lap_x", "lap_y", "desk_h + lap_tray_z", "-lap_yaw"),
     _occ("Chair", "CHR-01_HermanMillerMirra2", _CHR, "m1_x", "eye_y - chr_eye_dy", "0 mm"),
@@ -136,7 +138,7 @@ OCCURRENCES: tuple[Occurrence, ...] = (
 
 
 def load_hw_occurrences(path: Path = HW_PLACEMENTS) -> list[Occurrence]:
-    """Hardware occurrences solved from the legacy model (empty if the file isn't there yet)."""
+    """Hardware occurrences from skeleton/hw_placements.json (empty if the file isn't there yet)."""
     if not path.is_file():
         log.warning("no %s: building without hardware", path.relative_to(ROOT))
         return []
@@ -224,7 +226,8 @@ def main(argv: Sequence[str]) -> int:
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     args = parser.parse_args(argv)
 
-    script = build_script([*OCCURRENCES, *load_hw_occurrences()])
+    occurrences = [*OCCURRENCES, *load_hw_occurrences()]
+    script = build_script(occurrences)
     SCRIPT_OUT.write_text(json.dumps(script, indent=1), encoding="utf-8")
     log.info("wrote %s (%d commands)", SCRIPT_OUT.relative_to(ROOT), len(script["commands"]))
     result = subprocess.run([CLI, "run", str(SCRIPT_OUT), "--save", str(args.out), "--quiet"],
@@ -233,7 +236,6 @@ def main(argv: Sequence[str]) -> int:
         log.error("%s", result.stderr.strip() or result.stdout.strip())
         return 1
     log.info("saved %s", args.out)
-    occurrences = [*OCCURRENCES, *load_hw_occurrences()]
     try:
         finish_assembly(args.out, [component_name(o.part) for o in occurrences])
     except FinishError as exc:

@@ -926,5 +926,93 @@
     "host": "FRM-03R side rail R / FRM-01 upright R",
     "note": "Second HPTTD5 on the inner faces (user 2026-10-29: double the T-plates). Same plate as HW-01/02 turned 180 deg about the side rail axis (Y): the plate is symmetric about its stem, so it lands on the flush inner faces of the upright and rail. Local -Z (thickness) points toward the desk centre.",
     "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-39 Gusset right stile low L",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      -1,
+      0,
+      0
+    ],
+    "x": "stile_r_x - rail_l/2",
+    "y": "stile_y",
+    "z": "desk_h + bar1_z + rail_l/2",
+    "yaw": "0 deg",
+    "host": "FRM-04 stile right / FRM-02 crossbar low",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-40 Gusset right stile low R",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "stile_r_x + rail_l/2",
+    "y": "stile_y",
+    "z": "desk_h + bar1_z + rail_l/2",
+    "yaw": "0 deg",
+    "host": "FRM-04 stile right / FRM-02 crossbar low",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-41 Gusset right stile high L",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      -1,
+      0,
+      0
+    ],
+    "x": "stile_r_x - rail_l/2",
+    "y": "stile_y",
+    "z": "desk_h + bar2_z - rail_l/2",
+    "yaw": "0 deg",
+    "host": "FRM-04 stile right / FRM-02 crossbar high",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-42 Gusset right stile high R",
+    "lib": "HW-L03_HBLFSN5",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      -1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "stile_r_x + rail_l/2",
+    "y": "stile_y",
+    "z": "desk_h + bar2_z - rail_l/2",
+    "yaw": "0 deg",
+    "host": "FRM-04 stile right / FRM-02 crossbar high",
+    "note": "Origin = inside corner of the two members (vendor tab overruns it by 1 mm); bracket centred on the slot plane.",
+    "joint_angle": "0 deg"
   }
 ]

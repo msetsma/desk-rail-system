@@ -21,7 +21,7 @@
     "unit": "mm"
   },
   {
-    "comment": "Desktop thickness",
+    "comment": "Desktop thickness (IKEA KARLBY spec: 3.8 cm)",
     "expression": "1.5 in",
     "favorite": false,
     "name": "desk_t",
@@ -147,7 +147,7 @@
     "unit": "mm"
   },
   {
-    "comment": "Foot: length (Y)",
+    "comment": "MEASURE Foot: length (Y)",
     "expression": "27.5 in",
     "favorite": false,
     "name": "foot_len",
@@ -266,17 +266,10 @@
     "unit": "mm"
   },
   {
-    "comment": "VESA adapter thickness: stile front face to monitor back",
+    "comment": "MEASURE VESA adapter thickness: stile front face to monitor back (adapter not chosen yet)",
     "expression": "15 mm",
     "favorite": false,
     "name": "mon_standoff",
-    "unit": "mm"
-  },
-  {
-    "comment": "MEASURE Monitors: VESA hole pattern size (100x100 typical at 27-32in)",
-    "expression": "100 mm",
-    "favorite": false,
-    "name": "vesa",
     "unit": "mm"
   },
   {
@@ -301,8 +294,8 @@
     "unit": "mm"
   },
   {
-    "comment": "Lower crossbar top below the lowest monitor bottom edge (bar shows in the gap; mount things to it)",
-    "expression": "25 mm",
+    "comment": "Lower crossbar top below the lowest monitor bottom edge. User 2026-11-01: 25 -> 65 mm to leave room above the bar for 3D-printed accessories (USB hub housing, macro pad) mounted on it (D18)",
+    "expression": "65 mm",
     "favorite": false,
     "name": "bar1_gap",
     "unit": "mm"
@@ -319,6 +312,13 @@
     "expression": "m3_edge_x - m3_w/2*cos(m3_yaw) - m3_t*sin(m3_yaw)",
     "favorite": false,
     "name": "m3_x",
+    "unit": "mm"
+  },
+  {
+    "comment": "Derived: right stile X, mirror of the side stile; the laptop arm (LAP-01) bolts to its front slot (D19)",
+    "expression": "-m3_x",
+    "favorite": false,
+    "name": "stile_r_x",
     "unit": "mm"
   },
   {
@@ -497,13 +497,6 @@
     "unit": "mm"
   },
   {
-    "comment": "MEASURE Speaker: woofer center below the speaker top (default: just under the horn)",
-    "expression": "spk_tw_down + spk_horn/2 + 10 mm + spk_wf_d/2",
-    "favorite": false,
-    "name": "spk_wf_down",
-    "unit": "mm"
-  },
-  {
     "comment": "Speaker bottom above desktop surface (bracket slides along the upright slot)",
     "expression": "mon_clearance",
     "favorite": false,
@@ -616,41 +609,6 @@
     "unit": "mm"
   },
   {
-    "comment": "Gusset bracket wall thickness",
-    "expression": "5 mm",
-    "favorite": false,
-    "name": "brk_t",
-    "unit": "mm"
-  },
-  {
-    "comment": "Misumi HBLFSN5 gusset leg (1-slot) for the 2040 crossbar/stile joints; the 4040 side-rail joints use the 2-slot HBLFSD5 (HW-L04). Sketches hold fixed geometry",
-    "expression": "30 mm",
-    "favorite": false,
-    "name": "brk_a",
-    "unit": "mm"
-  },
-  {
-    "comment": "Misumi HBLFSN5 gusset leg, stile joints (same part as brk_a)",
-    "expression": "30 mm",
-    "favorite": false,
-    "name": "brk_a_small",
-    "unit": "mm"
-  },
-  {
-    "comment": "Misumi HPTTD5 / HPTLD5 sheet-metal plate thickness",
-    "expression": "2.3 mm",
-    "favorite": false,
-    "name": "plate_t",
-    "unit": "mm"
-  },
-  {
-    "comment": "Plate arm past the upright along the horizontal member (HPTTD5 stem / HPTLD5 arm); sketches hold fixed geometry",
-    "expression": "42 mm",
-    "favorite": false,
-    "name": "plate_arm",
-    "unit": "mm"
-  },
-  {
     "comment": "HPTTD5 T-plate bar reach past the side rail along the upright ((110-38)/2); sets up_below",
     "expression": "36 mm",
     "favorite": false,
@@ -662,13 +620,6 @@
     "expression": "rail_l + plate_ext",
     "favorite": false,
     "name": "up_below",
-    "unit": "mm"
-  },
-  {
-    "comment": "Panel standoff diameter (M5 threaded standoff into a T-nut)",
-    "expression": "10 mm",
-    "favorite": false,
-    "name": "so_d",
     "unit": "mm"
   },
   {
@@ -714,7 +665,7 @@
     "unit": "mm"
   },
   {
-    "comment": "PC strap metal thickness",
+    "comment": "MEASURE PC strap metal thickness",
     "expression": "0.5 in",
     "favorite": false,
     "name": "strap_t",
@@ -728,7 +679,7 @@
     "unit": "mm"
   },
   {
-    "comment": "PC strap left lip rise above case bottom",
+    "comment": "MEASURE PC strap left lip rise above case bottom",
     "expression": "6 in",
     "favorite": false,
     "name": "strap_lip",
@@ -756,7 +707,7 @@
     "unit": "mm"
   },
   {
-    "comment": "Walnut slat depth (Y)",
+    "comment": "MEASURE Walnut slat depth (Y)",
     "expression": "8 mm",
     "favorite": false,
     "name": "slat_t",
@@ -798,13 +749,6 @@
     "unit": "mm"
   },
   {
-    "comment": "Derived: PC case bottom Z",
-    "expression": "pc_top - pc_h",
-    "favorite": false,
-    "name": "pc_bot",
-    "unit": "mm"
-  },
-  {
     "comment": "Mouse pad, square side",
     "expression": "16.5 in",
     "favorite": false,
@@ -812,7 +756,7 @@
     "unit": "mm"
   },
   {
-    "comment": "Mouse pad thickness",
+    "comment": "MEASURE Mouse pad thickness",
     "expression": "3 mm",
     "favorite": false,
     "name": "pad_t",
@@ -833,24 +777,10 @@
     "unit": "mm"
   },
   {
-    "comment": "ErgoDox EZ half depth Y (ZSA 1:1 outline); placement only",
-    "expression": "176.25 mm",
-    "favorite": false,
-    "name": "kb_d",
-    "unit": "mm"
-  },
-  {
-    "comment": "ErgoDox EZ case height (3 cm total with stock DCS caps)",
+    "comment": "MEASURE ErgoDox EZ case height (3 cm total with stock DCS caps)",
     "expression": "12 mm",
     "favorite": false,
     "name": "kb_case_h",
-    "unit": "mm"
-  },
-  {
-    "comment": "ErgoDox EZ SA R1 keycap above case top (caps modelled flush on the case, no switch housings; MEASURE)",
-    "expression": "16.5 mm",
-    "favorite": false,
-    "name": "kb_key_h",
     "unit": "mm"
   },
   {
@@ -917,7 +847,7 @@
     "unit": "mm"
   },
   {
-    "comment": "TopSupport: web lip height left at the tapered flange tips (from foot-kit photo)",
+    "comment": "MEASURE TopSupport: web lip height left at the tapered flange tips (estimated from a foot-kit photo)",
     "expression": "5 mm",
     "favorite": false,
     "name": "ts_lip",
@@ -945,38 +875,10 @@
     "unit": "mm"
   },
   {
-    "comment": "Leg screw M6 button head diameter (ISO 7380)",
-    "expression": "10.5 mm",
-    "favorite": false,
-    "name": "ts_bolt_head_d",
-    "unit": "mm"
-  },
-  {
-    "comment": "Leg screw M6 button head height (ISO 7380)",
-    "expression": "3.3 mm",
-    "favorite": false,
-    "name": "ts_bolt_head_k",
-    "unit": "mm"
-  },
-  {
     "comment": "Side rail / top support clearance hole for M6",
     "expression": "6.6 mm",
     "favorite": false,
     "name": "sr_clear_d",
-    "unit": "mm"
-  },
-  {
-    "comment": "M6 socket head cap screw head diameter (ISO 4762)",
-    "expression": "10 mm",
-    "favorite": false,
-    "name": "sb_head_d",
-    "unit": "mm"
-  },
-  {
-    "comment": "M6 socket head cap screw head height (ISO 4762)",
-    "expression": "6 mm",
-    "favorite": false,
-    "name": "sb_head_k",
     "unit": "mm"
   },
   {
@@ -1106,17 +1008,24 @@
     "unit": "mm"
   },
   {
-    "comment": "Derived: laptop mount clamp seat = lower crossbar top face (world Z)",
+    "comment": "Derived: laptop mount origin Z (world) = right stile bottom end = lower crossbar top face; the arm base plate bolts to the stile front slot above it (D19)",
     "expression": "desk_h + bar1_z + rail_l/2",
     "favorite": false,
-    "name": "lap_clamp_z",
+    "name": "lap_mount_z",
     "unit": "mm"
   },
   {
-    "comment": "Derived: lower crossbar centre to tray pivot (Y, toward you)",
-    "expression": "stile_y - lap_y",
+    "comment": "Derived: right stile front face to the tray pivot (Y, toward you)",
+    "expression": "stile_front - lap_y",
     "favorite": false,
     "name": "lap_reach",
+    "unit": "mm"
+  },
+  {
+    "comment": "Derived: right stile centre to the tray pivot (X; negative = pivot left of the stile)",
+    "expression": "lap_x - stile_r_x",
+    "favorite": false,
+    "name": "lap_arm_dx",
     "unit": "mm"
   }
 ]

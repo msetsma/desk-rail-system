@@ -8,7 +8,7 @@
 
 Parametric CAD model of a sit-stand desk: a DeskHaus Apex Pro 4-leg frame (Jiecang OEM), the
 desktop, and a Misumi HFS5 aluminium extrusion rail system that carries two monitors, Klipsch R-40M
-speakers, a hanging PC and a modesty panel.
+speakers, a hanging PC, a laptop mount and a modesty panel.
 
 ![Isometric view of the desk rail system](docs/images/desk_iso.png)
 
@@ -66,8 +66,10 @@ Change a size:
    export it there with `parameters.export`).
 2. Run `python tools/regen_parts.py`. It rebuilds every part whose size depends on the skeleton.
    Add a prefix (`python tools/regen_parts.py FRM-03`) to rebuild only some.
-3. In the assembly, run `component.update_links {}` (or reopen it). The parts refresh and the
-   joints move them to their new places.
+3. In the assembly, refresh only the changed links: `component.update_links {"component": "<name>"}`
+   for each part `regen_parts.py` lists (the bare `update_links {}` re-evaluates every link, ~40 s).
+   If more than about 3 parts changed (a skeleton change usually touches ~25), rebuild the assembly
+   instead (below), then `new_design` + `open` it.
 
 Rebuild the whole assembly from scratch:
 
@@ -104,12 +106,14 @@ graph TD
   root --> SPK[SPK-00 Speakers]
   root --> PC[PC-00 PC under-desk]
   root --> INP[INP-00 Input devices]
+  root --> LAP[LAP-00 Laptop]
+  root --> CHR[CHR-00 Chair]
   root --> REF[REF-00 Skeleton]
 ```
 
 | Group | Part file (`parts/`) | Count | What | Finish |
 |---|---|---|---|---|
-| `DSK-00` Desk frame | `DSK-01_Desktop` | 1 | desktop slab | butcher block |
+| `DSK-00` Desk frame | `DSK-01_Desktop` | 1 | desktop, IKEA KARLBY | walnut veneer |
 | | `DSK-02_TopSupport` | 2 | Apex Pro top support, an L-angle the desktop screws to | DeskHaus Silver |
 | | `DSK-03_ChannelBar` | 4 | slim bars running left-right; the legs sit between them | DeskHaus Silver |
 | | `DSK-04_Leg` | 4 | lifting column (envelope) | DeskHaus Silver |
@@ -117,11 +121,12 @@ graph TD
 | `FRM-00` Monitor rail frame | `FRM-01_Upright_4040` | 2 | rear posts | aluminium |
 | | `FRM-02_Crossbar_2040` | 2 | lower and upper monitor bars | aluminium |
 | | `FRM-03L_SideRail_L_4040`, `FRM-03R_SideRail_R_4040` | 1 + 1 | side rails, drilled for 8 through-bolts each (D9, D15) | aluminium |
-| | `FRM-04_Stile_2040` | 2 | vertical bars between the crossbars; the monitors mount to these | aluminium |
-| | `FRM-05_Modesty_panel` | 1 | privacy panel behind the posts, on standoffs | slate |
-| `HW-00` Frame hardware | `lib/HW-L01_HPTTD5` | 2 | Misumi T-joining plate, side rail to upright | zinc |
+| | `FRM-04_Stile_2040` | 3 | vertical bars between the crossbars; the monitors and the laptop arm mount to these | aluminium |
+| | `FRM-05_Modesty_panel` | 1 | privacy panel behind the posts, on standoffs | walnut veneer to match |
+| `HW-00` Frame hardware | `lib/HW-L01_HPTTD5` | 4 | Misumi T-joining plate, side rail to upright, outer and inner faces | zinc |
 | | `lib/HW-L02_HPTLD5` | 4 | Misumi L-joining plate, crossbar ends | zinc |
-| | `lib/HW-L03_HBLFSN5` | 14 | Misumi gusset bracket | cast aluminium |
+| | `lib/HW-L03_HBLFSN5` | 16 | Misumi 1-slot gusset, crossbar and stile joints | cast aluminium |
+| | `lib/HW-L04_HBLFSD5` | 2 | Misumi 2-slot gusset under each side rail (D15) | cast aluminium |
 | | `lib/HW-L10_M6x55_SHCS` | 8 | M6x55 socket-head screw, side rail to top support | black oxide |
 | | `lib/HW-L11_Standoff_M5x12` | 8 | panel standoff | zinc |
 | `MON-00` Monitors | `MON-01_Monitor_Main_32in` | 1 | 32in 16:9 main | near-black |
@@ -136,14 +141,21 @@ graph TD
 | `INP-00` Input devices | `INP-01_MousePad` | 1 | 16.5in mouse pad | black |
 | | `INP-02_DeathAdderV3Pro` | 1 | Razer DeathAdder V3 Pro, real vendor STEP | vendor colors |
 | | `INP-03_ErgoDoxEZ_Left`, `INP-04_ErgoDoxEZ_Right` | 1 + 1 | ErgoDox EZ halves, outline traced from ZSA's 1:1 printout | black |
+| `LAP-00` Laptop | `LAP-01_LaptopMount` | 1 | user-built mount (placeholder) on the right stile's front slot (D19) | black |
+| | `LAP-02_MacBookPro14` | 1 | MacBook Pro 14in, reference model | space black |
+| | `LAP-03_LaptopTray` | 1 | user-built tray (placeholder) | black |
+| `CHR-00` Chair | `CHR-01_HermanMillerMirra2` | 1 | Herman Miller Mirra 2, Butterfly back, from the vendor 3D DWG | studio white, fog, graphite |
 | `REF-00` Skeleton | (no part file) | | `SKL_Eye`: a sketch point at the seated eye position, not a body | red |
 
-That's 29 part numbers and 83 parts in total (see `BOM.md`). The hardware occurrences are named
-`HW-01` to `HW-36` by job (`HW-07 Gusset side rail L`). Side rails and keyboards have L and R files
+That's 34 part numbers (28 part files + 6 library parts) and 86 parts in the main assembly (see
+`BOM.md`). The hardware occurrences are named `HW-01` to `HW-42` by job (`HW-07 Gusset side rail L`). Side rails and keyboards have L and R files
 because they're mirror images; the other pairs reuse one file, turned 180°.
 
-Saved views: Overview, Front, Back, SideRailJoint_R/L, SpeakerMount_R, UnderDesk. Display rows
-(`config.activate`): Full, Frame only, No desktop, Monitors + speakers.
+Saved views: Overview, Front, Back, SideRailJoint_R/L, SpeakerMount_R, UnderDesk, LaptopArm, Rails,
+RailsBack, Desk, DeskRails. Detail views take their targets from the design's own skeleton, so a
+variant frames the same features. Display rows (`config.activate`): Full, Frame only, No desktop,
+Monitors + speakers, Rails only, Desk only, Desk + rails, No chair. Views don't carry a row: pair
+`Rails`/`RailsBack`, `Desk` and `DeskRails` with their row by hand.
 
 Axes: origin = floor under frame center. X = width (+ right), Y = depth (+ toward wall), Z = up.
 
@@ -154,8 +166,8 @@ Set them in `skeleton/params.json`, then follow the [workflow](#workflow). Inche
 
 | Parameter | Default | What it does |
 |---|---|---|
-| `desk_h` ★ | 30 in | desktop top height above the floor (sit or stand) |
-| `desk_w` ★, `desk_d` ★ | 70 in, 30 in | desktop width and depth; the frame width follows `desk_w` |
+| `desk_h` ★ | 26.5 in | desktop top height above the floor (sit or stand) |
+| `desk_w` ★, `desk_d` ★ | 74 in, 26 in | desktop width and depth; the frame width follows `desk_w` |
 | `mon_clearance` ★ | 8 in | gap from the desktop to the bottom of the monitors |
 | `pc_w` ★, `pc_leg_gap` ★ | 215 mm, 2 in | PC case width, and its gap from the left leg |
 | `kb_gap` ★ | 100 mm | gap between the keyboard halves |
@@ -164,60 +176,69 @@ Set them in `skeleton/params.json`, then follow the [workflow](#workflow). Inche
 | `rear_gap` | 10 mm | desktop back edge to the upright front face |
 | `m1_x`, `mon_gap` | 0, 10 mm | main monitor position, gap between monitors |
 | `m1_tilt`, `m3_yaw` | 0°, 15° | tilts both monitors back; turns the side monitor in |
-| `bar1_gap` | 25 mm | lower crossbar top below the monitors |
+| `bar1_gap` | 65 mm | lower crossbar top below the monitors (room for printed accessories, D18) |
 | `spk_bot`, `spk_yaw_max` | `mon_clearance`, 25° | speaker height; toe-in limit (tilt and toe-in aim at the eye point) |
 | `pnl_drop`, `pnl_cover` | 14 in, 15 mm | panel drop below the desk; panel rise above the posts |
-| `eye_above_desk`, `eye_back` | 16 in, 6 in | eye point above the desk and in front of its edge |
+| `eye_above_desk`, `eye_back` | 46 in - `desk_h`, 6 in | eye point above the desk and in front of its edge |
 
 The other parameters are derived, so leave them alone. Each one has a comment in `params.json`.
 
 ## Measure checklist
 
-These parameters are marked `MEASURE` in `params.json`: they're estimates until measured.
-Inches are fine.
+Parameters whose comment in `params.json` says `MEASURE` are estimates until measured. Ticked items
+were measured or confirmed (the comment says how and when). Inches are fine.
 
 <details>
-<summary>Frame, monitors, speakers</summary>
+<summary>Frame, monitors, speakers, PC, inputs, laptop, chair</summary>
 
 **Top supports** (`DSK-02`; `frame_w` is derived from `desk_w`, the channel bars get cut to suit)
-- [ ] `ts_len`, `ts_w`, `ts_h`: length (Y), width (X), height (Z)
-- [ ] `ts_t`: sheet steel thickness
-- [ ] `ts_bolt_pitch`: spacing of the 2 leg screws per column (Y)
-- [ ] `ts_bolt_z`: leg screw center below the frame top (sets the side rail holes, D9)
+- [x] `ts_len`, `ts_w`, `ts_h`: length (Y), width (X), height (Z) (2026-10-29)
+- [x] `ts_t`: sheet steel thickness (photo estimate, confirmed by the user 2026-10-29)
+- [x] `ts_bolt_pitch`: spacing of the 2 leg screws per column (Y) (2026-10-29)
+- [x] `ts_bolt_z`: leg screw center below the frame top (sets the side rail holes, D9) (2026-10-29)
+- [ ] `ts_lip`: web lip height left at the tapered flange tips
 
 **Channel bars** (`DSK-03`)
-- [ ] `ch_h`: height (Z)
-- [ ] `ch_bar_w`: width of one bar (Y)
-- [ ] `ch_bar_gap`: gap between the 2 bars of one channel (now = `leg_y`)
-- [ ] `ch_y_off`: only if the legs aren't centered front to back (else 0)
+- [x] `ch_h`, `ch_bar_w`, `ch_bar_gap`, `ch_y_off` (2026-10-29)
 
 **Legs and feet** (`DSK-04`, `DSK-05`)
-- [ ] `leg_x`, `leg_y`: top stage size (X, Y)
-- [ ] `leg_yc`: frame center to leg center (Y). Easier: measure front leg center to back leg
-  center and halve it.
-- [ ] `foot_w`, `foot_h`: width and height with glides
+- [x] `leg_x`, `leg_y`, `leg_yc`: stage sizes and frame center to leg center (2026-10-29)
+- [x] `foot_w`, `foot_h`: width and height with glides (2026-10-29)
+- [ ] `foot_len`: foot length (Y)
 
 **Side rails** (`FRM-03L/R`)
 - [ ] leg column thread depth: the M6x55 needs 12 mm of free thread (stock M6x14 uses 11)
 
-**Monitors** (`MON-01`, `MON-02`; no stand, a ruler is fine)
-- [ ] `m1_w`, `m1_h`, `m1_t` and `m3_w`, `m3_h`, `m3_t`: width, height, max depth with the rear bulge
+**Monitors** (`MON-01` from the Gigabyte M32U manual; `MON-02` generic until picked)
+- [x] `m1_w`, `m1_h`, `m1_t`: from the manual
+- [ ] `m1_vesa_dz`: VESA centre above the screen centre (manual drawing, +/-0.5 mm)
+- [ ] `m3_w`, `m3_h`, `m3_t`: side monitor width, height, max depth with the rear bulge
 - [ ] `mon_panel_t`: thin edge thickness
-- [ ] `vesa`: VESA hole pattern size
-- [ ] `vesa_adp`: VESA adapter outside size
+- [ ] `vesa_adp`, `mon_standoff`: VESA adapter outside size and thickness (adapter not chosen yet)
 
 **Speakers** (`SPK-01`)
 - [ ] `spk_horn`: horn faceplate size
 - [ ] `spk_wf_d`: woofer outside diameter with trim ring
-- [ ] `spk_tw_down`, `spk_wf_down`: tweeter and woofer centers below the top
+- [ ] `spk_tw_down`: tweeter center below the top
 - [ ] `spk_mount_frac`: swivel height on the back, as a fraction of speaker height
+
+**PC and inputs** (`PC-02`, `PC-03`, `INP-01`, `INP-03/04`)
+- [ ] `slat_t`, `slat_inset`: slat depth and setback from the case front
+- [ ] `strap_t`, `strap_lip`: strap thickness and left lip rise
+- [ ] `pad_t`: mouse pad thickness
+- [ ] `kb_case_h`: ErgoDox EZ case height
+
+**Laptop and chair** (`LAP-01..03`, `CHR-01`)
+- [ ] `lap_hinge_r`: tray hinge barrel radius (user-built jig)
+- [ ] LAP-01 base plate screws: 2 x M5x12 into T-nuts in the right stile's front slot (estimate)
+- [ ] `chr_eye_dy`: seated eye Y from the chair cylinder axis
 
 **Ergonomics**
 - [x] `eye_above_desk`: measured 2026-10-27 (seated eye ~46 in above the floor)
 - [ ] `eye_back`: eyes out from the desktop front edge
 
-Not parameters, but worth noting: weights of the monitors and speakers (for `tools/audit.py`),
-the desk back edge to the wall, and your usual sit and stand heights.
+Not parameters, but worth noting: weights of the monitors, speakers and laptop mount (for
+`tools/audit.py`), the desk back edge to the wall, and your usual sit and stand heights.
 
 </details>
 
@@ -239,8 +260,8 @@ Checked cross-section areas: HFS5 4040 497 mm², 2040 323 mm².
 Each 4040 side rail runs along the outer face of a top support. Its back end butts the upright's
 front face, with the outer faces flush (a T-joint, D1).
 
-- **To the upright** (D2): a Misumi HPTTD5 T-plate on the shared outer face, an HBLFSN5 gusset
-  under the rail, and an end anchor inside the rail (not modelled).
+- **To the upright** (D2): Misumi HPTTD5 T-plates on the flush outer and inner faces, a 2-slot
+  HBLFSD5 gusset under the rail (D15), and an end anchor inside the rail (not modelled).
 - **To the top support** (D9): 4 M6x55 socket-head screws per side, straight through the rail and
   the top support's web into the leg column threads. The rail needs one Ø6.6 hole through both
   walls per screw; the head sits on the outer face.

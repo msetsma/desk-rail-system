@@ -54,6 +54,7 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   changed body against its bbox neighbours and skips hardware-on-extrusion contacts. Open mesh bodies
   (the converted chair) can't be checked exactly; it falls back to their bboxes (`BBOX ... inspect`).
   `--print-params` prints the commands for the live app. `--include-mating` keeps the contacts (slow).
+  Its scratch files are per design, so checks on the main design and a variant can run in parallel.
 - Sightlines + laptop fit: `python tools/sightlines.py [--set lap_az=36 ...]` (seconds). Ray-casts from the Eye to the
   speaker baffles, monitor screens and laptop screen, and box-checks the laptop against monitors, speakers and the frame.
   A coarse grid search can miss a small block: re-run the chosen point at the default resolution.
@@ -145,6 +146,8 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
 - Line endings: `.gitattributes` stores all text as LF; Windows generators may write CRLF and git
   normalises on add, so don't hand-preserve line endings. Working copies can still be CRLF (e.g.
   `FRM-gen.py`): edit scripts that match multi-line text must convert the pattern to the file's line ending.
+- SPK-01's logo outlines live in `refs/klipsch_r40m/R40M_logo_sketch.json` (a JSON in `parts/src` would be taken for
+  a part script). `regen_parts.py` doesn't track that file: after editing it, run `regen_parts.py --force SPK-01`.
 - `inspect.clearance` can report `0.000 mm` for a real 0.1 mm gap (seen on the laptop clamp vs the 2040 bar).
   Treat sub-0.2 mm "near" values as contact-level, not as a measurement.
 - MCP `parameters.export` returns the full text even when given a `path`. `component.list` on the full

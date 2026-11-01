@@ -137,7 +137,8 @@ def main(argv: Sequence[str]) -> int:
     if not commands:
         log.info("no neighbours within %.1f mm", args.margin)
         return 0
-    script, out = BUILD / "near_check_cmd.json", BUILD / "near_check.json"
+    # per-design scratch files, so checks on the main design and a variant can run in parallel
+    script, out = BUILD / f"{args.design.stem}_near_cmd.json", BUILD / f"{args.design.stem}_near.json"
     script.write_text(json.dumps({"commands": commands}), encoding="utf-8")
     _cli(["run", str(script), "--in", str(args.design), "--results", "--json-out", str(out), "--quiet"], args.threads)
     return _report(out, boxes)

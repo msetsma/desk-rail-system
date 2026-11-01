@@ -82,7 +82,7 @@
    "params": {
     "name": "lmnt_w",
     "expression": "40 mm",
-    "comment": "MEASURE clamp and riser width (X)"
+    "comment": "MEASURE base plate and riser width (X), = stile width"
    }
   },
   {
@@ -90,7 +90,31 @@
    "params": {
     "name": "lmnt_t",
     "expression": "6 mm",
-    "comment": "MEASURE clamp plate thickness"
+    "comment": "MEASURE base plate thickness (Y)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lmnt_plate_bot",
+    "expression": "5 mm",
+    "comment": "MEASURE base plate bottom above the stile bottom end (local Z)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lmnt_plate_h",
+    "expression": "80 mm",
+    "comment": "MEASURE base plate height (Z)"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lmnt_riser_d",
+    "expression": "20 mm",
+    "comment": "MEASURE riser depth (Y), in front of the base plate"
    }
   },
   {
@@ -98,7 +122,7 @@
    "params": {
     "name": "lmnt_arm_w",
     "expression": "30 mm",
-    "comment": "MEASURE arm width (X)"
+    "comment": "MEASURE arm width"
    }
   },
   {
@@ -130,7 +154,7 @@
    "params": {
     "name": "lmnt_tray_bot",
     "expression": "lap_tray_z + lap_yoke_bot - bar1_z - rail_l/2",
-    "comment": "Puck top = LAP-03 hinge stem bottom, above the bar top (local Z)"
+    "comment": "Puck top = LAP-03 hinge stem bottom (local Z)"
    }
   },
   {
@@ -138,67 +162,39 @@
    "params": {
     "name": "lmnt_arm_z",
     "expression": "lmnt_tray_bot - lmnt_puck_h - lmnt_arm_t",
-    "comment": "Arm underside above the bar top (local Z)"
+    "comment": "Arm underside (local Z)"
    }
   },
   {
    "command": "parameters.add",
    "params": {
     "name": "lmnt_front",
-    "expression": "rail_s/2 + 0.1 mm + lmnt_t",
-    "comment": "Clamp spine front face, in front of the bar centre line"
+    "expression": "0.1 mm + lmnt_t",
+    "comment": "Base plate front face, in front of the stile front plane"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lmnt_plate_top",
+    "expression": "lmnt_plate_bot + lmnt_plate_h",
+    "comment": "Base plate top (local Z)"
    }
   },
   {
    "command": "solid.box",
    "params": {
-    "name": "LMNT_TopPlate",
+    "name": "LMNT_BasePlate",
     "corner": [
      "-lmnt_w/2",
      "-lmnt_front",
-     "0.1 mm"
-    ],
-    "length": "lmnt_w",
-    "width": "lmnt_front + rail_s/2",
-    "height": "lmnt_t",
-    "body_name": "LaptopMount_Arm",
-    "operation": "new"
-   }
-  },
-  {
-   "command": "solid.box",
-   "params": {
-    "name": "LMNT_Spine",
-    "corner": [
-     "-lmnt_w/2",
-     "-lmnt_front",
-     "-rail_l - 0.1 mm - lmnt_t"
+     "lmnt_plate_bot"
     ],
     "length": "lmnt_w",
     "width": "lmnt_t",
-    "height": "rail_l + 0.2 mm + 2*lmnt_t",
-    "operation": "join",
-    "targets": [
-     "LaptopMount_Arm"
-    ]
-   }
-  },
-  {
-   "command": "solid.box",
-   "params": {
-    "name": "LMNT_Jaw",
-    "corner": [
-     "-lmnt_w/2",
-     "-lmnt_front",
-     "-rail_l - 0.1 mm - lmnt_t"
-    ],
-    "length": "lmnt_w",
-    "width": "lmnt_front + rail_s/2",
-    "height": "lmnt_t",
-    "operation": "join",
-    "targets": [
-     "LaptopMount_Arm"
-    ]
+    "height": "lmnt_plate_h",
+    "body_name": "LaptopMount_Arm",
+    "operation": "new"
    }
   },
   {
@@ -207,12 +203,12 @@
     "name": "LMNT_Riser",
     "corner": [
      "-lmnt_w/2",
-     "-lmnt_front - lmnt_w + 0.1 mm",
-     "min(0.1 mm, lmnt_arm_z)"
+     "-lmnt_front - lmnt_riser_d",
+     "min(lmnt_arm_z + 0.1 mm, lmnt_plate_bot)"
     ],
     "length": "lmnt_w",
-    "width": "lmnt_w",
-    "height": "max(lmnt_arm_z + lmnt_arm_t, lmnt_t + 0.1 mm) - min(0.1 mm, lmnt_arm_z)",
+    "width": "lmnt_riser_d + 0.1 mm",
+    "height": "lmnt_plate_top - 0.1 mm - min(lmnt_arm_z + 0.1 mm, lmnt_plate_bot)",
     "operation": "join",
     "targets": [
      "LaptopMount_Arm"
@@ -222,14 +218,32 @@
   {
    "command": "solid.box",
    "params": {
-    "name": "LMNT_Arm",
+    "name": "LMNT_ArmY",
     "corner": [
      "-lmnt_arm_w/2",
-     "-lap_reach - lmnt_puck_d/2",
+     "-lap_reach",
      "lmnt_arm_z"
     ],
     "length": "lmnt_arm_w",
-    "width": "lap_reach + lmnt_puck_d/2 - lmnt_front - lmnt_w/2",
+    "width": "lap_reach + -lmnt_front - lmnt_riser_d + 0.1 mm",
+    "height": "lmnt_arm_t",
+    "operation": "join",
+    "targets": [
+     "LaptopMount_Arm"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "LMNT_ArmX",
+    "corner": [
+     "min(0 mm, lap_arm_dx) - lmnt_arm_w/2",
+     "-lap_reach - lmnt_arm_w/2",
+     "lmnt_arm_z"
+    ],
+    "length": "abs(lap_arm_dx) + lmnt_arm_w",
+    "width": "lmnt_arm_w",
     "height": "lmnt_arm_t",
     "operation": "join",
     "targets": [
@@ -242,7 +256,7 @@
    "params": {
     "name": "LMNT_Puck",
     "corner": [
-     "-lmnt_puck_d/2",
+     "lap_arm_dx - lmnt_puck_d/2",
      "-lap_reach - lmnt_puck_d/2",
      "lmnt_arm_z + lmnt_arm_t - 0.1 mm"
     ],
@@ -278,7 +292,7 @@
    "params": {
     "values": {
      "part_number": "LAP-01",
-     "description": "User-built laptop mount (placeholder envelope): C-clamp on the lower 2040 crossbar, riser, straight arm toward the user, pivot puck under the LAP-03 tray centre. Origin: crossbar top face, clamp centre X, bar centre line Y; +Y toward the wall, Z up",
+     "description": "User-built laptop mount (placeholder envelope): base plate T-nut-bolted to the right 2040 stile's front slot, riser in front of the lower crossbar, L arm toward the user, pivot puck under the LAP-03 tray centre. Origin: stile front face plane, stile centre X, stile bottom end (crossbar top); +Y toward the wall, Z up",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

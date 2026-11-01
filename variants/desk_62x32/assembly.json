@@ -226,7 +226,7 @@
    "params": {
     "component": "LAP-00 Laptop",
     "part_number": "LAP-00",
-    "description": "User-built laptop mount and tray on the lower crossbar, MacBook Pro 14in",
+    "description": "User-built laptop mount and tray on the right stile, MacBook Pro 14in",
     "revision": "A"
    }
   },
@@ -491,6 +491,15 @@
   {
    "command": "component.insert_design",
    "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-04_Stile_2040.solidcraft",
+    "name": "FRM-04 Stile 2040",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
     "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-05_Modesty_panel.solidcraft",
     "name": "FRM-05 Modesty panel",
     "parent": "FRM-00 Monitor rail frame",
@@ -500,7 +509,7 @@
   {
    "command": "component.insert_design",
    "params": {
-    "path": "C:/Users/2015m/DEV/CAD/desk/parts/MON-01_Monitor_Main_32in.solidcraft",
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/MON-01_Monitor_Main_32in.solidcraft",
     "name": "MON-01 Monitor Main 32in",
     "parent": "MON-00 Monitors",
     "reuse": false
@@ -952,6 +961,42 @@
    "params": {
     "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L01_HPTTD5.solidcraft",
     "name": "HW-L01 HPTTD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L03_HBLFSN5.solidcraft",
+    "name": "HW-L03 HBLFSN5",
     "parent": "HW-00 Frame hardware",
     "reuse": true
    }
@@ -2068,6 +2113,57 @@
    "params": {
     "type": "planar",
     "flip": true,
+    "name": "J_Stile_Right",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-04 Stile 2040:3",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "stile_r_x",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
     "name": "J_ModestyPanel",
     "a": {
      "occurrence": 0,
@@ -2616,11 +2712,11 @@
      ]
     },
     "values": [
-     "lap_x",
-     "stile_y",
+     "stile_r_x",
+     "stile_front",
      "0 deg"
     ],
-    "offset": "lap_clamp_z",
+    "offset": "lap_mount_z",
     "angle": "0 deg"
    }
   },
@@ -4712,6 +4808,210 @@
      "0 deg"
     ],
     "offset": "frame_top - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-39 Gusset right stile low L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:13",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "stile_r_x - rail_l/2",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-40 Gusset right stile low R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:14",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "stile_r_x + rail_l/2",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-41 Gusset right stile high L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:15",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "stile_r_x - rail_l/2",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar2_z - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-42 Gusset right stile high R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L03 HBLFSN5:16",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "stile_r_x + rail_l/2",
+     "stile_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar2_z - rail_l/2",
     "angle": "0 deg"
    }
   },

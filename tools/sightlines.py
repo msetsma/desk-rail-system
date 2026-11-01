@@ -194,6 +194,11 @@ def frame(v: Mapping[str, float]) -> list[Shape]:
               (v["stile_front"], v["stile_front"] + v["rail_l"]), up_z),
         boxed("Stile_Main", v["m1_x"], 0.0, 0.0, (-v["rail_l"] / 2, v["rail_l"] / 2), bar_y,
               (v["bar1_z"] - v["rail_l"] / 2, v["bar2_z"] + v["rail_l"] / 2)),
+        boxed("Stile_Side", v["m3_x"], 0.0, 0.0, (-v["rail_l"] / 2, v["rail_l"] / 2), bar_y,
+              (v["bar1_z"] + v["rail_l"] / 2, v["bar2_z"] - v["rail_l"] / 2)),
+        # right stile (LAP-01 arm bolts to its front slot): between the crossbars, mirror of the side stile
+        boxed("Stile_Right", v.get("stile_r_x", -v["m3_x"]), 0.0, 0.0, (-v["rail_l"] / 2, v["rail_l"] / 2), bar_y,
+              (v["bar1_z"] + v["rail_l"] / 2, v["bar2_z"] - v["rail_l"] / 2)),
         boxed("VESA_Main", v["m1_x"], 0.0, 0.0, (-v["vesa_adp"] / 2, v["vesa_adp"] / 2),
               (v["mon_front"] + v["m1_t"], v["stile_front"]),
               (v["mon_clearance"] + v["m1_h"] / 2 - v["vesa_adp"] / 2, v["mon_clearance"] + v["m1_h"] / 2 + v["vesa_adp"] / 2)),
