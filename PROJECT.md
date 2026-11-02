@@ -54,6 +54,8 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   changed body against its bbox neighbours and skips hardware-on-extrusion contacts. Open mesh bodies
   (the converted chair) can't be checked exactly; it falls back to their bboxes (`BBOX ... inspect`).
   `--print-params` prints the commands for the live app. `--include-mating` keeps the contacts (slow).
+  New catalog hardware that seats face-to-face on an extrusion (end caps, brackets) must be added to
+  `near_check.MATING`, or its exact contact check runs for minutes.
   Its scratch files are per design, so checks on the main design and a variant can run in parallel.
 - Sightlines + laptop fit: `python tools/sightlines.py [--set lap_az=36 ...]` (seconds). Ray-casts from the Eye to the
   speaker baffles, monitor screens and laptop screen, and box-checks the laptop against monitors, speakers and the frame.
@@ -155,6 +157,9 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
 - Eval names a body in a repeated placement with its occurrence path:
   `Leg (DSK-00 Desk frame:1/DSK-04 Leg:3)`.
 - `solidcraft-cli eval <script> --in X` ignores the script; use `run --in X --save tmp`, then `eval`.
+- An `XZ` sketch's v axis is world **-Z** (normal +Y): generators negate z (`FRM-gen._pt`). Expression points also work in
+  `sketch.arc.three_point`; drawing arcs through their 45 deg point avoids CW/CCW sign slips. There's no `parameters.set`
+  in scripts: inline the expressions.
 - `sketch.rectangle.*` rejects expressions; use `sketch.line` with expression points. `sketch.create`
   takes a numeric origin only, and `{face, body}` needs `index`.
 - Mesh imports (`file.insert_mesh`: STL/OBJ/glTF) stay mesh bodies: no STEP export, and `insert_design` refuses a
