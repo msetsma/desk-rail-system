@@ -66,7 +66,7 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 | FRM-04 | Stile 2040 | 3 | Stile_Main/Side/Right_HFS5 |
 | FRM-05 | Modesty panel | 1 | ModestyPanel |
 | FRM-06 | Knee brace 2040, 45 deg mitred (D20) | 2 | Brace_L/R (new, no legacy body) |
-| FRM-07L | Hanger plate left, 5 x 80 x 530 steel, 13 M5 csk (D21; mirror of FRM-07R, so its own file) | 1 | HangerPlate_L |
+| FRM-07L | Hanger plate left, 5 x 80 x 530 steel, 14 M5 csk + 3 desktop-screw slots (D21; mirror of FRM-07R, so its own file) | 1 | HangerPlate_L |
 | FRM-07R | Hanger plate right (D21) | 1 | HangerPlate_R |
 | MON-01 | Main monitor 32in | 1 | Monitor_Main + Monitor_Main_Back (one body) |
 | MON-02 | Side monitor 27in (generic, not picked yet) | 1 | Monitor_Side + Monitor_Side_Back (one body) |

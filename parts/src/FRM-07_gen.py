@@ -2,7 +2,7 @@
 
 A hang_t x hang_w x hang_len steel flat bar on each top-support flange, under the desktop, overhanging the
 4040 side rail. The rail hangs from it by M5 countersunk screws into drop-in T-nuts in both top slots, and
-3 M5 countersunk screws + nylocs tie it to the flange. All 13 holes are the same M5 countersunk through hole,
+4 M5 countersunk screws + nylocs tie it to the flange. All 14 holes are the same M5 countersunk through hole,
 so one sketch of points + one solid.hole feature (AGENTS §3: no feature per instance).
 
 Hole stations (Y, from the top-support centre) are checked here against the evaluated skeleton
@@ -34,8 +34,9 @@ COLOR = "#c4c9d0"  # zinc plates (PROJECT.md appearance)
 # T-nut screw pairs (one per top slot) along the rail, 3 of 5 in the rear half where the hanging load is
 # (side-rail-recommended-changes, Change 1). Expressions so they follow the skeleton.
 TNUT_Y: tuple[str, ...] = ("-200 mm", "-20 mm", "130 mm", "195 mm", "255 mm")
-# Flange screws: 0 and +/-hang_scr_y. Symmetric, so the shared DSK-02 file (L = yaw 180) drills the same holes.
-FLANGE_Y: tuple[str, ...] = ("-hang_scr_y", "0 mm", "hang_scr_y")
+# Flange screws: +/-hang_scr_y2 and +/-hang_scr_y, clear of the stock desktop-screw slots at 0 and +/-ts_ds_y.
+# Symmetric, so the shared DSK-02 file (L = yaw 180) drills the same holes.
+FLANGE_Y: tuple[str, ...] = ("-hang_scr_y", "-hang_scr_y2", "hang_scr_y2", "hang_scr_y")
 TNUT_X = ("rail_l/4", "3*rail_l/4")          # HFS5-4040 top-slot centres, 10 and 30 mm in from the outer face
 FLANGE_X = "-(ts_t + (ts_w - ts_t)/2)"       # mid-flange, inboard of the web outer face
 CS_DIAMETER = 11.4                            # ISO 10642 M5 head dk max 11.2 + 0.2 seat clearance
@@ -73,6 +74,13 @@ def check_stations(v: Mapping[str, float]) -> None:
         y = abs(_y(e, v))
         if blocked[0] - NUT_R < y < blocked[1] + NUT_R:
             raise StationError(f"flange nut at |y|={y:.1f} hits a channel bar / leg housing ({blocked[0]:.1f}..{blocked[1]:.1f})")
+    # Flange-screw nuts vs the desktop wood-screw heads under the flange slots (offset in X by only ~6 mm, so
+    # treat it as a Y clearance).
+    for e in FLANGE_Y:
+        y = _y(e, v)
+        for sy in (-v["ts_ds_y"], 0.0, v["ts_ds_y"]):
+            if abs(y - sy) < v["ts_ds_l"] / 2 + v["ds_head_r"] + NUT_R:
+                raise StationError(f"flange screw at y={y:.1f} hits the desktop screw in the slot at y={sy:.1f}")
     flange_x = -(v["ts_t"] + (v["ts_w"] - v["ts_t"]) / 2)
     if v["rail_l"] - v["hang_w"] > flange_x - edge:
         raise StationError("hang_w doesn't reach far enough inboard past the flange screw line")
@@ -87,6 +95,20 @@ def c(cmd: str, **params: object) -> dict:
 def _points(sign: str) -> list[dict]:
     pts = [[f"{sign}({x})", y] for y in TNUT_Y for x in TNUT_X] + [[f"{sign}({FLANGE_X})", y] for y in FLANGE_Y]
     return [c("sketch.point", point=p) for p in pts]
+
+
+def _desk_slots(side: str, v: Mapping[str, float]) -> list[dict]:
+    """Clearance slots over the stock desktop-screw slots (numbers only: computed from the skeleton, AGENTS §3)."""
+    x = -v["ts_ds_x"] if side == "R" else v["ts_ds_x"]
+    w, ln = v["ts_ds_w"] + v["hang_ds_clr"], v["ts_ds_l"] + v["hang_ds_clr"]
+    half = (ln - w) / 2
+    return [c("sketch.create", plane="XY", offset="hang_t + 0.1 mm", name="Sketch_HangerDeskSlots"),
+            *[c("sketch.slot.center_to_center", p0=[x, y - half], p1=[x, y + half], width=w)
+              for y in (-v["ts_ds_y"], 0.0, v["ts_ds_y"])],
+            c("sketch.finish"),
+            c("solid.extrude", sketch="Sketch_HangerDeskSlots", distance="hang_t + 0.2 mm", direction="negative",
+              operation="cut", targets=[f"HangerPlate_{side}"], name="Cut_HangerDeskSlots"),
+            c("browser.visibility", visible=False, items=["Sketch_HangerDeskSlots"])]
 
 
 def plate(side: str) -> list[dict]:
@@ -110,8 +132,9 @@ def finish(side: str) -> list[dict]:
     outer = "+X" if side == "R" else "-X"
     desc = (f"Hanger plate {side} (D21): steel flat bar hang_t x hang_w x hang_len, zinc plated, on the top-support "
             f"flange under the desktop, flush with the side rail's outer ({outer}) face, rear end flush with the "
-            "flange's rear end. 13 x M5 countersunk (ISO 10642) through holes: 5 pairs over the rail's top slots "
-            "(T-nuts) and 3 on the mid-flange line (flange screws + nylocs). Origin: top-support outer web face / "
+            "flange's rear end. 14 x M5 countersunk (ISO 10642) through holes: 5 pairs over the rail's top slots "
+            "(T-nuts) and 4 on the mid-flange line (flange screws + nylocs); 3 desktop-screw clearance slots over the "
+            "flange's stock slots. Origin: top-support outer web face / "
             "top edge at Y = 0, +Y toward wall, +Z up")
     return [
         c("material.assign", bodies=[body], material=MATERIAL),
@@ -126,7 +149,7 @@ def finish(side: str) -> list[dict]:
 
 
 def build(side: str) -> list[dict]:
-    return [*TEMPLATE, SKEL, *plate(side), *finish(side)]
+    return [*TEMPLATE, SKEL, *plate(side), *_desk_slots(side, skeleton_values.values()), *finish(side)]
 
 
 def main(sides: Sequence[str] = ("L", "R")) -> None:

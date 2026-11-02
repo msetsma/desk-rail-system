@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools"))
 import skeleton_values  # noqa: E402
 
-__all__ = ["build", "main"]
+__all__ = ["build", "desk_slots", "main"]
 
 TEMPLATE = json.loads((ROOT / "parts/_template.json").read_text(encoding="utf-8"))["commands"]
 SKEL = {"command": "parameters.import", "params": {"path": f"{ROOT.as_posix()}/skeleton/params.json"}}
@@ -53,20 +53,38 @@ def holes() -> list[dict]:
           dir1=[0, 1, 0], count1=2, spacing1="ts_bolt_pitch"),
         c("solid.mirror", name="TS_Holes_Mirror", features=["TS_Hole_LegScrew", "TS_Hole_LegScrew_Pattern"],
           plane={"origin": ["0 mm", "ch_y_off", "0 mm"], "normal": [0, 1, 0]}),
-        # D21: 3 x M5 clearance (user drilled) for the hanger-plate flange screws, mid-flange at Y = 0, +/-hang_scr_y.
-        # Symmetric about Y = 0, so the L occurrence (yaw 180) gets the same holes.
-        c("solid.cylinder", name="TS_Hole_HangerScrew", axis="Z", operation="cut", targets=[BODY],
-          radius="5.5 mm/2", height="ts_t + 0.2 mm",
-          base=["-(ts_t + (ts_w - ts_t)/2)", "-hang_scr_y", "-ts_t - 0.1 mm"]),
-        c("solid.pattern.rectangular", name="TS_Hole_HangerScrew_Pattern", features=["TS_Hole_HangerScrew"],
-          dir1=[0, 1, 0], count1=3, spacing1="hang_scr_y"),
+        # D21: 4 x M5 clearance (user drilled) for the hanger-plate flange screws, mid-flange at Y = +/-hang_scr_y2,
+        # +/-hang_scr_y. Symmetric about Y = 0, so the L occurrence (yaw 180) gets the same holes.
+        *[c("solid.cylinder", name=f"TS_Hole_HangerScrew{i}", axis="Z", operation="cut", targets=[BODY],
+            radius="5.5 mm/2", height="ts_t + 0.2 mm",
+            base=["-(ts_t + (ts_w - ts_t)/2)", y, "-ts_t - 0.1 mm"])
+          for i, y in ((1, "hang_scr_y"), (2, "hang_scr_y2"))],
+        c("solid.mirror", name="TS_HangerScrew_Mirror", features=["TS_Hole_HangerScrew1", "TS_Hole_HangerScrew2"],
+          plane={"origin": ["0 mm", "0 mm", "0 mm"], "normal": [0, 1, 0]}),
+    ]
+
+
+def desk_slots(v: dict[str, float]) -> list[dict]:
+    """Stock desktop-screw slots (3 per flange, long axis along Y), measured 2026-11-01. Slot points take
+    numbers only, so they're computed from the evaluated skeleton (AGENTS §3)."""
+    half = (v["ts_ds_l"] - v["ts_ds_w"]) / 2
+    slots = [c("sketch.slot.center_to_center", p0=[-v["ts_ds_x"], y - half], p1=[-v["ts_ds_x"], y + half],
+               width=v["ts_ds_w"]) for y in (-v["ts_ds_y"], 0.0, v["ts_ds_y"])]
+    return [
+        c("sketch.create", plane="XY", offset="0.1 mm", name="Sketch_TS_DeskSlots"),
+        *slots,
+        c("sketch.finish"),
+        c("solid.extrude", sketch="Sketch_TS_DeskSlots", distance="ts_t + 0.2 mm", direction="negative",
+          operation="cut", targets=[BODY], name="Cut_TS_DeskSlots"),
+        c("browser.visibility", visible=False, items=["Sketch_TS_DeskSlots"]),
     ]
 
 
 def finish() -> list[dict]:
     desc = ("Apex Pro (Jiecang OEM) top support: bent steel angle, outer web + inward top flange, web ends tapered "
-            "to a ts_lip lip, 4 x sr_clear_d M6 holes in the web (D9: leg screws, 2 per leg column), 3 x 5.5 mm holes "
-            "mid-flange at Y = 0, +/-hang_scr_y (D21: hanger-plate screws, user drilled). Origin: outer "
+            "to a ts_lip lip, 4 x sr_clear_d M6 holes in the web (D9: leg screws, 2 per leg column), 4 x 5.5 mm holes "
+            "mid-flange at Y = +/-hang_scr_y2, +/-hang_scr_y (D21: hanger-plate screws, user drilled), 3 stock "
+            "ts_ds_w x ts_ds_l desktop-screw slots in the flange (Y = 0, +/-ts_ds_y). Origin: outer "
             "web face / flange top edge, mid-length; +X outward (away from desk centre), flange toward -X, +Y "
             "toward wall, body below Z=0. Serves L and R (L = yaw 180); hole pattern centred on ch_y_off, so this "
             "needs ch_y_off = 0.")
@@ -83,7 +101,8 @@ def finish() -> list[dict]:
 
 
 def build() -> list[dict]:
-    return [*TEMPLATE, SKEL, *angle(skeleton_values.values()), *holes(), *finish()]
+    v = skeleton_values.values()
+    return [*TEMPLATE, SKEL, *angle(v), *holes(), *desk_slots(v), *finish()]
 
 
 def main() -> None:

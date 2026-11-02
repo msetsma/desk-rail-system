@@ -190,7 +190,7 @@
   {
    "command": "solid.cylinder",
    "params": {
-    "name": "TS_Hole_HangerScrew",
+    "name": "TS_Hole_HangerScrew1",
     "axis": "Z",
     "operation": "cut",
     "targets": [
@@ -200,25 +200,125 @@
     "height": "ts_t + 0.2 mm",
     "base": [
      "-(ts_t + (ts_w - ts_t)/2)",
-     "-hang_scr_y",
+     "hang_scr_y",
      "-ts_t - 0.1 mm"
     ]
    }
   },
   {
-   "command": "solid.pattern.rectangular",
+   "command": "solid.cylinder",
    "params": {
-    "name": "TS_Hole_HangerScrew_Pattern",
+    "name": "TS_Hole_HangerScrew2",
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "TopSupport_JC"
+    ],
+    "radius": "5.5 mm/2",
+    "height": "ts_t + 0.2 mm",
+    "base": [
+     "-(ts_t + (ts_w - ts_t)/2)",
+     "hang_scr_y2",
+     "-ts_t - 0.1 mm"
+    ]
+   }
+  },
+  {
+   "command": "solid.mirror",
+   "params": {
+    "name": "TS_HangerScrew_Mirror",
     "features": [
-     "TS_Hole_HangerScrew"
+     "TS_Hole_HangerScrew1",
+     "TS_Hole_HangerScrew2"
     ],
-    "dir1": [
-     0,
-     1,
-     0
+    "plane": {
+     "origin": [
+      "0 mm",
+      "0 mm",
+      "0 mm"
+     ],
+     "normal": [
+      0,
+      1,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "0.1 mm",
+    "name": "Sketch_TS_DeskSlots"
+   }
+  },
+  {
+   "command": "sketch.slot.center_to_center",
+   "params": {
+    "p0": [
+     -25.83,
+     -229.28749999999997
     ],
-    "count1": 3,
-    "spacing1": "hang_scr_y"
+    "p1": [
+     -25.83,
+     -223.28749999999997
+    ],
+    "width": 6.0
+   }
+  },
+  {
+   "command": "sketch.slot.center_to_center",
+   "params": {
+    "p0": [
+     -25.83,
+     -3.0
+    ],
+    "p1": [
+     -25.83,
+     3.0
+    ],
+    "width": 6.0
+   }
+  },
+  {
+   "command": "sketch.slot.center_to_center",
+   "params": {
+    "p0": [
+     -25.83,
+     223.28749999999997
+    ],
+    "p1": [
+     -25.83,
+     229.28749999999997
+    ],
+    "width": 6.0
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "sketch": "Sketch_TS_DeskSlots",
+    "distance": "ts_t + 0.2 mm",
+    "direction": "negative",
+    "operation": "cut",
+    "targets": [
+     "TopSupport_JC"
+    ],
+    "name": "Cut_TS_DeskSlots"
+   }
+  },
+  {
+   "command": "browser.visibility",
+   "params": {
+    "visible": false,
+    "items": [
+     "Sketch_TS_DeskSlots"
+    ]
    }
   },
   {
@@ -244,7 +344,7 @@
    "params": {
     "values": {
      "part_number": "DSK-02",
-     "description": "Apex Pro (Jiecang OEM) top support: bent steel angle, outer web + inward top flange, web ends tapered to a ts_lip lip, 4 x sr_clear_d M6 holes in the web (D9: leg screws, 2 per leg column), 3 x 5.5 mm holes mid-flange at Y = 0, +/-hang_scr_y (D21: hanger-plate screws, user drilled). Origin: outer web face / flange top edge, mid-length; +X outward (away from desk centre), flange toward -X, +Y toward wall, body below Z=0. Serves L and R (L = yaw 180); hole pattern centred on ch_y_off, so this needs ch_y_off = 0.",
+     "description": "Apex Pro (Jiecang OEM) top support: bent steel angle, outer web + inward top flange, web ends tapered to a ts_lip lip, 4 x sr_clear_d M6 holes in the web (D9: leg screws, 2 per leg column), 4 x 5.5 mm holes mid-flange at Y = +/-hang_scr_y2, +/-hang_scr_y (D21: hanger-plate screws, user drilled), 3 stock ts_ds_w x ts_ds_l desktop-screw slots in the flange (Y = 0, +/-ts_ds_y). Origin: outer web face / flange top edge, mid-length; +X outward (away from desk centre), flange toward -X, +Y toward wall, body below Z=0. Serves L and R (L = yaw 180); hole pattern centred on ch_y_off, so this needs ch_y_off = 0.",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

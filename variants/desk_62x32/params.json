@@ -196,10 +196,73 @@
   "unit": "mm"
  },
  {
-  "comment": "Hanger plate flange screws (M5 csk + nyloc through the top-support flange) at Y = 0 and +/- this; outside the channel bars (end ~212) and clear of the plate ends",
-  "expression": "225 mm",
+  "comment": "Hanger plate outer flange-screw pair (M5 csk + nyloc through the top-support flange) at Y = +/- this: behind the end desktop-screw slots (ts_ds_y) and their screw heads, 6 mm countersink margin to the plate front end",
+  "expression": "250 mm",
   "favorite": false,
   "name": "hang_scr_y",
+  "unit": "mm"
+ },
+ {
+  "comment": "Hanger plate inner flange-screw pair at Y = +/- this: between the centre desktop-screw slot and the front/back inner channel bars (y 76-96)",
+  "expression": "40 mm",
+  "favorite": false,
+  "name": "hang_scr_y2",
+  "unit": "mm"
+ },
+ {
+  "comment": "Top-support flange desktop-screw slot width (X), rounded ends. User measurement 2026-11-01 (method not stated)",
+  "expression": "6 mm",
+  "favorite": false,
+  "name": "ts_ds_w",
+  "unit": "mm"
+ },
+ {
+  "comment": "Desktop-screw slot length, long axis front to back (Y). User measurement 2026-11-01 (method not stated)",
+  "expression": "12 mm",
+  "favorite": false,
+  "name": "ts_ds_l",
+  "unit": "mm"
+ },
+ {
+  "comment": "Flange inner edge to the slot's nearest edge (all 3 slots). User measurement 2026-11-01 (method not stated)",
+  "expression": "8 mm",
+  "favorite": false,
+  "name": "ts_ds_in",
+  "unit": "mm"
+ },
+ {
+  "comment": "Top-support end to the end slot's nearest edge (front and rear); the third slot is at mid-length. User measurement 2026-11-01 (method not stated)",
+  "expression": "36 mm",
+  "favorite": false,
+  "name": "ts_ds_end",
+  "unit": "mm"
+ },
+ {
+  "comment": "Derived: desktop-screw slot centre inboard of the web outer face (X)",
+  "expression": "ts_w - ts_ds_in - ts_ds_w/2",
+  "favorite": false,
+  "name": "ts_ds_x",
+  "unit": "mm"
+ },
+ {
+  "comment": "Derived: end desktop-screw slot centres at Y = +/- this (third slot at Y = 0)",
+  "expression": "ts_len/2 - ts_ds_end - ts_ds_l/2",
+  "favorite": false,
+  "name": "ts_ds_y",
+  "unit": "mm"
+ },
+ {
+  "comment": "MEASURE Desktop wood screw (7/8 in, Apex guide step 3) head radius under the flange; keeps the hanger flange-screw nuts clear of it",
+  "expression": "5 mm",
+  "favorite": false,
+  "name": "ds_head_r",
+  "unit": "mm"
+ },
+ {
+  "comment": "Hanger plate desktop-screw clearance slot: oversize on the flange slot's width and length",
+  "expression": "1 mm",
+  "favorite": false,
+  "name": "hang_ds_clr",
   "unit": "mm"
  },
  {

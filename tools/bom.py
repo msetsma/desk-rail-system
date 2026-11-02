@@ -40,8 +40,8 @@ MACHINING: Mapping[str, str] = {
     "FRM-03R": "rear end tapped M5 (M1, D8)",
     "FRM-04": "both ends tapped M5 for end anchors into the crossbar slots (M1, D7)",
     "FRM-06": "cut to length with both ends mitred 45 deg, long edge = brace_leg*sqrt(2) (D20)",
-    "FRM-07L": "5 x 80 flat bar cut to 530, 13 x M5 countersinks (vendor-machined plate, D21)",
-    "FRM-07R": "5 x 80 flat bar cut to 530, 13 x M5 countersinks (vendor-machined plate, D21)",
+    "FRM-07L": "5 x 80 flat bar cut to 530, 14 x M5 countersinks + 3 slots 7 x 13 (vendor-machined plate, D21)",
+    "FRM-07R": "5 x 80 flat bar cut to 530, 14 x M5 countersinks + 3 slots 7 x 13 (vendor-machined plate, D21)",
 }
 # (bolts into T-nuts, other screws) per piece. Misumi counts from the catalog
 # (refs/misumi_brackets/p2259.pdf); the -SET suffix ships them with each part.
@@ -59,9 +59,9 @@ FASTENERS: Mapping[str, tuple[int, int]] = {
     # in the right stile's front slot.
     "LAP-01": (2, 0),
     # D21 hanger plate: 10 x M5x12 csk (ISO 10642) into drop-in HNTT5-5 T-nuts in the rail top slots,
-    # 3 x M5x16 csk + nyloc through the top-support flange.
-    "FRM-07L": (10, 3),
-    "FRM-07R": (10, 3),
+    # 4 x M5x16 csk + nyloc through the top-support flange.
+    "FRM-07L": (10, 4),
+    "FRM-07R": (10, 4),
 }
 END_ANCHORS: Mapping[str, int] = {"FRM-02": 2, "FRM-04": 2, "FRM-03L": 1, "FRM-03R": 1}
 
