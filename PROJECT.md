@@ -57,6 +57,8 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   New catalog hardware that seats face-to-face on an extrusion (end caps, brackets) must be added to
   `near_check.MATING`, or its exact contact check runs for minutes.
   Its scratch files are per design, so checks on the main design and a variant can run in parallel.
+  It passes `skip_within: component`, so bodies in the same group (ACC-00 devices in their bays) are never checked
+  against each other: run `inspect.clearance` on those pairs without it.
 - Sightlines + laptop fit: `python tools/sightlines.py [--set lap_az=36 ...]` (seconds). Ray-casts from the Eye to the
   speaker baffles, monitor screens and laptop screen, and box-checks the laptop against monitors, speakers and the frame.
   A coarse grid search can miss a small block: re-run the chosen point at the default resolution.
