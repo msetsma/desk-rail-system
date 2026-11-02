@@ -1,0 +1,235 @@
+{
+ "generated_by": "parts/src/ACC-11-17_devices_gen.py",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "FPR_Body",
+    "corner": [
+     -15.0,
+     0,
+     -7.5
+    ],
+    "length": "30.0 mm",
+    "width": "7.0 mm",
+    "height": "15.0 mm",
+    "operation": "new",
+    "body_name": "Finger_Body"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "FPR_SensorRecess",
+    "axis": "Y",
+    "base": [
+     0.0,
+     -0.1,
+     0.0
+    ],
+    "diameter": "9.4 mm",
+    "height": "0.6 mm",
+    "operation": "cut",
+    "targets": [
+     "Finger_Body"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "FPR_Sensor",
+    "axis": "Y",
+    "base": [
+     0.0,
+     0.2,
+     0.0
+    ],
+    "diameter": "9.0 mm",
+    "height": "0.3 mm",
+    "operation": "new",
+    "body_name": "Finger_Sensor"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "FPR_Plug",
+    "corner": [
+     14.9,
+     2.25,
+     -4.15
+    ],
+    "length": "6.6 mm",
+    "width": "2.5 mm",
+    "height": "8.3 mm",
+    "operation": "new",
+    "body_name": "Finger_Plug"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Finger_Body"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Finger_Body"
+    ],
+    "color": "#1e1f21"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Finger_Sensor"
+    ],
+    "material": "PC"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Finger_Sensor"
+    ],
+    "color": "#3a4a55",
+    "pbr": {
+     "metallic": 0.0,
+     "roughness": 0.06,
+     "dielectric_ior": 1.5
+    }
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Finger_Plug"
+    ],
+    "material": "Steel zinc-plated"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Finger_Plug"
+    ],
+    "color": "#c0c0c4",
+    "pbr": {
+     "metallic": 0.85,
+     "roughness": 0.4,
+     "dielectric_ior": 1.5
+    }
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "ACC-15",
+     "description": "USB-C fingerprint reader dongle, 30 x 15 x 7, round sensor d9 on the -Y face, USB-C plug 6.5 out of the +X end. Origin: centre of the mounted visible face (flush with the console face); that face looks -Y, +Z = device top edge as mounted, X right, body at y >= 0.",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "ABS",
+      "ReleaseState": "WIP",
+      "Source": "MEASURE: model unknown; envelope and sensor estimated"
+     }
+    }
+   }
+  }
+ ]
+}

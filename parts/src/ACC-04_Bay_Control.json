@@ -1,0 +1,480 @@
+{
+ "generated_by": "parts/src/ACC-01-06_console_gen.py",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "CTL_Blank",
+    "body_name": "Bay_Control",
+    "operation": "new",
+    "corner": [
+     53.5,
+     -122.0,
+     -124.0
+    ],
+    "length": 99.0,
+    "width": 122.0,
+    "height": 124.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "CTLF_T_Front",
+    "body_name": "CTLF_T_Front",
+    "operation": "new",
+    "corner": [
+     52.5,
+     -300,
+     -400
+    ],
+    "length": 101.0,
+    "width": 300,
+    "height": 500
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "CTLF_TiltTools",
+    "bodies": [
+     "CTLF_T_Front"
+    ],
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "angle": "-20.0 deg"
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "CTLF_PlaceTools",
+    "bodies": [
+     "CTLF_T_Front"
+    ],
+    "translate": [
+     0,
+     -60.0,
+     0
+    ]
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "name": "CTLF_FaceCuts",
+    "target": "Bay_Control",
+    "tools": [
+     "CTLF_T_Front"
+    ],
+    "operation": "cut"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "CTL_Dowel1a",
+    "operation": "cut",
+    "targets": [
+     "Bay_Control"
+    ],
+    "axis": "X",
+    "diameter": 4.2,
+    "height": 8.1,
+    "base": [
+     53.4,
+     -30.0,
+     -30.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "CTL_Dowel1b",
+    "operation": "cut",
+    "targets": [
+     "Bay_Control"
+    ],
+    "axis": "X",
+    "diameter": 4.2,
+    "height": 8.1,
+    "base": [
+     53.4,
+     -40.0,
+     -90.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "CTL_Dowel2a",
+    "operation": "cut",
+    "targets": [
+     "Bay_Control"
+    ],
+    "axis": [
+     -1,
+     0,
+     0
+    ],
+    "diameter": 4.2,
+    "height": 8.1,
+    "base": [
+     152.6,
+     -30.0,
+     -30.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "CTL_Dowel2b",
+    "operation": "cut",
+    "targets": [
+     "Bay_Control"
+    ],
+    "axis": [
+     -1,
+     0,
+     0
+    ],
+    "diameter": 4.2,
+    "height": 8.1,
+    "base": [
+     152.6,
+     -40.0,
+     -90.0
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "CTL_T_Groove",
+    "body_name": "CTL_T_Groove",
+    "operation": "new",
+    "corner": [
+     52.5,
+     -1,
+     -11.6
+    ],
+    "length": 101.0,
+    "width": 2,
+    "height": 2.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "CTL_T_InlayGroove",
+    "body_name": "CTL_T_InlayGroove",
+    "operation": "new",
+    "corner": [
+     52.5,
+     -1,
+     -125.5
+    ],
+    "length": 101.0,
+    "width": 2.5,
+    "height": 3.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "CTL_T_KeyPlate",
+    "body_name": "CTL_T_KeyPlate",
+    "operation": "new",
+    "corner": [
+     68.0,
+     -1,
+     -75.0
+    ],
+    "length": 14.0,
+    "width": 2.6,
+    "height": 14.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "CTL_T_KeySwitch",
+    "body_name": "CTL_T_KeySwitch",
+    "operation": "new",
+    "corner": [
+     67.2,
+     1.5,
+     -75.8
+    ],
+    "length": 15.6,
+    "width": 20.5,
+    "height": 15.6
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "CTL_T_Fingerprint",
+    "body_name": "CTL_T_Fingerprint",
+    "operation": "new",
+    "corner": [
+     95.0,
+     -1,
+     -75.5
+    ],
+    "length": 30.0,
+    "width": 8.0,
+    "height": 15.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "CTL_T_FpExtension",
+    "body_name": "CTL_T_FpExtension",
+    "operation": "new",
+    "corner": [
+     124.9,
+     2,
+     -74.0
+    ],
+    "length": 23.1,
+    "width": 10,
+    "height": 12.0
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "CTL_TiltTools",
+    "bodies": [
+     "CTL_T_Groove",
+     "CTL_T_InlayGroove",
+     "CTL_T_KeyPlate",
+     "CTL_T_KeySwitch",
+     "CTL_T_Fingerprint",
+     "CTL_T_FpExtension"
+    ],
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "angle": "-20.0 deg"
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "CTL_PlaceTools",
+    "bodies": [
+     "CTL_T_Groove",
+     "CTL_T_InlayGroove",
+     "CTL_T_KeyPlate",
+     "CTL_T_KeySwitch",
+     "CTL_T_Fingerprint",
+     "CTL_T_FpExtension"
+    ],
+    "translate": [
+     0,
+     -60.0,
+     0
+    ]
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "name": "CTL_FaceCuts",
+    "target": "Bay_Control",
+    "tools": [
+     "CTL_T_Groove",
+     "CTL_T_InlayGroove",
+     "CTL_T_KeyPlate",
+     "CTL_T_KeySwitch",
+     "CTL_T_Fingerprint",
+     "CTL_T_FpExtension"
+    ],
+    "operation": "cut"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "CTL_KeyChannel",
+    "operation": "cut",
+    "targets": [
+     "Bay_Control"
+    ],
+    "corner": [
+     69.0,
+     -66.257,
+     -77.899
+    ],
+    "length": 12.0,
+    "width": 63.257,
+    "height": 12.0
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "CTL_TRSJack",
+    "operation": "cut",
+    "targets": [
+     "Bay_Control"
+    ],
+    "axis": "Y",
+    "diameter": 6.2,
+    "height": 3.2,
+    "base": [
+     75.0,
+     -3.1,
+     -71.899
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "CTL_FpChannel",
+    "operation": "cut",
+    "targets": [
+     "Bay_Control"
+    ],
+    "corner": [
+     130.0,
+     -75.257,
+     -75.899
+    ],
+    "length": 16.0,
+    "width": 75.357,
+    "height": 14.0
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Bay_Control"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Bay_Control"
+    ],
+    "color": "#34373b"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "ACC-04",
+     "description": "Console control bay (printed): KVM key (MX switch in a 1.5 mm plate, light grey cap) wired to a 3.5 mm TRS panel jack in the back wall, USB-C fingerprint dongle flush in a recess with a panel-mount USB-C extension behind; hangs on its neighbours by 4 d4 dowels. Origin: console top line on the lower crossbar front face at the console centre x (con_x); +X right, +Y toward the wall, +Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "ASA/PETG print (ABS density)",
+      "ReleaseState": "WIP",
+      "Source": "3D printed (user's printer), concept 2026-11-02; device sizes partly estimated (see ACC_layout)"
+     }
+    }
+   }
+  }
+ ]
+}

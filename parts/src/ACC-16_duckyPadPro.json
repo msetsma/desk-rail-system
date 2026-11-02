@@ -1,0 +1,666 @@
+{
+ "generated_by": "parts/src/ACC-11-17_devices_gen.py",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
+   "command": "file.insert_step",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/refs/ducky_pad_pro/DPP Case - Bottom.step",
+    "name": "DPP Case Bottom",
+    "matrix": [
+     1,
+     0,
+     0,
+     -54.5,
+     0,
+     0,
+     -1,
+     15.503675,
+     0,
+     1,
+     0,
+     -48.0
+    ]
+   }
+  },
+  {
+   "command": "file.insert_step",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/refs/ducky_pad_pro/DPP Case - Top.step",
+    "name": "DPP Case Top",
+    "matrix": [
+     1,
+     0,
+     0,
+     -54.5,
+     0,
+     0,
+     -1,
+     15.503675,
+     0,
+     1,
+     0,
+     -48.0
+    ]
+   }
+  },
+  {
+   "command": "body.rename",
+   "params": {
+    "body": "Bottom Plate",
+    "name": "DPP_CaseBottom"
+   }
+  },
+  {
+   "command": "body.rename",
+   "params": {
+    "body": "Top Plate",
+    "name": "DPP_CaseTop"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_10_10",
+    "corner": [
+     -53.5,
+     -6.246325000000001,
+     -47.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_10_29",
+    "corner": [
+     -53.5,
+     -6.246325000000001,
+     -28.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_1"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_10_48",
+    "corner": [
+     -53.5,
+     -6.246325000000001,
+     -9.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_2"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_10_67",
+    "corner": [
+     -53.5,
+     -6.246325000000001,
+     10.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_3"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_10_86",
+    "corner": [
+     -53.5,
+     -6.246325000000001,
+     29.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_4"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_29_10",
+    "corner": [
+     -34.5,
+     -6.246325000000001,
+     -47.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_5"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_29_29",
+    "corner": [
+     -34.5,
+     -6.246325000000001,
+     -28.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_6"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_29_48",
+    "corner": [
+     -34.5,
+     -6.246325000000001,
+     -9.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_7"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_29_67",
+    "corner": [
+     -34.5,
+     -6.246325000000001,
+     10.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_8"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_29_86",
+    "corner": [
+     -34.5,
+     -6.246325000000001,
+     29.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_9"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_48_10",
+    "corner": [
+     -15.5,
+     -6.246325000000001,
+     -47.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_10"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_48_29",
+    "corner": [
+     -15.5,
+     -6.246325000000001,
+     -28.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_11"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_48_48",
+    "corner": [
+     -15.5,
+     -6.246325000000001,
+     -9.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_12"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_48_67",
+    "corner": [
+     -15.5,
+     -6.246325000000001,
+     10.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_13"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_48_86",
+    "corner": [
+     -15.5,
+     -6.246325000000001,
+     29.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_14"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_67_10",
+    "corner": [
+     3.5,
+     -6.246325000000001,
+     -47.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_15"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_67_29",
+    "corner": [
+     3.5,
+     -6.246325000000001,
+     -28.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_16"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_67_48",
+    "corner": [
+     3.5,
+     -6.246325000000001,
+     -9.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_17"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_67_67",
+    "corner": [
+     3.5,
+     -6.246325000000001,
+     10.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_18"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Key_67_86",
+    "corner": [
+     3.5,
+     -6.246325000000001,
+     29.0
+    ],
+    "length": "18.0 mm",
+    "width": "8.0 mm",
+    "height": "18.0 mm",
+    "operation": "new",
+    "body_name": "DPP_Keycaps_19"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "name": "DPP_Keycaps_Merge",
+    "target": "DPP_Keycaps",
+    "tools": [
+     "DPP_Keycaps_1",
+     "DPP_Keycaps_2",
+     "DPP_Keycaps_3",
+     "DPP_Keycaps_4",
+     "DPP_Keycaps_5",
+     "DPP_Keycaps_6",
+     "DPP_Keycaps_7",
+     "DPP_Keycaps_8",
+     "DPP_Keycaps_9",
+     "DPP_Keycaps_10",
+     "DPP_Keycaps_11",
+     "DPP_Keycaps_12",
+     "DPP_Keycaps_13",
+     "DPP_Keycaps_14",
+     "DPP_Keycaps_15",
+     "DPP_Keycaps_16",
+     "DPP_Keycaps_17",
+     "DPP_Keycaps_18",
+     "DPP_Keycaps_19"
+    ],
+    "operation": "join"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_Knob1",
+    "axis": "Y",
+    "base": [
+     46.5,
+     -12.000000000000002,
+     15.75
+    ],
+    "diameter": "14.0 mm",
+    "height": "13.0 mm",
+    "operation": "new",
+    "body_name": "DPP_KnobsButtons"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_Knob2",
+    "axis": "Y",
+    "base": [
+     46.5,
+     -12.000000000000002,
+     39.75
+    ],
+    "diameter": "14.0 mm",
+    "height": "13.0 mm",
+    "operation": "new",
+    "body_name": "DPP_KnobsButtons_1"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_Button1",
+    "axis": "Y",
+    "base": [
+     29.5,
+     -2.5000000000000018,
+     -41.0
+    ],
+    "diameter": "9.5 mm",
+    "height": "8.5 mm",
+    "operation": "new",
+    "body_name": "DPP_KnobsButtons_2"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_Button2",
+    "axis": "Y",
+    "base": [
+     45.0,
+     -2.5000000000000018,
+     -41.0
+    ],
+    "diameter": "9.5 mm",
+    "height": "8.5 mm",
+    "operation": "new",
+    "body_name": "DPP_KnobsButtons_3"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "name": "DPP_KnobsButtons_Merge",
+    "target": "DPP_KnobsButtons",
+    "tools": [
+     "DPP_KnobsButtons_1",
+     "DPP_KnobsButtons_2",
+     "DPP_KnobsButtons_3"
+    ],
+    "operation": "join"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_OLED",
+    "corner": [
+     22.5,
+     8.253675,
+     -26.7
+    ],
+    "length": "31.4 mm",
+    "width": "1.0 mm",
+    "height": "32.9 mm",
+    "operation": "new",
+    "body_name": "DPP_OLED"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "DPP_CaseTop",
+     "DPP_CaseBottom"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "DPP_CaseTop",
+     "DPP_CaseBottom"
+    ],
+    "color": "#2e3033"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "DPP_Keycaps",
+     "DPP_KnobsButtons"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "DPP_Keycaps",
+     "DPP_KnobsButtons"
+    ],
+    "color": "#c9cccf"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "DPP_OLED"
+    ],
+    "material": "PC"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "DPP_OLED"
+    ],
+    "color": "#0d2a55",
+    "pbr": {
+     "metallic": 0.0,
+     "roughness": 0.06,
+     "dielectric_ior": 1.5
+    }
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "ACC-16",
+     "description": "duckyPad Pro in the user's standard printed case (116 x 103 x 24.7), 20 keycaps 4 x 5 at 19 mm, 2 knurled knobs (rear right), 2 buttons (front right), OLED; case rear edge (USB-C) at +Z. Origin: centre of the mounted visible face (flush with the console face); that face looks -Y, +Z = device top edge as mounted, X right, body at y >= 0.",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "ABS",
+      "ReleaseState": "WIP",
+      "Source": "User CAD refs/ducky_pad_pro/DPP Case - Top/Bottom.step (github msetsma/ducky-pad-pro case/standard); keycaps, knobs, buttons and OLED are MEASURE estimates; case printed (PLA/PETG, ABS as stand-in)"
+     }
+    }
+   }
+  }
+ ]
+}

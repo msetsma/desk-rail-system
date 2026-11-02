@@ -1,0 +1,433 @@
+{
+ "generated_by": "parts/src/ACC-11-17_devices_gen.py",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_Body",
+    "corner": [
+     -65.0,
+     0,
+     -15.0
+    ],
+    "length": "130.0 mm",
+    "width": "17.0 mm",
+    "height": "30.0 mm",
+    "operation": "new",
+    "body_name": "Hub_Body"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_Port1_A",
+    "corner": [
+     -60.5,
+     -0.1,
+     -2.5
+    ],
+    "length": "13.0 mm",
+    "width": "6.1 mm",
+    "height": "5.0 mm",
+    "operation": "cut",
+    "targets": [
+     "Hub_Body"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_Port2_A",
+    "corner": [
+     -42.5,
+     -0.1,
+     -2.5
+    ],
+    "length": "13.0 mm",
+    "width": "6.1 mm",
+    "height": "5.0 mm",
+    "operation": "cut",
+    "targets": [
+     "Hub_Body"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_Port3_A",
+    "corner": [
+     -24.5,
+     -0.1,
+     -2.5
+    ],
+    "length": "13.0 mm",
+    "width": "6.1 mm",
+    "height": "5.0 mm",
+    "operation": "cut",
+    "targets": [
+     "Hub_Body"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_Port4_A",
+    "corner": [
+     -6.5,
+     -0.1,
+     -2.5
+    ],
+    "length": "13.0 mm",
+    "width": "6.1 mm",
+    "height": "5.0 mm",
+    "operation": "cut",
+    "targets": [
+     "Hub_Body"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_Port5_C",
+    "corner": [
+     13.5,
+     -0.1,
+     -1.6
+    ],
+    "length": "9.0 mm",
+    "width": "6.1 mm",
+    "height": "3.2 mm",
+    "operation": "cut",
+    "targets": [
+     "Hub_Body"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_Port6_C",
+    "corner": [
+     31.5,
+     -0.1,
+     -1.6
+    ],
+    "length": "9.0 mm",
+    "width": "6.1 mm",
+    "height": "3.2 mm",
+    "operation": "cut",
+    "targets": [
+     "Hub_Body"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_Port7_C",
+    "corner": [
+     49.5,
+     -0.1,
+     -1.6
+    ],
+    "length": "9.0 mm",
+    "width": "6.1 mm",
+    "height": "3.2 mm",
+    "operation": "cut",
+    "targets": [
+     "Hub_Body"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_PortInside1",
+    "corner": [
+     -60.5,
+     1.0,
+     -2.5
+    ],
+    "length": "13.0 mm",
+    "width": "5.0 mm",
+    "height": "5.0 mm",
+    "operation": "new",
+    "body_name": "Hub_PortsCable"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_PortInside2",
+    "corner": [
+     -42.5,
+     1.0,
+     -2.5
+    ],
+    "length": "13.0 mm",
+    "width": "5.0 mm",
+    "height": "5.0 mm",
+    "operation": "new",
+    "body_name": "Hub_PortsCable_1"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_PortInside3",
+    "corner": [
+     -24.5,
+     1.0,
+     -2.5
+    ],
+    "length": "13.0 mm",
+    "width": "5.0 mm",
+    "height": "5.0 mm",
+    "operation": "new",
+    "body_name": "Hub_PortsCable_2"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_PortInside4",
+    "corner": [
+     -6.5,
+     1.0,
+     -2.5
+    ],
+    "length": "13.0 mm",
+    "width": "5.0 mm",
+    "height": "5.0 mm",
+    "operation": "new",
+    "body_name": "Hub_PortsCable_3"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_PortInside5",
+    "corner": [
+     13.5,
+     1.0,
+     -1.6
+    ],
+    "length": "9.0 mm",
+    "width": "5.0 mm",
+    "height": "3.2 mm",
+    "operation": "new",
+    "body_name": "Hub_PortsCable_4"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_PortInside6",
+    "corner": [
+     31.5,
+     1.0,
+     -1.6
+    ],
+    "length": "9.0 mm",
+    "width": "5.0 mm",
+    "height": "3.2 mm",
+    "operation": "new",
+    "body_name": "Hub_PortsCable_5"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HUB_PortInside7",
+    "corner": [
+     49.5,
+     1.0,
+     -1.6
+    ],
+    "length": "9.0 mm",
+    "width": "5.0 mm",
+    "height": "3.2 mm",
+    "operation": "new",
+    "body_name": "Hub_PortsCable_6"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "HUB_Cable",
+    "axis": "X",
+    "base": [
+     -77.0,
+     12.75,
+     0.0
+    ],
+    "diameter": "3.0 mm",
+    "height": "12.0 mm",
+    "operation": "new",
+    "body_name": "Hub_PortsCable_7"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "name": "Hub_PortsCable_Merge",
+    "target": "Hub_PortsCable",
+    "tools": [
+     "Hub_PortsCable_1",
+     "Hub_PortsCable_2",
+     "Hub_PortsCable_3",
+     "Hub_PortsCable_4",
+     "Hub_PortsCable_5",
+     "Hub_PortsCable_6",
+     "Hub_PortsCable_7"
+    ],
+    "operation": "join"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Hub_Body"
+    ],
+    "material": "Al 6063-T5"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Hub_Body"
+    ],
+    "color": "#6e7378",
+    "pbr": {
+     "metallic": 0.85,
+     "roughness": 0.4,
+     "dielectric_ior": 1.5
+    }
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Hub_PortsCable"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Hub_PortsCable"
+    ],
+    "color": "#141517"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "ACC-12",
+     "description": "ABFCRTTW 7-port USB 3.0 hub, 130 x 30 port face x 17 deep, 4 USB-A then 3 USB-C along +X in the -Y face, captive cable d3 x 12 stub out of the -X end (back half). Origin: centre of the mounted visible face (flush with the console face); that face looks -Y, +Z = device top edge as mounted, X right, body at y >= 0.",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Al 6063-T5",
+      "ReleaseState": "WIP",
+      "Source": "MEASURE: envelope from listings (130 x 30 x 17); port pitch and cable exit estimated"
+     }
+    }
+   }
+  }
+ ]
+}

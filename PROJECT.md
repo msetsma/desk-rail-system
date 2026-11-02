@@ -74,7 +74,7 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
 
 ## Conventions (for the cad-best-practices skill)
 - Part numbers belong to part **files**, not occurrences. Group components `DSK-00`, `FRM-00`, `HW-00`,
-  `MON-00`, `SPK-00`, `PC-00`, `INP-00`, `LAP-00`, `CHR-00`, `REF-00`; parts `DSK-01`…, library `HW-L01`…. Add `Rev X` when a
+  `MON-00`, `SPK-00`, `PC-00`, `INP-00`, `LAP-00`, `CHR-00`, `ACC-00`, `REF-00`; parts `DSK-01`…, library `HW-L01`…. Add `Rev X` when a
   part is released. `DSK-00` is grounded. The full list is in `docs/PART_BUILD_SPEC.md`.
 - One file per left/right pair when a 180° turn about Z reproduces the other side. Mirror-image parts
   (side rails, keyboards) get two files.

@@ -1,0 +1,385 @@
+{
+ "generated_by": "parts/src/ACC-11-17_devices_gen.py",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "SCAR_Body",
+    "corner": [
+     -72.0,
+     0,
+     -22.0
+    ],
+    "length": "144.0 mm",
+    "width": "96.0 mm",
+    "height": "44.0 mm",
+    "operation": "new",
+    "body_name": "Scarlett_Body"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "SCAR_XLR",
+    "axis": "Y",
+    "base": [
+     -54.0,
+     -0.8,
+     0.0
+    ],
+    "diameter": "22.0 mm",
+    "height": "0.8 mm",
+    "operation": "new",
+    "body_name": "Scarlett_Black"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "SCAR_Inst",
+    "axis": "Y",
+    "base": [
+     -32.0,
+     -0.8,
+     0.0
+    ],
+    "diameter": "10.0 mm",
+    "height": "0.8 mm",
+    "operation": "new",
+    "body_name": "Scarlett_Black_1"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "SCAR_Monitor",
+    "axis": "Y",
+    "base": [
+     32.0,
+     -9.0,
+     2.0
+    ],
+    "diameter": "24.0 mm",
+    "height": "9.0 mm",
+    "operation": "new",
+    "body_name": "Scarlett_Black_2"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "SCAR_Phones",
+    "axis": "Y",
+    "base": [
+     58.0,
+     -0.8,
+     -6.0
+    ],
+    "diameter": "10.0 mm",
+    "height": "0.8 mm",
+    "operation": "new",
+    "body_name": "Scarlett_Black_3"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "SCAR_RearUSBC",
+    "corner": [
+     -50.0,
+     96.0,
+     -1.6
+    ],
+    "length": "9.0 mm",
+    "width": "0.6 mm",
+    "height": "3.2 mm",
+    "operation": "new",
+    "body_name": "Scarlett_Black_4"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "SCAR_RCA_L",
+    "axis": "Y",
+    "base": [
+     30.0,
+     96.0,
+     0.0
+    ],
+    "diameter": "10.0 mm",
+    "height": "1.0 mm",
+    "operation": "new",
+    "body_name": "Scarlett_Black_5"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "SCAR_RCA_R",
+    "axis": "Y",
+    "base": [
+     50.0,
+     96.0,
+     0.0
+    ],
+    "diameter": "10.0 mm",
+    "height": "1.0 mm",
+    "operation": "new",
+    "body_name": "Scarlett_Black_6"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "name": "Scarlett_Black_Merge",
+    "target": "Scarlett_Black",
+    "tools": [
+     "Scarlett_Black_1",
+     "Scarlett_Black_2",
+     "Scarlett_Black_3",
+     "Scarlett_Black_4",
+     "Scarlett_Black_5",
+     "Scarlett_Black_6"
+    ],
+    "operation": "join"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "SCAR_Gain1",
+    "axis": "Y",
+    "base": [
+     -12.0,
+     -7.0,
+     4.0
+    ],
+    "diameter": "14.0 mm",
+    "height": "7.0 mm",
+    "operation": "new",
+    "body_name": "Scarlett_Knobs"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "SCAR_Gain2",
+    "axis": "Y",
+    "base": [
+     8.0,
+     -7.0,
+     4.0
+    ],
+    "diameter": "14.0 mm",
+    "height": "7.0 mm",
+    "operation": "new",
+    "body_name": "Scarlett_Knobs_1"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "SCAR_Btn48V",
+    "corner": [
+     -15.0,
+     -1.5,
+     -16.0
+    ],
+    "length": "6.0 mm",
+    "width": "1.5 mm",
+    "height": "3.5 mm",
+    "operation": "new",
+    "body_name": "Scarlett_Knobs_2"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "SCAR_BtnAir",
+    "corner": [
+     5.0,
+     -1.5,
+     -16.0
+    ],
+    "length": "6.0 mm",
+    "width": "1.5 mm",
+    "height": "3.5 mm",
+    "operation": "new",
+    "body_name": "Scarlett_Knobs_3"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "name": "Scarlett_Knobs_Merge",
+    "target": "Scarlett_Knobs",
+    "tools": [
+     "Scarlett_Knobs_1",
+     "Scarlett_Knobs_2",
+     "Scarlett_Knobs_3"
+    ],
+    "operation": "join"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Scarlett_Body"
+    ],
+    "material": "Al 6063-T5"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Scarlett_Body"
+    ],
+    "color": "#c8102e",
+    "pbr": {
+     "metallic": 0.85,
+     "roughness": 0.4,
+     "dielectric_ior": 1.5
+    }
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Scarlett_Black"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Scarlett_Black"
+    ],
+    "color": "#141517"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Scarlett_Knobs"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Scarlett_Knobs"
+    ],
+    "color": "#e9e9e9"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "ACC-11",
+     "description": "Focusrite Scarlett Solo 3rd Gen interface, 144 x 44 face x 96 deep, red anodised body, front jacks/knobs proud toward -Y, rear USB-C + RCA toward +Y. Origin: centre of the mounted visible face (flush with the console face); that face looks -Y, +Z = device top edge as mounted, X right, body at y >= 0.",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Al 6063-T5",
+      "ReleaseState": "WIP",
+      "Source": "MEASURE: envelope ~144 x 44 x 96 (Focusrite spec); front/rear detail positions estimated from product photos"
+     }
+    }
+   }
+  }
+ ]
+}

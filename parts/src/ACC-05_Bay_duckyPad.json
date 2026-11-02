@@ -1,0 +1,521 @@
+{
+ "generated_by": "parts/src/ACC-01-06_console_gen.py",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_Blank",
+    "body_name": "Bay_duckyPad",
+    "operation": "new",
+    "corner": [
+     153.5,
+     -122.0,
+     -124.0
+    ],
+    "length": 143.5,
+    "width": 122.0,
+    "height": 124.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPPF_T_Front",
+    "body_name": "DPPF_T_Front",
+    "operation": "new",
+    "corner": [
+     152.5,
+     -300,
+     -400
+    ],
+    "length": 145.5,
+    "width": 300,
+    "height": 500
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "DPPF_TiltTools",
+    "bodies": [
+     "DPPF_T_Front"
+    ],
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "angle": "-20.0 deg"
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "DPPF_PlaceTools",
+    "bodies": [
+     "DPPF_T_Front"
+    ],
+    "translate": [
+     0,
+     -60.0,
+     0
+    ]
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "name": "DPPF_FaceCuts",
+    "target": "Bay_duckyPad",
+    "tools": [
+     "DPPF_T_Front"
+    ],
+    "operation": "cut"
+   }
+  },
+  {
+   "command": "solid.fillet",
+   "params": {
+    "name": "DPP_EndRound",
+    "body": "Bay_duckyPad",
+    "edges": [
+     [
+      297.0,
+      -82.566,
+      -62.0
+     ]
+    ],
+    "radius": 8.0
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_Screw1a_Cbore",
+    "operation": "cut",
+    "targets": [
+     "Bay_duckyPad"
+    ],
+    "axis": "Y",
+    "diameter": 10.0,
+    "height": 74.0,
+    "base": [
+     185.0,
+     -80.0,
+     -20.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_Screw1a_Hole",
+    "operation": "cut",
+    "targets": [
+     "Bay_duckyPad"
+    ],
+    "axis": "Y",
+    "diameter": 5.5,
+    "height": 6.2,
+    "base": [
+     185.0,
+     -6.1,
+     -20.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_Screw1b_Cbore",
+    "operation": "cut",
+    "targets": [
+     "Bay_duckyPad"
+    ],
+    "axis": "Y",
+    "diameter": 10.0,
+    "height": 74.0,
+    "base": [
+     185.0,
+     -80.0,
+     -40.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_Screw1b_Hole",
+    "operation": "cut",
+    "targets": [
+     "Bay_duckyPad"
+    ],
+    "axis": "Y",
+    "diameter": 5.5,
+    "height": 6.2,
+    "base": [
+     185.0,
+     -6.1,
+     -40.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_Screw2a_Cbore",
+    "operation": "cut",
+    "targets": [
+     "Bay_duckyPad"
+    ],
+    "axis": "Y",
+    "diameter": 10.0,
+    "height": 74.0,
+    "base": [
+     240.0,
+     -80.0,
+     -20.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_Screw2a_Hole",
+    "operation": "cut",
+    "targets": [
+     "Bay_duckyPad"
+    ],
+    "axis": "Y",
+    "diameter": 5.5,
+    "height": 6.2,
+    "base": [
+     240.0,
+     -6.1,
+     -20.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_Screw2b_Cbore",
+    "operation": "cut",
+    "targets": [
+     "Bay_duckyPad"
+    ],
+    "axis": "Y",
+    "diameter": 10.0,
+    "height": 74.0,
+    "base": [
+     240.0,
+     -80.0,
+     -40.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_Screw2b_Hole",
+    "operation": "cut",
+    "targets": [
+     "Bay_duckyPad"
+    ],
+    "axis": "Y",
+    "diameter": 5.5,
+    "height": 6.2,
+    "base": [
+     240.0,
+     -6.1,
+     -40.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_Dowel1a",
+    "operation": "cut",
+    "targets": [
+     "Bay_duckyPad"
+    ],
+    "axis": "X",
+    "diameter": 4.2,
+    "height": 8.1,
+    "base": [
+     153.4,
+     -30.0,
+     -30.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_Dowel1b",
+    "operation": "cut",
+    "targets": [
+     "Bay_duckyPad"
+    ],
+    "axis": "X",
+    "diameter": 4.2,
+    "height": 8.1,
+    "base": [
+     153.4,
+     -40.0,
+     -90.0
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_T_Groove",
+    "body_name": "DPP_T_Groove",
+    "operation": "new",
+    "corner": [
+     152.5,
+     -1,
+     -11.6
+    ],
+    "length": 135.5,
+    "width": 2,
+    "height": 2.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_T_InlayGroove",
+    "body_name": "DPP_T_InlayGroove",
+    "operation": "new",
+    "corner": [
+     152.5,
+     -1,
+     -125.5
+    ],
+    "length": 135.5,
+    "width": 2.5,
+    "height": 3.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_T_Pocket",
+    "body_name": "DPP_T_Pocket",
+    "operation": "new",
+    "corner": [
+     166.7,
+     -1,
+     -113.6
+    ],
+    "length": 116.6,
+    "width": 26.0,
+    "height": 103.6
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_T_UsbPlug",
+    "body_name": "DPP_T_UsbPlug",
+    "operation": "new",
+    "corner": [
+     245.5,
+     3,
+     -10.1
+    ],
+    "length": 24.0,
+    "width": 19,
+    "height": 8.1
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "DPP_TiltTools",
+    "bodies": [
+     "DPP_T_Groove",
+     "DPP_T_InlayGroove",
+     "DPP_T_Pocket",
+     "DPP_T_UsbPlug"
+    ],
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "angle": "-20.0 deg"
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "DPP_PlaceTools",
+    "bodies": [
+     "DPP_T_Groove",
+     "DPP_T_InlayGroove",
+     "DPP_T_Pocket",
+     "DPP_T_UsbPlug"
+    ],
+    "translate": [
+     0,
+     -60.0,
+     0
+    ]
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "name": "DPP_FaceCuts",
+    "target": "Bay_duckyPad",
+    "tools": [
+     "DPP_T_Groove",
+     "DPP_T_InlayGroove",
+     "DPP_T_Pocket",
+     "DPP_T_UsbPlug"
+    ],
+    "operation": "cut"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_UsbBack",
+    "operation": "cut",
+    "targets": [
+     "Bay_duckyPad"
+    ],
+    "corner": [
+     247.5,
+     -54.684,
+     -8.5
+    ],
+    "length": 20.0,
+    "width": 54.784,
+    "height": 6.5
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Bay_duckyPad"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Bay_duckyPad"
+    ],
+    "color": "#34373b"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "ACC-05",
+     "description": "Console duckyPad bay (printed): the user's duckyPad Pro (standard case) sunk 25 mm so its top plate is flush with the 20 deg face; USB-C plug cavity at the rear edge, cable out over the bar top; 4 x M5 + HNTT5-5. Origin: console top line on the lower crossbar front face at the console centre x (con_x); +X right, +Y toward the wall, +Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "ASA/PETG print (ABS density)",
+      "ReleaseState": "WIP",
+      "Source": "3D printed (user's printer), concept 2026-11-02; device sizes partly estimated (see ACC_layout)"
+     }
+    }
+   }
+  }
+ ]
+}

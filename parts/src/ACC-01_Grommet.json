@@ -1,0 +1,178 @@
+{
+ "generated_by": "parts/src/ACC-01-06_console_gen.py",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "GRM_Flange",
+    "body_name": "Grommet",
+    "operation": "new",
+    "diameter": "80 mm",
+    "height": "2.5 mm",
+    "base": [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "GRM_Sleeve",
+    "operation": "join",
+    "targets": [
+     "Grommet"
+    ],
+    "diameter": "grom_d - 0.4 mm",
+    "height": "desk_t + 0.1 mm",
+    "base": [
+     "0 mm",
+     "0 mm",
+     "-desk_t"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "GRM_Bore",
+    "operation": "cut",
+    "targets": [
+     "Grommet"
+    ],
+    "diameter": "grom_d - 12 mm",
+    "height": "desk_t + 2.7 mm",
+    "base": [
+     "0 mm",
+     "0 mm",
+     "-desk_t - 0.1 mm"
+    ]
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Grommet"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Grommet"
+    ],
+    "color": "#34373b"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "ACC-01",
+     "description": "Desk cable grommet (printed): d80 x 2.5 flange on the desktop, sleeve through the grom_d hole (0.2 mm clearance), 6 mm wall. Origin: hole centre on the desktop top surface; +Y toward the wall, +Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "ASA/PETG print (ABS density)",
+      "ReleaseState": "WIP",
+      "Source": "3D printed (user's printer), concept 2026-11-02; device sizes partly estimated (see ACC_layout)"
+     }
+    }
+   }
+  }
+ ]
+}

@@ -92,6 +92,23 @@
    }
   },
   {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Desktop_GrommetHole",
+    "operation": "cut",
+    "targets": [
+     "Desktop"
+    ],
+    "diameter": "grom_d",
+    "height": "desk_t + 0.2 mm",
+    "base": [
+     "0 mm",
+     "grom_y - desk_y_off",
+     "-0.1 mm"
+    ]
+   }
+  },
+  {
    "command": "material.assign",
    "params": {
     "bodies": [
@@ -114,7 +131,7 @@
    "params": {
     "values": {
      "part_number": "DSK-01",
-     "description": "Desktop slab desk_w x desk_d x desk_t (IKEA KARLBY walnut veneer, 503.352.08). Origin: underside centre (sits on the D21 hanger plates at desk_h - desk_t = frame_top + hang_t); +X right, +Y toward wall, +Z up.",
+     "description": "Desktop slab desk_w x desk_d x desk_t (IKEA KARLBY walnut veneer, 503.352.08), with the ACC-01 cable grommet hole (grom_d at x 0, y grom_y; user drills it). Origin: underside centre (sits on the D21 hanger plates at desk_h - desk_t = frame_top + hang_t); +X right, +Y toward wall, +Z up.",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

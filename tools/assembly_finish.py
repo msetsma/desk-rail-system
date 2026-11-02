@@ -70,12 +70,12 @@ def skeleton_views(v: Mapping[str, float]) -> tuple[View, ...]:
 # Visibility sets as configuration rows (SolidCraft has no display states): link groups suppressed.
 DISPLAY_ROWS: Mapping[str, tuple[str, ...]] = {
     "Full": (),
-    "Frame only": ("DSK-01", "MON-", "SPK-", "PC-", "INP-", "LAP-", "CHR-"),
+    "Frame only": ("DSK-01", "MON-", "SPK-", "PC-", "INP-", "LAP-", "CHR-", "ACC-"),
     "No desktop": ("DSK-01",),
-    "Monitors + speakers": ("DSK-", "HW-", "PC-", "INP-", "LAP-", "CHR-", "FRM-05", "FRM-08"),
-    "Rails only": ("DSK-", "FRM-05", "FRM-08", "MON-", "SPK-", "PC-", "INP-", "LAP-", "CHR-"),
-    "Desk only": ("FRM-", "HW-", "MON-", "SPK-", "PC-", "INP-", "LAP-", "CHR-"),
-    "Desk + rails": ("MON-", "SPK-", "PC-", "INP-", "LAP-", "CHR-"),
+    "Monitors + speakers": ("DSK-", "HW-", "PC-", "INP-", "LAP-", "CHR-", "FRM-05", "FRM-08", "ACC-"),
+    "Rails only": ("DSK-", "FRM-05", "FRM-08", "MON-", "SPK-", "PC-", "INP-", "LAP-", "CHR-", "ACC-"),
+    "Desk only": ("FRM-", "HW-", "MON-", "SPK-", "PC-", "INP-", "LAP-", "CHR-", "ACC-"),
+    "Desk + rails": ("MON-", "SPK-", "PC-", "INP-", "LAP-", "CHR-", "ACC-"),
     "No chair": ("CHR-",),
 }
 

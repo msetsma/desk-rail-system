@@ -47,6 +47,7 @@ GROUPS = (
     ("INP-00 Input devices", "Mouse pad, mouse and split keyboard"),
     ("LAP-00 Laptop", "User-built laptop mount and tray on the right stile, MacBook Pro 14in"),
     ("CHR-00 Chair", "Herman Miller Mirra 2 (Butterfly back), user's seat"),
+    ("ACC-00 Crossbar console", "3D-printed console on the lower crossbar, the devices set flush in it, desk grommet"),
     ("REF-00 Skeleton", "Layout datums (Eye point)"),
 )
 
@@ -78,8 +79,37 @@ def _occ(label: str, part: str, group: str, x: str, y: str, z: str, yaw: str = "
     return Occurrence(label, part, group, x, y, z, yaw)
 
 
-_DSK, _FRM, _MON, _SPK, _PC, _INP, _LAP, _CHR = (g for g, _ in GROUPS[:2] + GROUPS[3:9])
+_DSK, _FRM, _MON, _SPK, _PC, _INP, _LAP, _CHR, _ACC = (g for g, _ in GROUPS[:2] + GROUPS[3:10])
 _LEG_X = "(frame_w/2 - leg_inset)"
+
+# Console frame (parts/src/ACC_layout.py): the top line on the lower crossbar front face, at con_x.
+_CON = ("con_x", "stile_front", "desk_h + bar1_z + rail_l/2 + con_top")
+# Devices sit in the 20 deg raked face: world +Z seen in a device's own frame (face toward -Y, +Z up the face).
+_DEVICE_MOUNTS = (("hub", 0.0), ("scarlett", 0.0), ("phone", 0.0), ("magsafe", "phone"), ("kvm", 0.0),
+                  ("fingerprint", 0.0), ("duckypad", 0.0))
+
+
+def _plus(expr: str, mm: float) -> str:
+    return f"{expr} {'-' if mm < 0 else '+'} {abs(mm)} mm"
+
+
+def _console_occurrences() -> tuple[Occurrence, ...]:
+    """Bays and inlay in the console frame; devices at their pocket centres, tilted with the face; grommet."""
+    sys.path.insert(0, str(PARTS / "src"))
+    import ACC_layout as L  # noqa: PLC0415 (layout module lives with the part generators)
+
+    x, y, z = _CON
+    occs = [_occ(b.stem.split("_", 1)[1], b.stem, _ACC, x, y, z) for b in L.BAYS]
+    occs.append(_occ("Inlay", "ACC-06_Inlay", _ACC, x, y, z))
+    sin, cos = L.up_face()[1], L.up_face()[2]
+    for key, depth in _DEVICE_MOUNTS:
+        d = L.DEVICES[depth].d if isinstance(depth, str) else depth
+        px, py, pz = (round(v, 3) for v in L.device_mount(key, d))
+        dev = L.DEVICES[key]
+        occs.append(Occurrence(dev.stem.split("_", 1)[1], dev.stem, _ACC, _plus(x, px), _plus(y, py), _plus(z, pz),
+                               zl=(0, -sin, cos)))
+    occs.append(_occ("Grommet", "ACC-01_Grommet", _ACC, "0 mm", "grom_y", "desk_h"))
+    return tuple(occs)
 _CH = "(ch_bar_gap/2 + ch_bar_w/2)"
 
 OCCURRENCES: tuple[Occurrence, ...] = (
@@ -144,6 +174,7 @@ OCCURRENCES: tuple[Occurrence, ...] = (
     _occ("LaptopTray", "LAP-03_LaptopTray", _LAP, "lap_x", "lap_y", "desk_h + lap_tray_z", "-lap_yaw"),
     _occ("Laptop", "LAP-02_MacBookPro14", _LAP, "lap_x", "lap_y", "desk_h + lap_tray_z", "-lap_yaw"),
     _occ("Chair", "CHR-01_HermanMillerMirra2", _CHR, "m1_x", "eye_y - chr_eye_dy", "0 mm"),
+    *_console_occurrences(),
 )
 
 

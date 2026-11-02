@@ -1146,5 +1146,33 @@
     "favorite": false,
     "name": "lap_arm_dx",
     "unit": "mm"
+  },
+  {
+    "comment": "Console (ACC-00): centre x of the lower-crossbar console. Its right end (con_x + 297) stays 10 mm left of the laptop tray zone (x 274, 2026-11-02 layout)",
+    "expression": "-33 mm",
+    "favorite": false,
+    "name": "con_x",
+    "unit": "mm"
+  },
+  {
+    "comment": "Console (ACC-00): top line height above the lower crossbar top; the parting groove sits level with the bar top",
+    "expression": "10 mm",
+    "favorite": false,
+    "name": "con_top",
+    "unit": "mm"
+  },
+  {
+    "comment": "Grommet (ACC-01): hole centre y (world), on the centreline between the rear channel bar (y 192-211) and the desktop rear edge (y 330); user drills it",
+    "expression": "270 mm",
+    "favorite": false,
+    "name": "grom_y",
+    "unit": "mm"
+  },
+  {
+    "comment": "Grommet (ACC-01): hole diameter in the desktop (60 mm hole saw)",
+    "expression": "60 mm",
+    "favorite": false,
+    "name": "grom_d",
+    "unit": "mm"
   }
 ]

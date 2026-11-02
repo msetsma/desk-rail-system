@@ -1,0 +1,196 @@
+{
+ "generated_by": "parts/src/ACC-11-17_devices_gen.py",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "MAG_Face",
+    "axis": "Y",
+    "base": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "diameter": "55.5 mm",
+    "height": "0.8 mm",
+    "operation": "new",
+    "body_name": "MagSafe_Face"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "MAG_Body",
+    "axis": "Y",
+    "base": [
+     0.0,
+     0.8,
+     0.0
+    ],
+    "diameter": "55.5 mm",
+    "height": "3.7 mm",
+    "operation": "new",
+    "body_name": "MagSafe_Body"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "MAG_Cable",
+    "axis": "Z",
+    "base": [
+     0.0,
+     2.6500000000000004,
+     -47.75
+    ],
+    "diameter": "3.0 mm",
+    "height": "20.0 mm",
+    "operation": "new",
+    "body_name": "MagSafe_Cable"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "MagSafe_Face",
+     "MagSafe_Cable"
+    ],
+    "material": "PC"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "MagSafe_Face",
+     "MagSafe_Cable"
+    ],
+    "color": "#e8e8ea"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "MagSafe_Body"
+    ],
+    "material": "Al 6063-T5"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "MagSafe_Body"
+    ],
+    "color": "#c0c0c4",
+    "pbr": {
+     "metallic": 0.85,
+     "roughness": 0.4,
+     "dielectric_ior": 1.5
+    }
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "ACC-14",
+     "description": "Apple MagSafe Charger 25 W puck d55.5 x 4.5, charging face toward -Y, aluminium back, cable d3 x 20 radially out of the bottom (-Z). Origin: centre of the mounted visible face (flush with the console face); that face looks -Y, +Z = device top edge as mounted, X right, body at y >= 0.",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "Al 6063-T5",
+      "ReleaseState": "WIP",
+      "Source": "Apple spec d55.5 x 4.5 (approx.); cable stub length is a modelling choice"
+     }
+    }
+   }
+  }
+ ]
+}

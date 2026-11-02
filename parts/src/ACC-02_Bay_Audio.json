@@ -1,0 +1,621 @@
+{
+ "generated_by": "parts/src/ACC-01-06_console_gen.py",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "AUD_Blank",
+    "body_name": "Bay_Audio",
+    "operation": "new",
+    "corner": [
+     -297.0,
+     -122.0,
+     -124.0
+    ],
+    "length": 169.5,
+    "width": 122.0,
+    "height": 124.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "AUDF_T_Front",
+    "body_name": "AUDF_T_Front",
+    "operation": "new",
+    "corner": [
+     -298.0,
+     -300,
+     -400
+    ],
+    "length": 171.5,
+    "width": 300,
+    "height": 500
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "AUDF_TiltTools",
+    "bodies": [
+     "AUDF_T_Front"
+    ],
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "angle": "-20.0 deg"
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "AUDF_PlaceTools",
+    "bodies": [
+     "AUDF_T_Front"
+    ],
+    "translate": [
+     0,
+     -60.0,
+     0
+    ]
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "name": "AUDF_FaceCuts",
+    "target": "Bay_Audio",
+    "tools": [
+     "AUDF_T_Front"
+    ],
+    "operation": "cut"
+   }
+  },
+  {
+   "command": "solid.fillet",
+   "params": {
+    "name": "AUD_EndRound",
+    "body": "Bay_Audio",
+    "edges": [
+     [
+      -297.0,
+      -82.566,
+      -62.0
+     ]
+    ],
+    "radius": 8.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "AUD_Tail",
+    "operation": "join",
+    "targets": [
+     "Bay_Audio"
+    ],
+    "corner": [
+     -297.0,
+     -1.0,
+     -141.073
+    ],
+    "length": 169.5,
+    "width": 13.0,
+    "height": 87.073
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "AUD_Under",
+    "operation": "join",
+    "targets": [
+     "Bay_Audio"
+    ],
+    "corner": [
+     -297.0,
+     -32.16,
+     -141.073
+    ],
+    "length": 169.5,
+    "width": 44.16,
+    "height": 17.173
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "AUD_Screw1a_Cbore",
+    "operation": "cut",
+    "targets": [
+     "Bay_Audio"
+    ],
+    "axis": "Y",
+    "diameter": 10.0,
+    "height": 52.5,
+    "base": [
+     -250.0,
+     -58.5,
+     -20.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "AUD_Screw1a_Hole",
+    "operation": "cut",
+    "targets": [
+     "Bay_Audio"
+    ],
+    "axis": "Y",
+    "diameter": 5.5,
+    "height": 6.2,
+    "base": [
+     -250.0,
+     -6.1,
+     -20.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "AUD_Screw1b_Cbore",
+    "operation": "cut",
+    "targets": [
+     "Bay_Audio"
+    ],
+    "axis": "Y",
+    "diameter": 10.0,
+    "height": 52.5,
+    "base": [
+     -250.0,
+     -58.5,
+     -40.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "AUD_Screw1b_Hole",
+    "operation": "cut",
+    "targets": [
+     "Bay_Audio"
+    ],
+    "axis": "Y",
+    "diameter": 5.5,
+    "height": 6.2,
+    "base": [
+     -250.0,
+     -6.1,
+     -40.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "AUD_Screw2a_Cbore",
+    "operation": "cut",
+    "targets": [
+     "Bay_Audio"
+    ],
+    "axis": "Y",
+    "diameter": 10.0,
+    "height": 52.5,
+    "base": [
+     -174.0,
+     -58.5,
+     -20.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "AUD_Screw2a_Hole",
+    "operation": "cut",
+    "targets": [
+     "Bay_Audio"
+    ],
+    "axis": "Y",
+    "diameter": 5.5,
+    "height": 6.2,
+    "base": [
+     -174.0,
+     -6.1,
+     -20.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "AUD_Screw2b_Cbore",
+    "operation": "cut",
+    "targets": [
+     "Bay_Audio"
+    ],
+    "axis": "Y",
+    "diameter": 10.0,
+    "height": 52.5,
+    "base": [
+     -174.0,
+     -58.5,
+     -40.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "AUD_Screw2b_Hole",
+    "operation": "cut",
+    "targets": [
+     "Bay_Audio"
+    ],
+    "axis": "Y",
+    "diameter": 5.5,
+    "height": 6.2,
+    "base": [
+     -174.0,
+     -6.1,
+     -40.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "AUD_Dowel1a",
+    "operation": "cut",
+    "targets": [
+     "Bay_Audio"
+    ],
+    "axis": [
+     -1,
+     0,
+     0
+    ],
+    "diameter": 4.2,
+    "height": 8.1,
+    "base": [
+     -127.4,
+     -30.0,
+     -30.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "AUD_Dowel1b",
+    "operation": "cut",
+    "targets": [
+     "Bay_Audio"
+    ],
+    "axis": [
+     -1,
+     0,
+     0
+    ],
+    "diameter": 4.2,
+    "height": 8.1,
+    "base": [
+     -127.4,
+     -40.0,
+     -90.0
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "AUD_T_Groove",
+    "body_name": "AUD_T_Groove",
+    "operation": "new",
+    "corner": [
+     -288.0,
+     -1,
+     -11.6
+    ],
+    "length": 161.5,
+    "width": 2,
+    "height": 2.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "AUD_T_InlayGroove",
+    "body_name": "AUD_T_InlayGroove",
+    "operation": "new",
+    "corner": [
+     -288.0,
+     -1,
+     -125.5
+    ],
+    "length": 161.5,
+    "width": 2.5,
+    "height": 3.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "AUD_T_UnderTrim",
+    "body_name": "AUD_T_UnderTrim",
+    "operation": "new",
+    "corner": [
+     -298.0,
+     69.572,
+     -600
+    ],
+    "length": 171.5,
+    "width": 330.428,
+    "height": 493.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "AUD_T_Hub",
+    "body_name": "AUD_T_Hub",
+    "operation": "new",
+    "corner": [
+     -277.0,
+     -1,
+     -42.0
+    ],
+    "length": 130.0,
+    "width": 18.0,
+    "height": 30.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "AUD_T_HubCable",
+    "body_name": "AUD_T_HubCable",
+    "operation": "new",
+    "corner": [
+     -291.5,
+     3,
+     -41.0
+    ],
+    "length": 14.6,
+    "width": 13.0,
+    "height": 28.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "AUD_T_Scarlett",
+    "body_name": "AUD_T_Scarlett",
+    "operation": "new",
+    "corner": [
+     -284.0,
+     -1,
+     -104.0
+    ],
+    "length": 144.0,
+    "width": 157.0,
+    "height": 44.0
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "AUD_TiltTools",
+    "bodies": [
+     "AUD_T_Groove",
+     "AUD_T_InlayGroove",
+     "AUD_T_UnderTrim",
+     "AUD_T_Hub",
+     "AUD_T_HubCable",
+     "AUD_T_Scarlett"
+    ],
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "angle": "-20.0 deg"
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "AUD_PlaceTools",
+    "bodies": [
+     "AUD_T_Groove",
+     "AUD_T_InlayGroove",
+     "AUD_T_UnderTrim",
+     "AUD_T_Hub",
+     "AUD_T_HubCable",
+     "AUD_T_Scarlett"
+    ],
+    "translate": [
+     0,
+     -60.0,
+     0
+    ]
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "name": "AUD_FaceCuts",
+    "target": "Bay_Audio",
+    "tools": [
+     "AUD_T_Groove",
+     "AUD_T_InlayGroove",
+     "AUD_T_UnderTrim",
+     "AUD_T_Hub",
+     "AUD_T_HubCable",
+     "AUD_T_Scarlett"
+    ],
+    "operation": "cut"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "AUD_HubCableRiser",
+    "operation": "cut",
+    "targets": [
+     "Bay_Audio"
+    ],
+    "corner": [
+     -290.5,
+     -58.104,
+     -15.276
+    ],
+    "length": 12.0,
+    "width": 16.0,
+    "height": 13.276
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "AUD_HubCableBack",
+    "operation": "cut",
+    "targets": [
+     "Bay_Audio"
+    ],
+    "corner": [
+     -290.5,
+     -52.104,
+     -8.5
+    ],
+    "length": 12.0,
+    "width": 52.204,
+    "height": 6.0
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Bay_Audio"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Bay_Audio"
+    ],
+    "color": "#34373b"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "ACC-02",
+     "description": "Console audio bay (printed): Scarlett Solo 3rd Gen front panel and the 7-port USB hub port face flush in the 20 deg face; Scarlett body runs back under the bar in a tail, its back open for plugs; hub cable exits over the bar top; 4 x M5 + HNTT5-5. Origin: console top line on the lower crossbar front face at the console centre x (con_x); +X right, +Y toward the wall, +Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "ASA/PETG print (ABS density)",
+      "ReleaseState": "WIP",
+      "Source": "3D printed (user's printer), concept 2026-11-02; device sizes partly estimated (see ACC_layout)"
+     }
+    }
+   }
+  }
+ ]
+}

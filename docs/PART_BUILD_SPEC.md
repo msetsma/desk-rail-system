@@ -87,6 +87,13 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 | LAP-02 | MacBook Pro 14in M4 | 1 | new (MBP_*, multibody allowed) |
 | LAP-03 | Laptop tray (user-built jig placeholder) | 1 | new (LaptopTray) |
 | CHR-01 | Herman Miller Mirra 2 chair, Butterfly back (vendor 3D DWG mesh: seat down, arms up and back) | 1 | Chair_* (multibody allowed; source refs/herman_miller_mirra2/converted/CHR-01_mirra2.step via parts/src/CHR-01_convert.py) |
+| ACC-01 | Desk cable grommet, printed, d80 flange, sleeve through the grom_d hole (D24) | 1 | new |
+| ACC-02 | Console audio bay: Scarlett Solo + USB hub flush, tail under the bar (D24) | 1 | new |
+| ACC-03 | Console phone bay: iPhone landscape + MagSafe puck (D24) | 1 | new |
+| ACC-04 | Console control bay: KVM key (MX + TRS jack) + fingerprint dongle (D24) | 1 | new |
+| ACC-05 | Console duckyPad bay: duckyPad Pro case sunk flush (D24) | 1 | new |
+| ACC-06 | Console inlay line, light grey strip (D24) | 1 | new |
+| ACC-11..17 | Console devices (purchased refs): Scarlett Solo 3rd Gen, ABFCRTTW hub, iPhone 16 Pro Max, MagSafe charger, fingerprint dongle, duckyPad Pro (user's case STEP), KVM key | 1 each | new (multibody allowed) |
 
 Hardware is in `parts/lib/` (HW-L01 HPTTD5, HW-L02 HPTLD5, HW-L03 HBLFSN5, HW-L04 HBLFSD5, HW-L10 M6x55
 SHCS, HW-L11 standoff, HW-L12 end cap); its occurrences HW-01..HW-58 come from `skeleton/hw_placements.json`. Eye becomes a skeleton
