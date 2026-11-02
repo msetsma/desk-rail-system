@@ -1,4 +1,5 @@
-"""Generate the lower-crossbar console parts: ACC-01 grommet, ACC-02/03/05 printed bays, ACC-06 inlay strip.
+"""Generate the lower-crossbar console parts: ACC-01 grommet, ACC-02/05 printed bays, ACC-06 inlay
+strip, ACC-07 phone stand.
 
 Layout (bay edges, face rake, device pockets) comes from ACC_layout.py, shared with the device generator, so a
 pocket and the device it holds can't drift apart. The bays use the console frame (ACC_layout docstring): origin on
@@ -6,7 +7,7 @@ the bar front face at the top line, console centre x. Each bay is a box trimmed 
 boxes built in a "face frame" (x, depth into the console, up the face) and turned into place in one batch, then cut
 with one combine. Screws: M5 button heads through a 6 mm spine into HNTT5-5 drop-in T-nuts in the bar's two front
 slots (z from the skeleton: con_top + 10 and + 30 below the top line); d4 dowel pins align the bays at the seams
-(ACC-04, the control bay, was retired 2026-11-02). Cables leave each bay at the back, over the bar top or below its bottom, to run behind the rails.
+(ACC-03 phone bay and ACC-04 control bay retired 2026-11-02). Cables leave each bay at the back, over the bar top or below its bottom, to run behind the rails.
 
     python parts/src/ACC-01-06_console_gen.py
 """
@@ -195,27 +196,46 @@ def audio_bay(bay: L.Bay, slot_z: Sequence[float]) -> list[dict]:
     return [*cmds, *finish(body, bay.pn, desc)]
 
 
-def phone_bay(bay: L.Bay, slot_z: Sequence[float]) -> list[dict]:
-    p, body = "PHN", "Bay_Phone"
-    ph, ms = L.DEVICES["phone"], L.DEVICES["magsafe"]
-    t = FaceTools(p)
-    cmds = wedge(p, body, bay, t)
-    cmds += [
-        *screw_bores(p, body, (ph.x - 58, ph.x + 58), slot_z[1:], -64.0),
-        *dowels(p, body, ((bay.x0, 1), (bay.x1, -1))),
+def build_stand() -> list[dict]:
+    """ACC-07 phone stand: a spine on the bar's front face (2 x M5 + HNTT5-5 in the lower slot), a neck, and a cup
+    holding the Apple MagSafe puck with its face raked like the console. The phone hangs on the puck's magnet alone, so
+    any phone or case fits and nothing surrounds it. Built in the stand frame (ACC_layout)."""
+    body, p = "PhoneStand", "PHS"
+    ms = L.DEVICES["magsafe"]
+    sp_w, sp_t, bar_h = 70.0, 9.0, 40.0
+    neck = 24.0
+    cup_r = L.STAND_CUP_D / 2
+    cmds = [
+        c("solid.box", name=f"{p}_Spine", body_name=body, operation="new", corner=[-sp_w / 2, -sp_t, -bar_h / 2],
+          length=sp_w, width=sp_t, height=bar_h),
+        c("solid.box", name=f"{p}_Neck", operation="join", targets=[body],
+          corner=[-neck / 2, f(L.STAND_FACE_Y - 8), -neck / 2], length=neck, width=f(-L.STAND_FACE_Y + 8 - sp_t + OVER),
+          height=neck),
+        c("solid.cylinder", name=f"{p}_Cup", body_name=f"{p}_CupBody", operation="new", axis="Y",
+          diameter=L.STAND_CUP_D, height=L.STAND_CUP_T + 0.2, base=[0, -0.2, 0]),  # 0.2 proud, trimmed by Front
     ]
-    s_top = ph.s - ph.h / 2
-    t.box("Phone", ph.x - ph.w / 2, ph.x + ph.w / 2, s_top, ph.s + ph.h / 2, -1, ph.d)
-    t.box("ThumbScoop", ph.x - 20, ph.x + 20, s_top - 7, s_top + OVER, -1.5, 8)
-    t.cyl("MagSafe", ms.x, ms.s, ms.w, ph.d - OVER, ph.d + ms.d)
-    # Relief for the camera plateau on the phone back (ACC-13: x 36..76, z -7..33 in the phone frame, 1.5 proud).
-    t.box("CameraRelief", ph.x + 35, ph.x + 77, ph.s - 34, ph.s + 8, ph.d - 0.5, ph.d + 2.5)
-    t.box("MagSafeCable", ms.x - 1.75, ms.x + 1.75, ms.s, 160, ph.d - OVER, ph.d + ms.d - 0.2)
-    cmds += t.cut_into(body)
-    desc = (f"Console phone bay (printed): iPhone 16 Pro Max (cased) landscape in a 12 mm pocket, screen flush, held by "
-            f"the Apple MagSafe puck in a pocket behind it; thumb scoop at the top; MagSafe cable out the bottom; "
-            f"2 x M5 + HNTT5-5. {FRAME_NOTE}")
-    return [*cmds, *finish(body, bay.pn, desc)]
+    tools = FaceTools(p)
+    tools.box("Front", -100, 100, -100, 100, -100, 0)  # trims the neck's nose to the puck face plane
+    tools.cyl("Puck", 0, 0, ms.w, -1, ms.d)
+    tools.box("PuckCable", -1.9, 1.9, cup_r - 6, cup_r + 10, -1, ms.d - 0.2)  # down through the rim (puck cable at -Z)
+    place = [c("solid.move", name=f"{p}_TiltCup", bodies=[f"{p}_CupBody", *tools.names], axis=[1, 0, 0],
+               angle=f"{-L.RAKE_DEG} deg"),
+             c("solid.move", name=f"{p}_PlaceCup", bodies=[f"{p}_CupBody", *tools.names], translate=[0, L.STAND_FACE_Y, 0])]
+    cmds += [*tools.cmds, *place,
+             c("solid.combine", name=f"{p}_JoinCup", target=body, tools=[f"{p}_CupBody"], operation="join"),
+             c("solid.combine", name=f"{p}_Cuts", target=body, tools=tools.names, operation="cut")]
+    for i, x in enumerate((-24.0, 24.0)):  # lower bar slot: 10 mm below the bar centre
+        cmds += [
+            c("solid.cylinder", name=f"{p}_Screw{i + 1}_Cbore", operation="cut", targets=[body], axis="Y", diameter=BORE_D,
+              height=3.0 + OVER, base=[x, -sp_t - OVER, -10.0]),
+            c("solid.cylinder", name=f"{p}_Screw{i + 1}_Hole", operation="cut", targets=[body], axis="Y", diameter=SCREW_D,
+              height=sp_t + 2 * OVER, base=[x, -sp_t - OVER, -10.0]),
+        ]
+    desc = ("Phone stand (printed): spine on the lower crossbar front face (2 x M5 + HNTT5-5), neck, and a d66 cup "
+            "holding the Apple MagSafe puck (25 W) with its face raked 20 deg toward the eye, 55 mm in front of the bar. "
+            "The phone hangs on the magnet alone, landscape for StandBy, so any phone or case fits. Origin: bar front "
+            "face at the bar's centre height, stand centre x; +X right, +Y toward the wall, +Z up")
+    return [*TEMPLATE, *cmds, *finish(body, "ACC-07", desc)]
 
 
 def kvm_key(p: str, body: str, t: FaceTools) -> list[dict]:
@@ -254,8 +274,7 @@ def duckypad_bay(bay: L.Bay, slot_z: Sequence[float]) -> list[dict]:
 
 
 def build_bay(bay: L.Bay, slot_z: Sequence[float]) -> list[dict]:
-    makers = {"ACC-02": lambda: audio_bay(bay, slot_z), "ACC-03": lambda: phone_bay(bay, slot_z),
-              "ACC-05": lambda: duckypad_bay(bay, slot_z)}
+    makers = {"ACC-02": lambda: audio_bay(bay, slot_z), "ACC-05": lambda: duckypad_bay(bay, slot_z)}
     return [*TEMPLATE, *makers[bay.pn]()]
 
 
@@ -301,6 +320,7 @@ def main() -> None:
     for bay in L.BAYS:
         write(bay.stem, build_bay(bay, slot_z))
     write("ACC-06_Inlay", build_inlay())
+    write("ACC-07_PhoneStand", build_stand())
 
 
 if __name__ == "__main__":

@@ -1,0 +1,352 @@
+{
+ "generated_by": "parts/src/ACC-01-06_console_gen.py",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PHS_Spine",
+    "body_name": "PhoneStand",
+    "operation": "new",
+    "corner": [
+     -35.0,
+     -9.0,
+     -20.0
+    ],
+    "length": 70.0,
+    "width": 9.0,
+    "height": 40.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PHS_Neck",
+    "operation": "join",
+    "targets": [
+     "PhoneStand"
+    ],
+    "corner": [
+     -12.0,
+     -63.0,
+     -12.0
+    ],
+    "length": 24.0,
+    "width": 54.1,
+    "height": 24.0
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "PHS_Cup",
+    "body_name": "PHS_CupBody",
+    "operation": "new",
+    "axis": "Y",
+    "diameter": 66.0,
+    "height": 9.2,
+    "base": [
+     0,
+     -0.2,
+     0
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PHS_T_Front",
+    "body_name": "PHS_T_Front",
+    "operation": "new",
+    "corner": [
+     -100,
+     -100,
+     -100
+    ],
+    "length": 200,
+    "width": 100,
+    "height": 200
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "PHS_T_Puck",
+    "body_name": "PHS_T_Puck",
+    "operation": "new",
+    "axis": "Y",
+    "diameter": 55.8,
+    "height": 5.6,
+    "base": [
+     0,
+     -1,
+     0
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "PHS_T_PuckCable",
+    "body_name": "PHS_T_PuckCable",
+    "operation": "new",
+    "corner": [
+     -1.9,
+     -1,
+     -43.0
+    ],
+    "length": 3.8,
+    "width": 5.4,
+    "height": 16.0
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "PHS_TiltCup",
+    "bodies": [
+     "PHS_CupBody",
+     "PHS_T_Front",
+     "PHS_T_Puck",
+     "PHS_T_PuckCable"
+    ],
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "angle": "-20.0 deg"
+   }
+  },
+  {
+   "command": "solid.move",
+   "params": {
+    "name": "PHS_PlaceCup",
+    "bodies": [
+     "PHS_CupBody",
+     "PHS_T_Front",
+     "PHS_T_Puck",
+     "PHS_T_PuckCable"
+    ],
+    "translate": [
+     0,
+     -55.0,
+     0
+    ]
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "name": "PHS_JoinCup",
+    "target": "PhoneStand",
+    "tools": [
+     "PHS_CupBody"
+    ],
+    "operation": "join"
+   }
+  },
+  {
+   "command": "solid.combine",
+   "params": {
+    "name": "PHS_Cuts",
+    "target": "PhoneStand",
+    "tools": [
+     "PHS_T_Front",
+     "PHS_T_Puck",
+     "PHS_T_PuckCable"
+    ],
+    "operation": "cut"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "PHS_Screw1_Cbore",
+    "operation": "cut",
+    "targets": [
+     "PhoneStand"
+    ],
+    "axis": "Y",
+    "diameter": 10.0,
+    "height": 3.1,
+    "base": [
+     -24.0,
+     -9.1,
+     -10.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "PHS_Screw1_Hole",
+    "operation": "cut",
+    "targets": [
+     "PhoneStand"
+    ],
+    "axis": "Y",
+    "diameter": 5.5,
+    "height": 9.2,
+    "base": [
+     -24.0,
+     -9.1,
+     -10.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "PHS_Screw2_Cbore",
+    "operation": "cut",
+    "targets": [
+     "PhoneStand"
+    ],
+    "axis": "Y",
+    "diameter": 10.0,
+    "height": 3.1,
+    "base": [
+     24.0,
+     -9.1,
+     -10.0
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "PHS_Screw2_Hole",
+    "operation": "cut",
+    "targets": [
+     "PhoneStand"
+    ],
+    "axis": "Y",
+    "diameter": 5.5,
+    "height": 9.2,
+    "base": [
+     24.0,
+     -9.1,
+     -10.0
+    ]
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "PhoneStand"
+    ],
+    "material": "ABS"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "PhoneStand"
+    ],
+    "color": "#34373b"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "ACC-07",
+     "description": "Phone stand (printed): spine on the lower crossbar front face (2 x M5 + HNTT5-5), neck, and a d66 cup holding the Apple MagSafe puck (25 W) with its face raked 20 deg toward the eye, 55 mm in front of the bar. The phone hangs on the magnet alone, landscape for StandBy, so any phone or case fits. Origin: bar front face at the bar's centre height, stand centre x; +X right, +Y toward the wall, +Z up",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "ASA/PETG print (ABS density)",
+      "ReleaseState": "WIP",
+      "Source": "3D printed (user's printer), concept 2026-11-02; device sizes partly estimated (see ACC_layout)"
+     }
+    }
+   }
+  }
+ ]
+}

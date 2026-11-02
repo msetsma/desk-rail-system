@@ -92,11 +92,11 @@
     "body_name": "Inlay_Strip",
     "operation": "new",
     "corner": [
-     -252.9,
+     -162.9,
      0,
      -125.4
     ],
-    "length": 505.8,
+    "length": 325.8,
     "width": 1.4,
     "height": 2.8
    }
@@ -153,7 +153,7 @@
    "params": {
     "values": {
      "part_number": "ACC-06",
-     "description": "Console inlay line (printed, light grey): 506 mm strip pressed flush into the groove across all four bays, the console's light grey line. Origin: console top line on the lower crossbar front face at the console centre x (con_x); +X right, +Y toward the wall, +Z up",
+     "description": "Console inlay line (printed, light grey): 326 mm strip pressed flush into the groove across all four bays, the console's light grey line. Origin: console top line on the lower crossbar front face at the console centre x (con_x); +X right, +Y toward the wall, +Z up",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

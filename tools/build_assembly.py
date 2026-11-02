@@ -85,8 +85,9 @@ _LEG_X = "(frame_w/2 - leg_inset)"
 # Console frame (parts/src/ACC_layout.py): the top line on the lower crossbar front face, at con_x.
 _CON = ("con_x", "stile_front", "desk_h + bar1_z + rail_l/2 + con_top")
 # Devices sit in the 20 deg raked face: world +Z seen in a device's own frame (face toward -Y, +Z up the face).
-_DEVICE_MOUNTS = (("hub", 0.0), ("scarlett", 0.0), ("phone", 0.0), ("magsafe", "phone"), ("kvm", 0.0),
-                  ("duckypad", 0.0))
+_DEVICE_MOUNTS = (("hub", 0.0), ("scarlett", 0.0), ("kvm", 0.0), ("duckypad", 0.0))
+# Phone stand (ACC-07) frame: bar front face at the bar's centre height.
+_STAND_Z = "desk_h + bar1_z"
 # ACC-15 fingerprint dongle frame: sensor face -Y, USB-C plug out of +X (base at x 15, centred at y 3.5).
 _FP_PLUG_BASE = (15.0, 3.5)
 
@@ -112,6 +113,23 @@ def _fingerprint_in_hub(L: object) -> Occurrence:
                       _plus(z, round(oz, 3)), zl=(-uy, -uz, 0), xl=(0, 0, -1))
 
 
+def _phone_stand(L: object) -> list[Occurrence]:
+    """ACC-07 stand on the bar, the MagSafe puck in its cup, the phone hanging on the puck (back on the puck face)."""
+    x = _plus(_CON[0], L.STAND_X)  # type: ignore[attr-defined]
+    _, ny, nz = L.inward()  # type: ignore[attr-defined]
+    _, uy, uz = L.up_face()  # type: ignore[attr-defined]
+    phone, puck = L.DEVICES["phone"], L.DEVICES["magsafe"]  # type: ignore[attr-defined]
+    face_y = L.STAND_FACE_Y  # type: ignore[attr-defined]
+    tilt = (0, -uy, uz)
+    return [
+        _occ("PhoneStand", "ACC-07_PhoneStand", _ACC, x, "stile_front", _STAND_Z),
+        Occurrence(puck.stem.split("_", 1)[1], puck.stem, _ACC, x, _plus("stile_front", face_y), _STAND_Z, zl=tilt),
+        Occurrence(phone.stem.split("_", 1)[1], phone.stem, _ACC, x,
+                   _plus("stile_front", round(face_y - phone.d * ny, 3)), _plus(_STAND_Z, round(-phone.d * nz, 3)),
+                   zl=tilt),
+    ]
+
+
 def _console_occurrences() -> tuple[Occurrence, ...]:
     """Bays and inlay in the console frame; devices at their pocket centres, tilted with the face; grommet."""
     sys.path.insert(0, str(PARTS / "src"))
@@ -128,6 +146,7 @@ def _console_occurrences() -> tuple[Occurrence, ...]:
         occs.append(Occurrence(dev.stem.split("_", 1)[1], dev.stem, _ACC, _plus(x, px), _plus(y, py), _plus(z, pz),
                                zl=(0, -sin, cos)))
     occs.append(_fingerprint_in_hub(L))
+    occs += _phone_stand(L)
     occs.append(_occ("Grommet", "ACC-01_Grommet", _ACC, "0 mm", "grom_y", "desk_h"))
     return tuple(occs)
 _CH = "(ch_bar_gap/2 + ch_bar_w/2)"

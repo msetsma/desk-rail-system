@@ -20,19 +20,26 @@ from dataclasses import dataclass
 
 __all__ = [
     "RAKE_DEG", "D_TOP", "HEIGHT", "WIDTH", "FACE_LEN", "SEAM_GAP", "BAY_EDGES", "Bay", "BAYS", "Device", "DEVICES",
-    "face_point", "inward", "up_face", "device_mount", "HUB_FP_PORT_X", "TAIL_Y", "INLAY_S", "INLAY_W", "INLAY_D", "GROOVE_S",
+    "face_point", "inward", "up_face", "device_mount", "HUB_FP_PORT_X", "STAND_X", "STAND_FACE_Y", "STAND_CUP_D", "STAND_CUP_T", "TAIL_Y", "INLAY_S", "INLAY_W", "INLAY_D", "GROOVE_S",
 ]
 
 RAKE_DEG = 20.0  # face lean back from vertical, toward the seated eye (24 deg below level)
 D_TOP = 60.0  # console depth at the top line (bar front face to the top-front edge)
 HEIGHT = 124.0  # top line to console bottom (z)
-WIDTH = 524.0
+WIDTH = 344.0
 SEAM_GAP = 0.5  # each bay stops this far short of a shared edge: a 1 mm seam line between bays
-BAY_EDGES = (-262.0, -92.0, 88.0, 262.0)  # audio 170, phone 180, duckyPad + KVM key 174
+BAY_EDGES = (-172.0, -2.0, 172.0)  # audio 170, duckyPad + KVM key 174
 TAIL_Y = 12.0  # audio bay tail under the bar reaches this far behind the bar front face (bar back is +20)
 GROOVE_S = 10.6  # parting-line groove centre (s): level with the bar top when con_top = 10
 INLAY_S, INLAY_W, INLAY_D = 124.0, 3.0, 1.5  # light grey inlay line: centre s, width, depth
 HUB_FP_PORT_X = 54.0  # fingerprint dongle in the hub's rightmost USB-C port (hub frame x, ACC-12 port pitch 18)
+
+# Phone stand (ACC-07), its own part on the bar, left of the console. Stand frame: origin on the bar front face at
+# the bar's centre height, at console-frame x STAND_X; +X right, +Y toward the wall, +Z up. The phone hangs on the
+# MagSafe puck alone (any phone or case), so only the puck is held; open space around it.
+STAND_X = -330.0  # stand centre in the console frame: phone (landscape) clears the console's left end by ~70 mm
+STAND_FACE_Y = -55.0  # puck face centre, in front of the bar front face
+STAND_CUP_D, STAND_CUP_T = 66.0, 9.0  # puck cup diameter and thickness behind the puck face
 
 _SIN, _COS = math.sin(math.radians(RAKE_DEG)), math.cos(math.radians(RAKE_DEG))
 FACE_LEN = HEIGHT / _COS  # face length along s
@@ -66,9 +73,9 @@ class Bay:
 
 BAYS = (
     Bay("ACC-02", "ACC-02_Bay_Audio", BAY_EDGES[0], BAY_EDGES[1] - SEAM_GAP, "Scarlett Solo + USB hub"),
-    Bay("ACC-03", "ACC-03_Bay_Phone", BAY_EDGES[1] + SEAM_GAP, BAY_EDGES[2] - SEAM_GAP, "iPhone StandBy + MagSafe"),
-    # ACC-04 (control bay) retired 2026-11-02: the fingerprint dongle plugs into the hub, the KVM key moved here.
-    Bay("ACC-05", "ACC-05_Bay_duckyPad", BAY_EDGES[2] + SEAM_GAP, BAY_EDGES[3], "KVM key + duckyPad Pro"),
+    # ACC-03 (phone bay) and ACC-04 (control bay) retired 2026-11-02: the phone moved to its own stand (ACC-07),
+    # the fingerprint dongle plugs into the hub, the KVM key moved into the duckyPad bay.
+    Bay("ACC-05", "ACC-05_Bay_duckyPad", BAY_EDGES[1] + SEAM_GAP, BAY_EDGES[2], "KVM key + duckyPad Pro"),
 )
 
 
@@ -87,19 +94,19 @@ class Device:
 
 
 DEVICES = {
-    "hub": Device("ACC-12", "ACC-12_USBHub_ABFCRTTW", -177.0, 27.0, 130.0, 30.0, 17.0,
+    "hub": Device("ACC-12", "ACC-12_USBHub_ABFCRTTW", -87.0, 27.0, 130.0, 30.0, 17.0,
                   "ABFCRTTW 7-port USB 3.0, 130 x 30 x 17 (listings), ports face out"),
-    "scarlett": Device("ACC-11", "ACC-11_ScarlettSolo3", -177.0, 82.0, 144.0, 44.0, 96.0,
+    "scarlett": Device("ACC-11", "ACC-11_ScarlettSolo3", -87.0, 82.0, 144.0, 44.0, 96.0,
                        "Focusrite Scarlett Solo 3rd Gen, ~144 x 96 x 44, MEASURE"),
     "phone": Device("ACC-13", "ACC-13_iPhone16ProMax", -2.0, 62.0, 168.0, 82.0, 12.0,
-                    "iPhone 16 Pro Max in a case, landscape, ~168 x 82 x 12, MEASURE the case"),
+                    "iPhone 16 Pro Max in a case, landscape on the ACC-07 stand, ~168 x 82 x 12, MEASURE the case"),
     "magsafe": Device("ACC-14", "ACC-14_MagSafeCharger", -2.0, 62.0, 55.8, 55.8, 4.6,
-                      "Apple MagSafe Charger 25 W, d55.5 x 4.5, behind the phone (face at the phone pocket floor)"),
-    "kvm": Device("ACC-17", "ACC-17_KVMKey", 103.0, 62.0, 14.0, 14.0, 1.5,
+                      "Apple MagSafe Charger 25 W, d55.5 x 4.5, in the ACC-07 stand cup; the phone hangs on it"),
+    "kvm": Device("ACC-17", "ACC-17_KVMKey", 13.0, 62.0, 14.0, 14.0, 1.5,
                   "MX switch in a 14 x 14 cut through a 1.5 mm plate, light grey 1u cap"),
     "fingerprint": Device("ACC-15", "ACC-15_FingerprintDongle", 0.0, 0.0, 30.0, 15.0, 7.0,
                           "USB-C fingerprint dongle, ~30 x 15 x 7, MEASURE; plugs into the hub (HUB_FP_PORT_X), no pocket"),
-    "duckypad": Device("ACC-16", "ACC-16_duckyPadPro", 190.0, 61.8, 116.6, 103.6, 25.0,
+    "duckypad": Device("ACC-16", "ACC-16_duckyPadPro", 100.0, 61.8, 116.6, 103.6, 25.0,
                        "duckyPad Pro in the user's standard case, 116 x 103 x 25 (+0.3 clearance per side)"),
 }
 
