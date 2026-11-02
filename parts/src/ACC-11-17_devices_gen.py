@@ -19,7 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "parts/src"))
-from ACC_layout import DEVICES  # noqa: E402
+from ACC_layout import DEVICES, HUB_FP_PORT_X  # noqa: E402
 
 __all__ = ["SCRIPTS", "main"]
 
@@ -133,7 +133,7 @@ def hub() -> list[Cmd]:
     d = DEVICES["hub"]
     w, h, dep = d.w, d.h, d.d
     body, blk = "Hub_Body", "Hub_PortsCable"
-    pitch, recess, port_d = 18.0, 1.0, 6.0  # port pitch, port insert recess, port opening depth
+    pitch, recess, port_d = 18.0, 1.0, 7.0  # port pitch, port insert recess, port opening depth (USB-C plug 6.5)
     ports = [(-3 * pitch + i * pitch, "A" if i < 4 else "C") for i in range(7)]
     size = {"A": (13.0, 5.0), "C": (9.0, 3.2)}
     cmds = [box("HUB_Body", body, (-w / 2, w / 2), (0, dep), (-h / 2, h / 2))]
@@ -141,7 +141,8 @@ def hub() -> list[Cmd]:
         pw, ph = size[kind]
         cmds.append(box(f"HUB_Port{i + 1}_{kind}", body, (x - pw / 2, x + pw / 2), (-EPS, port_d), (-ph / 2, ph / 2), "cut"))
     inside = [box(f"HUB_PortInside{i + 1}", blk, (x - size[k][0] / 2, x + size[k][0] / 2), (recess, port_d),
-                  (-size[k][1] / 2, size[k][1] / 2)) for i, (x, k) in enumerate(ports)]
+                  (-size[k][1] / 2, size[k][1] / 2)) for i, (x, k) in enumerate(ports)
+              if x != HUB_FP_PORT_X]  # the fingerprint dongle's plug fills that port (ACC-15)
     inside.append(cyl("HUB_Cable", blk, "X", [-w / 2 - 12.0, dep * 0.75, 0.0], 3.0, 12.0))  # stub stays inside the bay cable cavity
     cmds += merge(blk, inside)
     mat = "Al 6063-T5"

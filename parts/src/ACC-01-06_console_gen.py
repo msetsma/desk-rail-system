@@ -1,12 +1,12 @@
-"""Generate the lower-crossbar console parts: ACC-01 grommet, ACC-02..05 printed bays, ACC-06 inlay strip.
+"""Generate the lower-crossbar console parts: ACC-01 grommet, ACC-02/03/05 printed bays, ACC-06 inlay strip.
 
 Layout (bay edges, face rake, device pockets) comes from ACC_layout.py, shared with the device generator, so a
 pocket and the device it holds can't drift apart. The bays use the console frame (ACC_layout docstring): origin on
 the bar front face at the top line, console centre x. Each bay is a box trimmed by the raked face; pockets are
 boxes built in a "face frame" (x, depth into the console, up the face) and turned into place in one batch, then cut
 with one combine. Screws: M5 button heads through a 6 mm spine into HNTT5-5 drop-in T-nuts in the bar's two front
-slots (z from the skeleton: con_top + 10 and + 30 below the top line); the control bay hangs on its neighbours by
-d4 dowel pins. Cables leave each bay at the back, over the bar top or below its bottom, to run behind the rails.
+slots (z from the skeleton: con_top + 10 and + 30 below the top line); d4 dowel pins align the bays at the seams
+(ACC-04, the control bay, was retired 2026-11-02). Cables leave each bay at the back, over the bar top or below its bottom, to run behind the rails.
 
     python parts/src/ACC-01-06_console_gen.py
 """
@@ -218,31 +218,18 @@ def phone_bay(bay: L.Bay, slot_z: Sequence[float]) -> list[dict]:
     return [*cmds, *finish(body, bay.pn, desc)]
 
 
-def control_bay(bay: L.Bay) -> list[dict]:
-    p, body = "CTL", "Bay_Control"
-    kv, fp = L.DEVICES["kvm"], L.DEVICES["fingerprint"]
-    t = FaceTools(p)
-    cmds = wedge(p, body, bay, t)
-    cmds += dowels(p, body, ((bay.x0, 1), (bay.x1, -1)))
+def kvm_key(p: str, body: str, t: FaceTools) -> list[dict]:
+    """KVM key: MX switch in a 14 x 14 cut through a 1.5 mm plate, cavity behind, channel to a 3 mm back wall below
+    the bar with a d6.2 hole for the 3.5 mm TRS panel jack (cable to the KVM under the desk)."""
+    kv = L.DEVICES["kvm"]
     t.box("KeyPlate", kv.x - 7, kv.x + 7, kv.s - 7, kv.s + 7, -1, kv.d + OVER)
     t.box("KeySwitch", kv.x - 7.8, kv.x + 7.8, kv.s - 7.8, kv.s + 7.8, kv.d, 22)
-    t.box("Fingerprint", fp.x - fp.w / 2, fp.x + fp.w / 2, fp.s - fp.h / 2, fp.s + fp.h / 2, -1, fp.d)
-    ext_x1 = bay.x1 - 4.5
-    t.box("FpExtension", fp.x + fp.w / 2 - OVER, ext_x1, fp.s - 6, fp.s + 6, 2, 12)
-    cmds += t.cut_into(body)
     ky, kz = L.face_point(0, kv.s)[1:]
-    cmds += [
-        # KVM: switch cavity to a 3 mm back wall below the bar, d6.2 hole for the 3.5 mm TRS panel jack.
+    return [
         world_box(f"{p}_KeyChannel", body, kv.x - 6, kv.x + 6, ky + 17, -3.0, kz - 14, kz - 2),
         c("solid.cylinder", name=f"{p}_TRSJack", operation="cut", targets=[body], axis="Y", diameter=6.2,
           height=3.0 + 2 * OVER, base=[f(kv.x), -3.0 - OVER, f(kz - 8)]),
-        # Fingerprint: USB-C extension cavity, channel out the back below the bar.
-        world_box(f"{p}_FpChannel", body, ext_x1 - 18, ext_x1 - 2, ky + 8, OVER, kz - 12, kz + 2),
     ]
-    desc = (f"Console control bay (printed): KVM key (MX switch in a 1.5 mm plate, light grey cap) wired to a 3.5 mm "
-            f"TRS panel jack in the back wall, USB-C fingerprint dongle flush in a recess with a panel-mount USB-C "
-            f"extension behind; hangs on its neighbours by 4 d4 dowels. {FRAME_NOTE}")
-    return [*cmds, *finish(body, bay.pn, desc)]
 
 
 def duckypad_bay(bay: L.Bay, slot_z: Sequence[float]) -> list[dict]:
@@ -255,20 +242,20 @@ def duckypad_bay(bay: L.Bay, slot_z: Sequence[float]) -> list[dict]:
     t.box("Pocket", dp.x - dp.w / 2, dp.x + dp.w / 2, s_top, dp.s + dp.h / 2, -1, dp.d)
     usb_x = dp.x + 32.5  # case USB-C cut-out: +Z edge, device x 24.5..40.5 (ACC-16, from the user's STEP)
     t.box("UsbPlug", usb_x - 12, usb_x + 12, 2, s_top + OVER, 3, 22)
+    key_cmds = kvm_key(p, body, t)
     cmds += t.cut_into(body)
     uy = L.face_point(0, 2)[1]
-    cmds += [
-        world_box(f"{p}_UsbBack", body, usb_x - 10, usb_x + 10, uy + 6, OVER, -8.5, -2.0),
-    ]
-    desc = (f"Console duckyPad bay (printed): the user's duckyPad Pro (standard case) sunk 25 mm so its top plate is "
-            f"flush with the 20 deg face; USB-C plug cavity at the rear edge, cable out over the bar top; "
-            f"4 x M5 + HNTT5-5. {FRAME_NOTE}")
+    cmds += [world_box(f"{p}_UsbBack", body, usb_x - 10, usb_x + 10, uy + 6, OVER, -8.5, -2.0), *key_cmds]
+    desc = (f"Console duckyPad bay (printed): the KVM key (MX switch in a 1.5 mm plate, light grey cap, wired to a "
+            f"3.5 mm TRS panel jack in the back wall) in a column left of the user's duckyPad Pro (standard case), "
+            f"which sinks 25 mm so its top plate is flush with the 20 deg face; duckyPad USB-C plug cavity at the rear "
+            f"edge, cable out over the bar top; 4 x M5 + HNTT5-5. {FRAME_NOTE}")
     return [*cmds, *finish(body, bay.pn, desc)]
 
 
 def build_bay(bay: L.Bay, slot_z: Sequence[float]) -> list[dict]:
     makers = {"ACC-02": lambda: audio_bay(bay, slot_z), "ACC-03": lambda: phone_bay(bay, slot_z),
-              "ACC-04": lambda: control_bay(bay), "ACC-05": lambda: duckypad_bay(bay, slot_z)}
+              "ACC-05": lambda: duckypad_bay(bay, slot_z)}
     return [*TEMPLATE, *makers[bay.pn]()]
 
 

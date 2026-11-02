@@ -92,11 +92,11 @@
     "body_name": "Bay_duckyPad",
     "operation": "new",
     "corner": [
-     153.5,
+     88.5,
      -122.0,
      -124.0
     ],
-    "length": 143.5,
+    "length": 173.5,
     "width": 122.0,
     "height": 124.0
    }
@@ -108,11 +108,11 @@
     "body_name": "DPPF_T_Front",
     "operation": "new",
     "corner": [
-     152.5,
+     87.5,
      -300,
      -400
     ],
-    "length": 145.5,
+    "length": 175.5,
     "width": 300,
     "height": 500
    }
@@ -164,7 +164,7 @@
     "body": "Bay_duckyPad",
     "edges": [
      [
-      297.0,
+      262.0,
       -82.566,
       -62.0
      ]
@@ -184,7 +184,7 @@
     "diameter": 10.0,
     "height": 74.0,
     "base": [
-     185.0,
+     150.0,
      -80.0,
      -20.0
     ]
@@ -202,7 +202,7 @@
     "diameter": 5.5,
     "height": 6.2,
     "base": [
-     185.0,
+     150.0,
      -6.1,
      -20.0
     ]
@@ -220,7 +220,7 @@
     "diameter": 10.0,
     "height": 74.0,
     "base": [
-     185.0,
+     150.0,
      -80.0,
      -40.0
     ]
@@ -238,7 +238,7 @@
     "diameter": 5.5,
     "height": 6.2,
     "base": [
-     185.0,
+     150.0,
      -6.1,
      -40.0
     ]
@@ -256,7 +256,7 @@
     "diameter": 10.0,
     "height": 74.0,
     "base": [
-     240.0,
+     205.0,
      -80.0,
      -20.0
     ]
@@ -274,7 +274,7 @@
     "diameter": 5.5,
     "height": 6.2,
     "base": [
-     240.0,
+     205.0,
      -6.1,
      -20.0
     ]
@@ -292,7 +292,7 @@
     "diameter": 10.0,
     "height": 74.0,
     "base": [
-     240.0,
+     205.0,
      -80.0,
      -40.0
     ]
@@ -310,7 +310,7 @@
     "diameter": 5.5,
     "height": 6.2,
     "base": [
-     240.0,
+     205.0,
      -6.1,
      -40.0
     ]
@@ -328,7 +328,7 @@
     "diameter": 4.2,
     "height": 8.1,
     "base": [
-     153.4,
+     88.4,
      -30.0,
      -30.0
     ]
@@ -346,7 +346,7 @@
     "diameter": 4.2,
     "height": 8.1,
     "base": [
-     153.4,
+     88.4,
      -40.0,
      -90.0
     ]
@@ -359,11 +359,11 @@
     "body_name": "DPP_T_Groove",
     "operation": "new",
     "corner": [
-     152.5,
+     87.5,
      -1,
      -11.6
     ],
-    "length": 135.5,
+    "length": 165.5,
     "width": 2,
     "height": 2.0
    }
@@ -375,11 +375,11 @@
     "body_name": "DPP_T_InlayGroove",
     "operation": "new",
     "corner": [
-     152.5,
+     87.5,
      -1,
      -125.5
     ],
-    "length": 135.5,
+    "length": 165.5,
     "width": 2.5,
     "height": 3.0
    }
@@ -391,7 +391,7 @@
     "body_name": "DPP_T_Pocket",
     "operation": "new",
     "corner": [
-     166.7,
+     131.7,
      -1,
      -113.6
     ],
@@ -407,13 +407,45 @@
     "body_name": "DPP_T_UsbPlug",
     "operation": "new",
     "corner": [
-     245.5,
+     210.5,
      3,
      -10.1
     ],
     "length": 24.0,
     "width": 19,
     "height": 8.1
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_T_KeyPlate",
+    "body_name": "DPP_T_KeyPlate",
+    "operation": "new",
+    "corner": [
+     96.0,
+     -1,
+     -69.0
+    ],
+    "length": 14.0,
+    "width": 2.6,
+    "height": 14.0
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_T_KeySwitch",
+    "body_name": "DPP_T_KeySwitch",
+    "operation": "new",
+    "corner": [
+     95.2,
+     1.5,
+     -69.8
+    ],
+    "length": 15.6,
+    "width": 20.5,
+    "height": 15.6
    }
   },
   {
@@ -424,7 +456,9 @@
      "DPP_T_Groove",
      "DPP_T_InlayGroove",
      "DPP_T_Pocket",
-     "DPP_T_UsbPlug"
+     "DPP_T_UsbPlug",
+     "DPP_T_KeyPlate",
+     "DPP_T_KeySwitch"
     ],
     "axis": [
      1,
@@ -442,7 +476,9 @@
      "DPP_T_Groove",
      "DPP_T_InlayGroove",
      "DPP_T_Pocket",
-     "DPP_T_UsbPlug"
+     "DPP_T_UsbPlug",
+     "DPP_T_KeyPlate",
+     "DPP_T_KeySwitch"
     ],
     "translate": [
      0,
@@ -460,7 +496,9 @@
      "DPP_T_Groove",
      "DPP_T_InlayGroove",
      "DPP_T_Pocket",
-     "DPP_T_UsbPlug"
+     "DPP_T_UsbPlug",
+     "DPP_T_KeyPlate",
+     "DPP_T_KeySwitch"
     ],
     "operation": "cut"
    }
@@ -474,13 +512,49 @@
      "Bay_duckyPad"
     ],
     "corner": [
-     247.5,
+     212.5,
      -54.684,
      -8.5
     ],
     "length": 20.0,
     "width": 54.784,
     "height": 6.5
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "DPP_KeyChannel",
+    "operation": "cut",
+    "targets": [
+     "Bay_duckyPad"
+    ],
+    "corner": [
+     97.0,
+     -64.205,
+     -72.261
+    ],
+    "length": 12.0,
+    "width": 61.205,
+    "height": 12.0
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "DPP_TRSJack",
+    "operation": "cut",
+    "targets": [
+     "Bay_duckyPad"
+    ],
+    "axis": "Y",
+    "diameter": 6.2,
+    "height": 3.2,
+    "base": [
+     103.0,
+     -3.1,
+     -66.261
+    ]
    }
   },
   {
@@ -506,7 +580,7 @@
    "params": {
     "values": {
      "part_number": "ACC-05",
-     "description": "Console duckyPad bay (printed): the user's duckyPad Pro (standard case) sunk 25 mm so its top plate is flush with the 20 deg face; USB-C plug cavity at the rear edge, cable out over the bar top; 4 x M5 + HNTT5-5. Origin: console top line on the lower crossbar front face at the console centre x (con_x); +X right, +Y toward the wall, +Z up",
+     "description": "Console duckyPad bay (printed): the KVM key (MX switch in a 1.5 mm plate, light grey cap, wired to a 3.5 mm TRS panel jack in the back wall) in a column left of the user's duckyPad Pro (standard case), which sinks 25 mm so its top plate is flush with the 20 deg face; duckyPad USB-C plug cavity at the rear edge, cable out over the bar top; 4 x M5 + HNTT5-5. Origin: console top line on the lower crossbar front face at the console centre x (con_x); +X right, +Y toward the wall, +Z up",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

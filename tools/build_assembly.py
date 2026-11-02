@@ -86,11 +86,30 @@ _LEG_X = "(frame_w/2 - leg_inset)"
 _CON = ("con_x", "stile_front", "desk_h + bar1_z + rail_l/2 + con_top")
 # Devices sit in the 20 deg raked face: world +Z seen in a device's own frame (face toward -Y, +Z up the face).
 _DEVICE_MOUNTS = (("hub", 0.0), ("scarlett", 0.0), ("phone", 0.0), ("magsafe", "phone"), ("kvm", 0.0),
-                  ("fingerprint", 0.0), ("duckypad", 0.0))
+                  ("duckypad", 0.0))
+# ACC-15 fingerprint dongle frame: sensor face -Y, USB-C plug out of +X (base at x 15, centred at y 3.5).
+_FP_PLUG_BASE = (15.0, 3.5)
 
 
 def _plus(expr: str, mm: float) -> str:
     return f"{expr} {'-' if mm < 0 else '+'} {abs(mm)} mm"
+
+
+def _fingerprint_in_hub(L: object) -> Occurrence:
+    """The fingerprint dongle plugged into the hub's rightmost USB-C port, sticking out toward the user.
+
+    Dongle axes in the console frame: +X (plug) -> into the console (inward), -Y (sensor) -> up the face, so its
+    +Z -> world -X. The plug base sits on the hub face at the port centre."""
+    hub, fp = L.DEVICES["hub"], L.DEVICES["fingerprint"]  # type: ignore[attr-defined]
+    _, ny, nz = L.inward()  # type: ignore[attr-defined]
+    _, uy, uz = L.up_face()  # type: ignore[attr-defined]
+    px, py, pz = L.face_point(hub.x + L.HUB_FP_PORT_X, hub.s)  # type: ignore[attr-defined]
+    bx, by = _FP_PLUG_BASE
+    oy = py - (bx * ny - by * uy)
+    oz = pz - (bx * nz - by * uz)
+    x, y, z = _CON
+    return Occurrence(fp.stem.split("_", 1)[1], fp.stem, _ACC, _plus(x, round(px, 3)), _plus(y, round(oy, 3)),
+                      _plus(z, round(oz, 3)), zl=(-uy, -uz, 0), xl=(0, 0, -1))
 
 
 def _console_occurrences() -> tuple[Occurrence, ...]:
@@ -108,6 +127,7 @@ def _console_occurrences() -> tuple[Occurrence, ...]:
         dev = L.DEVICES[key]
         occs.append(Occurrence(dev.stem.split("_", 1)[1], dev.stem, _ACC, _plus(x, px), _plus(y, py), _plus(z, pz),
                                zl=(0, -sin, cos)))
+    occs.append(_fingerprint_in_hub(L))
     occs.append(_occ("Grommet", "ACC-01_Grommet", _ACC, "0 mm", "grom_y", "desk_h"))
     return tuple(occs)
 _CH = "(ch_bar_gap/2 + ch_bar_w/2)"

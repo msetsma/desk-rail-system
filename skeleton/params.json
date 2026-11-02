@@ -1148,8 +1148,8 @@
     "unit": "mm"
   },
   {
-    "comment": "Console (ACC-00): centre x of the lower-crossbar console. Its right end (con_x + 297) stays 10 mm left of the laptop tray zone (x 274, 2026-11-02 layout)",
-    "expression": "-33 mm",
+    "comment": "Console (ACC-00): centre x of the lower-crossbar console, centred under the main monitor. Its right end (con_x + 262) stays 12 mm left of the laptop tray zone (x 274, 2026-11-02 layout)",
+    "expression": "0 mm",
     "favorite": false,
     "name": "con_x",
     "unit": "mm"
@@ -1162,8 +1162,8 @@
     "unit": "mm"
   },
   {
-    "comment": "Grommet (ACC-01): hole centre y (world), on the centreline between the rear channel bar (y 192-211) and the desktop rear edge (y 330); user drills it",
-    "expression": "270 mm",
+    "comment": "Grommet (ACC-01): hole centre y (world), on the centreline midway between the rear channel bars (inner y 76-96, outer y 192-211: 18 mm clear each side) for shorter keyboard cables; user drills it",
+    "expression": "144 mm",
     "favorite": false,
     "name": "grom_y",
     "unit": "mm"

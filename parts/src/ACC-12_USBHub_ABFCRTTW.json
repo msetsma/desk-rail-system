@@ -111,7 +111,7 @@
      -2.5
     ],
     "length": "13.0 mm",
-    "width": "6.1 mm",
+    "width": "7.1 mm",
     "height": "5.0 mm",
     "operation": "cut",
     "targets": [
@@ -129,7 +129,7 @@
      -2.5
     ],
     "length": "13.0 mm",
-    "width": "6.1 mm",
+    "width": "7.1 mm",
     "height": "5.0 mm",
     "operation": "cut",
     "targets": [
@@ -147,7 +147,7 @@
      -2.5
     ],
     "length": "13.0 mm",
-    "width": "6.1 mm",
+    "width": "7.1 mm",
     "height": "5.0 mm",
     "operation": "cut",
     "targets": [
@@ -165,7 +165,7 @@
      -2.5
     ],
     "length": "13.0 mm",
-    "width": "6.1 mm",
+    "width": "7.1 mm",
     "height": "5.0 mm",
     "operation": "cut",
     "targets": [
@@ -183,7 +183,7 @@
      -1.6
     ],
     "length": "9.0 mm",
-    "width": "6.1 mm",
+    "width": "7.1 mm",
     "height": "3.2 mm",
     "operation": "cut",
     "targets": [
@@ -201,7 +201,7 @@
      -1.6
     ],
     "length": "9.0 mm",
-    "width": "6.1 mm",
+    "width": "7.1 mm",
     "height": "3.2 mm",
     "operation": "cut",
     "targets": [
@@ -219,7 +219,7 @@
      -1.6
     ],
     "length": "9.0 mm",
-    "width": "6.1 mm",
+    "width": "7.1 mm",
     "height": "3.2 mm",
     "operation": "cut",
     "targets": [
@@ -237,7 +237,7 @@
      -2.5
     ],
     "length": "13.0 mm",
-    "width": "5.0 mm",
+    "width": "6.0 mm",
     "height": "5.0 mm",
     "operation": "new",
     "body_name": "Hub_PortsCable"
@@ -253,7 +253,7 @@
      -2.5
     ],
     "length": "13.0 mm",
-    "width": "5.0 mm",
+    "width": "6.0 mm",
     "height": "5.0 mm",
     "operation": "new",
     "body_name": "Hub_PortsCable_1"
@@ -269,7 +269,7 @@
      -2.5
     ],
     "length": "13.0 mm",
-    "width": "5.0 mm",
+    "width": "6.0 mm",
     "height": "5.0 mm",
     "operation": "new",
     "body_name": "Hub_PortsCable_2"
@@ -285,7 +285,7 @@
      -2.5
     ],
     "length": "13.0 mm",
-    "width": "5.0 mm",
+    "width": "6.0 mm",
     "height": "5.0 mm",
     "operation": "new",
     "body_name": "Hub_PortsCable_3"
@@ -301,7 +301,7 @@
      -1.6
     ],
     "length": "9.0 mm",
-    "width": "5.0 mm",
+    "width": "6.0 mm",
     "height": "3.2 mm",
     "operation": "new",
     "body_name": "Hub_PortsCable_4"
@@ -317,26 +317,10 @@
      -1.6
     ],
     "length": "9.0 mm",
-    "width": "5.0 mm",
+    "width": "6.0 mm",
     "height": "3.2 mm",
     "operation": "new",
     "body_name": "Hub_PortsCable_5"
-   }
-  },
-  {
-   "command": "solid.box",
-   "params": {
-    "name": "HUB_PortInside7",
-    "corner": [
-     49.5,
-     1.0,
-     -1.6
-    ],
-    "length": "9.0 mm",
-    "width": "5.0 mm",
-    "height": "3.2 mm",
-    "operation": "new",
-    "body_name": "Hub_PortsCable_6"
    }
   },
   {
@@ -352,7 +336,7 @@
     "diameter": "3.0 mm",
     "height": "12.0 mm",
     "operation": "new",
-    "body_name": "Hub_PortsCable_7"
+    "body_name": "Hub_PortsCable_6"
    }
   },
   {
@@ -366,8 +350,7 @@
      "Hub_PortsCable_3",
      "Hub_PortsCable_4",
      "Hub_PortsCable_5",
-     "Hub_PortsCable_6",
-     "Hub_PortsCable_7"
+     "Hub_PortsCable_6"
     ],
     "operation": "join"
    }
