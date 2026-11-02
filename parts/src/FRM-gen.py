@@ -60,12 +60,48 @@ write("FRM-04_Stile_2040", profile("Profile_HFS5_2040", {"origin": [0, 0, 0], "x
            "Stile, Misumi HFS5-2040 (40 in X, 20 in Y), L = bar2_z - bar1_z - rail_l (between crossbars). Origin: bottom end face centre, +Z up along the bar",
            SRC_DXF))
 
+FELT = "PET felt"
+FELT_COLOR = "#3a3c3f"  # dark grey PET felt (Felt Right "Cast" estimate, refs/visual_black_felt; confirm from samples)
+FELT_SRC = "Modelled from skeleton; 12 mm dark grey PET felt board (refs/visual_black_felt), colour estimated (MEASURE)"
+PNL_W, PNL_H = "(desk_w - 2*pnl_side)", "(pnl_drop + desk_t + pnl_above)"
+COS45 = "0.70710678"
+
+
+def _pt(x: str, z: str) -> list[str]:
+    """XZ-plane sketch point for world (x, z): the XZ sketch's v axis is world -Z (tested 2026-11-02)."""
+    return [x, f"-({z})"]
+
+
+def _corner_arc(sx: int) -> dict:
+    """Top-corner arc of radius pnl_r on side sx (+1 right, -1 left), drawn through its 45 deg point."""
+    cx, cz = f"{sx}*({PNL_W}/2 - pnl_r)", f"{PNL_H} - pnl_r"
+    return c("sketch.arc.three_point", start=_pt(f"{sx}*{PNL_W}/2", cz), end=_pt(cx, PNL_H),
+             through=_pt(f"{cx} + {sx}*pnl_r*{COS45}", f"{cz} + pnl_r*{COS45}"))
+
+
 write("FRM-05_Modesty_panel", [
-    c("solid.box", length="desk_w - 2*pnl_side", width="pnl_t", height="pnl_drop + desk_t + pnl_above",
-      corner=["-(desk_w - 2*pnl_side)/2", "0 mm", "0 mm"], name="Box_Panel", body_name="Modesty_Panel"),
-] + finish("Modesty_Panel", "MDF", "#6b4a32", "FRM-05",
-           "Modesty / privacy panel, 1/4 in sheet, W = desk_w - 2*pnl_side, H = pnl_drop + desk_t + pnl_above. Origin: bottom edge centre of the front (-Y) face, +Y toward the room, +Z up",
-           "Modelled from skeleton (legacy ModestyPanel); walnut-veneer finish to match the KARLBY walnut top, colour estimated (MEASURE)"))
+    c("sketch.create", plane="XZ", name="Panel_Outline"),
+    c("sketch.line", points=[_pt(f"-{PNL_W}/2", f"{PNL_H} - pnl_r"), _pt(f"-{PNL_W}/2", "0 mm"),
+                             _pt(f"{PNL_W}/2", "0 mm"), _pt(f"{PNL_W}/2", f"{PNL_H} - pnl_r")]),
+    _corner_arc(1),
+    c("sketch.line", points=[_pt(f"({PNL_W}/2 - pnl_r)", PNL_H), _pt(f"-({PNL_W}/2 - pnl_r)", PNL_H)]),
+    _corner_arc(-1),
+    c("sketch.finish"),
+    c("solid.extrude", distance="pnl_t", body_name="Modesty_Panel", name="Extrude_Panel"),
+] + finish("Modesty_Panel", FELT, FELT_COLOR, "FRM-05",
+           "Privacy panel, 12 mm PET felt, W = desk_w - 2*pnl_side, H = pnl_drop + desk_t + pnl_above, top corners R pnl_r (V1). "
+           "Origin: bottom edge centre of the front (-Y) face, +Y toward the room, +Z up",
+           FELT_SRC))
+
+write("FRM-08_SidePanel", [
+    c("solid.box", length="pnl_t", width="rail_l + pnl_back_gap + pnl_t", height=f"{PNL_H} - pnl_r",
+      corner=["0 mm", "-(rail_l + pnl_back_gap + pnl_t)/2", "0 mm"], name="Box_SidePanel", body_name="Side_Panel"),
+] + finish("Side_Panel", FELT, FELT_COLOR, "FRM-08",
+           "Side panel (corner return), 12 mm PET felt on the upright's outer face, on 12 mm standoffs clear of the HPTTD5 "
+           "screw heads (7.3 mm). D = rail_l + pnl_back_gap + pnl_t (upright front face to the privacy panel's back face), "
+           "H = privacy panel height - pnl_r (top meets the corner arc's lower end). Origin: bottom edge centre of the inner (-X) face, "
+           "+X outward; the L occurrence is the same file turned 180 deg about Z",
+           FELT_SRC))
 
 
 def knee_brace() -> list[dict]:

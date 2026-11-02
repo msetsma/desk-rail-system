@@ -1,0 +1,144 @@
+{
+ "generated_by": "parts/src/FRM-gen.py",
+ "commands": [
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel powder-coated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al 6063-T5",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Al ADC12 cast",
+    "density_g_cm3": 2.7
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel zinc-plated",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Steel black-oxide",
+    "density_g_cm3": 7.85
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Walnut",
+    "density_g_cm3": 0.66
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "Butcher block (birch)",
+    "density_g_cm3": 0.68
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "ABS",
+    "density_g_cm3": 1.05
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PC",
+    "density_g_cm3": 1.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "MDF",
+    "density_g_cm3": 0.75
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
+   "command": "parameters.import",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "length": "pnl_t",
+    "width": "rail_l + pnl_back_gap + pnl_t",
+    "height": "(pnl_drop + desk_t + pnl_above) - pnl_r",
+    "corner": [
+     "0 mm",
+     "-(rail_l + pnl_back_gap + pnl_t)/2",
+     "0 mm"
+    ],
+    "name": "Box_SidePanel",
+    "body_name": "Side_Panel"
+   }
+  },
+  {
+   "command": "material.assign",
+   "params": {
+    "bodies": [
+     "Side_Panel"
+    ],
+    "material": "PET felt"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "Side_Panel"
+    ],
+    "color": "#3a3c3f"
+   }
+  },
+  {
+   "command": "document.metadata.set",
+   "params": {
+    "values": {
+     "part_number": "FRM-08",
+     "description": "Side panel (corner return), 12 mm PET felt on the upright's outer face, on 12 mm standoffs clear of the HPTTD5 screw heads (7.3 mm). D = rail_l + pnl_back_gap + pnl_t (upright front face to the privacy panel's back face), H = privacy panel height - pnl_r (top meets the corner arc's lower end). Origin: bottom edge centre of the inner (-X) face, +X outward; the L occurrence is the same file turned 180 deg about Z",
+     "revision": "A",
+     "project": "desk",
+     "com.setsma.desk": {
+      "Material": "PET felt",
+      "ReleaseState": "WIP",
+      "Source": "Modelled from skeleton; 12 mm dark grey PET felt board (refs/visual_black_felt), colour estimated (MEASURE)"
+     }
+    }
+   }
+  }
+ ]
+}

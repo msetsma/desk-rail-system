@@ -665,8 +665,15 @@
   "unit": "mm"
  },
  {
-  "comment": "Panel rise past the highest of the upright tops and adapter tops (hides cable exits)",
-  "expression": "15 mm",
+  "comment": "Privacy panel top-corner radius (V1, user 2026-11-02)",
+  "expression": "50 mm",
+  "favorite": false,
+  "name": "pnl_r",
+  "unit": "mm"
+ },
+ {
+  "comment": "Panel rise past the highest of the upright tops and adapter tops: corner radius + 15 mm, so the side panels (top at panel top - pnl_r) still cover the upright tops by 15 mm (V1)",
+  "expression": "pnl_r + 15 mm",
   "favorite": false,
   "name": "pnl_cover",
   "unit": "mm"
@@ -679,8 +686,8 @@
   "unit": "mm"
  },
  {
-  "comment": "Panel thickness",
-  "expression": "0.25 in",
+  "comment": "Panel thickness: 12 mm dark grey PET felt board (V1; Kirei / AcoustiGuard 12 mm, refs/visual_black_felt). Privacy panel FRM-05 and side panels FRM-08",
+  "expression": "12 mm",
   "favorite": false,
   "name": "pnl_t",
   "unit": "mm"
@@ -693,8 +700,8 @@
   "unit": "mm"
  },
  {
-  "comment": "Panel overhang past each upright outer face (X)",
-  "expression": "0 mm",
+  "comment": "Panel overhang past each upright outer face (X). V1: -pnl_back_gap, so the privacy panel's ends butt the side panels' inner faces (no gap at the corner)",
+  "expression": "-pnl_back_gap",
   "favorite": false,
   "name": "pnl_side",
   "unit": "mm"

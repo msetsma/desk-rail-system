@@ -72,24 +72,114 @@
    }
   },
   {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
    "command": "parameters.import",
    "params": {
     "path": "C:/Users/2015m/DEV/CAD/desk/skeleton/params.json"
    }
   },
   {
-   "command": "solid.box",
+   "command": "sketch.create",
    "params": {
-    "length": "desk_w - 2*pnl_side",
-    "width": "pnl_t",
-    "height": "pnl_drop + desk_t + pnl_above",
-    "corner": [
-     "-(desk_w - 2*pnl_side)/2",
-     "0 mm",
-     "0 mm"
+    "plane": "XZ",
+    "name": "Panel_Outline"
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "points": [
+     [
+      "-(desk_w - 2*pnl_side)/2",
+      "-((pnl_drop + desk_t + pnl_above) - pnl_r)"
+     ],
+     [
+      "-(desk_w - 2*pnl_side)/2",
+      "-(0 mm)"
+     ],
+     [
+      "(desk_w - 2*pnl_side)/2",
+      "-(0 mm)"
+     ],
+     [
+      "(desk_w - 2*pnl_side)/2",
+      "-((pnl_drop + desk_t + pnl_above) - pnl_r)"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.arc.three_point",
+   "params": {
+    "start": [
+     "1*(desk_w - 2*pnl_side)/2",
+     "-((pnl_drop + desk_t + pnl_above) - pnl_r)"
     ],
-    "name": "Box_Panel",
-    "body_name": "Modesty_Panel"
+    "end": [
+     "1*((desk_w - 2*pnl_side)/2 - pnl_r)",
+     "-((pnl_drop + desk_t + pnl_above))"
+    ],
+    "through": [
+     "1*((desk_w - 2*pnl_side)/2 - pnl_r) + 1*pnl_r*0.70710678",
+     "-((pnl_drop + desk_t + pnl_above) - pnl_r + pnl_r*0.70710678)"
+    ]
+   }
+  },
+  {
+   "command": "sketch.line",
+   "params": {
+    "points": [
+     [
+      "((desk_w - 2*pnl_side)/2 - pnl_r)",
+      "-((pnl_drop + desk_t + pnl_above))"
+     ],
+     [
+      "-((desk_w - 2*pnl_side)/2 - pnl_r)",
+      "-((pnl_drop + desk_t + pnl_above))"
+     ]
+    ]
+   }
+  },
+  {
+   "command": "sketch.arc.three_point",
+   "params": {
+    "start": [
+     "-1*(desk_w - 2*pnl_side)/2",
+     "-((pnl_drop + desk_t + pnl_above) - pnl_r)"
+    ],
+    "end": [
+     "-1*((desk_w - 2*pnl_side)/2 - pnl_r)",
+     "-((pnl_drop + desk_t + pnl_above))"
+    ],
+    "through": [
+     "-1*((desk_w - 2*pnl_side)/2 - pnl_r) + -1*pnl_r*0.70710678",
+     "-((pnl_drop + desk_t + pnl_above) - pnl_r + pnl_r*0.70710678)"
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "distance": "pnl_t",
+    "body_name": "Modesty_Panel",
+    "name": "Extrude_Panel"
    }
   },
   {
@@ -98,7 +188,7 @@
     "bodies": [
      "Modesty_Panel"
     ],
-    "material": "MDF"
+    "material": "PET felt"
    }
   },
   {
@@ -107,7 +197,7 @@
     "bodies": [
      "Modesty_Panel"
     ],
-    "color": "#6b4a32"
+    "color": "#3a3c3f"
    }
   },
   {
@@ -115,13 +205,13 @@
    "params": {
     "values": {
      "part_number": "FRM-05",
-     "description": "Modesty / privacy panel, 1/4 in sheet, W = desk_w - 2*pnl_side, H = pnl_drop + desk_t + pnl_above. Origin: bottom edge centre of the front (-Y) face, +Y toward the room, +Z up",
+     "description": "Privacy panel, 12 mm PET felt, W = desk_w - 2*pnl_side, H = pnl_drop + desk_t + pnl_above, top corners R pnl_r (V1). Origin: bottom edge centre of the front (-Y) face, +Y toward the room, +Z up",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
-      "Material": "MDF",
+      "Material": "PET felt",
       "ReleaseState": "WIP",
-      "Source": "Modelled from skeleton (legacy ModestyPanel); walnut-veneer finish to match the KARLBY walnut top, colour estimated (MEASURE)"
+      "Source": "Modelled from skeleton; 12 mm dark grey PET felt board (refs/visual_black_felt), colour estimated (MEASURE)"
      }
     }
    }

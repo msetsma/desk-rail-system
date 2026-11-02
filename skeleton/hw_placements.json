@@ -1114,5 +1114,137 @@
     "host": "FRM-06 knee brace R / FRM-03R side rail R / FRM-01 upright R",
     "note": "Vendor frame (HBL45TS5 section): vertex line on local X, base on local y=0 running +z, angled face on y=z. Rail end: base on the rail underside, vertex where the brace's inner face meets it (brace_in in front of the upright), base running back toward the corner; local x->+X, y->-Z, z->+Y. Both slots of the rail bottom face and the brace's inner 40 face.",
     "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-47 Side panel standoff low L",
+    "lib": "HW-L11_Standoff_M5x12",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      -1
+    ],
+    "x": "-(up_xc + rail_l/2)",
+    "y": "up_y - rail_l/2 + rail_s/2",
+    "z": "frame_top - up_below + 40 mm",
+    "yaw": "0 deg",
+    "host": "FRM-01 upright L / FRM-08 side panel",
+    "note": "V1: outer-face front slot of the upright; length must equal pnl_back_gap (12 mm) so the felt clears the HPTTD5 screw heads (7.3 mm). Clear of the T-plate (z 551-669) and the crossbar end-anchor access holes (bar1_z, bar2_z).",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-48 Side panel standoff mid L",
+    "lib": "HW-L11_Standoff_M5x12",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      -1
+    ],
+    "x": "-(up_xc + rail_l/2)",
+    "y": "up_y - rail_l/2 + rail_s/2",
+    "z": "desk_h + (bar1_z + bar2_z)/2",
+    "yaw": "0 deg",
+    "host": "FRM-01 upright L / FRM-08 side panel",
+    "note": "V1: outer-face front slot of the upright; length must equal pnl_back_gap (12 mm) so the felt clears the HPTTD5 screw heads (7.3 mm). Clear of the T-plate (z 551-669) and the crossbar end-anchor access holes (bar1_z, bar2_z).",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-49 Side panel standoff high L",
+    "lib": "HW-L11_Standoff_M5x12",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      -1
+    ],
+    "x": "-(up_xc + rail_l/2)",
+    "y": "up_y - rail_l/2 + rail_s/2",
+    "z": "desk_h + up_above - 60 mm",
+    "yaw": "0 deg",
+    "host": "FRM-01 upright L / FRM-08 side panel",
+    "note": "V1: outer-face front slot of the upright; length must equal pnl_back_gap (12 mm) so the felt clears the HPTTD5 screw heads (7.3 mm). Clear of the T-plate (z 551-669) and the crossbar end-anchor access holes (bar1_z, bar2_z).",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-50 Side panel standoff low R",
+    "lib": "HW-L11_Standoff_M5x12",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "(up_xc + rail_l/2)",
+    "y": "up_y - rail_l/2 + rail_s/2",
+    "z": "frame_top - up_below + 40 mm",
+    "yaw": "0 deg",
+    "host": "FRM-01 upright R / FRM-08 side panel",
+    "note": "V1: outer-face front slot of the upright; length must equal pnl_back_gap (12 mm) so the felt clears the HPTTD5 screw heads (7.3 mm). Clear of the T-plate (z 551-669) and the crossbar end-anchor access holes (bar1_z, bar2_z).",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-51 Side panel standoff mid R",
+    "lib": "HW-L11_Standoff_M5x12",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "(up_xc + rail_l/2)",
+    "y": "up_y - rail_l/2 + rail_s/2",
+    "z": "desk_h + (bar1_z + bar2_z)/2",
+    "yaw": "0 deg",
+    "host": "FRM-01 upright R / FRM-08 side panel",
+    "note": "V1: outer-face front slot of the upright; length must equal pnl_back_gap (12 mm) so the felt clears the HPTTD5 screw heads (7.3 mm). Clear of the T-plate (z 551-669) and the crossbar end-anchor access holes (bar1_z, bar2_z).",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-52 Side panel standoff high R",
+    "lib": "HW-L11_Standoff_M5x12",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      0,
+      0,
+      1
+    ],
+    "x": "(up_xc + rail_l/2)",
+    "y": "up_y - rail_l/2 + rail_s/2",
+    "z": "desk_h + up_above - 60 mm",
+    "yaw": "0 deg",
+    "host": "FRM-01 upright R / FRM-08 side panel",
+    "note": "V1: outer-face front slot of the upright; length must equal pnl_back_gap (12 mm) so the felt clears the HPTTD5 screw heads (7.3 mm). Clear of the T-plate (z 551-669) and the crossbar end-anchor access holes (bar1_z, bar2_z).",
+    "joint_angle": "0 deg"
   }
 ]

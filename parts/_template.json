@@ -8,5 +8,7 @@
  {"command":"material.create","params":{"name":"Butcher block (birch)","density_g_cm3":0.68}},
  {"command":"material.create","params":{"name":"ABS","density_g_cm3":1.05}},
  {"command":"material.create","params":{"name":"PC","density_g_cm3":1.20}},
- {"command":"material.create","params":{"name":"MDF","density_g_cm3":0.75}}
+ {"command":"material.create","params":{"name":"MDF","density_g_cm3":0.75}},
+ {"command":"material.create","params":{"name":"PET felt","density_g_cm3":0.20}},
+ {"command":"material.create","params":{"name":"PA6","density_g_cm3":1.14}}
 ]}

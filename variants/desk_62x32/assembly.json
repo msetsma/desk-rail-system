@@ -71,6 +71,20 @@
    }
   },
   {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
    "command": "parameters.import",
    "params": {
     "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/params.json"
@@ -540,6 +554,24 @@
     "name": "FRM-05 Modesty panel",
     "parent": "FRM-00 Monitor rail frame",
     "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-08_SidePanel.solidcraft",
+    "name": "FRM-08 SidePanel",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/FRM-08_SidePanel.solidcraft",
+    "name": "FRM-08 SidePanel",
+    "parent": "FRM-00 Monitor rail frame",
+    "reuse": true
    }
   },
   {
@@ -1069,6 +1101,60 @@
    "params": {
     "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L05_HBL45TD5.solidcraft",
     "name": "HW-L05 HBL45TD5",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
+    "name": "HW-L11 Standoff M5x12",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
+    "name": "HW-L11 Standoff M5x12",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
+    "name": "HW-L11 Standoff M5x12",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
+    "name": "HW-L11 Standoff M5x12",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
+    "name": "HW-L11 Standoff M5x12",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
+    "name": "HW-L11 Standoff M5x12",
     "parent": "HW-00 Frame hardware",
     "reuse": true
    }
@@ -2480,6 +2566,108 @@
     "values": [
      "0 mm",
      "stile_y + rail_s/2 + pnl_back_gap",
+     "0 deg"
+    ],
+    "offset": "desk_h - desk_t - pnl_drop",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_SidePanel_R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-08 SidePanel:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "up_xc + rail_l/2 + pnl_back_gap",
+     "up_y - rail_l/2 + (rail_l + pnl_back_gap + pnl_t)/2",
+     "0 deg"
+    ],
+    "offset": "desk_h - desk_t - pnl_drop",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_SidePanel_L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "FRM-08 SidePanel:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      -1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-(up_xc + rail_l/2 + pnl_back_gap)",
+     "up_y - rail_l/2 + (rail_l + pnl_back_gap + pnl_t)/2",
      "0 deg"
     ],
     "offset": "desk_h - desk_t - pnl_drop",
@@ -5492,6 +5680,312 @@
      "0 deg"
     ],
     "offset": "frame_top - rail_l",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-47 Side panel standoff low L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L11 Standoff M5x12:9",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      -1
+     ]
+    },
+    "values": [
+     "-(up_xc + rail_l/2)",
+     "up_y - rail_l/2 + rail_s/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - up_below + 40 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-48 Side panel standoff mid L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L11 Standoff M5x12:10",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      -1
+     ]
+    },
+    "values": [
+     "-(up_xc + rail_l/2)",
+     "up_y - rail_l/2 + rail_s/2",
+     "0 deg"
+    ],
+    "offset": "desk_h + (bar1_z + bar2_z)/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-49 Side panel standoff high L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L11 Standoff M5x12:11",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      -1
+     ]
+    },
+    "values": [
+     "-(up_xc + rail_l/2)",
+     "up_y - rail_l/2 + rail_s/2",
+     "0 deg"
+    ],
+    "offset": "desk_h + up_above - 60 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-50 Side panel standoff low R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L11 Standoff M5x12:12",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      1
+     ]
+    },
+    "values": [
+     "(up_xc + rail_l/2)",
+     "up_y - rail_l/2 + rail_s/2",
+     "0 deg"
+    ],
+    "offset": "frame_top - up_below + 40 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-51 Side panel standoff mid R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L11 Standoff M5x12:13",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      1
+     ]
+    },
+    "values": [
+     "(up_xc + rail_l/2)",
+     "up_y - rail_l/2 + rail_s/2",
+     "0 deg"
+    ],
+    "offset": "desk_h + (bar1_z + bar2_z)/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-52 Side panel standoff high R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L11 Standoff M5x12:14",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      1
+     ]
+    },
+    "values": [
+     "(up_xc + rail_l/2)",
+     "up_y - rail_l/2 + rail_s/2",
+     "0 deg"
+    ],
+    "offset": "desk_h + up_above - 60 mm",
     "angle": "0 deg"
    }
   },
