@@ -28,8 +28,8 @@ __all__ = ["TNUT_Y", "FLANGE_Y", "build", "check_stations", "main"]
 
 TEMPLATE = json.loads((ROOT / "parts/_template.json").read_text(encoding="utf-8"))["commands"]
 SKEL = {"command": "parameters.import", "params": {"path": f"{ROOT.as_posix()}/skeleton/params.json"}}
-MATERIAL = "Steel zinc-plated"
-COLOR = "#c4c9d0"  # zinc plates (PROJECT.md appearance)
+MATERIAL = "Steel powder-coated"
+COLOR = "#1a1a1a"  # matte black powder coat, local shop (V2, D23)
 
 # T-nut screw pairs (one per top slot) along the rail, 3 of 5 in the rear half where the hanging load is
 # (side-rail-recommended-changes, Change 1). Expressions so they follow the skeleton.
@@ -130,7 +130,7 @@ def plate(side: str) -> list[dict]:
 def finish(side: str) -> list[dict]:
     body = f"HangerPlate_{side}"
     outer = "+X" if side == "R" else "-X"
-    desc = (f"Hanger plate {side} (D21): steel flat bar hang_t x hang_w x hang_len, zinc plated, on the top-support "
+    desc = (f"Hanger plate {side} (D21): steel flat bar hang_t x hang_w x hang_len, black powder-coated (local shop, D23), on the top-support "
             f"flange under the desktop, flush with the side rail's outer ({outer}) face, rear end flush with the "
             "flange's rear end. 14 x M5 countersunk (ISO 10642) through holes: 5 pairs over the rail's top slots "
             "(T-nuts) and 4 on the mid-flange line (flange screws + nylocs); 3 desktop-screw clearance slots over the "

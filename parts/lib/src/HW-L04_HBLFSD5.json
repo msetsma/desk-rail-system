@@ -73,6 +73,20 @@
    }
   },
   {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
    "command": "body.rename",
    "params": {
     "body": "HBLFSD5-SETh5",

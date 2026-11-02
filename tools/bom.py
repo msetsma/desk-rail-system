@@ -48,6 +48,7 @@ MACHINING: Mapping[str, str] = {
 FASTENERS: Mapping[str, tuple[int, int]] = {
     "HBLFSN5": (2, 0),             # 1 bolt per leg
     "HBLFSD5": (4, 0),             # 2 bolts per leg, 4 x CBM5-10 + HNTT5-5 (D15)
+    "HBLTDB5": (4, 0),             # 2 bolts per leg, -SET: CBM5-10 + HNTT5-5 (D23)
     "HBL45TD5": (4, 0),            # 2 bolts per face, -SET: CBM5-14 + HNTT5-5 (D20)
     "HPTTD5": (8, 0),              # 8 x M5
     "HPTLD5": (8, 0),              # 8 x M5

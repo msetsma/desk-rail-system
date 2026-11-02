@@ -73,6 +73,20 @@
    }
   },
   {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
    "command": "solid.extrude",
    "params": {
     "face": [
@@ -207,7 +221,7 @@
     "bodies": [
      "HBL45TD5"
     ],
-    "color": "#c8ccd1"
+    "color": "#1a1a1a"
    }
   },
   {
@@ -215,7 +229,7 @@
    "params": {
     "values": {
      "part_number": "HBL45TD5",
-     "description": "Misumi HBL45TD5 45 deg angled bracket, 5 series, 2 slots (34 wide), 4 x M5, 1470 N",
+     "description": "Misumi HBL45TD5 45 deg angled bracket, 5 series, 2 slots (34 wide), 4 x M5, 1470 N, painted / powder-coated black by user (D23)",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

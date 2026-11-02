@@ -14,7 +14,8 @@ the material and properties in the assembly.
 | `HW-L04_HBLFSD5.solidcraft` | HBLFSD5 | `HBLFSD5` | `refs/misumi_brackets/HBLFSD5/HBLFSD5_bracket.stp` (vendor origin kept) | Al ADC12 cast | #a9adb2 | Vendor: inside corner on the X axis, legs on the Y=0 / Z=0 faces running to +Y / +Z (30 mm), 40 wide symmetric in X; 1 mm tabs to -Y / -Z | [-20, -1, -1] .. [20, 30, 30] |
 | `HW-L05_HBL45TD5.solidcraft` | HBL45TD5 | `HBL45TD5` | Section from `refs/misumi_brackets/HBL45T5/HBL45TS5-SET.stp` (vendor), widened to the catalog 34 mm with 4 x d5.5 at x = +/-10 (p2255) | Al 6063-T5 (catalog A6N01SS-T5) | #c8ccd1 | Vendor TS5 frame: vertex line on X, base on y=0 running z = 2.12..82.12 (holes z = 72.12), angled face on y=z (holes at y=z=51), 34 wide symmetric in X | [-17, 0, 2.12] .. [17, 57.65, 82.12] |
 | `HW-L10_M6x55_SHCS.solidcraft` | ISO 4762 M6x55 | `M6x55_SHCS` | Modelled: head d10 k6, hex 5 AF x 3 deep, shank d6 x 55, no thread | Steel black-oxide | #2b2b2b | Origin = center of head underside; head to +Z, shank along -Z | [-5, -5, -55] .. [5, 5, 6] |
-| `HW-L11_Standoff_M5x12.solidcraft` | Standoff M5x12 d10 | `Standoff_M5x12` | Modelled: d10 x 12, d5 through bore (simplified M5) | Steel zinc-plated | #c4c9d0 | Origin = center of one end face; axis +Z | [-5, -5, 0] .. [5, 5, 12] |
+| `HW-L11_Standoff_M5x12.solidcraft` | Standoff M5x12 d10 | `Standoff_M5x12` | Modelled: d10 x 12, d5 through bore (simplified M5) | Steel black-oxide (black, D23) | #1d1e20 | Origin = center of one end face; axis +Z | [-5, -5, 0] .. [5, 5, 12] |
+| `HW-L12_HFC5-4040-B.solidcraft` | HFC5-4040-B | `EndCap_HFC5_4040` | Modelled: 40 x 40 x 3 plate (press-fit pins not modelled), Misumi drawing | PA6 | #141414 | Origin = center of the inner (end-face) side; +Z outward | [-20, -20, 0] .. [20, 20, 3] |
 
 All files: revision A, ReleaseState Released, project `desk`. Volumes: 12786 / 10174 / 6196 / 10644 / 972 / 707 mm³.
 

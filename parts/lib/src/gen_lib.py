@@ -19,10 +19,11 @@ def finish(body: str, pn: str, desc: str, material: str, color: str, label: str,
 
 
 STEP = {
-    "HW-L01_HPTTD5": ("HPTTD5-SET_b", "HPTTD5", "HPTTD5", "Misumi HPTTD5 T-joint plate, 5 series, 2.3 mm", "Steel zinc-plated", "#c4c9d0"),
-    "HW-L02_HPTLD5": ("HPTLD5-SET_b", "HPTLD5", "HPTLD5", "Misumi HPTLD5 L-joint plate, 5 series, 2.3 mm", "Steel zinc-plated", "#c4c9d0"),
-    "HW-L03_HBLFSN5": ("Diameter Hole3", "HBLFSN5", "HBLFSN5", "Misumi HBLFSN5 cast bracket, 5 series", "Al ADC12 cast", "#a9adb2"),
+    "HW-L01_HPTTD5": ("HPTTD5-SET_b", "HPTTD5", "HPTTD5", "Misumi HPTTD5 T-joint plate, 5 series, 2.3 mm, painted / powder-coated black by user (D23)", "Steel powder-coated", "#1a1a1a"),
+    "HW-L02_HPTLD5": ("HPTLD5-SET_b", "HPTLD5", "HPTLD5", "Misumi HPTLD5 L-joint plate, 5 series, 2.3 mm, painted / powder-coated black by user (D23)", "Steel powder-coated", "#1a1a1a"),
+    "HW-L03_HBLFSN5": ("Diameter Hole3", "HBLFSN5", "HBLFSNB5", "Misumi HBLFSNB5 cast bracket, 5 series, black anodized (same as HBLFSN5, D23)", "Al ADC12 cast", "#1d1e20"),
     "HW-L04_HBLFSD5": ("HBLFSD5-SETh5", "HBLFSD5", "HBLFSD5", "Misumi HBLFSD5 cast bracket, 5 series, 2 slots (40 wide)", "Al ADC12 cast", "#a9adb2"),
+    "HW-L06_HBLTDB5": ("HBLTDB5_b", "HBLTDB5", "HBLTDB5", "Misumi HBLTDB5 thick bracket, 5 series, 2 slots (34 wide, 35 x 35 x 5), black anodized, 4 x M5, 1470 N (D23)", "Al 6063-T5", "#1d1e20"),
 }
 
 
@@ -32,6 +33,7 @@ INPUT = {
     "HW-L02_HPTLD5": "refs/misumi_brackets/HPTLD5/HPTLD5_plate.stp",
     "HW-L03_HBLFSN5": "refs/misumi_brackets/HBLFSN5/HBLFSN5_bracket.stp",
     "HW-L04_HBLFSD5": "refs/misumi_brackets/HBLFSD5/HBLFSD5_bracket.stp",
+    "HW-L06_HBLTDB5": "refs/misumi_brackets/HBLTDB5/HBLTDB5_bracket.stp",
 }
 
 
@@ -66,7 +68,19 @@ def standoff() -> dict:
         {"command": "solid.cylinder", "params": {"diameter": 10, "height": 12, "base": [0, 0, 0], "name": "Standoff", "body_name": b}},
         {"command": "solid.cylinder", "params": {"diameter": 5, "height": 12.2, "base": [0, 0, -0.1], "operation": "cut", "targets": [b], "name": "BoreM5"}},
     ]
-    return {"commands": cmds + finish(b, "Standoff M5x12 d10", "Round standoff d10 x 12, M5 through bore (simplified), zinc-plated steel", "Steel zinc-plated", "#c4c9d0", "HW-L11_Standoff_M5x12", SIMPLIFIED)}
+    return {"commands": cmds + finish(b, "Standoff M5x12 d10", "Round standoff d10 x 12, M5 through bore (simplified), black (Misumi black-anodized round standoff or Lyn-Tron -14 finish, D23)", "Steel black-oxide", "#1d1e20", "HW-L11_Standoff_M5x12", SIMPLIFIED)}
+
+
+def end_cap() -> dict:
+    """HFC5-4040-B black polyamide end cap: 40 x 40 x 3 plate (simplified, press-fit pins not modelled)."""
+    b = "EndCap_HFC5_4040"
+    cmds = list(TEMPLATE) + [
+        {"command": "solid.box", "params": {"length": 40, "width": 40, "height": 3, "corner": [-20, -20, 0],
+                                            "name": "Box_EndCap", "body_name": b}},
+    ]
+    source = "Modelled (simplified) from the Misumi HFC5 drawing (refs/visual_black_felt/HFC5_drawing.png): 3 mm, 4 press-fit pins"
+    return {"commands": cmds + finish(b, "HFC5-4040-B", "Misumi HFC5-4040-B end cap, black polyamide, 40 x 40 x 3, press fit (D23)",
+                                      "PA6", "#141414", "HW-L12_HFC5-4040-B", source)}
 
 
 TS5_STEP = "refs/misumi_brackets/HBL45T5/HBL45TS5-SET.stp"
@@ -102,8 +116,8 @@ def angle_bracket_2slot() -> dict:
     ] + hole_cmds
     source = f"Modelled from Misumi vendor STEP {TS5_STEP} (HBL45TS5 section) + catalog p2255 (HBL45TD5: 34 wide, 4 holes)"
     return {"input": TS5_STEP, "commands": cmds + finish(
-        b, "HBL45TD5", "Misumi HBL45TD5 45 deg angled bracket, 5 series, 2 slots (34 wide), 4 x M5, 1470 N",
-        "Al 6063-T5", "#c8ccd1", "HW-L05_HBL45TD5", source)}
+        b, "HBL45TD5", "Misumi HBL45TD5 45 deg angled bracket, 5 series, 2 slots (34 wide), 4 x M5, 1470 N, painted / powder-coated black by user (D23)",
+        "Al 6063-T5", "#1a1a1a", "HW-L05_HBL45TD5", source)}
 
 
 def _write(name: str, script: dict) -> None:
@@ -116,3 +130,4 @@ if __name__ == "__main__":
     _write("HW-L05_HBL45TD5", angle_bracket_2slot())
     _write("HW-L10_M6x55_SHCS", screw())
     _write("HW-L11_Standoff_M5x12", standoff())
+    _write("HW-L12_HFC5-4040-B", end_cap())

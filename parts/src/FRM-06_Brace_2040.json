@@ -214,7 +214,7 @@
     "bodies": [
      "Brace_2040"
     ],
-    "color": "#d4d8dd"
+    "color": "#1d1e20"
    }
   },
   {
@@ -222,13 +222,13 @@
    "params": {
     "values": {
      "part_number": "FRM-06",
-     "description": "Knee brace (D20), Misumi HFS5-2040, 40 across X, both ends cut 45 deg; long edge = brace_leg*sqrt(2), from the upright front face up to the side-rail underside. Same part L and R. Origin: middle of the brace axis; the upright/rail inside corner is at local (Y, Z) = (brace_c, brace_c)",
+     "description": "Knee brace (D20), Misumi HFSB5-2040, 40 across X, both ends cut 45 deg; long edge = brace_leg*sqrt(2), from the upright front face up to the side-rail underside. Same part L and R. Origin: middle of the brace axis; the upright/rail inside corner is at local (Y, Z) = (brace_c, brace_c)",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
       "Material": "Al 6063-T5",
       "ReleaseState": "WIP",
-      "Source": "Misumi HFS5 profile DXF (profiles/), length from skeleton; 45 deg mitre both ends"
+      "Source": "Misumi HFS5 profile DXF (profiles/; HFSB5 black is the same section), length from skeleton; 45 deg mitre both ends"
      }
     }
    }

@@ -748,8 +748,8 @@
   {
    "command": "component.insert_design",
    "params": {
-    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L04_HBLFSD5.solidcraft",
-    "name": "HW-L04 HBLFSD5",
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L06_HBLTDB5.solidcraft",
+    "name": "HW-L06 HBLTDB5",
     "parent": "HW-00 Frame hardware",
     "reuse": false
    }
@@ -757,8 +757,8 @@
   {
    "command": "component.insert_design",
    "params": {
-    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L04_HBLFSD5.solidcraft",
-    "name": "HW-L04 HBLFSD5",
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L06_HBLTDB5.solidcraft",
+    "name": "HW-L06 HBLTDB5",
     "parent": "HW-00 Frame hardware",
     "reuse": true
    }
@@ -1155,6 +1155,60 @@
    "params": {
     "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L11_Standoff_M5x12.solidcraft",
     "name": "HW-L11 Standoff M5x12",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L12_HFC5-4040-B.solidcraft",
+    "name": "HW-L12 HFC5-4040-B",
+    "parent": "HW-00 Frame hardware",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L12_HFC5-4040-B.solidcraft",
+    "name": "HW-L12 HFC5-4040-B",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L12_HFC5-4040-B.solidcraft",
+    "name": "HW-L12 HFC5-4040-B",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L12_HFC5-4040-B.solidcraft",
+    "name": "HW-L12 HFC5-4040-B",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L12_HFC5-4040-B.solidcraft",
+    "name": "HW-L12 HFC5-4040-B",
+    "parent": "HW-00 Frame hardware",
+    "reuse": true
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/lib/HW-L12_HFC5-4040-B.solidcraft",
+    "name": "HW-L12 HFC5-4040-B",
     "parent": "HW-00 Frame hardware",
     "reuse": true
    }
@@ -3648,7 +3702,7 @@
    "params": {
     "type": "planar",
     "flip": true,
-    "name": "J_HW-07 Gusset side rail L (HBLFSD5)",
+    "name": "J_HW-07 Gusset side rail L (HBLTDB5)",
     "a": {
      "occurrence": 0,
      "point": [
@@ -3668,7 +3722,7 @@
      ]
     },
     "b": {
-     "occurrence": "HW-L04 HBLFSD5:1",
+     "occurrence": "HW-L06 HBLTDB5:1",
      "point": [
       0,
       0,
@@ -3699,7 +3753,7 @@
    "params": {
     "type": "planar",
     "flip": true,
-    "name": "J_HW-08 Gusset side rail R (HBLFSD5)",
+    "name": "J_HW-08 Gusset side rail R (HBLTDB5)",
     "a": {
      "occurrence": 0,
      "point": [
@@ -3719,7 +3773,7 @@
      ]
     },
     "b": {
-     "occurrence": "HW-L04 HBLFSD5:2",
+     "occurrence": "HW-L06 HBLTDB5:2",
      "point": [
       0,
       0,
@@ -5986,6 +6040,312 @@
      "0 deg"
     ],
     "offset": "desk_h + up_above - 60 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-53 End cap Upright top L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L12 HFC5-4040-B:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-up_xc",
+     "up_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + up_above",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-54 End cap Upright bottom L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L12 HFC5-4040-B:2",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      -1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-up_xc",
+     "up_y",
+     "0 deg"
+    ],
+    "offset": "frame_top - up_below",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-55 End cap Side rail front L",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L12 HFC5-4040-B:3",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "-up_xc",
+     "side_front",
+     "0 deg"
+    ],
+    "offset": "frame_top - rail_l/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-56 End cap Upright top R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L12 HFC5-4040-B:4",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "up_xc",
+     "up_y",
+     "0 deg"
+    ],
+    "offset": "desk_h + up_above",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-57 End cap Upright bottom R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L12 HFC5-4040-B:5",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      -1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "up_xc",
+     "up_y",
+     "0 deg"
+    ],
+    "offset": "frame_top - up_below",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_HW-58 End cap Side rail front R",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "HW-L12 HFC5-4040-B:6",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      1,
+      0
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "up_xc",
+     "side_front",
+     "0 deg"
+    ],
+    "offset": "frame_top - rail_l/2",
     "angle": "0 deg"
    }
   },

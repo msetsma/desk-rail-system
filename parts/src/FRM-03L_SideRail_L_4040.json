@@ -260,7 +260,7 @@
     "bodies": [
      "SideRail_L_4040"
     ],
-    "color": "#d4d8dd"
+    "color": "#1d1e20"
    }
   },
   {
@@ -268,13 +268,13 @@
    "params": {
     "values": {
      "part_number": "FRM-03L",
-     "description": "Side rail L, Misumi HFS5-4040 drilled for 4 M6 through-bolts (D9): \u00d8 sr_clear_d straight through both walls, M6x55 heads on the outer (-X) face; at ts_bolt_z below the top, Y = ch_y_off \u00b1 leg_yc \u00b1 ts_bolt_pitch/2 (leg screws, into the leg columns' threads). Ends: side_front .. up_y - rail_l/2. Origin: top edge of the inner (mating) face at the top-support centre station (Y=0), +Y toward wall, +Z up",
+     "description": "Side rail L, Misumi HFSB5-4040 drilled for 4 M6 through-bolts (D9): \u00d8 sr_clear_d straight through both walls, M6x55 heads on the outer (-X) face; at ts_bolt_z below the top, Y = ch_y_off \u00b1 leg_yc \u00b1 ts_bolt_pitch/2 (leg screws, into the leg columns' threads). Ends: side_front .. up_y - rail_l/2. Origin: top edge of the inner (mating) face at the top-support centre station (Y=0), +Y toward wall, +Z up",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
       "Material": "Al 6063-T5",
       "ReleaseState": "WIP",
-      "Source": "Misumi HFS5 profile DXF (profiles/), length from skeleton; holes per D9"
+      "Source": "Misumi HFS5 profile DXF (profiles/; HFSB5 black is the same section), length from skeleton; holes per D9"
      }
     }
    }

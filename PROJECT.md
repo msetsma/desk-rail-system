@@ -63,7 +63,7 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   log decisions (D*) there.
 
 ## Standards and constraints
-- Extrusion: Misumi HFS5 (5 series) only; the 8020 and V-slot variants are retired. Profiles come from
+- Extrusion: Misumi HFS5 (5 series) only, ordered black anodized as HFSB5 (D23, same section); the 8020 and V-slot variants are retired. Profiles come from
   `profiles/misumi_hfs5_*.dxf`, so `rail_l` and `rail_s` follow the profile and aren't free parameters.
 - Buy, don't fabricate: joints use catalog parts. Vendor machining is OK, and user drilling is OK when
   the user agrees.
@@ -79,11 +79,11 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
 - Purchased reference models (speaker, mouse) may hold several bodies, one per finish.
 - Appearance: purchased parts get their real finish:
   - DeskHaus Silver powder-coated steel frame #a8acaf (refs/apex_pro)
-  - aluminium extrusion #d4d8dd
-  - zinc plates #c4c9d0
-  - as-cast Al gussets #a9adb2
-  - desktop (IKEA KARLBY walnut veneer, 503.352.08) and modesty panel (walnut veneer to match) #6b4a32,
-    estimated from product descriptions
+  - black anodized extrusion (HFSB5) and gussets (HBLFSNB5) #1d1e20 (D23)
+  - joining plates, 45 deg brackets and hanger plates: painted / powder-coated black by the user #1a1a1a
+  - black polyamide end caps (HFC5-4040-B) #141414
+  - dark grey PET felt panels #3a3c3f (estimate, confirm from samples)
+  - desktop (IKEA KARLBY walnut veneer, 503.352.08) #6b4a32, estimated from product descriptions
 
   Reference geometry is red.
 - Materials are the custom set in `parts/_template.json`. They are stored in each part as

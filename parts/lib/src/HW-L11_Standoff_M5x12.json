@@ -72,6 +72,20 @@
    }
   },
   {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
    "command": "solid.cylinder",
    "params": {
     "diameter": 10,
@@ -108,7 +122,7 @@
     "bodies": [
      "Standoff_M5x12"
     ],
-    "material": "Steel zinc-plated"
+    "material": "Steel black-oxide"
    }
   },
   {
@@ -117,7 +131,7 @@
     "bodies": [
      "Standoff_M5x12"
     ],
-    "color": "#c4c9d0"
+    "color": "#1d1e20"
    }
   },
   {
@@ -125,12 +139,12 @@
    "params": {
     "values": {
      "part_number": "Standoff M5x12 d10",
-     "description": "Round standoff d10 x 12, M5 through bore (simplified), zinc-plated steel",
+     "description": "Round standoff d10 x 12, M5 through bore (simplified), black (Misumi black-anodized round standoff or Lyn-Tron -14 finish, D23)",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
       "lib_id": "HW-L11_Standoff_M5x12",
-      "Material": "Steel zinc-plated",
+      "Material": "Steel black-oxide",
       "ReleaseState": "Released",
       "Source": "Modelled (simplified)"
      }

@@ -73,6 +73,20 @@
    }
   },
   {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
    "command": "body.rename",
    "params": {
     "body": "Diameter Hole3",
@@ -94,15 +108,15 @@
     "bodies": [
      "HBLFSN5"
     ],
-    "color": "#a9adb2"
+    "color": "#1d1e20"
    }
   },
   {
    "command": "document.metadata.set",
    "params": {
     "values": {
-     "part_number": "HBLFSN5",
-     "description": "Misumi HBLFSN5 cast bracket, 5 series",
+     "part_number": "HBLFSNB5",
+     "description": "Misumi HBLFSNB5 cast bracket, 5 series, black anodized (same as HBLFSN5, D23)",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

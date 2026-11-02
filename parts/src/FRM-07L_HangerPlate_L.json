@@ -350,7 +350,7 @@
     "bodies": [
      "HangerPlate_L"
     ],
-    "material": "Steel zinc-plated"
+    "material": "Steel powder-coated"
    }
   },
   {
@@ -359,7 +359,7 @@
     "bodies": [
      "HangerPlate_L"
     ],
-    "color": "#c4c9d0"
+    "color": "#1a1a1a"
    }
   },
   {
@@ -367,11 +367,11 @@
    "params": {
     "values": {
      "part_number": "FRM-07L",
-     "description": "Hanger plate L (D21): steel flat bar hang_t x hang_w x hang_len, zinc plated, on the top-support flange under the desktop, flush with the side rail's outer (-X) face, rear end flush with the flange's rear end. 14 x M5 countersunk (ISO 10642) through holes: 5 pairs over the rail's top slots (T-nuts) and 4 on the mid-flange line (flange screws + nylocs); 3 desktop-screw clearance slots over the flange's stock slots. Origin: top-support outer web face / top edge at Y = 0, +Y toward wall, +Z up",
+     "description": "Hanger plate L (D21): steel flat bar hang_t x hang_w x hang_len, black powder-coated (local shop, D23), on the top-support flange under the desktop, flush with the side rail's outer (-X) face, rear end flush with the flange's rear end. 14 x M5 countersunk (ISO 10642) through holes: 5 pairs over the rail's top slots (T-nuts) and 4 on the mid-flange line (flange screws + nylocs); 3 desktop-screw clearance slots over the flange's stock slots. Origin: top-support outer web face / top edge at Y = 0, +Y toward wall, +Z up",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
-      "Material": "Steel zinc-plated",
+      "Material": "Steel powder-coated",
       "ReleaseState": "WIP",
       "Source": "side-rail-recommended-changes.pdf Change 1 (2026-11-01), dimensions checked against the skeleton"
      }

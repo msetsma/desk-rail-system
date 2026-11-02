@@ -150,8 +150,8 @@
     "joint_angle": "0 deg"
   },
   {
-    "name": "HW-07 Gusset side rail L (HBLFSD5)",
-    "lib": "HW-L04_HBLFSD5",
+    "name": "HW-07 Gusset side rail L (HBLTDB5)",
+    "lib": "HW-L06_HBLTDB5",
     "parent_group": "HW-00 Frame hardware",
     "zl": [
       0,
@@ -167,16 +167,15 @@
     "y": "up_y - rail_l/2",
     "z": "frame_top - rail_l",
     "yaw": "0 deg",
-    "legacy_body": null,
     "verified_bbox_err_mm": null,
     "verified_com_err_mm": null,
     "host": "FRM-03L side rail L / FRM-01 upright L",
-    "note": "Vendor frame: inside corner on local X, legs along local +Y/+Z, 40 wide symmetric in X. Sits under the rail, centred on the shared 40 mm width (both slots of the rail bottom and upright front faces, 20 mm pitch); origin = rail underside / upright front face corner line, tabs 1 mm into the slots. Local -Z (rail leg) up, local +Y forward along the rail; same rotation L and R (symmetric). Clear: HPTTD5 1 mm, panel standoff 39 mm, top support 53 mm.",
+    "note": "D23: black HBLTDB5 replaces HBLFSD5 (no black version); same vendor frame (outer corner on local X, legs along local +Y/+Z, symmetric in X), 34 wide, 35 mm legs, no tabs. Vendor frame: inside corner on local X, legs along local +Y/+Z, 40 wide symmetric in X. Sits under the rail, centred on the shared 40 mm width (both slots of the rail bottom and upright front faces, 20 mm pitch); origin = rail underside / upright front face corner line, tabs 1 mm into the slots. Local -Z (rail leg) up, local +Y forward along the rail; same rotation L and R (symmetric). Clear: HPTTD5 1 mm, panel standoff 39 mm, top support 53 mm.",
     "joint_angle": "0 deg"
   },
   {
-    "name": "HW-08 Gusset side rail R (HBLFSD5)",
-    "lib": "HW-L04_HBLFSD5",
+    "name": "HW-08 Gusset side rail R (HBLTDB5)",
+    "lib": "HW-L06_HBLTDB5",
     "parent_group": "HW-00 Frame hardware",
     "zl": [
       0,
@@ -192,11 +191,10 @@
     "y": "up_y - rail_l/2",
     "z": "frame_top - rail_l",
     "yaw": "0 deg",
-    "legacy_body": null,
     "verified_bbox_err_mm": null,
     "verified_com_err_mm": null,
     "host": "FRM-03R side rail R / FRM-01 upright R",
-    "note": "Vendor frame: inside corner on local X, legs along local +Y/+Z, 40 wide symmetric in X. Sits under the rail, centred on the shared 40 mm width (both slots of the rail bottom and upright front faces, 20 mm pitch); origin = rail underside / upright front face corner line, tabs 1 mm into the slots. Local -Z (rail leg) up, local +Y forward along the rail; same rotation L and R (symmetric). Clear: HPTTD5 1 mm, panel standoff 39 mm, top support 53 mm.",
+    "note": "D23: black HBLTDB5 replaces HBLFSD5 (no black version); same vendor frame (outer corner on local X, legs along local +Y/+Z, symmetric in X), 34 wide, 35 mm legs, no tabs. Vendor frame: inside corner on local X, legs along local +Y/+Z, 40 wide symmetric in X. Sits under the rail, centred on the shared 40 mm width (both slots of the rail bottom and upright front faces, 20 mm pitch); origin = rail underside / upright front face corner line, tabs 1 mm into the slots. Local -Z (rail leg) up, local +Y forward along the rail; same rotation L and R (symmetric). Clear: HPTTD5 1 mm, panel standoff 39 mm, top support 53 mm.",
     "joint_angle": "0 deg"
   },
   {
@@ -1245,6 +1243,138 @@
     "yaw": "0 deg",
     "host": "FRM-01 upright R / FRM-08 side panel",
     "note": "V1: outer-face front slot of the upright; length must equal pnl_back_gap (12 mm) so the felt clears the HPTTD5 screw heads (7.3 mm). Clear of the T-plate (z 551-669) and the crossbar end-anchor access holes (bar1_z, bar2_z).",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-53 End cap Upright top L",
+    "lib": "HW-L12_HFC5-4040-B",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      0,
+      1
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "-up_xc",
+    "y": "up_y",
+    "z": "desk_h + up_above",
+    "yaw": "0 deg",
+    "host": "FRM-01 upright L top end",
+    "note": "V2 (D23): HFC5-4040-B press-fit cap on a free 4040 end; local +Z points out of the end face.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-54 End cap Upright bottom L",
+    "lib": "HW-L12_HFC5-4040-B",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      0,
+      -1
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "-up_xc",
+    "y": "up_y",
+    "z": "frame_top - up_below",
+    "yaw": "0 deg",
+    "host": "FRM-01 upright L bottom end",
+    "note": "V2 (D23): HFC5-4040-B press-fit cap on a free 4040 end; local +Z points out of the end face.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-55 End cap Side rail front L",
+    "lib": "HW-L12_HFC5-4040-B",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "-up_xc",
+    "y": "side_front",
+    "z": "frame_top - rail_l/2",
+    "yaw": "0 deg",
+    "host": "FRM-03L side rail front end",
+    "note": "V2 (D23): HFC5-4040-B press-fit cap on a free 4040 end; local +Z points out of the end face.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-56 End cap Upright top R",
+    "lib": "HW-L12_HFC5-4040-B",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      0,
+      1
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "up_xc",
+    "y": "up_y",
+    "z": "desk_h + up_above",
+    "yaw": "0 deg",
+    "host": "FRM-01 upright R top end",
+    "note": "V2 (D23): HFC5-4040-B press-fit cap on a free 4040 end; local +Z points out of the end face.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-57 End cap Upright bottom R",
+    "lib": "HW-L12_HFC5-4040-B",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      0,
+      -1
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "up_xc",
+    "y": "up_y",
+    "z": "frame_top - up_below",
+    "yaw": "0 deg",
+    "host": "FRM-01 upright R bottom end",
+    "note": "V2 (D23): HFC5-4040-B press-fit cap on a free 4040 end; local +Z points out of the end face.",
+    "joint_angle": "0 deg"
+  },
+  {
+    "name": "HW-58 End cap Side rail front R",
+    "lib": "HW-L12_HFC5-4040-B",
+    "parent_group": "HW-00 Frame hardware",
+    "zl": [
+      0,
+      1,
+      0
+    ],
+    "xl": [
+      1,
+      0,
+      0
+    ],
+    "x": "up_xc",
+    "y": "side_front",
+    "z": "frame_top - rail_l/2",
+    "yaw": "0 deg",
+    "host": "FRM-03R side rail front end",
+    "note": "V2 (D23): HFC5-4040-B press-fit cap on a free 4040 end; local +Z points out of the end face.",
     "joint_angle": "0 deg"
   }
 ]

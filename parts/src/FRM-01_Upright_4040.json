@@ -131,7 +131,7 @@
     "bodies": [
      "Upright_4040"
     ],
-    "color": "#d4d8dd"
+    "color": "#1d1e20"
    }
   },
   {
@@ -139,13 +139,13 @@
    "params": {
     "values": {
      "part_number": "FRM-01",
-     "description": "Upright, Misumi HFS5-4040, L = up_below + hang_t + desk_t + up_above. Origin: bottom end face centre, +Z up along the bar",
+     "description": "Upright, Misumi HFSB5-4040, L = up_below + hang_t + desk_t + up_above. Origin: bottom end face centre, +Z up along the bar",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
       "Material": "Al 6063-T5",
       "ReleaseState": "WIP",
-      "Source": "Misumi HFS5 profile DXF (profiles/), length from skeleton"
+      "Source": "Misumi HFS5 profile DXF (profiles/; HFSB5 black is the same section), length from skeleton"
      }
     }
    }

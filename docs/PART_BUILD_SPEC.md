@@ -89,7 +89,7 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 | CHR-01 | Herman Miller Mirra 2 chair, Butterfly back (vendor 3D DWG mesh: seat down, arms up and back) | 1 | Chair_* (multibody allowed; source refs/herman_miller_mirra2/converted/CHR-01_mirra2.step via parts/src/CHR-01_convert.py) |
 
 Hardware is in `parts/lib/` (HW-L01 HPTTD5, HW-L02 HPTLD5, HW-L03 HBLFSN5, HW-L04 HBLFSD5, HW-L10 M6x55
-SHCS, HW-L11 standoff); its occurrences HW-01..HW-42 come from `skeleton/hw_placements.json`. Eye becomes a skeleton
+SHCS, HW-L11 standoff, HW-L12 end cap); its occurrences HW-01..HW-58 come from `skeleton/hw_placements.json`. Eye becomes a skeleton
 point in the assembly, not a part.
 
 ## Edit speed (applies to every part)

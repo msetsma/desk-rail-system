@@ -73,6 +73,20 @@
    }
   },
   {
+   "command": "material.create",
+   "params": {
+    "name": "PET felt",
+    "density_g_cm3": 0.2
+   }
+  },
+  {
+   "command": "material.create",
+   "params": {
+    "name": "PA6",
+    "density_g_cm3": 1.14
+   }
+  },
+  {
    "command": "body.rename",
    "params": {
     "body": "HPTTD5-SET_b",
@@ -85,7 +99,7 @@
     "bodies": [
      "HPTTD5"
     ],
-    "material": "Steel zinc-plated"
+    "material": "Steel powder-coated"
    }
   },
   {
@@ -94,7 +108,7 @@
     "bodies": [
      "HPTTD5"
     ],
-    "color": "#c4c9d0"
+    "color": "#1a1a1a"
    }
   },
   {
@@ -102,12 +116,12 @@
    "params": {
     "values": {
      "part_number": "HPTTD5",
-     "description": "Misumi HPTTD5 T-joint plate, 5 series, 2.3 mm",
+     "description": "Misumi HPTTD5 T-joint plate, 5 series, 2.3 mm, painted / powder-coated black by user (D23)",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
       "lib_id": "HW-L01_HPTTD5",
-      "Material": "Steel zinc-plated",
+      "Material": "Steel powder-coated",
       "ReleaseState": "Released",
       "Source": "Misumi vendor STEP refs/misumi_brackets/HPTTD5/HPTTD5_plate.stp"
      }

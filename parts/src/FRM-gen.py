@@ -10,7 +10,7 @@ SKEL = {"command": "parameters.import", "params": {"path": "C:/Users/2015m/DEV/C
 DXF4040 = "C:/Users/2015m/DEV/CAD/desk/profiles/misumi_hfs5_4040.dxf"
 DXF2040 = "C:/Users/2015m/DEV/CAD/desk/profiles/misumi_hfs5_2040.dxf"
 AL = "Al 6063-T5"
-AL_COLOR = "#d4d8dd"
+AL_COLOR = "#1d1e20"  # black anodized HFSB5 (V2, D23)
 
 
 def c(cmd: str, **params: object) -> dict:
@@ -40,24 +40,24 @@ def write(fname: str, cmds: list[dict]) -> None:
                    encoding="utf-8")
 
 
-SRC_DXF = "Misumi HFS5 profile DXF (profiles/), length from skeleton"
+SRC_DXF = "Misumi HFS5 profile DXF (profiles/; HFSB5 black is the same section), length from skeleton"
 
 write("FRM-01_Upright_4040", profile("Profile_HFS5_4040", "XY", DXF4040) + [
     c("solid.extrude", distance="up_below + hang_t + desk_t + up_above", body_name="Upright_4040", name="Extrude_Upright"),
 ] + finish("Upright_4040", AL, AL_COLOR, "FRM-01",
-           "Upright, Misumi HFS5-4040, L = up_below + hang_t + desk_t + up_above. Origin: bottom end face centre, +Z up along the bar",
+           "Upright, Misumi HFSB5-4040, L = up_below + hang_t + desk_t + up_above. Origin: bottom end face centre, +Z up along the bar",
            SRC_DXF))
 
 write("FRM-02_Crossbar_2040", profile("Profile_HFS5_2040", "YZ", DXF2040) + [
     c("solid.extrude", distance="2*up_xc - rail_l", direction="symmetric", body_name="Crossbar_2040", name="Extrude_Crossbar"),
 ] + finish("Crossbar_2040", AL, AL_COLOR, "FRM-02",
-           "Crossbar, Misumi HFS5-2040 (40 in Z, 20 in Y), L = 2*up_xc - rail_l (between upright inner faces). Origin: profile centre at mid-length, +X along the bar",
+           "Crossbar, Misumi HFSB5-2040 (40 in Z, 20 in Y), L = 2*up_xc - rail_l (between upright inner faces). Origin: profile centre at mid-length, +X along the bar",
            SRC_DXF))
 
 write("FRM-04_Stile_2040", profile("Profile_HFS5_2040", {"origin": [0, 0, 0], "x_dir": [0, 1, 0], "y_dir": [-1, 0, 0]}, DXF2040) + [
     c("solid.extrude", distance="bar2_z - bar1_z - rail_l", body_name="Stile_2040", name="Extrude_Stile"),
 ] + finish("Stile_2040", AL, AL_COLOR, "FRM-04",
-           "Stile, Misumi HFS5-2040 (40 in X, 20 in Y), L = bar2_z - bar1_z - rail_l (between crossbars). Origin: bottom end face centre, +Z up along the bar",
+           "Stile, Misumi HFSB5-2040 (40 in X, 20 in Y), L = bar2_z - bar1_z - rail_l (between crossbars). Origin: bottom end face centre, +Z up along the bar",
            SRC_DXF))
 
 FELT = "PET felt"
@@ -127,7 +127,7 @@ def knee_brace() -> list[dict]:
         c("solid.combine", target="Brace_2040", tools=["BraceBlank"], operation="intersect", name="Intersect_BraceMitre"),
         c("browser.visibility", visible=False, items=["Sketch_BraceMitre"]),
     ] + finish("Brace_2040", AL, AL_COLOR, "FRM-06",
-               "Knee brace (D20), Misumi HFS5-2040, 40 across X, both ends cut 45 deg; long edge = brace_leg*sqrt(2), "
+               "Knee brace (D20), Misumi HFSB5-2040, 40 across X, both ends cut 45 deg; long edge = brace_leg*sqrt(2), "
                "from the upright front face up to the side-rail underside. Same part L and R. Origin: middle of the "
                "brace axis; the upright/rail inside corner is at local (Y, Z) = (brace_c, brace_c)",
                SRC_DXF + "; 45 deg mitre both ends")
@@ -172,7 +172,7 @@ def side_rail(side: str) -> list[dict]:
         cmds.append(c("solid.move", bodies=[body], axis=[0, 0, 1], angle="180 deg", name="Rotate_to_R"))
     outer = "-X" if side == "L" else "+X"
     return cmds + finish(body, AL, AL_COLOR, f"FRM-03{side}",
-                         f"Side rail {side}, Misumi HFS5-4040 drilled for 4 M6 through-bolts (D9): Ø sr_clear_d straight through both walls, M6x55 heads on the outer ({outer}) face; at ts_bolt_z below the top, Y = ch_y_off ± leg_yc ± ts_bolt_pitch/2 (leg screws, into the leg columns' threads). Ends: side_front .. up_y - rail_l/2. Origin: top edge of the inner (mating) face at the top-support centre station (Y=0), +Y toward wall, +Z up",
+                         f"Side rail {side}, Misumi HFSB5-4040 drilled for 4 M6 through-bolts (D9): Ø sr_clear_d straight through both walls, M6x55 heads on the outer ({outer}) face; at ts_bolt_z below the top, Y = ch_y_off ± leg_yc ± ts_bolt_pitch/2 (leg screws, into the leg columns' threads). Ends: side_front .. up_y - rail_l/2. Origin: top edge of the inner (mating) face at the top-support centre station (Y=0), +Y toward wall, +Z up",
                          SRC_DXF + "; holes per D9")
 
 

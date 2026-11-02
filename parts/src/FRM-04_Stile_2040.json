@@ -147,7 +147,7 @@
     "bodies": [
      "Stile_2040"
     ],
-    "color": "#d4d8dd"
+    "color": "#1d1e20"
    }
   },
   {
@@ -155,13 +155,13 @@
    "params": {
     "values": {
      "part_number": "FRM-04",
-     "description": "Stile, Misumi HFS5-2040 (40 in X, 20 in Y), L = bar2_z - bar1_z - rail_l (between crossbars). Origin: bottom end face centre, +Z up along the bar",
+     "description": "Stile, Misumi HFSB5-2040 (40 in X, 20 in Y), L = bar2_z - bar1_z - rail_l (between crossbars). Origin: bottom end face centre, +Z up along the bar",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {
       "Material": "Al 6063-T5",
       "ReleaseState": "WIP",
-      "Source": "Misumi HFS5 profile DXF (profiles/), length from skeleton"
+      "Source": "Misumi HFS5 profile DXF (profiles/; HFSB5 black is the same section), length from skeleton"
      }
     }
    }
