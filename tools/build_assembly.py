@@ -112,11 +112,11 @@ OCCURRENCES: tuple[Occurrence, ...] = (
     _occ("ModestyPanel", "FRM-05_Modesty_panel", _FRM, "0 mm", "stile_y + rail_s/2 + pnl_back_gap",
          "desk_h - desk_t - pnl_drop"),
     # Side panels (V1): on the upright outer faces, standing pnl_back_gap off on standoffs HW-47..52, front edge
-    # flush with the upright front face, back edge flush with the privacy panel's back face.
+    # flush with the upright front face, back edge butting the privacy panel's front face (the panel covers it).
     _occ("SidePanel_R", "FRM-08_SidePanel", _FRM, "up_xc + rail_l/2 + pnl_back_gap",
-         "up_y - rail_l/2 + (rail_l + pnl_back_gap + pnl_t)/2", "desk_h - desk_t - pnl_drop"),
+         "up_y - rail_l/2 + (rail_l + pnl_back_gap)/2", "desk_h - desk_t - pnl_drop"),
     _occ("SidePanel_L", "FRM-08_SidePanel", _FRM, "-(up_xc + rail_l/2 + pnl_back_gap)",
-         "up_y - rail_l/2 + (rail_l + pnl_back_gap + pnl_t)/2", "desk_h - desk_t - pnl_drop", "180 deg"),
+         "up_y - rail_l/2 + (rail_l + pnl_back_gap)/2", "desk_h - desk_t - pnl_drop", "180 deg"),
     _occ("Monitor_Main", "MON-01_Monitor_Main_32in", _MON, "m1_x", "stile_front - m1_off",
          "desk_h + mon_clearance + m1_h/2 + m1_vesa_dz"),
     _occ("Monitor_Side", "MON-02_Monitor_Side_27in", _MON, "m3_x", "stile_front - m3_off",

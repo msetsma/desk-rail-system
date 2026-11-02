@@ -95,11 +95,11 @@
    "command": "solid.box",
    "params": {
     "length": "pnl_t",
-    "width": "rail_l + pnl_back_gap + pnl_t",
+    "width": "rail_l + pnl_back_gap",
     "height": "(pnl_drop + desk_t + pnl_above) - pnl_r",
     "corner": [
      "0 mm",
-     "-(rail_l + pnl_back_gap + pnl_t)/2",
+     "-(rail_l + pnl_back_gap)/2",
      "0 mm"
     ],
     "name": "Box_SidePanel",
@@ -129,7 +129,7 @@
    "params": {
     "values": {
      "part_number": "FRM-08",
-     "description": "Side panel (corner return), 12 mm PET felt on the upright's outer face, on 12 mm standoffs clear of the HPTTD5 screw heads (7.3 mm). D = rail_l + pnl_back_gap + pnl_t (upright front face to the privacy panel's back face), H = privacy panel height - pnl_r (top meets the corner arc's lower end). Origin: bottom edge centre of the inner (-X) face, +X outward; the L occurrence is the same file turned 180 deg about Z",
+     "description": "Side panel (corner return), 12 mm PET felt on the upright's outer face, on 12 mm standoffs clear of the HPTTD5 screw heads (7.3 mm). D = rail_l + pnl_back_gap (upright front face to the privacy panel's front face, which covers its back edge), H = privacy panel height - pnl_r (top meets the corner arc's lower end, so the arc caps it from behind). Origin: bottom edge centre of the inner (-X) face, +X outward; the L occurrence is the same file turned 180 deg about Z",
      "revision": "A",
      "project": "desk",
      "com.setsma.desk": {

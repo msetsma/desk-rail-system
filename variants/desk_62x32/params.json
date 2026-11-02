@@ -700,8 +700,8 @@
   "unit": "mm"
  },
  {
-  "comment": "Panel overhang past each upright outer face (X). V1: -pnl_back_gap, so the privacy panel's ends butt the side panels' inner faces (no gap at the corner)",
-  "expression": "-pnl_back_gap",
+  "comment": "Panel overhang past each upright outer face (X). V1: -(pnl_back_gap + pnl_t), so the privacy panel runs out over the side panels' back edges (they butt its front face) and its corner arcs cap them",
+  "expression": "-(pnl_back_gap + pnl_t)",
   "favorite": false,
   "name": "pnl_side",
   "unit": "mm"

@@ -94,12 +94,12 @@ write("FRM-05_Modesty_panel", [
            FELT_SRC))
 
 write("FRM-08_SidePanel", [
-    c("solid.box", length="pnl_t", width="rail_l + pnl_back_gap + pnl_t", height=f"{PNL_H} - pnl_r",
-      corner=["0 mm", "-(rail_l + pnl_back_gap + pnl_t)/2", "0 mm"], name="Box_SidePanel", body_name="Side_Panel"),
+    c("solid.box", length="pnl_t", width="rail_l + pnl_back_gap", height=f"{PNL_H} - pnl_r",
+      corner=["0 mm", "-(rail_l + pnl_back_gap)/2", "0 mm"], name="Box_SidePanel", body_name="Side_Panel"),
 ] + finish("Side_Panel", FELT, FELT_COLOR, "FRM-08",
            "Side panel (corner return), 12 mm PET felt on the upright's outer face, on 12 mm standoffs clear of the HPTTD5 "
-           "screw heads (7.3 mm). D = rail_l + pnl_back_gap + pnl_t (upright front face to the privacy panel's back face), "
-           "H = privacy panel height - pnl_r (top meets the corner arc's lower end). Origin: bottom edge centre of the inner (-X) face, "
+           "screw heads (7.3 mm). D = rail_l + pnl_back_gap (upright front face to the privacy panel's front face, which covers its back edge), "
+           "H = privacy panel height - pnl_r (top meets the corner arc's lower end, so the arc caps it from behind). Origin: bottom edge centre of the inner (-X) face, "
            "+X outward; the L occurrence is the same file turned 180 deg about Z",
            FELT_SRC))
 

@@ -2670,7 +2670,7 @@
     },
     "values": [
      "up_xc + rail_l/2 + pnl_back_gap",
-     "up_y - rail_l/2 + (rail_l + pnl_back_gap + pnl_t)/2",
+     "up_y - rail_l/2 + (rail_l + pnl_back_gap)/2",
      "0 deg"
     ],
     "offset": "desk_h - desk_t - pnl_drop",
@@ -2721,7 +2721,7 @@
     },
     "values": [
      "-(up_xc + rail_l/2 + pnl_back_gap)",
-     "up_y - rail_l/2 + (rail_l + pnl_back_gap + pnl_t)/2",
+     "up_y - rail_l/2 + (rail_l + pnl_back_gap)/2",
      "0 deg"
     ],
     "offset": "desk_h - desk_t - pnl_drop",
