@@ -1,14 +1,15 @@
 # Desk rail system
 
 [![CAD: SolidCraft](https://img.shields.io/badge/CAD-SolidCraft-informational)](PROJECT.md)
-[![Extrusion: Misumi HFS5](https://img.shields.io/badge/extrusion-Misumi%20HFS5-lightgrey)](docs/EXTRUSION_GUIDE.md)
+[![Extrusion: Misumi HFSB5](https://img.shields.io/badge/extrusion-Misumi%20HFSB5%20black-1d1e20)](docs/EXTRUSION_GUIDE.md)
 [![Built with Claude Code](https://img.shields.io/badge/built%20with-Claude%20Code-d97757)](AGENTS.md)
 [![License](https://img.shields.io/github/license/msetsma/desk-rail-system)](LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/msetsma/desk-rail-system)](https://github.com/msetsma/desk-rail-system/commits/main)
 
 Parametric CAD model of a sit-stand desk: a DeskHaus Apex Pro 4-leg frame (Jiecang OEM), the
 desktop, and a Misumi HFS5 aluminium extrusion rail system that carries two monitors, Klipsch R-40M
-speakers, a hanging PC, a laptop mount and a modesty panel.
+speakers, a hanging PC, a laptop mount, felt privacy and side panels, and a 3D-printed console on
+the lower crossbar with a desk cable grommet.
 
 ![Isometric view of the desk rail system](docs/images/desk_overview.png)
 
@@ -27,8 +28,8 @@ steers. The project doubles as a testbed for:
 Expect the repo to change often while that workflow is worked out.
 
 > [!NOTE]
-> Raw vendor downloads (Misumi, Razer, DeskHaus, ZSA) are kept local only and aren't in this repo,
-> since their licenses don't allow redistribution. The paths to them in the docs are references.
+> Raw vendor downloads (Misumi, Razer, DeskHaus, ZSA, Fractal, Gigabyte, Herman Miller) are kept
+> local only and aren't in this repo, since their licenses don't allow redistribution. The paths to them in the docs are references.
 
 ## Files
 
@@ -39,8 +40,8 @@ Expect the repo to change often while that workflow is worked out.
 - `parts/`: one file per real part (`parts/<PN>_<Name>.solidcraft`), each built around its own origin.
   - `parts/src/`: the build script for each part. The script is the source of truth; the
     `.solidcraft` file is its output.
-  - `parts/lib/`: purchased hardware (Misumi plates and gussets, screws, standoffs), one file each,
-    named by vendor part number. See `parts/lib/README.md`.
+  - `parts/lib/`: purchased hardware (Misumi plates, gussets, brackets and end caps, screws,
+    standoffs), one file each, named by vendor part number. See `parts/lib/README.md`.
   - `parts/_template.json`: materials and settings every new part starts from.
 - `tools/`:
   - `regen_parts.py`: pushes the skeleton parameters into the size-driven parts and rebuilds them.
@@ -52,7 +53,16 @@ Expect the repo to change often while that workflow is worked out.
     loads). Edit `SPEC_KG` when things are weighed.
   - `eval_bodies.py`: maps the bodies in the assembly back to their part and placement names.
   - `svg2dxf.py`: converts an SVG profile drawing to DXF (used once for the HFS5-4040 profile).
+  - `near_check.py`: fast clearance check of changed bodies against their neighbours only.
+  - `sightlines.py`: ray-casts from the eye point to the screens and speakers; checks the laptop fit.
+  - `skeleton_values.py`: evaluates the skeleton expressions to numbers (cached) for generators.
+  - `sweep.py`: parameter sweeps in parallel, each on a private copy.
+  - `build_variant.py`: builds a layout variant (`variants/<name>/`) into its own assembly file.
+  - `spk_laid.py`: solves the laid-speaker placement for variants.
+  - `mesh_step.py`: turns a vendor mesh into a planar-face STEP that SolidCraft imports as B-rep.
 - `BOM.md`: generated bill of materials. Don't hand-edit it.
+- `variants/`: layout variants (skeleton overrides); `desk_62x32` builds `desk_rails_62x32.solidcraft` (D17).
+- `tests/`: unit tests for the tools.
 - `docs/`: `EXTRUSION_GUIDE.md` (extrusion rules + decision log; check it before any extrusion
   decision), `PART_BUILD_SPEC.md` (rules and part-number list for part files), `images/`.
 - `refs/`: reference photos, drawings and data sheets (vendor downloads are local only).
@@ -77,7 +87,8 @@ Rebuild the whole assembly from scratch:
 python tools/build_assembly.py --out desk_rails.solidcraft
 ```
 
-It also runs `tools/assembly_finish.py`, since links don't carry materials or properties.
+It also runs `tools/assembly_finish.py` (materials, properties, views, display rows, timeline
+folders), since links don't carry materials or properties.
 
 Check (one command, reads the saved design, never overwrites it):
 
@@ -108,6 +119,7 @@ graph TD
   root --> INP[INP-00 Input devices]
   root --> LAP[LAP-00 Laptop]
   root --> CHR[CHR-00 Chair]
+  root --> ACC[ACC-00 Crossbar console]
   root --> REF[REF-00 Skeleton]
 ```
 
@@ -118,17 +130,22 @@ graph TD
 | | `DSK-03_ChannelBar` | 4 | slim bars running left-right; the legs sit between them | DeskHaus Silver |
 | | `DSK-04_Leg` | 4 | lifting column (envelope) | DeskHaus Silver |
 | | `DSK-05_Foot` | 2 | foot with glides | DeskHaus Silver |
-| `FRM-00` Monitor rail frame | `FRM-01_Upright_4040` | 2 | rear posts | aluminium |
-| | `FRM-02_Crossbar_2040` | 2 | lower and upper monitor bars | aluminium |
-| | `FRM-03L_SideRail_L_4040`, `FRM-03R_SideRail_R_4040` | 1 + 1 | side rails, drilled for 8 through-bolts each (D9, D15) | aluminium |
-| | `FRM-04_Stile_2040` | 3 | vertical bars between the crossbars; the monitors and the laptop arm mount to these | aluminium |
-| | `FRM-05_Modesty_panel` | 1 | privacy panel behind the posts, on standoffs | walnut veneer to match |
-| `HW-00` Frame hardware | `lib/HW-L01_HPTTD5` | 4 | Misumi T-joining plate, side rail to upright, outer and inner faces | zinc |
-| | `lib/HW-L02_HPTLD5` | 4 | Misumi L-joining plate, crossbar ends | zinc |
-| | `lib/HW-L03_HBLFSN5` | 16 | Misumi 1-slot gusset, crossbar and stile joints | cast aluminium |
-| | `lib/HW-L04_HBLFSD5` | 2 | Misumi 2-slot gusset under each side rail (D15) | cast aluminium |
+| `FRM-00` Monitor rail frame | `FRM-01_Upright_4040` | 2 | rear posts | black anodized (HFSB5) |
+| | `FRM-02_Crossbar_2040` | 2 | lower and upper monitor bars | black anodized |
+| | `FRM-03L_SideRail_L_4040`, `FRM-03R_SideRail_R_4040` | 1 + 1 | side rails, each drilled for 4 M6 through-bolts (D9, D15) | black anodized |
+| | `FRM-04_Stile_2040` | 3 | vertical bars between the crossbars; the monitors and the laptop arm mount to these | black anodized |
+| | `FRM-05_Modesty_panel` | 1 | privacy panel behind the posts, 12 mm PET felt, R50 top corners, on standoffs (D22) | dark grey felt |
+| | `FRM-06_Brace_2040` | 2 | 45° knee brace under each side rail (D20) | black anodized |
+| | `FRM-07L_HangerPlate_L`, `FRM-07R_HangerPlate_R` | 1 + 1 | 5 mm steel hanger plate on the top-support flange; the side rail hangs from it (D21) | black powder coat |
+| | `FRM-08_SidePanel` | 2 | felt side panel on each upright's outer face (D22) | dark grey felt |
+| `HW-00` Frame hardware | `lib/HW-L01_HPTTD5` | 4 | Misumi T-joining plate, side rail to upright, outer and inner faces | painted black |
+| | `lib/HW-L02_HPTLD5` | 4 | Misumi L-joining plate, crossbar ends | painted black |
+| | `lib/HW-L03_HBLFSN5` | 16 | Misumi 1-slot gusset (ordered black, HBLFSNB5), crossbar and stile joints | black anodized |
+| | `lib/HW-L05_HBL45TD5` | 4 | Misumi 2-slot 45° bracket, knee-brace ends (D20) | painted black |
+| | `lib/HW-L06_HBLTDB5` | 2 | Misumi 2-slot gusset under each side rail (D23) | black anodized |
 | | `lib/HW-L10_M6x55_SHCS` | 8 | M6x55 socket-head screw, side rail to top support | black oxide |
-| | `lib/HW-L11_Standoff_M5x12` | 8 | panel standoff | zinc |
+| | `lib/HW-L11_Standoff_M5x12` | 14 | standoffs for the privacy and side panels | black |
+| | `lib/HW-L12_HFC5-4040-B` | 6 | Misumi end cap on the free 4040 ends (D23) | black |
 | `MON-00` Monitors | `MON-01_Monitor_Main_32in` | 1 | 32in 16:9 main | near-black |
 | | `MON-02_Monitor_Side_27in` | 1 | 27in portrait, left | near-black |
 | `SPK-00` Speakers | `SPK-01_R40M_Speaker` | 2 | Klipsch R-40M, aimed at the eye point | black, copper woofer |
@@ -145,11 +162,19 @@ graph TD
 | | `LAP-02_MacBookPro14` | 1 | MacBook Pro 14in, reference model | space black |
 | | `LAP-03_LaptopTray` | 1 | user-built tray (placeholder) | black |
 | `CHR-00` Chair | `CHR-01_HermanMillerMirra2` | 1 | Herman Miller Mirra 2, Butterfly back, from the vendor 3D DWG | studio white, fog, graphite |
+| `ACC-00` Crossbar console | `ACC-01_Grommet` | 1 | desk cable grommet in a drilled 60 mm hole (D24) | printed charcoal |
+| | `ACC-02_Bay_Audio` | 1 | console bay: Scarlett Solo and USB hub set flush (D24) | printed charcoal |
+| | `ACC-05_Bay_duckyPad` | 1 | console bay: KVM key and duckyPad Pro set flush (D24) | printed charcoal |
+| | `ACC-06_Inlay` | 1 | light grey inlay line along the console face | printed light grey |
+| | `ACC-07_PhoneStand` | 1 | phone stand on the lower bar holding the MagSafe puck (D24) | printed charcoal |
+| | `ACC-11` … `ACC-17` | 1 each | device references: Scarlett Solo 3rd Gen, ABFCRTTW hub, iPhone 16 Pro Max, MagSafe charger, fingerprint dongle, duckyPad Pro, KVM key | vendor colors |
 | `REF-00` Skeleton | (no part file) | | `SKL_Eye`: a sketch point at the seated eye position, not a body | red |
 
-That's 34 part numbers (28 part files + 6 library parts) and 86 parts in the main assembly (see
-`BOM.md`). The hardware occurrences are named `HW-01` to `HW-42` by job (`HW-07 Gusset side rail L`). Side rails and keyboards have L and R files
-because they're mirror images; the other pairs reuse one file, turned 180°.
+That's 52 part numbers (44 part files + 8 library parts) and 120 parts in the main assembly (see
+`BOM.md`). The hardware occurrences are named `HW-01` to `HW-58` by job
+(`HW-07 Gusset side rail L (HBLTDB5)`). Side rails, hanger plates and keyboards have L and R files
+because they're mirror images; the other pairs reuse one file, turned 180°. `HW-L04` (HBLFSD5) and
+`SPK-05` (speaker wedge, 62x32 variant only) are in `parts/` but not in the main assembly.
 
 Saved views: Overview, Front, Back, SideRailJoint_R/L, SpeakerMount_R, UnderDesk, LaptopArm, Rails,
 RailsBack, Desk, DeskRails. Detail views take their targets from the design's own skeleton, so a
@@ -178,7 +203,12 @@ Set them in `skeleton/params.json`, then follow the [workflow](#workflow). Inche
 | `m1_tilt`, `m3_yaw` | 0°, 15° | tilts both monitors back; turns the side monitor in |
 | `bar1_gap` | 65 mm | lower crossbar top below the monitors (room for printed accessories, D18) |
 | `spk_bot`, `spk_yaw_max` | `mon_clearance`, 25° | speaker height; toe-in limit (tilt and toe-in aim at the eye point) |
-| `pnl_drop`, `pnl_cover` | 14 in, 15 mm | panel drop below the desk; panel rise above the posts |
+| `pnl_drop`, `pnl_cover` | 14 in, `pnl_r` + 15 mm | panel drop below the desk; panel rise above the posts |
+| `pnl_r` | 50 mm | privacy panel top-corner radius |
+| `brace_leg` | 150 mm | knee-brace leg along the upright and the rail (D20) |
+| `hang_t` | 5 mm | hanger plate thickness; the frame sits this much lower (D21) |
+| `con_x`, `con_top` | 0, 10 mm | console centre x; console top above the lower crossbar |
+| `grom_y`, `grom_d` | 144 mm, 60 mm | desk grommet hole position (y) and diameter |
 | `eye_above_desk`, `eye_back` | 46 in - `desk_h`, 6 in | eye point above the desk and in front of its edge |
 
 The other parameters are derived, so leave them alone. Each one has a comment in `params.json`.
@@ -189,7 +219,7 @@ Parameters whose comment in `params.json` says `MEASURE` are estimates until mea
 were measured or confirmed (the comment says how and when). Inches are fine.
 
 <details>
-<summary>Frame, monitors, speakers, PC, inputs, laptop, chair</summary>
+<summary>Frame, monitors, speakers, PC, inputs, laptop, chair, console</summary>
 
 **Top supports** (`DSK-02`; `frame_w` is derived from `desk_w`, the channel bars get cut to suit)
 - [x] `ts_len`, `ts_w`, `ts_h`: length (Y), width (X), height (Z) (2026-10-29)
@@ -208,6 +238,11 @@ were measured or confirmed (the comment says how and when). Inches are fine.
 
 **Side rails** (`FRM-03L/R`)
 - [ ] leg column thread depth: the M6x55 needs 12 mm of free thread (stock M6x14 uses 11)
+
+**Hanger plates** (`FRM-07L/R`, D21: check before ordering)
+- [ ] `ds_head_r`: desktop wood-screw head radius (estimate)
+- [ ] M5x12 countersunk screw against the HNTT5-5 valid screw range
+- [ ] weld bumps or bosses on the real top-support flange
 
 **Monitors** (`MON-01` from the Gigabyte M32U manual; `MON-02` generic until picked)
 - [x] `m1_w`, `m1_h`, `m1_t`: from the manual
@@ -233,6 +268,12 @@ were measured or confirmed (the comment says how and when). Inches are fine.
 - [ ] LAP-01 base plate screws: 2 x M5x12 into T-nuts in the right stile's front slot (estimate)
 - [ ] `chr_eye_dy`: seated eye Y from the chair cylinder axis
 
+**Console devices** (`parts/src/ACC_layout.py`, not skeleton parameters)
+- [ ] Scarlett Solo 3rd Gen: ~144 x 96 x 44 mm
+- [ ] iPhone 16 Pro Max in its case: ~168 x 82 x 12 mm
+- [ ] fingerprint dongle: ~30 x 15 x 7 mm
+- [ ] USB hub: 130 x 30 x 17 mm and port positions (from listings)
+
 **Ergonomics**
 - [x] `eye_above_desk`: measured 2026-10-27 (seated eye ~46 in above the floor)
 - [ ] `eye_back`: eyes out from the desktop front edge
@@ -245,13 +286,13 @@ Not parameters, but worth noting: weights of the monitors, speakers and laptop m
 ## Extrusion profiles
 
 Real cross-sections (DXF, mm, centered) in `profiles/`. The extrusion part files sketch them and
-extrude them to parameter lengths. Only Misumi HFS5 is used. The 80/20 and V-slot variants were
+extrude them to parameter lengths. Only Misumi HFS5 is used, ordered black anodized as HFSB5 (D23). The 80/20 and V-slot variants were
 retired (D16) and their DXFs removed (in git history before 2026-10-31).
 
 | Profile | File | Used for | Source |
 |---|---|---|---|
 | HFS5-4040 | `misumi_hfs5_4040.dxf` | uprights, side rails | converted from an SVG drawing in github.com/TheEnigmaBlade/dllpdf-frame-calculator (no license stated) via `tools/svg2dxf.py` |
-| HFS5-2040 | `misumi_hfs5_2040.dxf` | crossbars, stiles | github.com/oysteinkrog/thing_libutils (LGPL-2.1) |
+| HFS5-2040 | `misumi_hfs5_2040.dxf` | crossbars, stiles, knee braces | github.com/oysteinkrog/thing_libutils (LGPL-2.1) |
 
 Checked cross-section areas: HFS5 4040 497 mm², 2040 323 mm².
 
@@ -261,13 +302,21 @@ Each 4040 side rail runs along the outer face of a top support. Its back end but
 front face, with the outer faces flush (a T-joint, D1).
 
 - **To the upright** (D2): Misumi HPTTD5 T-plates on the flush outer and inner faces, a 2-slot
-  HBLFSD5 gusset under the rail (D15), and an end anchor inside the rail (not modelled).
+  HBLTDB5 gusset under the rail (D23), and an end anchor inside the rail (not modelled).
+- **Knee brace** (D20): a 45° HFSB5-2040 brace from the upright up to the rail underside, with an
+  HBL45TD5 bracket at each end.
+- **Hanger plate** (D21): a 5 x 80 x 530 mm steel plate sits on the top-support flange under the
+  desktop, flush with the rail's outer face. The rail hangs from it by 10 M5 countersunk screws into
+  T-nuts in its top slots; 4 M5 countersunk screws with nylocs tie it through the flange. The desktop
+  rests on the plates, so `frame_top` = `desk_h` - `desk_t` - `hang_t`.
 - **To the top support** (D9): 4 M6x55 socket-head screws per side, straight through the rail and
-  the top support's web into the leg column threads. The rail needs one Ø6.6 hole through both
-  walls per screw; the head sits on the outer face.
+  the top support's web into the leg column threads, each with a hardened washer. The rail needs one
+  Ø6.6 hole through both walls per screw; the head sits on the outer face.
+- **End caps** (D23): HFC5-4040-B caps on the rail front ends and the upright tops and bottoms.
 
-The plate sticks out 2.3 mm past the outer face. Set `up_side_inset` to at least that to keep it
-inside the desktop edge.
+The felt side panels stand `pnl_back_gap` + `pnl_t` (24 mm) past the upright's outer face, and the
+privacy panel runs out over them by the same amount (D22). The T-plate's 2.3 mm sits behind the side
+panel.
 
 ## License
 

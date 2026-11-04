@@ -33,6 +33,11 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
      Removing or renaming a skeleton parameter is a skeleton change too. When a change only retires a
      parameter, leave it unused (say so in its comment) and delete it with the next real skeleton change.
 - Parameter sweep (parallel, on private copies): `python tools/sweep.py`.
+- Console (ACC-00): `parts/src/ACC_layout.py` is the shared layout (bays, device pockets, phone stand) read by
+  the bay generator and the device generator; it isn't a skeleton parameter set, so editing it reruns only those
+  generators.
+- Other tools: `audit.py` (structure and balance), `eval_bodies.py` (body -> part/placement names), `svg2dxf.py`,
+  `spk_laid.py` (laid-speaker solve for variants).
 - Layout variants (own assembly file, main design untouched): `python tools/build_variant.py <name>` builds
   `variants/<name>/variant.json` (skeleton overrides, `speakers: hung|laid`) into its `out` file, with the
   variant skeleton and its skeleton-driven parts under `variants/<name>/`. `desk_62x32` ->
@@ -79,13 +84,16 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   `MON-00`, `SPK-00`, `PC-00`, `INP-00`, `LAP-00`, `CHR-00`, `ACC-00`, `REF-00`; parts `DSK-01`…, library `HW-L01`…. Add `Rev X` when a
   part is released. `DSK-00` is grounded. The full list is in `docs/PART_BUILD_SPEC.md`.
 - One file per left/right pair when a 180° turn about Z reproduces the other side. Mirror-image parts
-  (side rails, keyboards) get two files.
-- Purchased reference models (speaker, mouse) may hold several bodies, one per finish.
+  (side rails, hanger plates, keyboards) get two files.
+- Purchased reference models (speaker, mouse, chair, laptop, console devices) may hold several bodies, one per finish.
 - Appearance: purchased parts get their real finish:
   - DeskHaus Silver powder-coated steel frame #a8acaf (refs/apex_pro)
   - black anodized extrusion (HFSB5) and gussets (HBLFSNB5) #1d1e20 (D23)
   - joining plates, 45 deg brackets and hanger plates: painted / powder-coated black by the user #1a1a1a
   - black polyamide end caps (HFC5-4040-B) #141414
+  - black standoffs and HBLTDB5 #1d1e20; M6x55 black oxide #2b2b2b
+  - printed console parts (ACC-01..07) charcoal #34373b, inlay light grey #c9cccf
+  - PC walnut slat front #634433
   - dark grey PET felt panels #3a3c3f (estimate, confirm from samples)
   - desktop (IKEA KARLBY walnut veneer, 503.352.08) #6b4a32, estimated from product descriptions
 
@@ -139,7 +147,8 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   `solidcraft-cli run <script> --timings --profile --json-out t.json`.
   - Booleans on the detailed HFS5 DXF profile are the expensive case: one `solid.hole` with 8 counterbores
     took 46 s.
-  - The assembly build is ~120 s, of which the two side rails are ~105 s (2026-10-28).
+  - The assembly build was ~120 s before parts were frozen, the two side rails ~105 s of it (2026-10-28);
+    with frozen links it is ~20 s.
 - `component.update_links {}` re-evaluates every link, even unchanged ones (~40 s). Pass `component`.
 - Full assembly builds log repeated non-fatal `knot vector consists single value` panics (source part
   not yet identified; likely a vendor NURBS body). The run still succeeds.
@@ -170,6 +179,11 @@ Companion to the generic `AGENTS.md`. Update this file when project facts or qui
   DWG -> DXF: LibreDWG `dwg2dxf` (C:/Users/2015m/cad_tools/libredwg/), see refs/herman_miller_mirra2/README.md.
 - Misumi: 3D CAD is generated server-side (slow) and needs a login or email. HFS5 extrusion 3D
   CAD isn't offered; profiles come from DXFs in `profiles/` / `refs/ext_*`.
+- README image (`docs/images/desk_overview.png`): model screenshots (`screenshot source:model`) always draw
+  black edges, which turn the chair mesh into a wireframe, and `view.visual_style` doesn't affect them. Render it
+  with `render.settings.set` (setup `Readme`: camera target [0,0,720], yaw 0.6, pitch 0.42, distance 2700,
+  1600 x 1000, background [46,51,64]) then `render.start {setup, integrator:"raytrace", raytrace:{budget:"studio"}}`
+  and `render.export` (~10 s). GitHub caches README images for a few minutes.
 - Rendering: the full assembly (~330k triangles) exceeds the CPU preview cap (262k); use CPU raytrace with
   `budget: "studio"` or GPU path. The GPU path tracer needs Vulkan, but the Windows viewport defaults to D3D12
   (issue #7623), so `%APPDATA%\SolidCraft\graphics.json` sets `{"backend": "vulkan"}` (2026-10-29). The first

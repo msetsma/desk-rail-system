@@ -1,4 +1,4 @@
-# Part build spec (compliance Phase 3)
+# Part build spec
 
 Shared rules for every part-file builder. Read `PROJECT.md` (section "SolidCraft capabilities")
 and `.claude/skills/cad-best-practices/SKILL.md` first.
@@ -10,7 +10,7 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 - Docs: `solidcraft-cli commands`. Check results with `solidcraft-cli eval`, and look at
   `solidcraft-cli snapshot --in X --out build/parts_snapshots/<file>.png`.
 - Reference geometry, in world coordinates of the legacy assembly, is exported as STEP in `build/export/`
-  (`DSK.step`, `FRM.step`, `MON_PC_INP_REF.step`, `SPK.step`). Bodies keep their legacy names.
+  (`DSK.step`, `FRM.step`, `HW.step`, `MON_PC_INP_REF.step`, `SPK.step`). Bodies keep their legacy names.
   Import a STEP into a scratch design to measure it. (The legacy model and its `build/baseline.json` were removed 2026-10-31; both are in git history.)
 
 ## Every part file
@@ -25,23 +25,26 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
    skeleton parameter already holds. Parts that are pure vendor geometry (STEP) skip the import.
 3. Each file has **one final body**, with a `body_name` that is not a default name. Name the features
    too (pass `name`, or `timeline.rename`). Delete tool bodies and unused sketches.
-   - Exception: purchased reference models (speaker, mouse) may have several bodies so each finish
+   - Exception: purchased reference models (speaker, mouse, chair, laptop, console devices) may have several bodies so each finish
      can have its own colour. Every body still gets a meaningful name.
 4. Set metadata:
    - `document.metadata.set` with part_number, description and revision `A`.
    - The key `com.setsma.desk` = `{Material, ReleaseState: "WIP", Source}`.
 5. Assign a material from the template with `material.assign`, and an appearance colour (PROJECT.md):
    - DeskHaus Silver powder-coated steel frame `#a8acaf`
-   - aluminium extrusion `#d4d8dd`
-   - wood: walnut veneer `#6b4a32` (desktop, modesty panel); the PC slat front is walnut too
+   - black anodized extrusion (HFSB5) and gussets `#1d1e20`; painted or powder-coated black plates and
+     brackets `#1a1a1a`; end caps `#141414`
+   - wood: walnut veneer `#6b4a32` (desktop); PC slat front walnut `#634433`
+   - dark grey PET felt `#3a3c3f` (privacy and side panels)
+   - printed console parts charcoal `#34373b`, inlay light grey `#c9cccf`
    - vendor parts keep their legacy colours. You can read colours in a scratch import, or ask in your report.
 6. **Local origin**: choose a functional datum (mating face or centre line), and document it in the
    description, e.g. "origin: top face centre, +Y toward wall". For left/right pairs, one file serves both
    sides; the second occurrence is rotated 180° about Z. Check that the rotation reproduces the other
    side's legacy bbox. If it doesn't (e.g. hole patterns aren't symmetric), report it and make two files.
 7. Verify:
-   - The volume is within 0.1 % of `baseline.json`, and the bbox size matches within 0.01 mm. Explain any
-     difference.
+   - A part rebuilt from an existing one keeps its volume and bbox (compare with the previous frozen file
+     or an eval taken before the change). Explain any difference.
    - There are 0 timeline errors and 0 warnings.
 8. Report, per file:
    - part number, file, body name(s) and volume (with the baseline delta)
@@ -96,8 +99,9 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 | ACC-07 | Phone stand on the lower bar: spine, neck, cup holding the MagSafe puck; the phone hangs on the magnet (D24) | 1 | new |
 | ACC-11..17 | Console devices (purchased refs): Scarlett Solo 3rd Gen, ABFCRTTW hub, iPhone 16 Pro Max, MagSafe charger, fingerprint dongle, duckyPad Pro (user's case STEP), KVM key | 1 each | new (multibody allowed) |
 
-Hardware is in `parts/lib/` (HW-L01 HPTTD5, HW-L02 HPTLD5, HW-L03 HBLFSN5, HW-L04 HBLFSD5, HW-L10 M6x55
-SHCS, HW-L11 standoff, HW-L12 end cap); its occurrences HW-01..HW-58 come from `skeleton/hw_placements.json`. Eye becomes a skeleton
+Hardware is in `parts/lib/` (HW-L01 HPTTD5, HW-L02 HPTLD5, HW-L03 HBLFSN5 (ordered black as HBLFSNB5),
+HW-L04 HBLFSD5 (retired by D23, not placed), HW-L05 HBL45TD5, HW-L06 HBLTDB5, HW-L10 M6x55 SHCS,
+HW-L11 standoff, HW-L12 end cap); its occurrences HW-01..HW-58 come from `skeleton/hw_placements.json`. Eye becomes a skeleton
 point in the assembly, not a part.
 
 ## Edit speed (applies to every part)
