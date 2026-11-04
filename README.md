@@ -10,7 +10,7 @@ Parametric CAD model of a sit-stand desk: a DeskHaus Apex Pro 4-leg frame (Jieca
 desktop, and a Misumi HFS5 aluminium extrusion rail system that carries two monitors, Klipsch R-40M
 speakers, a hanging PC, a laptop mount and a modesty panel.
 
-![Isometric view of the desk rail system](docs/images/desk_iso.png)
+![Isometric view of the desk rail system](docs/images/desk_overview.png)
 
 ## Built agentically
 
