@@ -6,122 +6,74 @@
 [![License](https://img.shields.io/github/license/msetsma/desk-rail-system)](LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/msetsma/desk-rail-system)](https://github.com/msetsma/desk-rail-system/commits/main)
 
-Parametric CAD model of a sit-stand desk: a DeskHaus Apex Pro 4-leg frame (Jiecang OEM), the
-desktop, and a Misumi HFS5 aluminium extrusion rail system that carries two monitors, Klipsch R-40M
-speakers, a hanging PC, a laptop mount, felt privacy and side panels, and a 3D-printed console on
-the lower crossbar with a desk cable grommet.
+Parametric CAD model of a sit-stand desk: a DeskHaus Apex Pro 4-leg frame, the desktop, and a
+Misumi HFS5 extrusion rail system carrying two monitors, Klipsch R-40M speakers, a hanging PC, a
+laptop mount, felt privacy and side panels, and a 3D-printed console with a cable grommet.
 
 ![Isometric view of the desk rail system](docs/images/desk_overview.png)
 
 ## Built agentically
 
-The design is developed agentically: an AI coding agent (Claude Code) drives SolidCraft over its
-MCP control interface and builds, edits, measures and checks the model while a human reviews and
-steers. The project doubles as a testbed for:
+Claude Code drives SolidCraft over its MCP interface and builds, edits, measures and checks the
+model while a human reviews and steers. The repo doubles as a testbed for agent-driven CAD:
 
-- **SolidCraft's agent integration**: what works well, what doesn't, and the quirks found along the
-  way (logged in `PROJECT.md`).
-- **Skills and agents for CAD work**: reusable instructions such as
-  `.claude/skills/cad-best-practices/`, plus the living rule set in `AGENTS.md`, which gets updated
-  (with an improvement log) every time a session learns something.
-
-Expect the repo to change often while that workflow is worked out.
+- [`docs/solidcraft-agent-improvements.md`](docs/solidcraft-agent-improvements.md): how the agent
+  works with SolidCraft today, and what would let it work natively.
+- [`AGENTS.md`](AGENTS.md): living rules with an improvement log, updated whenever a session learns
+  something. Project facts and SolidCraft quirks are in [`PROJECT.md`](PROJECT.md).
+- [`.claude/skills/cad-best-practices/`](.claude/skills/cad-best-practices/SKILL.md): reusable CAD
+  modelling practices.
 
 > [!NOTE]
-> Raw vendor downloads (Misumi, Razer, DeskHaus, ZSA, Fractal, Gigabyte, Herman Miller) are kept
-> local only and aren't in this repo, since their licenses don't allow redistribution. The paths to them in the docs are references.
+> Vendor CAD downloads (Misumi, Razer, DeskHaus, ZSA, Fractal, Gigabyte, Herman Miller) stay local
+> because their licenses don't allow redistribution; paths to them in the docs are references.
 
-## Files
+## Layout
 
-- `desk_rails.solidcraft`: the **assembly**. It holds no geometry of its own, only linked part
-  files placed with joints. Open it in SolidCraft. Stored with Git LFS, like every `.solidcraft` file.
-- `skeleton/params.json`: the shared parameters (layout and `MEASURE` values). The assembly and
-  every size-driven part read it. `skeleton/hw_placements.json` places the hardware.
-- `parts/`: one file per real part (`parts/<PN>_<Name>.solidcraft`), each built around its own origin.
-  - `parts/src/`: the build script for each part. The script is the source of truth; the
-    `.solidcraft` file is its output.
-  - `parts/lib/`: purchased hardware (Misumi plates, gussets, brackets and end caps, screws,
-    standoffs), one file each, named by vendor part number. See `parts/lib/README.md`.
-  - `parts/_template.json`: materials and settings every new part starts from.
-- `tools/`:
-  - `regen_parts.py`: pushes the skeleton parameters into the size-driven parts and rebuilds them.
-  - `build_assembly.py`: builds the whole assembly from scratch (inserts and places every part).
-  - `assembly_finish.py`: second pass after a build: materials, properties, views, display rows.
-  - `check.py`: one-command body report, overlap check, audit and BOM (see below).
-  - `bom.py`: writes `BOM.md` from the part numbers in the assembly.
-  - `audit.py`: structure and balance audit (mass, tip margins, leg split, crossbar sag, joint
-    loads). Edit `SPEC_KG` when things are weighed.
-  - `eval_bodies.py`: maps the bodies in the assembly back to their part and placement names.
-  - `svg2dxf.py`: converts an SVG profile drawing to DXF (used once for the HFS5-4040 profile).
-  - `near_check.py`: fast clearance check of changed bodies against their neighbours only.
-  - `sightlines.py`: ray-casts from the eye point to the screens and speakers; checks the laptop fit.
-  - `skeleton_values.py`: evaluates the skeleton expressions to numbers (cached) for generators.
-  - `sweep.py`: parameter sweeps in parallel, each on a private copy.
-  - `build_variant.py`: builds a layout variant (`variants/<name>/`) into its own assembly file.
-  - `spk_laid.py`: solves the laid-speaker placement for variants.
-  - `mesh_step.py`: turns a vendor mesh into a planar-face STEP that SolidCraft imports as B-rep.
-- `BOM.md`: generated bill of materials. Don't hand-edit it.
-- `variants/`: layout variants (skeleton overrides); `desk_62x32` builds `desk_rails_62x32.solidcraft` (D17).
-- `tests/`: unit tests for the tools.
-- `docs/`: `EXTRUSION_GUIDE.md` (extrusion rules + decision log; check it before any extrusion
-  decision), `PART_BUILD_SPEC.md` (rules and part-number list for part files), `images/`.
-- `refs/`: reference photos, drawings and data sheets (vendor downloads are local only).
-- `profiles/`: extrusion cross-section DXFs.
+| Path | What |
+|---|---|
+| `desk_rails.solidcraft` | the assembly: linked part files placed by joints, no geometry of its own (Git LFS) |
+| `skeleton/params.json` | shared layout and `MEASURE` parameters read by the assembly and size-driven parts |
+| `parts/` | one frozen `.solidcraft` per real part; `parts/lib/` holds purchased hardware ([list](parts/lib/README.md)) |
+| `parts/src/` | part scripts and their generators. A script marked `"generated_by"` is regenerated, so edit its generator |
+| `tools/` | build, regen, check, BOM, clearance, sightline and sweep scripts (below) |
+| `variants/` | layout variants as skeleton overrides; `desk_62x32` builds `desk_rails_62x32.solidcraft` (D17) |
+| `docs/` | [extrusion rules + decision log](docs/EXTRUSION_GUIDE.md), [part build spec](docs/PART_BUILD_SPEC.md), [visual joint review](docs/visual_joint_review.md) |
+| `refs/`, `profiles/` | reference photos and drawings; extrusion cross-section DXFs |
+| `tests/` | pytest checks of the laid-speaker maths (`spk_laid.py`, `build_variant.py`) |
+| `BOM.md` | generated bill of materials (`tools/bom.py`), don't hand-edit |
 
 ## Workflow
 
-Change a size:
-
-1. Edit the value in `skeleton/params.json` (or change it in the assembly's Parameters table and
-   export it there with `parameters.export`).
-2. Run `python tools/regen_parts.py`. It rebuilds every part whose size depends on the skeleton.
-   Add a prefix (`python tools/regen_parts.py FRM-03`) to rebuild only some.
-3. In the assembly, refresh only the changed links: `component.update_links {"component": "<name>"}`
-   for each part `regen_parts.py` lists (the bare `update_links {}` re-evaluates every link, ~40 s).
-   If more than about 3 parts changed (a skeleton change usually touches ~25), rebuild the assembly
-   instead (below), then `new_design` + `open` it.
-
-Rebuild the whole assembly from scratch:
-
 ```sh
-python tools/build_assembly.py --out desk_rails.solidcraft
+# 1. edit skeleton/params.json (inches are fine: "30 in")
+python tools/regen_parts.py          # 2. rebuild the parts that changed (prefix arg: FRM-03)
+python tools/build_assembly.py --out desk_rails.solidcraft   # 3. rebuild the assembly (~20 s)
 ```
 
-It also runs `tools/assembly_finish.py` (materials, properties, views, display rows, timeline
-folders), since links don't carry materials or properties.
+For 1-3 changed parts, refresh just those links in the live app instead of step 3:
+`component.update_links {"component": "<name>"}` (the bare `update_links {}` re-evaluates every
+link, ~40 s). After a rebuild, run `new_design` then `open` in the app.
 
-Check (one command, reads the saved design, never overwrites it):
+Checks:
 
 ```sh
-python tools/check.py            # report, overlap check, audit, BOM.md
-python tools/check.py --renders  # also write build/renders/<view>.png
+python tools/near_check.py <body prefixes>   # clearance of changed bodies vs neighbours (~4 s)
+python tools/sightlines.py                   # eye-point ray casts, laptop fit
+python tools/check.py [--renders]            # full report, overlaps, audit, BOM (slow)
 ```
 
-It exits non-zero if the report fails or any bodies overlap. Outputs (report JSON,
-interference results) go to `build/` (git-ignored). The check is slow, so run it before a commit,
-not after every change. The `.solidcraft` files are binary, so git history is the undo
-(`git checkout <rev> -- desk_rails.solidcraft parts/`).
+Other tools: `audit.py` (mass, tip margins, sag, joint loads), `sweep.py` (parallel parameter
+sweeps), `build_variant.py`, `skeleton_values.py`, `eval_bodies.py`, `mesh_step.py`, `svg2dxf.py`,
+`spk_laid.py`. The `.solidcraft` files are binary, so git history is the undo.
 
 ## Assemblies
 
-The root holds only the group components. Each group holds linked part files. A part number belongs
-to the part **file**; a file used twice shows up twice. `DSK-00` is grounded. Every other part is
-placed by a joint from the root origin, driven by skeleton parameters.
+The root holds only group components (`DSK-00` grounded); every part is placed by a joint driven by
+skeleton parameters. Axes: origin on the floor under the frame centre, X right, Y toward the wall, Z up.
 
-```mermaid
-graph TD
-  root[desk_rails] --> DSK[DSK-00 Desk frame]
-  root --> FRM[FRM-00 Monitor rail frame]
-  root --> HW[HW-00 Frame hardware]
-  root --> MON[MON-00 Monitors]
-  root --> SPK[SPK-00 Speakers]
-  root --> PC[PC-00 PC under-desk]
-  root --> INP[INP-00 Input devices]
-  root --> LAP[LAP-00 Laptop]
-  root --> CHR[CHR-00 Chair]
-  root --> ACC[ACC-00 Crossbar console]
-  root --> REF[REF-00 Skeleton]
-```
+<details>
+<summary>Parts: 52 part numbers (44 files + 8 library), 120 parts</summary>
 
 | Group | Part file (`parts/`) | Count | What | Finish |
 |---|---|---|---|---|
@@ -170,24 +122,21 @@ graph TD
 | | `ACC-11` … `ACC-17` | 1 each | device references: Scarlett Solo 3rd Gen, ABFCRTTW hub, iPhone 16 Pro Max, MagSafe charger, fingerprint dongle, duckyPad Pro, KVM key | vendor colors |
 | `REF-00` Skeleton | (no part file) | | `SKL_Eye`: a sketch point at the seated eye position, not a body | red |
 
-That's 52 part numbers (44 part files + 8 library parts) and 120 parts in the main assembly (see
-`BOM.md`). The hardware occurrences are named `HW-01` to `HW-58` by job
-(`HW-07 Gusset side rail L (HBLTDB5)`). Side rails, hanger plates and keyboards have L and R files
-because they're mirror images; the other pairs reuse one file, turned 180°. `HW-L04` (HBLFSD5) and
-`SPK-05` (speaker wedge, 62x32 variant only) are in `parts/` but not in the main assembly.
+Hardware occurrences are named `HW-01` to `HW-58` by job (`HW-07 Gusset side rail L (HBLTDB5)`).
+Mirror-image parts (side rails, hanger plates, keyboards) have L and R files; other pairs reuse one
+file turned 180°. `HW-L04` (retired HBLFSD5) and `SPK-05` (62x32 variant only) aren't in the main
+assembly.
+
+</details>
 
 Saved views: Overview, Front, Back, SideRailJoint_R/L, SpeakerMount_R, UnderDesk, LaptopArm, Rails,
-RailsBack, Desk, DeskRails. Detail views take their targets from the design's own skeleton, so a
-variant frames the same features. Display rows (`config.activate`): Full, Frame only, No desktop,
-Monitors + speakers, Rails only, Desk only, Desk + rails, No chair. Views don't carry a row: pair
+RailsBack, Desk, DeskRails. Display rows (`config.activate`): Full, Frame only, No desktop, Monitors +
+speakers, Rails only, Desk only, Desk + rails, No chair. Views don't carry a row, so pair
 `Rails`/`RailsBack`, `Desk` and `DeskRails` with their row by hand.
-
-Axes: origin = floor under frame center. X = width (+ right), Y = depth (+ toward wall), Z = up.
 
 ## Key parameters
 
-Set them in `skeleton/params.json`, then follow the [workflow](#workflow). Inches are fine
-(`"30 in"`). ★ = favourite.
+Set in `skeleton/params.json`; the rest are derived. ★ = favourite.
 
 | Parameter | Default | What it does |
 |---|---|---|
@@ -210,8 +159,6 @@ Set them in `skeleton/params.json`, then follow the [workflow](#workflow). Inche
 | `con_x`, `con_top` | 0, 10 mm | console centre x; console top above the lower crossbar |
 | `grom_y`, `grom_d` | 144 mm, 60 mm | desk grommet hole position (y) and diameter |
 | `eye_above_desk`, `eye_back` | 46 in - `desk_h`, 6 in | eye point above the desk and in front of its edge |
-
-The other parameters are derived, so leave them alone. Each one has a comment in `params.json`.
 
 ## Measure checklist
 
@@ -275,7 +222,7 @@ were measured or confirmed (the comment says how and when). Inches are fine.
 - [ ] USB hub: 130 x 30 x 17 mm and port positions (from listings)
 
 **Ergonomics**
-- [x] `eye_above_desk`: measured 2026-10-27 (seated eye ~46 in above the floor)
+- [x] `eye_above_desk`: measured 2026-10-29 (seated eye 46 in above the floor, minus `desk_h`)
 - [ ] `eye_back`: eyes out from the desktop front edge
 
 Not parameters, but worth noting: weights of the monitors, speakers and laptop mount (for
@@ -283,42 +230,23 @@ Not parameters, but worth noting: weights of the monitors, speakers and laptop m
 
 </details>
 
-## Extrusion profiles
+## Frame
 
-Real cross-sections (DXF, mm, centered) in `profiles/`. The extrusion part files sketch them and
-extrude them to parameter lengths. Only Misumi HFS5 is used, ordered black anodized as HFSB5 (D23). The 80/20 and V-slot variants were
-retired (D16) and their DXFs removed (in git history before 2026-10-31).
+Misumi HFS5 only, ordered black anodized as HFSB5 (D23). Cross-sections in `profiles/`:
 
-| Profile | File | Used for | Source |
-|---|---|---|---|
-| HFS5-4040 | `misumi_hfs5_4040.dxf` | uprights, side rails | converted from an SVG drawing in github.com/TheEnigmaBlade/dllpdf-frame-calculator (no license stated) via `tools/svg2dxf.py` |
-| HFS5-2040 | `misumi_hfs5_2040.dxf` | crossbars, stiles, knee braces | github.com/oysteinkrog/thing_libutils (LGPL-2.1) |
+| Profile | Used for | Source |
+|---|---|---|
+| HFS5-4040 (497 mm²) | uprights, side rails | SVG from github.com/TheEnigmaBlade/dllpdf-frame-calculator (no license stated), via `tools/svg2dxf.py` |
+| HFS5-2040 (323 mm²) | crossbars, stiles, knee braces | github.com/oysteinkrog/thing_libutils (LGPL-2.1) |
 
-Checked cross-section areas: HFS5 4040 497 mm², 2040 323 mm².
-
-## Side rail joints
-
-Each 4040 side rail runs along the outer face of a top support. Its back end butts the upright's
-front face, with the outer faces flush (a T-joint, D1).
-
-- **To the upright** (D2): Misumi HPTTD5 T-plates on the flush outer and inner faces, a 2-slot
-  HBLTDB5 gusset under the rail (D23), and an end anchor inside the rail (not modelled).
-- **Knee brace** (D20): a 45° HFSB5-2040 brace from the upright up to the rail underside, with an
-  HBL45TD5 bracket at each end.
-- **Hanger plate** (D21): a 5 x 80 x 530 mm steel plate sits on the top-support flange under the
-  desktop, flush with the rail's outer face. The rail hangs from it by 10 M5 countersunk screws into
-  T-nuts in its top slots; 4 M5 countersunk screws with nylocs tie it through the flange. The desktop
-  rests on the plates, so `frame_top` = `desk_h` - `desk_t` - `hang_t`.
-- **To the top support** (D9): 4 M6x55 socket-head screws per side, straight through the rail and
-  the top support's web into the leg column threads, each with a hardened washer. The rail needs one
-  Ø6.6 hole through both walls per screw; the head sits on the outer face.
-- **End caps** (D23): HFC5-4040-B caps on the rail front ends and the upright tops and bottoms.
-
-The felt side panels stand `pnl_back_gap` + `pnl_t` (24 mm) past the upright's outer face, and the
-privacy panel runs out over them by the same amount (D22). The T-plate's 2.3 mm sits behind the side
-panel.
+Each 4040 side rail runs along a top support's outer face and butts the upright (T-joint, D1):
+HPTTD5 T-plates and an HBLTDB5 gusset at the upright (D2, D23), a 45° knee brace with HBL45TD5
+brackets (D20), a 5 mm steel hanger plate on the top-support flange that the rail hangs from (D21),
+and 4 M6x55 screws per side through the rail and top support into the leg columns (D9). End caps
+close the free ends (D23). Details and reasoning are in the
+[decision log](docs/EXTRUSION_GUIDE.md).
 
 ## License
 
-[MIT](LICENSE) for the design, docs and tools. Extrusion profile DXFs in `profiles/` keep their
-upstream licenses (see the table above).
+[MIT](LICENSE) for the design, docs and tools. Extrusion profile DXFs keep their upstream licenses
+(see above).
