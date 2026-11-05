@@ -1148,6 +1148,34 @@
   "unit": "mm"
  },
  {
+  "comment": "Console (ACC-00): centre x of the lower-crossbar console, centred under the main monitor. Its right end (con_x + 262) stays 12 mm left of the laptop tray zone (x 274, 2026-11-02 layout)",
+  "expression": "0 mm",
+  "favorite": false,
+  "name": "con_x",
+  "unit": "mm"
+ },
+ {
+  "comment": "Console (ACC-00): top line height above the lower crossbar top; the parting groove sits level with the bar top",
+  "expression": "10 mm",
+  "favorite": false,
+  "name": "con_top",
+  "unit": "mm"
+ },
+ {
+  "comment": "Grommet (ACC-01): hole centre y (world), on the centreline midway between the rear channel bars (inner y 76-96, outer y 192-211: 18 mm clear each side) for shorter keyboard cables; user drills it",
+  "expression": "144 mm",
+  "favorite": false,
+  "name": "grom_y",
+  "unit": "mm"
+ },
+ {
+  "comment": "Grommet (ACC-01): hole diameter in the desktop (60 mm hole saw)",
+  "expression": "60 mm",
+  "favorite": false,
+  "name": "grom_d",
+  "unit": "mm"
+ },
+ {
   "name": "spk_st_w",
   "expression": "300.0 mm",
   "comment": "Aperta300 stand width (SPK-05_gen.STAND)",

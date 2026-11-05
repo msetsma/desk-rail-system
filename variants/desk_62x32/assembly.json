@@ -265,6 +265,24 @@
   {
    "command": "component.create",
    "params": {
+    "name": "ACC-00 Crossbar console",
+    "parent": 0,
+    "activate": false,
+    "grounded": false
+   }
+  },
+  {
+   "command": "component.metadata.set",
+   "params": {
+    "component": "ACC-00 Crossbar console",
+    "part_number": "ACC-00",
+    "description": "3D-printed console on the lower crossbar, the devices set flush in it, desk grommet",
+    "revision": "A"
+   }
+  },
+  {
+   "command": "component.create",
+   "params": {
     "name": "REF-00 Skeleton",
     "parent": 0,
     "activate": false,
@@ -688,6 +706,114 @@
     "path": "C:/Users/2015m/DEV/CAD/desk/parts/CHR-01_HermanMillerMirra2.solidcraft",
     "name": "CHR-01 HermanMillerMirra2",
     "parent": "CHR-00 Chair",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/ACC-02_Bay_Audio.solidcraft",
+    "name": "ACC-02 Bay Audio",
+    "parent": "ACC-00 Crossbar console",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/ACC-05_Bay_duckyPad.solidcraft",
+    "name": "ACC-05 Bay duckyPad",
+    "parent": "ACC-00 Crossbar console",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/ACC-06_Inlay.solidcraft",
+    "name": "ACC-06 Inlay",
+    "parent": "ACC-00 Crossbar console",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/ACC-12_USBHub_ABFCRTTW.solidcraft",
+    "name": "ACC-12 USBHub ABFCRTTW",
+    "parent": "ACC-00 Crossbar console",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/ACC-11_ScarlettSolo3.solidcraft",
+    "name": "ACC-11 ScarlettSolo3",
+    "parent": "ACC-00 Crossbar console",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/ACC-17_KVMKey.solidcraft",
+    "name": "ACC-17 KVMKey",
+    "parent": "ACC-00 Crossbar console",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/ACC-16_duckyPadPro.solidcraft",
+    "name": "ACC-16 duckyPadPro",
+    "parent": "ACC-00 Crossbar console",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/ACC-15_FingerprintDongle.solidcraft",
+    "name": "ACC-15 FingerprintDongle",
+    "parent": "ACC-00 Crossbar console",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/ACC-07_PhoneStand.solidcraft",
+    "name": "ACC-07 PhoneStand",
+    "parent": "ACC-00 Crossbar console",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/ACC-14_MagSafeCharger.solidcraft",
+    "name": "ACC-14 MagSafeCharger",
+    "parent": "ACC-00 Crossbar console",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/ACC-13_iPhone16ProMax.solidcraft",
+    "name": "ACC-13 iPhone16ProMax",
+    "parent": "ACC-00 Crossbar console",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/ACC-01_Grommet.solidcraft",
+    "name": "ACC-01 Grommet",
+    "parent": "ACC-00 Crossbar console",
     "reuse": false
    }
   },
@@ -3388,6 +3514,618 @@
      "0 deg"
     ],
     "offset": "0 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Bay_Audio",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "ACC-02 Bay Audio:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "con_x",
+     "stile_front",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2 + con_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Bay_duckyPad",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "ACC-05 Bay duckyPad:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "con_x",
+     "stile_front",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2 + con_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Inlay",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "ACC-06 Inlay:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "con_x",
+     "stile_front",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2 + con_top",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_USBHub_ABFCRTTW",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "ACC-12 USBHub ABFCRTTW:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -0.3420201433256687,
+      0.9396926207859084
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "con_x - 87.0 mm",
+     "stile_front - 69.235 mm",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2 + con_top - 25.372 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_ScarlettSolo3",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "ACC-11 ScarlettSolo3:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -0.3420201433256687,
+      0.9396926207859084
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "con_x - 87.0 mm",
+     "stile_front - 88.046 mm",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2 + con_top - 77.055 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_KVMKey",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "ACC-17 KVMKey:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -0.3420201433256687,
+      0.9396926207859084
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "con_x + 13.0 mm",
+     "stile_front - 81.205 mm",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2 + con_top - 58.261 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_duckyPadPro",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "ACC-16 duckyPadPro:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -0.3420201433256687,
+      0.9396926207859084
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "con_x + 100.0 mm",
+     "stile_front - 81.137 mm",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2 + con_top - 58.073 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_FingerprintDongle",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "ACC-15 FingerprintDongle:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      -0.3420201433256687,
+      -0.9396926207859084,
+      0
+     ],
+     "x": [
+      0,
+      0,
+      -1
+     ]
+    },
+    "values": [
+     "con_x - 33.0 mm",
+     "stile_front - 82.133 mm",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + rail_l/2 + con_top - 16.952 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_PhoneStand",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "ACC-07 PhoneStand:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "con_x - 330.0 mm",
+     "stile_front",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_MagSafeCharger",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "ACC-14 MagSafeCharger:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -0.3420201433256687,
+      0.9396926207859084
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "con_x - 330.0 mm",
+     "stile_front - 55.0 mm",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_iPhone16ProMax",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "ACC-13 iPhone16ProMax:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      -0.3420201433256687,
+      0.9396926207859084
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "con_x - 330.0 mm",
+     "stile_front - 66.276 mm",
+     "0 deg"
+    ],
+    "offset": "desk_h + bar1_z + 4.104 mm",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Grommet",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "ACC-01 Grommet:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "0 mm",
+     "grom_y",
+     "0 deg"
+    ],
+    "offset": "desk_h",
     "angle": "0 deg"
    }
   },
