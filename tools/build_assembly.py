@@ -41,7 +41,7 @@ GROUPS = (
     ("DSK-00 Desk frame", "DeskHaus Apex Pro 4-leg frame and desktop"),
     ("FRM-00 Monitor rail frame", "Misumi HFS5 rail frame and modesty panel"),
     ("HW-00 Frame hardware", "Misumi plates, gussets, standoffs and screws"),
-    ("MON-00 Monitors", "Main 32in and side 27in portrait monitors"),
+    ("MON-00 Monitors", "Main 32in and side 27in portrait monitors, webcam on the main monitor"),
     ("SPK-00 Speakers", "Klipsch R-40M speakers on swivel mounts"),
     ("PC-00 PC under-desk", "Fractal North case, slat front and strap"),
     ("INP-00 Input devices", "Mouse pad, mouse and split keyboard"),
@@ -190,6 +190,9 @@ OCCURRENCES: tuple[Occurrence, ...] = (
          "desk_h + mon_clearance + m1_h/2 + m1_vesa_dz"),
     _occ("Monitor_Side", "MON-02_Monitor_Side_27in", _MON, "m3_x", "stile_front - m3_off",
          "desk_h + m3_bot + m3_h/2", "m3_yaw"),
+    # Webcam clipped on the main monitor's top edge, centred (part origin = clip lip on the screen front face and
+    # top edge). Assumes m1_tilt = 0 (the monitor isn't tilted; the placement doesn't follow a tilt).
+    _occ("Webcam", "MON-03_Insta360Link2Pro", _MON, "m1_x", "mon_front", "desk_h + mon_clearance + m1_h"),
     _occ("Speaker_L", "SPK-01_R40M_Speaker", _SPK, "-spk_px", "spk_py", "desk_h + spk_pz", "spk_yaw"),
     _occ("Speaker_R", "SPK-01_R40M_Speaker", _SPK, "spk_px", "spk_py", "desk_h + spk_pz", "-spk_yaw"),
     _occ("SpkFlange_L", "SPK-02_SpkMount_Flange", _SPK, "-up_xc", "up_y - rail_l/2", "desk_h + spk_pz"),

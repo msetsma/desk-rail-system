@@ -42,6 +42,13 @@ FIXED_VIEWS: tuple[View, ...] = (
     ("Desk", [0, 0, 450], 0.6, 0.4, 2500),
     ("DeskRails", [0, 100, 700], 0.6, 0.4, 2800),
 )
+# README image render setup (PROJECT.md "README image"): kept in the design so a rebuild doesn't drop it.
+README_RENDER = {
+    "backend": "builtin", "mode": "preview", "format": "png", "width": 1600, "height": 1000,
+    "background": [46, 51, 64], "exposure_ev": 0.0, "environment_intensity": 1.0, "environment_rotation": 0.0,
+    "camera": {"target": [0.0, 0.0, 720.0], "yaw": 0.6, "pitch": 0.42, "distance": 2700.0, "fov": 0.0, "roll": 0.0,
+               "up": "z"},
+}
 SIDE_RAIL_VIEW_DZ = 55.0  # target above the frame top: middle of the side-rail to top-support joint
 VIEW_ORDER = ("Overview", "Front", "Back", "SideRailJoint_R", "SideRailJoint_L", "SpeakerMount_R",
               "UnderDesk", "LaptopArm", "Rails", "RailsBack", "Desk", "DeskRails")
@@ -209,6 +216,7 @@ def finish_assembly(design: Path, components: Sequence[str], values: Mapping[str
     commands = [c for comp in links for c in _part_commands(comp, real)]
     joint_folders = _joint_folders(_joint_names(design, BUILD / f"{design.stem}_joints.json"), components)
     commands += _view_commands(views) + _config_commands(links) + _group_commands(links, joint_folders)
+    commands.append(_cmd("render.settings.set", name="Readme", set=README_RENDER))
     script_out.write_text(json.dumps({"commands": commands}, indent=1), encoding="utf-8")
     log.info("wrote %s (%d commands)", script_out.relative_to(ROOT), len(commands))
     _run(["run", str(script_out), "--in", str(design), "--save", str(design), "--quiet"])

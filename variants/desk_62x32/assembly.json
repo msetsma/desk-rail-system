@@ -168,7 +168,7 @@
    "params": {
     "component": "MON-00 Monitors",
     "part_number": "MON-00",
-    "description": "Main 32in and side 27in portrait monitors",
+    "description": "Main 32in and side 27in portrait monitors, webcam on the main monitor",
     "revision": "A"
    }
   },
@@ -606,6 +606,15 @@
    "params": {
     "path": "C:/Users/2015m/DEV/CAD/desk/variants/desk_62x32/parts/MON-02_Monitor_Side_27in.solidcraft",
     "name": "MON-02 Monitor Side 27in",
+    "parent": "MON-00 Monitors",
+    "reuse": false
+   }
+  },
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "C:/Users/2015m/DEV/CAD/desk/parts/MON-03_Insta360Link2Pro.solidcraft",
+    "name": "MON-03 Insta360Link2Pro",
     "parent": "MON-00 Monitors",
     "reuse": false
    }
@@ -2953,6 +2962,57 @@
      "m3_yaw"
     ],
     "offset": "desk_h + m3_bot + m3_h/2",
+    "angle": "0 deg"
+   }
+  },
+  {
+   "command": "joint.create",
+   "params": {
+    "type": "planar",
+    "flip": true,
+    "name": "J_Webcam",
+    "a": {
+     "occurrence": 0,
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "b": {
+     "occurrence": "MON-03 Insta360Link2Pro:1",
+     "point": [
+      0,
+      0,
+      0
+     ],
+     "z": [
+      0,
+      0,
+      1
+     ],
+     "x": [
+      1,
+      0,
+      0
+     ]
+    },
+    "values": [
+     "m1_x",
+     "mon_front",
+     "0 deg"
+    ],
+    "offset": "desk_h + mon_clearance + m1_h",
     "angle": "0 deg"
    }
   },

@@ -74,6 +74,7 @@ and `.claude/skills/cad-best-practices/SKILL.md` first.
 | FRM-08 | Side panel (corner return on the upright outer face), 12 mm PET felt (V1); L = R turned 180 deg | 2 | SidePanel_L/R (new) |
 | MON-01 | Main monitor 32in | 1 | Monitor_Main + Monitor_Main_Back (one body) |
 | MON-02 | Side monitor 27in (generic, not picked yet) | 1 | Monitor_Side + Monitor_Side_Back (one body) |
+| MON-03 | Insta360 Link 2 Pro webcam on its magnetic clip, centred on MON-01's top edge (Sketchfab Link 2 mesh, CC BY, scaled to the 58.9 mm spec height) | 1 | Webcam_Body, Webcam_Lens, Webcam_Mount (multibody allowed; source refs/insta360_link2pro/converted/MON-03_link2.step via parts/src/MON-03_convert.py) |
 | SPK-01 | Klipsch R-40M speaker | 2 | Speaker_L_R40M + SpkFace_L_* (multibody allowed) |
 | SPK-02 | Speaker mount flange | 2 | SpkMount_L_Flange |
 | SPK-03 | Speaker mount block | 2 | SpkMount_L_Block |
